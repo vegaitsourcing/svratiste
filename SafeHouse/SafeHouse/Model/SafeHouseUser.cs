@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Svratiste.Model
+namespace SafeHouse.Model
 {
     public class SafeHouseUser
     {

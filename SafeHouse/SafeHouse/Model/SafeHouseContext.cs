@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Svratiste.Model
+namespace SafeHouse.Model
 {
     public class SafeHouseContext : DbContext
     {
