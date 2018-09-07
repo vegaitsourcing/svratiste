@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SafeHouse.Model;
 
 namespace SafeHouse.Migrations
 {
     [DbContext(typeof(SafeHouseContext))]
-    partial class SafeHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20180907202405_ContextChanges")]
+    partial class ContextChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
