@@ -2,9 +2,8 @@ using System;
 
 namespace SafeHouse.Model
 {
-    public class Suitability
+    public class Suitability : BaseEntity
     {
-        public Guid Id { get; set; }
-        public String Description { get; set; }
+        public string Description { get; set; }
     }
 }

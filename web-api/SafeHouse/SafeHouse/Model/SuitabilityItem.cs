@@ -2,11 +2,10 @@ using System;
 
 namespace SafeHouse.Model
 {
-    public class SuitabilityItem
+    public class SuitabilityItem : BaseEntity
     {
-        public Guid Id { get; set; }
-        public Suitability SuitabilityId { get; set; }
-        public String Name {get; set;}
-        public String Description {get; set;}
+        public Suitability Suitability { get; set; }
+        public string Name {get; set;}
+        public string Description {get; set;}
     }
 }

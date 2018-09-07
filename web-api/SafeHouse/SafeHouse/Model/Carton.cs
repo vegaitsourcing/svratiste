@@ -7,29 +7,29 @@ namespace SafeHouse.Model
     {
         [Required]
         [MaxLength(32)]
-        public String FirstName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [MaxLength(32)]
-        public String LastName { get; set; }
+        public string LastName { get; set; }
 
         [MaxLength(32)]
-        public String Nickname { get; set; }
+        public string Nickname { get; set; }
         public int Gender { get; set; }
         public DateTime Birthday { get; set; }
         public int NumberOfVisits { get; set; }
 
         [MaxLength(100)]
-        public String AddressStreetName { get; set; }
+        public string AddressStreetName { get; set; }
 
         [MaxLength(32)]
-        public String AddressStreetNumber { get; set; }
+        public string AddressStreetNumber { get; set; }
 
         [MaxLength(32)]
-        public String FathersName {get; set;}
+        public string FathersName {get; set;}
 
         [MaxLength(32)]
-        public String MothersName { get; set; }
+        public string MothersName { get; set; }
         public bool InitialEvaluationDone {get; set;}
         public bool EvaluationDone {get; set;}
         public bool IndividualPlanDone {get; set;}

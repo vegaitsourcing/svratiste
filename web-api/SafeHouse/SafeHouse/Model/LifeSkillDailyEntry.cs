@@ -2,7 +2,7 @@ namespace SafeHouse.Model
 {
     public class LifeSkillDailyEntry : BaseEntity
     {
-        public LifeSkills LifeSkillId { get; set; }
-        public DailyEntry DailyEntryId { get; set; }
+        public LifeSkill LifeSkill { get; set; }
+        public DailyEntry DailyEntry { get; set; }
     }
 }

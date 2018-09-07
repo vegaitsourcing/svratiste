@@ -2,10 +2,9 @@ using System;
 
 namespace SafeHouse.Model
 {
-    public class SchoolActivity
+    public class SchoolActivity : BaseEntity
     {
-        public Guid Id { get; set; }
         public int Type { get; set; }
-        public DailyEntry DailyEntryId { get; set; }
+        public DailyEntry DailyEntry { get; set; }
     }
 }

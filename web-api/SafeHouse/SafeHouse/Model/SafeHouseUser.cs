@@ -1,14 +1,19 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SafeHouse.Model
 {
-    public class SafeHouseUser
+    public class SafeHouseUser : BaseEntity
     {
-        public Guid Id { get; set; }
-        public String CommonName { get; set; }
-        public String Email { get; set; }
-        public String PasswordSalt { get; set; }
-        public String Password { get; set; }
+        [Required]
+        public string CommonName { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string PasswordSalt { get; set; }
+        [Required]
+        public string Password { get; set; }
+        [Required]
         public DateTime CreatedAt { get; set; }
     }
 }
