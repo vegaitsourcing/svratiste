@@ -17,7 +17,16 @@ namespace SafeHouse.Model
         public virtual DbSet<DailyEntry> DailyEntries { get; set; }
         public virtual DbSet<FirstEvaluation> FirstEvaluations { get; set; }
         public virtual DbSet<Evaluation> Evaluations { get; set; }
-
+        public virtual DbSet<ActivityDetails> ActivityDetails { get; set; }
+        public virtual DbSet<GoalAndResult> GoalAndResults { get; set; }
+        public virtual DbSet<IncludedPerson> IncludedPersons  { get; set; }
+        public virtual DbSet<IndividualServicePlan> IndividualServicePlan { get; set; }
+        public virtual DbSet<LifeSkillDailyEntry> LifeSkillDailyEntries { get; set; }
+        public virtual DbSet<LifeSkills> LifeSkills { get; set; }
+        public virtual DbSet<SchoolActivity> SchoolActivity { get; set; }
+        public virtual DbSet<Suitability> Suitability { get; set; }
+        public virtual DbSet<SuitabilityItem> SuitabilityItem { get; set; }
+        public virtual DbSet<Workshop> Workshop { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,7 +35,15 @@ namespace SafeHouse.Model
             modelBuilder.Entity<DailyEntry>().ToTable("DailyEntry");
             modelBuilder.Entity<FirstEvaluation>().ToTable("FirstEvaluation");
             modelBuilder.Entity<Evaluation>().ToTable("Evaluation");
+            modelBuilder.Entity<ActivityDetails>().ToTable("ActivityDetails");
+            modelBuilder.Entity<GoalAndResult>().ToTable("GoalAndResult");
+            modelBuilder.Entity<IncludedPerson>().ToTable("IncludedPerson");
+            modelBuilder.Entity<IndividualServicePlan>().ToTable("IndividualServicePlan");
+            modelBuilder.Entity<LifeSkillDailyEntry>().ToTable("LifeSkillDailyEntry");
+            modelBuilder.Entity<LifeSkills>().ToTable("LifeSkills");
+            modelBuilder.Entity<SchoolActivity>().ToTable("SchoolActivity");
+            modelBuilder.Entity<SuitabilityItem>().ToTable("SuitabilityItem");
+            modelBuilder.Entity<Workshop>().ToTable("Workshop");
         }
-
     }
 }
