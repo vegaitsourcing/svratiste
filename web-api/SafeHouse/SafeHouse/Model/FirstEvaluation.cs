@@ -37,7 +37,6 @@ namespace SafeHouse.Model
 
         [MaxLength(512)]
         public String DirectedToName { get; set; }
-
         //Procena Sposobnosti
         [MaxLength(512)]
         public String IndividualMovementAbility { get; set; }

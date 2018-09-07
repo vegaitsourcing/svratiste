@@ -1,5 +1,3 @@
-using System;
-
 namespace SafeHouse.Model
 {
     public class LifeSkillDailyEntry : BaseEntity
