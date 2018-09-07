@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta charset="utf-8">
+	<meta name="description" content="">
+
+	{@eq key=env value="prod"}
+	<link rel="preconnect" href="https://www.googletagmanager.com" />
+	<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+	{:else}
+	<meta name="robots" content="noindex,nofollow">
+	<meta name="googlebot" content="noindex,nofollow">
+	{/eq}
+
+	<!-- main css file -->
+	<link rel="stylesheet" href="css/dist/style.min.css">
+
+	{@eq key=env value="prod"}
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','XXX-XXXXXX');</script>
+	<!-- End Google Tag Manager -->
+	{/eq}
+
+	<!-- global js file -->
+	<script defer type="text/javascript" src="js/dist/global.min.js"></script>
+
+	<title>Front-end dust AR starter</title>
+	<link href="favicon.ico" rel="icon" />
+</head>
+<body>
+
+{@eq key=env value="prod"}
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=XXX-XXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager -->
+{/eq}

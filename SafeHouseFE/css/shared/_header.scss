@@ -1,0 +1,105 @@
+//----------  header
+//------------------------------------------------------------------------------
+.header {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	background: $orange;
+	transition: top 0.3s ease-out;
+	z-index: 9999;
+	padding: 15px 0;
+	&.sticky {
+		top: 0;
+	}
+	.logo {
+		float: left;
+		img {
+			width: 130px;
+		}
+	}
+}
+.header-menu {
+	float: right;
+	ul {
+		float: right;
+		padding-top: 18px;
+	}
+	li {
+		display: inline-block;
+		margin-left: 25px;
+		&.hidden {
+			display: none;
+		}
+	}
+	a {
+		color: $white;
+		text-transform: uppercase;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	@include media-breakpoint-down(lg) {
+		li {
+			margin-left: 11px;
+			&:first-of-type {
+				margin-left: 0;
+			}
+		}
+	}
+	@include media-breakpoint-down(md) {
+		display: none;
+		ul {
+			text-align: center;
+		}
+		li {
+			width: 100%;
+			margin: 0;
+		}
+	}
+}
+.menu-toggle {
+	display: none;
+	position: relative;
+	float: right;
+	top: 16px;
+	right: 0;
+	@include media-breakpoint-down(md) {
+		display: block;
+	}
+}
+.nav {
+	position: fixed;
+	top: 50%;
+	right: 40px;
+	transform: translate(0, -50%);
+	z-index: 5000;
+	.seclink {
+		width: 12px;
+		height: 12px;
+		background-color: $orange;
+		border: 2px solid transparent;
+		position: relative;
+		border-radius: 50%;
+		cursor: pointer;
+		margin: 0 auto;
+		text-indent: -9999px;
+		display: block;
+		&:hover {
+			width: 12px;
+			height: 12px;
+			background-color: transparent;
+			border-color: $orange;
+		}
+	}
+	li {
+		height: 12px;
+		width: 12px;
+		margin-bottom: 25px;
+		&.active {
+			.seclink {
+				background-color: transparent;
+				border-color: $orange;
+			}
+		}
+	}
+}

@@ -1,0 +1,48 @@
+@font-face {
+	font-family: 'svgicons';
+	src: url('../../fonts/dist/svgicons.woff2') format('woff2'),
+	url('../../fonts/dist/svgicons.woff') format('woff'),
+	url('../../fonts/dist/svgicons.ttf') format('truetype');
+}
+
+@mixin font-styles {
+	font-family: 'svgicons';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	// speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+	text-decoration: none;
+	text-transform: none;
+}
+
+%font {
+	@include font-styles;
+}
+
+@function font-char($filename) {
+	$char: "";
+
+	@if $filename == ico-arrow-down {
+	$char: '\E001';
+}
+
+@return $char;
+}
+
+@mixin font($filename, $insert: before, $extend: true) {
+&:#{$insert} {
+	@if $extend {
+		@extend %font;
+	} @else {
+		@include font-styles;
+	}
+	content: font-char($filename);
+}
+}
+
+.font-ico-arrow-down {
+	@include font(ico-arrow-down);
+}
+
