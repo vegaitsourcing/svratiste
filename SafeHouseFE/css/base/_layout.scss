@@ -6,10 +6,12 @@ body {
 	font-size: 14px;
 }
 
-.wrap {
-	@extend %clearfix;
-	margin: 0 auto;
-	max-width: 1280px;
-	padding: 0 20px;
-	width: 100%;
+.container {
+	&.wrap {
+		@extend %clearfix;
+		margin: 0 auto;
+		max-width: 1280px;
+		padding: 0 20px;
+		width: 100%;
+	}
 }
