@@ -2,9 +2,8 @@
 
 namespace SafeHouse.Model
 {
-    public class DailyEntry
+    public class DailyEntry : BaseEntity
     {
-        public Guid Id { get; set; }
         public Carton Carton { get; set; }
         public DateTime Date { get; set; }
 

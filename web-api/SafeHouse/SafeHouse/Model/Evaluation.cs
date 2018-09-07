@@ -2,9 +2,8 @@
 
 namespace SafeHouse.Model
 {
-    public class Evaluation
+    public class Evaluation : BaseEntity
     {
-        public Guid Id { get; set; }
         public Carton Carton { get; set; }
         public int Age { get; set; }
         public string FamilyMembers { get; set; }

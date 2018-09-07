@@ -8,9 +8,9 @@ namespace SafeHouse
     {
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
-        Guid Id { get; set; }
+        public Guid Id { get; set; }
 
         [Timestamp]
-        byte[] Version { get; set; }
+        public byte[] Version { get; set; }
     }
 }
