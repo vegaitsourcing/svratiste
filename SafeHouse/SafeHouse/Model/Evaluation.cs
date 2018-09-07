@@ -9,8 +9,6 @@ namespace Svratiste.Model
     {
         public Guid Id { get; set; }
         public Carton Carton { get; set; }
-        public String AddressStreetName { get; set; }
-        public String AddressStreetNumber { get; set; }
 
         // TODO: Add other fields
     }
