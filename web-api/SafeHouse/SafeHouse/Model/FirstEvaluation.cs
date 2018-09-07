@@ -21,7 +21,6 @@ namespace SafeHouse.Model
         public bool OnTheWaitingList { get; set; }
         public DateTime ServiceStart { get; set; }
         public String DirectedToName { get; set; }
-
         //Procena Sposobnosti
         public String IndividualMovementAbility { get; set; }
         public String VerbalComunicationAbility { get; set; }
