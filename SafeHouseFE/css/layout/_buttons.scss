@@ -23,6 +23,20 @@ input[type='submit'] {
 
 
 .btn {
+	&.color-primary {
+		background-color: $primary;
+		color: $white;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	&.color-secondary {
+		background-color: $grey;
+		color: $white;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
 	&.btn-inverse {
 		margin-left: 20px;
 		&:hover {
@@ -30,6 +44,7 @@ input[type='submit'] {
 		}
 	}
 	&.login {
+		background-color: $primary;
 		display: block;
 		&.active {
 			display: none;

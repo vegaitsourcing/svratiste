@@ -48,5 +48,50 @@
 	.btn-custom {
 		margin: 20px;
 		width: calc(100% - 40px);
+		background-color: $primary;
+		border: 0;
+	}
+}
+
+.main-page {
+	background: $grey-light;
+	height: calc(100vh - 56px);
+	position: relative;
+	.login-panel {
+		background: $grey;
+		@include align(absolute, xy);
+		width: 100%;
+		max-width: 400px;
+		height: 300px;
+		z-index: 2;
+		display: block;
+		border-radius: 5px;
+		.panel {
+			@include align(absolute, xy);
+			h3 {
+				color: $white;
+				font-size: 20px;
+			}
+			input {
+				display: block;
+				width: 300px;
+				height: 30px;
+				border: 2px solid $grey;
+				border-radius: 5px;
+				margin-bottom: 10px;
+				&:last-of-type {
+					margin-bottom: 30px;
+				}
+			}
+			.btn-inverse {
+				background: $grey-light;
+				border: 0;
+				&.login {
+					background: $primary;
+					width: 100%;
+					margin-left: 0;
+				}
+			}
+		}
 	}
 }

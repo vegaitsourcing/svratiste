@@ -4,94 +4,54 @@
 
 <main class="main">
 	<div class="container wrap">
-		<table class="table table-position">
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">First</th>
-					<th scope="col">Last</th>
-					<th scope="col">Handle</th>
-					<th scope="col">Notification</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="table-details">
-					<th scope="row">1</th>
-					<td>Mark</td>
-					<td>Otto</td>
-					<td>@mdo</td>
-					<td>5</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Larry</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-					<td>1</td>
-				</tr>
-			</tbody>
-		</table>
-		<button type="button" class="btn btn-outline-secondary">Edit</button>
-		<button type="button" class="btn btn-dark btn-inverse">Create</button>
-		<button type="button" class="btn btn-dark btn-inverse">Add</button>
+		<div class="table-carton">
+			<table class="table table-position">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">First</th>
+						<th scope="col">Last</th>
+						<th scope="col">Handle</th>
+						<th scope="col">Notification</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="table-details">
+						<th scope="row">1</th>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+						<td>5</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+						<td>2</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+						<td>1</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<button type="button" class="btn color-secondary">Edit</button>
+		<button type="button" class="btn btn-info btn-inverse">Create</button>
+		<button type="button" class="btn btn-info btn-inverse">Add</button>
 	</div>
-	<div class="side-items side-items-read">
-		<table class="table table-position">
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">Stavka</th>
-					<th scope="col">#</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class="info">Ime</td>
-					<td>Otto</td>
-				</tr>
-				<tr>
-					<td class="info">Prezime</td>
-					<td>Thornton</td>
-				</tr>
-				<tr>
-					<td class="info">Godina</td>
-					<td>the Bird</td>
-				</tr>
-			</tbody>
-		</table>
-		<button type="button" class="btn btn-light btn-custom">Save</button>
+	{> "partials/side-read" /}
+	{> "partials/side-create" /}
+	<div class="carton-table">
+		{> "partials/side-create" /}
 	</div>
-	<div class="side-items side-items-create">
-		<table class="table table-position">
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">Stavka</th>
-					<th scope="col">#</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class="info">Ime</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td class="info">Prezime</td>
-					<td><input type="text"></td>
-				</tr>
-				<tr>
-					<td class="info">Godina</td>
-					<td><input type="text"></td>
-				</tr>
-			</tbody>
-		</table>
-		<button type="button" class="btn btn-light btn-custom">Save</button>
+	<div class="carton-table-edit">
+		{> "partials/side-edit" /}
 	</div>
 </main>
 
-{> "partials/shared/footer" /}
+<!-- {> "partials/shared/footer" /} -->
