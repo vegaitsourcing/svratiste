@@ -13,7 +13,7 @@ namespace SafeHouse.Model
         [MaxLength(512)]
         public String OtherMembersName { get; set; }
 
-        [MaxLength(512)]
+        [MaxLength(32)]
         public String GuardiansName { get; set; }
 
         [MaxLength(128)]
