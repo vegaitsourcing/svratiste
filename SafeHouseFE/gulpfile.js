@@ -214,9 +214,7 @@ gulp.task('styles', function () {
 	return gulp.src(['css/**/*.scss'])
 		.pipe(plumber(plumberErrorHandler))
 		.pipe(sourcemaps.init())
-		.pipe(sass({
-			outputStyle: 'compressed'
-		}))
+		.pipe(sass())
 		.pipe(postcss(processors))
 		.pipe(rename('style.min.css'))
 		.pipe(sourcemaps.write('.'))
