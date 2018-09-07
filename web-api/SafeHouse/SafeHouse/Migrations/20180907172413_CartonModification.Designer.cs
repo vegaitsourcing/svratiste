@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Svratiste.Model;
+using SafeHouse.Model;
 
 namespace SafeHouse.Migrations
 {
     [DbContext(typeof(SafeHouseContext))]
-    [Migration("20180907120856_Initial")]
-    partial class Initial
+    [Migration("20180907172413_CartonModification")]
+    partial class CartonModification
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,17 +26,33 @@ namespace SafeHouse.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Age");
+                    b.Property<string>("AddressStreetName");
 
-                    b.Property<string>("CartonNumber");
+                    b.Property<string>("AddressStreetNumber");
+
+                    b.Property<DateTime>("Birthday");
+
+                    b.Property<bool>("EvaluationDone");
+
+                    b.Property<string>("FatherLastName");
+
+                    b.Property<string>("FathersFirstName");
 
                     b.Property<string>("FirstName");
 
                     b.Property<int>("Gender");
 
+                    b.Property<bool>("IndividualPlanDone");
+
+                    b.Property<bool>("IndividualPlanRevised");
+
+                    b.Property<bool>("InitialEvaluationDone");
+
                     b.Property<string>("LastName");
 
-                    b.Property<string>("MiddleName");
+                    b.Property<string>("MothersFirstName");
+
+                    b.Property<string>("MothersLastName");
 
                     b.Property<int>("NumberOfVisits");
 
@@ -79,10 +95,6 @@ namespace SafeHouse.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AddressStreetName");
-
-                    b.Property<string>("AddressStreetNumber");
 
                     b.Property<Guid?>("CartonId");
 
