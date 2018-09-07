@@ -1,0 +1,111 @@
+//----------  responsive breakpoints
+//------------------------------------------------------------------------------
+// @mixin breakpoint ($value) {
+// 	@if $value == 'phone' {
+// 		@media only screen and (min-width: 120px) and (max-width: 767px) { @content; }
+// 	} @else if $value == 'tablet' {
+// 		@media only screen and (min-width: 768px) and (max-width: 1024px) { @content; }
+// 	} @else if $value == 'touch' {
+// 		@media only screen and (min-width: 120px) and (max-width: 1024px) { @content; }
+// 	} @else if $value == 'desktop' {
+// 		@media only screen and (min-width: 1025px) { @content; }
+// 	} @else {
+// 		@media only screen and (max-width: $value) { @content; }
+// 	}
+// }
+
+//----------  input placeholder
+//------------------------------------------------------------------------------
+@mixin placeholder {
+	&::-webkit-input-placeholder {
+		@content;
+	}
+
+	&:-moz-placeholder {
+		@content;
+	}
+
+	&::-moz-placeholder {
+		@content;
+	}
+
+	&:-ms-input-placeholder {
+		@content;
+	}
+}
+
+//----------  base float
+//------------------------------------------------------------------------------
+@mixin base-float {
+	width: 100%;
+	float: left;
+}
+
+//----------  Text Overflow
+//------------------------------------------------------------------------------
+@mixin text-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+//----------  Vertical / horizontal alignment
+//------------------------------------------------------------------------------
+@mixin align($position: relative, $direction: x) {
+	position: $position;
+	@if ($direction == 'y') {
+		top: 50%;
+		transform: translateY(-50%);
+	} @else if ($direction == 'xy') {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	} @else {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+// example: @include align(absolute, xy); for centering both axis'
+// default @include align(); will be relative on x axis
+
+/*
+  This mixin can be used to set the object-fit:
+  @include object-fit(contain);
+  or object-fit and object-position:
+  @include object-fit(cover, top);
+*/
+
+@mixin object-fit($fit: fill, $position: null) {
+	-o-object-fit: $fit;
+	object-fit: $fit;
+	@if $position {
+		font-family: 'object-fit: #{$fit}; object-position: #{$position}';
+		-o-object-position: $position;
+		object-position: $position;
+	}
+	@else {
+		font-family: 'object-fit: #{$fit}';
+	}
+}
+
+//	Visually hidden mixin for accessability
+@mixin visually-hidden() {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+// Hover mixin only for desktop devices
+// to include use @include hover {your hover styles} can also include elements
+@mixin hover {
+	@media only screen and (min-width: 1025px) {
+		.no-touch &:hover {
+			@content;
+		}
+	}
+}

@@ -1,0 +1,14 @@
+//----------  forms
+//------------------------------------------------------------------------------
+input,
+textarea {
+	background: $white;
+	border-radius: 0;
+	box-shadow: none;
+	color: $black;
+	height: 25px;
+	padding: 0 10px;
+	&::placeholder {
+		color: $black;
+	}
+}

@@ -1,0 +1,84 @@
+//----------  helpers
+//------------------------------------------------------------------------------
+* {
+	box-sizing: border-box;
+	&::before,
+	&::after {
+		box-sizing: border-box;
+	}
+}
+
+%clearfix {
+	&::before,
+	&::after {
+		content: '';
+		display: table;
+	}
+	&::after {
+		clear: both;
+	}
+}
+
+.clearfix {
+	@extend %clearfix;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
+.clear {
+	clear: both;
+}
+
+.no-margin {
+	margin: 0;
+}
+
+.fleft {
+	float: left;
+}
+
+.fright {
+	float: right;
+}
+
+.centered {
+	text-align: center;
+}
+
+.sr-only {
+	@include visually-hidden;
+}
+
+.has-cover {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.cover-img {
+	min-width: 1000%;
+	min-height: 1000%;
+	max-width: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.1);
+}
+
+// Theming and colors iterator
+@each $colors-name in $site-colors {
+	$name: nth($colors-name, 1);
+	$color: nth($colors-name, 2);
+	.bg-#{$name} {
+		background-color: $color;
+	}
+	.color-#{$name} {
+		color: $color;
+	}
+}

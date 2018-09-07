@@ -1,0 +1,38 @@
+//----------  button
+//------------------------------------------------------------------------------
+a,
+button {
+	appearance: none;
+	outline: none;
+	@include media-breakpoint-up(lg) {
+		&:focus {
+			outline: 1px dashed rgba($orange, .2);
+		}
+	}
+}
+
+button,
+input[type='button'],
+input[type='submit'] {
+	background: none;
+	border: 0;
+	cursor: pointer;
+	outline: none;
+	padding: 0;
+}
+
+.btn {
+	background-color: $black;
+	color: $white;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+	transition: 0.4s ease-out;
+	&:hover {
+		background-color: lighten($black, 30%);
+		border-radius: 20px;
+	}
+}
