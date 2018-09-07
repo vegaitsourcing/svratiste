@@ -16,7 +16,7 @@ class CardboardStore extends EventEmitter {
 
     handleActions(action) {
         switch(action.type) {
-            case "FETCHED_ALL_SECTIONS":
+            case "FETCHED_CARTONS":
                 
                 break;
         }

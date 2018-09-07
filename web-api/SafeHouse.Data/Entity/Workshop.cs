@@ -2,11 +2,10 @@ using System;
 
 namespace SafeHouse.Model
 {
-    public class Workshop
+    public class Workshop : BaseEntity
     {
-        public Guid Id { get; set; }
         public int Type { get; set; }
-        public DailyEntry DailyEntryId { get; set; }
+        public DailyEntry DailyEntry { get; set; }
         public int Number { get; set; }
     }
 }
