@@ -1,11 +1,12 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SafeHouse.Model
 {
-    public class LifeSkills
+    public class LifeSkills : BaseEntity
     {
-            public Guid Id { get; set; }
-            public String Description { get; set; }
-            public bool IsGroupSkill { get; set; }
+        [MaxLength(1024)]
+        public String Description { get; set; }
+        public bool IsGroupSkill { get; set; }
     }
 }
