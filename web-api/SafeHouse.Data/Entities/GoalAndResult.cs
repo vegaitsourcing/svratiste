@@ -1,4 +1,4 @@
-﻿namespace SafeHouse.Model
+﻿namespace SafeHouse.Data.Entities 
 {
     public class GoalAndResult: BaseEntity
     {

@@ -1,11 +1,10 @@
 using System;
 
-namespace SafeHouse.Model
+namespace SafeHouse.Data.Entities 
 {
-    public class Workshop : BaseEntity
+    public class SchoolActivity : BaseEntity
     {
         public int Type { get; set; }
         public DailyEntry DailyEntry { get; set; }
-        public int Number { get; set; }
     }
 }

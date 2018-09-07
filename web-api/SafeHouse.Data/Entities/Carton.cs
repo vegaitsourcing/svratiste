@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SafeHouse.Model
+namespace SafeHouse.Data.Entities 
 {
     public class Carton : BaseEntity
     {

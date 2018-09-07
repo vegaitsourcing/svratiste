@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace SafeHouse.Model
+namespace SafeHouse.Data.Entities
 {
     public class SafeHouseContext : DbContext
     {
@@ -22,7 +22,7 @@ namespace SafeHouse.Model
         public virtual DbSet<IncludedPerson> IncludedPersons  { get; set; }
         public virtual DbSet<IndividualServicePlan> IndividualServicePlan { get; set; }
         public virtual DbSet<LifeSkillDailyEntry> LifeSkillDailyEntries { get; set; }
-        public virtual DbSet<LifeSkills> LifeSkills { get; set; }
+        public virtual DbSet<LifeSkill> LifeSkills { get; set; }
         public virtual DbSet<SchoolActivity> SchoolActivity { get; set; }
         public virtual DbSet<Suitability> Suitability { get; set; }
         public virtual DbSet<SuitabilityItem> SuitabilityItem { get; set; }
@@ -40,7 +40,7 @@ namespace SafeHouse.Model
             modelBuilder.Entity<IncludedPerson>().ToTable("IncludedPerson");
             modelBuilder.Entity<IndividualServicePlan>().ToTable("IndividualServicePlan");
             modelBuilder.Entity<LifeSkillDailyEntry>().ToTable("LifeSkillDailyEntry");
-            modelBuilder.Entity<LifeSkills>().ToTable("LifeSkills");
+            modelBuilder.Entity<LifeSkill>().ToTable("LifeSkills");
             modelBuilder.Entity<SchoolActivity>().ToTable("SchoolActivity");
             modelBuilder.Entity<SuitabilityItem>().ToTable("SuitabilityItem");
             modelBuilder.Entity<Workshop>().ToTable("Workshop");

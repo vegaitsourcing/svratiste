@@ -1,6 +1,6 @@
 using System;
 
-namespace SafeHouse.Model
+namespace SafeHouse.Data.Entities 
 {
     public class SuitabilityItem : BaseEntity
     {
