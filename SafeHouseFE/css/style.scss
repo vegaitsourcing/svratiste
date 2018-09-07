@@ -29,19 +29,12 @@
 @import 'layout/forms';
 @import 'layout/lists';
 
-//----------  plugins
-//------------------------------------------------------------------------------
-@import 'plugins/slick';
 
 //----------  sections
 //------------------------------------------------------------------------------
-@import 'sections/intro';
-@import 'sections/highlights';
-@import 'sections/statement';
-@import 'sections/review';
-@import 'sections/strategy';
-@import 'sections/case-studies';
-@import 'sections/downloads';
+@import 'sections/home';
+@import 'sections/evaluation';
+@import 'sections/reports';
 
 //----------  shared
 //------------------------------------------------------------------------------
