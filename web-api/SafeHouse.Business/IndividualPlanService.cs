@@ -1,28 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Data.Entities;
-using System;
+﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using SafeHouse.Business.Contracts;
+using SafeHouse.Data;
+using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business
 {
     public class IndividualPlanService : IIndividualPlanService
     {
-        private readonly SafeHouseContext _dbContex;
+        private readonly SafeHouseContext _dbContext;
 
         public IndividualPlanService(SafeHouseContext context)
         {
-            _dbContex = context;
+            _dbContext = context;
         }
 
         public IndividualServicePlan Get(Guid id)
         {
-            return _dbContex.IndividualServicePlans.Include("Carton").First(x => x.Carton.Id == id);
+            return _dbContext.IndividualServicePlans.Include("Carton").First(x => x.Carton.Id == id);
         }
 
         public void Add(IndividualServicePlan plan)
         {
-            _dbContex.IndividualServicePlans.Add(plan);
+            _dbContext.IndividualServicePlans.Add(plan);
         }
     }
 }

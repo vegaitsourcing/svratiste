@@ -1,9 +1,10 @@
-﻿using SafeHouse.Business.Contracts;
+﻿using System;
+using System.Linq;
+using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Business.Helpers;
+using SafeHouse.Data;
 using SafeHouse.Data.Entities;
-using System;
-using System.Linq;
 
 namespace SafeHouse.Business
 {
@@ -23,7 +24,6 @@ namespace SafeHouse.Business
             return user == null ? null : (CheckIfPasswordIsCorrect(user.Password, request.Password) ? user.Id : (Guid?)null);
         }
 
-        private bool CheckIfPasswordIsCorrect(string userPassword, string enteredPassword)
-            => String.Equals(userPassword, HashingHelper.Hash(enteredPassword));
+        private bool CheckIfPasswordIsCorrect(string userPassword, string enteredPassword) => String.Equals(userPassword, HashingHelper.Hash(enteredPassword));
     }
 }

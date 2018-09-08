@@ -4,7 +4,7 @@ namespace SafeHouse.Data.Entities
 {
     public class SuitabilityCache : BaseEntity
     {
-        [MaxLength(32)]
+        [MaxLength(80)]
         public string Name { get; set; }
     }
 }
