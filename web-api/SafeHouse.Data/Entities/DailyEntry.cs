@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using SafeHouse.Data.Enums;
 
 namespace SafeHouse.Data.Entities 
 {
@@ -23,8 +24,12 @@ namespace SafeHouse.Data.Entities
         public int Clothing { get; set; }
 
         // Posredovanje u obezbeđivanju dostupnosti usluga u zajednici
-        public int MediationWriting { get; set; }
-        public int MediationSpeaking { get; set; }
+        public MediationWritingEnum MediationWriting { get; set; }
+        [MaxLength(512)]
+        public string MediationWritingDescription { get; set; }
+
+        public MediationSpeakingEnum MediationSpeaking { get; set; }
+        public string MediationSpeakingDescription { get; set; }
 
         // Pružanje psihosocijalne podrške
         public bool PsihosocialSupport { get; set; }
