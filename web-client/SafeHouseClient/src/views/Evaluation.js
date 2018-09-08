@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 
-class Cardboard extends Component {
+class Evaluation extends Component {
     render() {
         return (
-            <h2>Kartoni</h2>
+            <h2>Procena</h2>
         );
     };
 }
 
-export default Cardboard;
+export default Evaluation;
