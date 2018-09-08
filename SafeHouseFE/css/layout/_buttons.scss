@@ -57,3 +57,20 @@ input[type='submit'] {
 		}
 	}
 }
+
+.color-primary {
+	background-color: $primary;
+	color: $white;
+	&:hover {
+		opacity: 0.7;
+		color: $grey;
+	}
+}
+.color-secondary {
+	background-color: $grey;
+	color: $white;
+	&:hover {
+		opacity: 0.7;
+		color: $primary;
+	}
+}

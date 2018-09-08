@@ -33,12 +33,13 @@
 	// margin-top: 106px;
 	background-color: $grey;
 	&.side-items-read {
+		width: 0;
 		&.opened {
 			width: 100%;
 		}
 	}
 	&.side-items-create {
-		width: 100%;
+		width: 0;
 		&.opened {
 			width: 100%;
 		}
@@ -111,6 +112,18 @@
 					margin-left: 0;
 				}
 			}
+		}
+	}
+}
+
+.pages {
+	margin-top: 50px;
+	.active-page {
+		background-color: $primary;
+		color: $white;
+		&:hover {
+			opacity: 0.7;
+			color: $grey;
 		}
 	}
 }

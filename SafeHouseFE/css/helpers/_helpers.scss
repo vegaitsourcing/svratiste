@@ -19,6 +19,18 @@
 	}
 }
 
+label, .btn:focus, .btn:active, a:focus, a:active {
+	outline: none !important; // sass-lint:disable-line no-important
+	box-shadow: none !important; // sass-lint:disable-line no-important
+ }
+
+a:focus,
+a:hover,
+a:active {
+	outline: none !important; // sass-lint:disable-line no-important
+}
+
+
 .clearfix {
 	@extend %clearfix;
 }
