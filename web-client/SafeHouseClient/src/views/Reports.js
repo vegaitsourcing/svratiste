@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class Cardboard extends Component {
+class Reports extends Component {
     constructor(props) {
         super(props);
 
@@ -9,9 +9,9 @@ class Cardboard extends Component {
 
     render() {
         return (
-            <h2>Kartoni</h2>
+            <h2>Izveštaji</h2>
         );
     };
 }
 
-export default Cardboard;
+export default Reports;
