@@ -18,7 +18,7 @@ namespace SafeHouse.Business
             _dbContext = context;
         }
 
-        public ReportData GetReportData(DateTime from, DateTime to, string childName)
+        public ReportDataDto GetReportData(DateTime from, DateTime to, string childName)
         {
             throw new NotImplementedException();
         }

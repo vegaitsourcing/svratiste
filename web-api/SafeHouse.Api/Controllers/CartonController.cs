@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SafeHouse.Business.Contracts;
-using SafeHouse.Data.Entities;
+using SafeHouse.Business.Contracts.Models;
 using System;
 using System.Collections.Generic;
 
@@ -18,13 +18,13 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpGet("{page}")]
-        public IEnumerable<Carton> Get(int? page)
+        public IEnumerable<CartonDto> Get(int? page)
         {
             return _cartonService.Get(page);
         }
 
         [HttpGet("{id}")]
-        public Carton Get(Guid id)
+        public CartonDto Get(Guid id)
         {
             return _cartonService.Get(id);
         }
@@ -36,7 +36,7 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody]Carton newValue)
+        public void Create([FromBody]CartonDto newValue)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Update([FromBody]Carton newValue)
+        public void Update([FromBody]CartonDto newValue)
         {
             try
             {

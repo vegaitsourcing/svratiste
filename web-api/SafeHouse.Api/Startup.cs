@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SafeHouse.Api.Helpers;
+using SafeHouse.Business.Mappers;
 using SafeHouse.Data;
 using SafeHouse.Data.Entities;
 using SafeHouse.Infrastructure;
@@ -58,6 +59,7 @@ namespace SafeHouse.Api
                 options.AddPolicy("Member",
                     policy => policy.RequireClaim(Api.Common.Constants.SafeHouseUserIdClaimKey));
             });
+
 
         }
 

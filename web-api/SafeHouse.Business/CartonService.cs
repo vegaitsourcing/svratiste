@@ -1,29 +1,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Business.Mappers;
 using SafeHouse.Data;
-using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business
 {
     public class CartonService : ICartonService
     {
         private readonly SafeHouseContext _dbContex;
+        private readonly ICartonMapper _cartonMapper;
+        private readonly IConfiguration _configuration;
 
-        public CartonService(SafeHouseContext context)
+        private int PageSize => _configuration.GetValue<int>("PageSize");
+
+        public CartonService(SafeHouseContext context, ICartonMapper cartonMapper, IConfiguration configuration)
         {
             _dbContex = context;
+            _cartonMapper = cartonMapper;
+            _configuration = configuration;
         }
 
-        public IEnumerable<Carton> Get(int? page)
+        public IEnumerable<CartonDto> Get(int? page)
         {
-            return _dbContex.Cartons.ToList().Skip((page ?? 1) * 20).Take(20);
+            return _dbContex.Cartons
+                .Skip((page ?? 1) * PageSize)
+                .Take(PageSize)
+                .Select(m => _cartonMapper.ToDto(m));
         }
 
-        public Carton Get(Guid id)
+        public CartonDto Get(Guid id)
         {
-            return _dbContex.Cartons.Find(id);
+            var entity = _dbContex.Cartons.Find(id);
+            return entity != null ? _cartonMapper.ToDto(entity) : null;
         }
 
         public int GetPageNumber()
@@ -31,14 +43,14 @@ namespace SafeHouse.Business
             return _dbContex.Cartons.Count() / 20 + 1;
         }
 
-        public void Add(Carton carton)
+        public void Add(CartonDto carton)
         {
-            _dbContex.Cartons.Add(carton);
+            _dbContex.Cartons.Add(_cartonMapper.ToEntity(carton));
         }
 
-        public void Update(Carton cartonNewValues)
+        public void Update(CartonDto cartonNewValues)
         {
-            _dbContex.Cartons.Update(cartonNewValues);
+            _dbContex.Cartons.Update(_cartonMapper.ToEntity(cartonNewValues));
         }
     }
 }
