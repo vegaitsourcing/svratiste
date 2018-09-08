@@ -1,6 +1,12 @@
 .table-position {
 	position: relative;
 	margin-top: 50px;
+	.combobox {
+		width: 400px;
+		height: 35px;
+		margin-top: 7px;
+		border: 1px solid $grey;
+	}
 	.notify {
 		background-color: transparent;
 		width: 100px;
