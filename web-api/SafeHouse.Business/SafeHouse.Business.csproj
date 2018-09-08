@@ -4,4 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SafeHouse.Business.Contracts\SafeHouse.Business.Contracts.csproj" />
+    <ProjectReference Include="..\SafeHouse.Data\SafeHouse.Data.csproj" />
+  </ItemGroup>
+
 </Project>

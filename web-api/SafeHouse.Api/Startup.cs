@@ -32,7 +32,7 @@ namespace SafeHouse
             }
 
             services.AddDbContext<SafeHouseContext>(options =>
-                options.UseSqlServer(connection));
+                options.UseSqlServer(connection, x => x.MigrationsAssembly("SafeHouse.Api")));
 
             services.AddMvc();
         }
