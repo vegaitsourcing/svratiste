@@ -27,7 +27,7 @@ namespace SafeHouse.Business
 
         public void Add(Carton carton)
         {
-            _dbContex.Add(carton);
+            _dbContex.Cartons.Add(carton);
         }
 
         public void Update(Carton cartonNewValues)

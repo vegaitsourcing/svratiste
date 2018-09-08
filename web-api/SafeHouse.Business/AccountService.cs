@@ -1,22 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SafeHouse.Business.Contracts;
+﻿using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Business.Helpers;
+using SafeHouse.Data.Entities;
 using System;
+using System.Linq;
 
 namespace SafeHouse.Business
 {
     public class AccountService : IAccountService
     {
-        private readonly DbContext _dbContex;
+        private readonly SafeHouseContext _dbContex;
 
-        public AccountService(DbContext context)
+        public AccountService(SafeHouseContext context)
         {
             _dbContex = context;
         }
 
-        public bool CheckCredentials(CheckCredentialsRequest request)
+        public Guid? GetUserIdIfCredentialsAreValid(CheckCredentialsRequest request)
         {
-            throw new NotImplementedException();
+            var user = _dbContex.SafeHouseUsers.FirstOrDefault(u => u.Username == request.Username);
+
+            return user == null ? null : (CheckIfPasswordIsCorrect(user.Password, request.Password) ? user.Id : (Guid?)null);
         }
+
+        private bool CheckIfPasswordIsCorrect(string userPassword, string enteredPassword)
+            => String.Equals(userPassword, HashingHelper.Hash(enteredPassword));
     }
 }

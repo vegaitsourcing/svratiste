@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SafeHouse.Infrastructure;
+using Microsoft.IdentityModel.Tokens;
+using SafeHouse.Api.Helpers;
 using SafeHouse.Data.Entities;
+using SafeHouse.Infrastructure;
 
 namespace SafeHouse.Api
 {
@@ -22,6 +25,41 @@ namespace SafeHouse.Api
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters =
+                       new TokenValidationParameters
+                       {
+                           ValidateIssuer = true,
+                           ValidateAudience = true,
+                           ValidateLifetime = true,
+                           ValidateIssuerSigningKey = true,
+
+                           ValidIssuer = Configuration.GetValue<string>(Api.Common.Constants.ConfigKeys.Issuer),
+                           ValidAudience = Configuration.GetValue<string>(Api.Common.Constants.ConfigKeys.Audience),
+                           IssuerSigningKey = JwtSecurityKey.Create(Configuration.GetValue<string>(Api.Common.Constants.ConfigKeys.Secreet))
+                       };
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnAuthenticationFailed = context =>
+                        {
+                            return Task.CompletedTask;
+                        },
+                        OnTokenValidated = context =>
+                        {
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Member",
+                    policy => policy.RequireClaim(Api.Common.Constants.SafeHouseUserIdClaimKey));
+            });
+            
             services.AddDataServices(connection)
                 .AddBusinessServices()
                 .AddMvc();
@@ -35,6 +73,7 @@ namespace SafeHouse.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseMvc();
 
             DbInitialization.FillSuitabiltyCache(db);

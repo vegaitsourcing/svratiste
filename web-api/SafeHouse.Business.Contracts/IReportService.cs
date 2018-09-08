@@ -1,10 +1,10 @@
-﻿using SafeHouse.Business.Contracts.Models;
-using System;
+﻿using System;
+using SafeHouse.Business.Contracts.Models;
 
 namespace SafeHouse.Business.Contracts
 {
     public interface IReportService
     {
-        ReportData GetReportData(DateTime start, DateTime end, Guid visitor);
+        ReportData GetReportData(DateTime from, DateTime to, string childName);
     }
 }
