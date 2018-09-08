@@ -2,7 +2,10 @@
 {
     public static class HashingHelper
     {
-        public static string Hash(string stringToBeCached)
-            => BCrypt.Net.BCrypt.HashPassword(stringToBeCached, BCrypt.Net.BCrypt.GenerateSalt());
+        public static string Hash(string textToBeHashed)
+            => BCrypt.Net.BCrypt.HashPassword(textToBeHashed, BCrypt.Net.BCrypt.GenerateSalt(10));
+
+        public static bool Verify(string text, string hash)
+            => BCrypt.Net.BCrypt.Verify(text, hash);
     }
 }

@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Data.Entities;
-using System;
+﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using SafeHouse.Business.Contracts;
+using SafeHouse.Data;
+using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business
 {

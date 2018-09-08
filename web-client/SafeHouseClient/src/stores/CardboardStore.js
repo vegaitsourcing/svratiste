@@ -8,6 +8,7 @@ class CardboardStore extends EventEmitter {
         super(props);
 
         this.cartons = [];
+        this.totalPages = 1;
     }
 
     getAll() {
@@ -22,6 +23,13 @@ class CardboardStore extends EventEmitter {
                 break;
             case "HIDE_ADD_BAR":
                 this.emit("hide_add_bar");
+                break;
+            case "HIDE_EDIT_BAR":
+                this.emit("hide_edit_bar");
+                break;
+            case "FETCHED_PAGES_COUNT":
+                this.totalPages = action.payload;
+                this.emit("fetched_pages_count");
                 break;
             default:
         }

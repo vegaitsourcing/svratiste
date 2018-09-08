@@ -1,8 +1,9 @@
-using SafeHouse.Business.Contracts;
-using SafeHouse.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SafeHouse.Business.Contracts;
+using SafeHouse.Data;
+using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business
 {
@@ -27,7 +28,7 @@ namespace SafeHouse.Business
 
         public int GetPageNumber()
         {
-            return _dbContex.Cartons.Count()/20;
+            return _dbContex.Cartons.Count() / 20 + 1;
         }
 
         public void Add(Carton carton)
