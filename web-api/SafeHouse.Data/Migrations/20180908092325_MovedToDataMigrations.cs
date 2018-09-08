@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SafeHouse.Api.Migrations
+namespace SafeHouse.Data.Migrations
 {
-    public partial class AddedGenderMigration : Migration
+    public partial class MovedToDataMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
