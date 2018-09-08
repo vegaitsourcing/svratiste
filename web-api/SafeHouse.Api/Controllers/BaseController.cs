@@ -5,7 +5,6 @@ using System;
 namespace SafeHouse.Api.Controllers
 {
     [Authorize]
-    [ApiController]
     public abstract class BaseController : Controller
     {
         protected Guid SafeHouseUserId()

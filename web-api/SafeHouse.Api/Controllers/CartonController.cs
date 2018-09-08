@@ -8,7 +8,7 @@ namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/Carton")]
-    public class CartonController : Controller
+    public class CartonController : BaseController
     {
         private ICartonService _cartonService;
 
