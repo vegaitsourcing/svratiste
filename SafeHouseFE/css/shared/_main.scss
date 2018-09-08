@@ -22,6 +22,13 @@
 	}
 }
 
+.combobox {
+	width: 400px;
+	height: 35px;
+	margin-top: 7px;
+	border: 1px solid $grey;
+}
+
 .side-items {
 	max-width: 800px;
 	width: 100%;
@@ -132,5 +139,44 @@
 			opacity: 0.7;
 			color: $grey;
 		}
+	}
+}
+
+
+.table-print {
+	.table-head {
+		text-align: center;
+	}
+	.row-width {
+		width: 250px;
+	}
+	input {
+		width: 100%;
+		height: 35px;
+		border: 1px solid $grey;
+	}
+	input[type='checkbox'] {
+		width: 50px;
+		height: 20px;
+		border: 1px solid $grey;
+		margin-top: 6px;
+	}
+	span {
+		font-weight: 700;
+		font-size: 18px;
+		vertical-align: bottom;
+	}
+	textarea {
+		width: 100%;
+		height: 150px;
+	}
+	td {
+		padding: 5px;
+	}
+	.big {
+		height: 200px;
+	}
+	.small {
+		height: 100px;
 	}
 }
