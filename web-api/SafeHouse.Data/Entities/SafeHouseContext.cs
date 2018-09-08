@@ -28,11 +28,6 @@ namespace SafeHouse.Data.Entities
         public virtual DbSet<SuitabilityItem> SuitabilityItems { get; set; }
         public virtual DbSet<SuitabilityCache> SuitabilityCaches { get; set; }
         public virtual DbSet<Workshop> Workshops { get; set; }
-        public virtual DbSet<SchoolActivity> SchoolActivities { get; set; }
-        public virtual DbSet<Suitability> Suitabilities { get; set; }
-        public virtual DbSet<SuitabilityItem> SuitabilityItems { get; set; }
-        public virtual DbSet<SuitabilityCache> SuitabilityCaches { get; set; }
-        public virtual DbSet<Workshop> Workshop { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
