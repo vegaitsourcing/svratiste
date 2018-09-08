@@ -1,0 +1,35 @@
+﻿namespace SafeHouse.Data.Enums
+{
+    public enum LifeSkillEnum
+    {
+        MakingDecisions,
+        ProblemSolving,
+        AsertiveCommunication,
+        HowToSayNo,
+        SelfAwareness,
+        EmotionManagment,
+        Empathy,
+        DealingWithStress,
+        PersonalHygiene,
+        ClothesHygiene,
+        Health,
+        PesonalSafety,
+        FinancialSkills,
+        PersonalSpaceHygiene,
+        UsingAppliances,
+        Cooking,
+        Manners,
+        GrocerryShoping,
+        PregnancyHealthCare,
+        ChildCare,
+        ChildEmotionalSupport,
+        ChildProtection,
+        ChildMotivation,
+        PersonalDocuments,
+        TimeManagment,
+        Trafic,
+        SpatialCoordination,
+        UsingMedia,
+        JobSearch
+    }
+}
