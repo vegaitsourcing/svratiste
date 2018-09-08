@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
+import CartonTable from '../components/CartonTable';
 
 class Cardboard extends Component {
     render() {
         return (
-            <h2>Kartoni</h2>
+            <div>
+                <CartonTable />
+                
+            </div>
         );
     };
 }
