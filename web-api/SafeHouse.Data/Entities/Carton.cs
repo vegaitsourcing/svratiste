@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using SafeHouse.Data.Enums;
 
 namespace SafeHouse.Data.Entities 
 {
@@ -15,8 +16,8 @@ namespace SafeHouse.Data.Entities
 
         [MaxLength(32)]
         public string Nickname { get; set; }
-        public int Gender { get; set; }
-        public DateTime Birthday { get; set; }
+        public Gender Gender { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public int NumberOfVisits { get; set; }
 
         [MaxLength(100)]

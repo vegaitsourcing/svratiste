@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace SafeHouse
+namespace SafeHouse.Api
 {
     public class Program
     {
@@ -12,7 +12,7 @@ namespace SafeHouse
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+            .UseStartup<Startup>()
+            .Build();
     }
 }

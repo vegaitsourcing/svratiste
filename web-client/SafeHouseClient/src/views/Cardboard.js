@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
+import CartonTable from '../components/CartonTable';
 
 class Cardboard extends Component {
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         return (
-            <h2>Home</h2>
+            <div>
+                <CartonTable />
+                
+            </div>
         );
     };
 }

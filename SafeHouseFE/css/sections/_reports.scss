@@ -1,5 +1,28 @@
 //----------  downloads section
 //------------------------------------------------------------------------------
-// .downloads {
-//
-// }
+.reports {
+	.table-position {
+		margin-top: 0;
+	}
+}
+.report {
+	display: inline-block;
+	background: $grey;
+	padding: 10px;
+	width: 100%;
+	margin-top: 50px;
+	input {
+		border: 2px solid $primary;
+		padding-bottom: 4px;
+		display: inline-block;
+		width: 200px;
+		height: 30px;
+		border-radius: 5px;
+		margin-bottom: 10px;
+		margin-right: 20px;
+	}
+	span {
+		color: $white;
+		display: inline-block;
+	}
+}

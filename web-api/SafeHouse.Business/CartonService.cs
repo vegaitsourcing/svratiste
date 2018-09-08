@@ -2,6 +2,7 @@ using SafeHouse.Business.Contracts;
 using SafeHouse.Data.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SafeHouse.Business
 {
@@ -16,7 +17,7 @@ namespace SafeHouse.Business
 
         public IEnumerable<Carton> Get(int? page)
         {
-            return _dbContex.Cartons;
+            return _dbContex.Cartons.ToList().Skip((page ?? 1) * 20).Take(20);
         }
 
         public Carton Get(Guid id)

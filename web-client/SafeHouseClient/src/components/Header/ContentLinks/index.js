@@ -1,19 +1,20 @@
 import React from 'react';
 
+import LinkRouter from './LinkRouter';
 
-const ContentLinks = () => {
+const ContentLinks = ({ location }) => {
     return (
         <div className="collapse navbar-collapse menu" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-                <li className="nav-item active">
-                    <a className="nav-link" href="home.html">home</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="evaluation.html">evaluation</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="reports.html">reports</a>
-                </li>
+                <LinkRouter
+                    to="/"
+                    active={location.pathname === "/"}>Kartoni</LinkRouter>
+                <LinkRouter
+                    to="/reports"
+                    active={location.pathname === "/reports"}>Izveštaji</LinkRouter>
+                <LinkRouter
+                    to="/evaluation"
+                    active={location.pathname === "/evaluation"}>Procena</LinkRouter>
             </ul>
             <button type="button" className="btn btn-light my-2 my-lg-0 btn-inverse logout">Login out</button>
         </div>

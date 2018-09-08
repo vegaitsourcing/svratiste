@@ -1,10 +1,10 @@
-using System;
+using SafeHouse.Data.Enums;
 
-namespace SafeHouse.Data.Entities 
+namespace SafeHouse.Data.Entities
 {
     public class SchoolActivity : BaseEntity
     {
-        public int Type { get; set; }
+        public SchoolActivityEnum Type { get; set; }
         public DailyEntry DailyEntry { get; set; }
     }
 }
