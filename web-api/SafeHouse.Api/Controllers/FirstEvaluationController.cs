@@ -6,7 +6,7 @@ using System;
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/InitialEvaluation")]
+    [Route("api/FirstEvaluation")]
     public class FirstEvaluationController : BaseController
     {
         private IFirstEvaluationService _firstEvaluationService;

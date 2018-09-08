@@ -54,7 +54,7 @@ body {
   line-height: 1.35;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  overflow: hidden; }
+ }
 
 ::-moz-selection {
   background: #000;
