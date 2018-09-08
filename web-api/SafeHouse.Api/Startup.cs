@@ -20,13 +20,9 @@ namespace SafeHouse.Api
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
-            if (connection == null)
-            {
-                connection = "Server=NZIVKOVIC\\SQLEXPRESS;Database=SafeHouse;Trusted_Connection=True;MultipleActiveResultSets=true";
-            }
 
             services.AddDbContext<SafeHouseContext>(options =>
-                options.UseSqlServer(connection, x => x.MigrationsAssembly("SafeHouse.Api")));
+                options.UseSqlServer(connection, x => x.MigrationsAssembly("SafeHouse.Data")));
 
             services.AddMvc();
         }
