@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SafeHouse.Business;
+using SafeHouse.Business.Contracts;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Api
@@ -24,6 +26,8 @@ namespace SafeHouse.Api
             services.AddDbContext<SafeHouseContext>(options =>
                 options.UseSqlServer(connection, x => x.MigrationsAssembly("SafeHouse.Data")));
 
+            services.AddTransient<ICartonService, CartonService>();
+            services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
             services.AddMvc();
         }
 
