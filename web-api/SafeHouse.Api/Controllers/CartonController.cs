@@ -29,6 +29,12 @@ namespace SafeHouse.Api.Controllers
             return _cartonService.Get(id);
         }
 
+        [HttpGet("{pagenumber}")]
+        public int GetCount()
+        {
+            return _cartonService.GetPageNumber();
+        }
+
         [HttpPost]
         public void Create([FromBody]Carton newValue)
         {
