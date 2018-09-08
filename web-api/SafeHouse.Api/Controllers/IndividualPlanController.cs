@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Data.Entities;
@@ -11,7 +7,7 @@ namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/IndividualPlan")]
-    public class IndividualPlanController : Controller
+    public class IndividualPlanController : BaseController
     {
         private IIndividualPlanService _individualPlanService;
 

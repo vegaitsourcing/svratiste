@@ -5,8 +5,10 @@ import CardboardStore from '../../stores/CardboardStore';
 
 import TableData from './TableData';
 import TableHeader from './TableHeader';
+import Pagination from '../Pagination';
 
 import AddCartonSide from '../AddCartonSide';
+import EditCartonSide from '../EditCartonSide';
 
 
 class CartonTable extends Component {
@@ -15,23 +17,47 @@ class CartonTable extends Component {
 
         this.state = {
             catons: [
-                { FirstName: 'Mark', LastName: 'Otto', notifications: '5' },
+                { 
+                    Id: '',
+                    FirstName: 'Mark',
+                    LastName: 'Otto',
+                    Nickname: 'otot',
+                    Gender: '1',
+                    DateOfBirth: '2018-09-13',
+                    AddressStreetName: 'test',
+                    AddressStreetNumber: '22',
+                    FathersName: 'tata',
+                    MothersName: 'Mama',
+                    notifications: '2'
+                },
                 { FirstName: 'Jacob', LastName: 'Thornton', notifications: '2' },
                 { FirstName: 'Larry', LastName: 'the Bird', notifications: '1' }
             ],
-            showAddSide: false
+            currentPage: 5,
+            totalPages: 5,
+            selectedRow: {},
+            showAddSide: false,
+            showEditSide: false
         };
 
         this.getCartons = this.getCartons.bind(this);
         this.hideAddBar = this.hideAddBar.bind(this);
+        this.hideEditBar = this.hideEditBar.bind(this);
 
         this.onItemSelected = this.onItemSelected.bind(this);
         this.showAddSide = this.showAddSide.bind(this);
+
+        // pagination
+        this.onPreviousClick = this.onPreviousClick.bind(this);
+        this.onPageClick = this.onPageClick.bind(this);
+        this.onNextClick = this.onNextClick.bind(this);
     }
 
     componentWillMount() {
         CardboardStore.on("fetched_cartons", this.getCartons);
+        CardboardStore.on("fetched_pages_count", this.getNumOfPages);
         CardboardStore.on("hide_add_bar", this.hideAddBar);
+        CardboardStore.on("hide_edit_bar", this.hideEditBar);
     }
 
     componentDidMount() {
@@ -40,7 +66,9 @@ class CartonTable extends Component {
 
     componentWillUnmount() {
         CardboardStore.removeListener("fetched_cartons", this.getCartons);
+        CardboardStore.removeListener("fetched_pages_count", this.getNumOfPages);
         CardboardStore.removeListener("hide_add_bar", this.hideAddBar);
+        CardboardStore.removeListener("hide_edit_bar", this.hideEditBar);
     }
 
     getCartons() {
@@ -49,16 +77,44 @@ class CartonTable extends Component {
         });
     }
 
+    getNumOfPages() {
+        this.setState({ totalPages: CardboardStore.getNumOfPages() });
+    }
+
     hideAddBar() {
         this.setState({ showAddSide: false });
     }
 
-    onItemSelected(row) {
-        console.log(row);
+    hideEditBar() {
+        this.setState({ showEditSide: false });
+    }
+
+    onItemSelected(selectedRow) {
+        this.setState({ selectedRow, showEditSide: true });
     }
 
     showAddSide() {
         this.setState({ showAddSide: true });
+    }
+
+    onPreviousClick() {
+        let { currentPage } = this.state;
+        
+        if (currentPage > 1) {
+            this.setState({ currentPage: --currentPage });
+        }
+    }
+
+    onPageClick(page) {
+        this.setState({ currentPage: page });
+    }
+
+    onNextClick() {
+        let { currentPage, totalPages } = this.state;
+        
+        if (currentPage < totalPages) {
+            this.setState({ currentPage: ++currentPage });
+        }
     }
 
     render() {
@@ -83,21 +139,19 @@ class CartonTable extends Component {
                         Dodaj
                     </button>
 
-                    <div className="pages">
-                        <nav aria-label="Page navigation example">
-                            <ul className="pagination">
-                                <li className="page-item"><a className="page-link  color-secondary active-page" href="#">Previous</a></li>
-                                <li className="page-item"><a className="page-link  color-secondary" href="#">1</a></li>
-                                <li className="page-item"><a className="page-link color-secondary" href="#">2</a></li>
-                                <li className="page-item"><a className="page-link color-secondary" href="#">3</a></li>
-                                <li className="page-item"><a className="page-link color-secondary" href="#">Next</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+                    <Pagination 
+                        totalPages={this.state.totalPages}
+                        previousClick={this.onPreviousClick}
+                        pageClick={this.onPageClick}
+                        nextClick={this.onNextClick}
+                        currentPage={this.state.currentPage} />
 
                 </div>
                 
                 <AddCartonSide open={this.state.showAddSide} />
+                {this.state.showEditSide && <EditCartonSide 
+                    open={this.state.showEditSide}
+                    data={this.state.selectedRow}/>}
 
                 <div className="carton-table-edit">
                 </div>

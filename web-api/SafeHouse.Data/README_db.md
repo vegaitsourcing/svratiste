@@ -13,4 +13,5 @@ Update db
 Clean all migrations
 ---------------
 `> dotnet ef database update 0`
+
 `> dotnet ef migrations remove -s ..\SafeHouse.Api\SafeHouse.Api.csproj`

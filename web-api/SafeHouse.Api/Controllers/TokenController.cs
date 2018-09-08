@@ -9,7 +9,7 @@ using SafeHouse.Business.Contracts;
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Token")]
+    [Route("api/token")]
     [AllowAnonymous]
     public class TokenController : Controller
     {
