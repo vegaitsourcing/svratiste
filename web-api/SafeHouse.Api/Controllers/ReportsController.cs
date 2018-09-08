@@ -18,7 +18,7 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpGet()]
-        public ReportData Get([FromQuery] DateTime from, DateTime to, string childName)
+        public ReportDataDto Get([FromQuery] DateTime from, DateTime to, string childName)
         {
             return _reportService.GetReportData(from, to, childName);
         }

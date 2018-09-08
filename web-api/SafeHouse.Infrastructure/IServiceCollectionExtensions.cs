@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Business;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Mappers;
 using SafeHouse.Data;
-using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Infrastructure
 {
@@ -18,6 +17,8 @@ namespace SafeHouse.Infrastructure
             services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
             services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<IIndividualPlanService, IndividualPlanService>();
+            services.AddSingleton<IGenderMapper, GenderMapper>();
+            services.AddSingleton<ICartonMapper, CartonMapper>();
             return services;
         }
 

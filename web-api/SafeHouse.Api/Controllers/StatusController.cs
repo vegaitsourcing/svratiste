@@ -9,7 +9,7 @@ namespace SafeHouse.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(SafeHouseUserId);
+            return Ok(this.SafeHouseUserId);
         }
     }
 }

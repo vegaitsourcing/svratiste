@@ -1,4 +1,5 @@
-﻿using SafeHouse.Data.Entities;
+﻿using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Data.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -6,10 +7,10 @@ namespace SafeHouse.Business.Contracts
 {
     public interface ICartonService
     {
-        IEnumerable<Carton> Get(int? page);
-        Carton Get(Guid id);
+        IEnumerable<CartonDto> Get(int? page);
+        CartonDto Get(Guid id);
         int GetPageNumber();
-        void Add(Carton carton);
-        void Update(Carton cartonNewValues);
+        void Add(CartonDto carton);
+        void Update(CartonDto cartonNewValues);
     }
 }
