@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SafeHouse.Model;
+using SafeHouse.Data.Entities;
 
 namespace SafeHouse
 {
@@ -32,7 +32,7 @@ namespace SafeHouse
             }
 
             services.AddDbContext<SafeHouseContext>(options =>
-                options.UseSqlServer(connection));
+                options.UseSqlServer(connection, x => x.MigrationsAssembly("SafeHouse.Api")));
 
             services.AddMvc();
         }

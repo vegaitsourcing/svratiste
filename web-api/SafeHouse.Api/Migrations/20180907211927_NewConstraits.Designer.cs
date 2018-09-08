@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Api.Migrations
 {
     [DbContext(typeof(SafeHouseContext))]
-    partial class SafeHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20180907211927_NewConstraits")]
+    partial class NewConstraits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +59,7 @@ namespace SafeHouse.Api.Migrations
                     b.Property<string>("AddressStreetNumber")
                         .HasMaxLength(32);
 
-                    b.Property<DateTime>("DateOfBirth");
+                    b.Property<DateTime>("Birthday");
 
                     b.Property<bool>("EvaluationDone");
 
