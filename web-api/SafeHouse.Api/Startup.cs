@@ -33,8 +33,8 @@ namespace SafeHouse.Api
                 configuration.RootPath = "../../web-client/SafeHouseClient/build";
             });
 
+            services.AddCors();
             services.AddAuthorizationServices(Configuration);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
