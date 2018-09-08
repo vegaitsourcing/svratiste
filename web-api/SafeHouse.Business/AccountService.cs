@@ -24,6 +24,7 @@ namespace SafeHouse.Business
             return user == null ? null : (CheckIfPasswordIsCorrect(user.Password, request.Password) ? user.Id : (Guid?)null);
         }
 
-        private bool CheckIfPasswordIsCorrect(string userPassword, string enteredPassword) => String.Equals(userPassword, HashingHelper.Hash(enteredPassword));
+        private bool CheckIfPasswordIsCorrect(string userPassword, string enteredPassword) 
+            => HashingHelper.Verify(enteredPassword, userPassword);
     }
 }

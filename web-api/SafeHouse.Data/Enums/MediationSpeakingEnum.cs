@@ -1,10 +1,13 @@
-﻿namespace SafeHouse.Data.Enums
+﻿using System;
+
+namespace SafeHouse.Data.Enums
 {
+    [Flags]
     public enum MediationSpeakingEnum
     {
-        SocialCentar,
-        HealthCentar,
-        Police,
-        Rest
+        SocialCentar = 1,
+        HealthCentar = 2,
+        Police = 4,
+        Rest = 8
     }
 }

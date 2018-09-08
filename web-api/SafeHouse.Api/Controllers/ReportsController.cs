@@ -8,7 +8,7 @@ namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/reports")]
-    public class ReportsController : Controller
+    public class ReportsController : BaseController
     {
         private readonly IReportService _reportService;
 
