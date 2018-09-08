@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Business;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Data;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Infrastructure

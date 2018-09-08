@@ -1,16 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SafeHouse.Data.Entities;
 
-namespace SafeHouse.Data.Entities
+namespace SafeHouse.Data
 {
     public class SafeHouseContext : DbContext
     {
-        public SafeHouseContext() : base()
-        {
-        }
+        public SafeHouseContext() : base() { }
 
-        public SafeHouseContext(DbContextOptions<SafeHouseContext> options) : base(options)
-        {
-        }
+        public SafeHouseContext(DbContextOptions<SafeHouseContext> options) : base(options) { }
 
         public virtual DbSet<SafeHouseUser> SafeHouseUsers { get; set; }
         public virtual DbSet<Carton> Cartons { get; set; }
@@ -19,7 +16,7 @@ namespace SafeHouse.Data.Entities
         public virtual DbSet<Evaluation> Evaluations { get; set; }
         public virtual DbSet<ActivityDetails> ActivityDetails { get; set; }
         public virtual DbSet<GoalAndResult> GoalAndResults { get; set; }
-        public virtual DbSet<IncludedPerson> IncludedPersons  { get; set; }
+        public virtual DbSet<IncludedPerson> IncludedPersons { get; set; }
         public virtual DbSet<IndividualServicePlan> IndividualServicePlans { get; set; }
         public virtual DbSet<LifeSkillDailyEntry> LifeSkillDailyEntries { get; set; }
         public virtual DbSet<LifeSkill> LifeSkills { get; set; }

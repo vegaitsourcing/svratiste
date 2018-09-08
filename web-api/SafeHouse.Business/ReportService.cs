@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Data;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business
