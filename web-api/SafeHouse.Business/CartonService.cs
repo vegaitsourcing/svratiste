@@ -1,4 +1,3 @@
-using PagedList;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Data.Entities;
 using System;
@@ -17,7 +16,7 @@ namespace SafeHouse.Business
 
         public IEnumerable<Carton> Get(int? page)
         {
-            return _dbContex.Cartons.ToPagedList((page ?? 1), 20);
+            return _dbContex.Cartons;
         }
 
         public Carton Get(Guid id)
