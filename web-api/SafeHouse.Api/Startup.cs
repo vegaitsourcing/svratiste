@@ -40,6 +40,8 @@ namespace SafeHouse.Api
             }
 
             app.UseMvc();
+
+            DbInitialization.FillSuitabiltyCache(app.ApplicationServices);
         }
     }
 }

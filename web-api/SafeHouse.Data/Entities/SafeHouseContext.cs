@@ -23,10 +23,10 @@ namespace SafeHouse.Data.Entities
         public virtual DbSet<IndividualServicePlan> IndividualServicePlan { get; set; }
         public virtual DbSet<LifeSkillDailyEntry> LifeSkillDailyEntries { get; set; }
         public virtual DbSet<LifeSkill> LifeSkills { get; set; }
-        public virtual DbSet<SchoolActivity> SchoolActivity { get; set; }
-        public virtual DbSet<Suitability> Suitability { get; set; }
-        public virtual DbSet<SuitabilityItem> SuitabilityItem { get; set; }
-        public virtual DbSet<SuitabilityCache> SuitabilityCache { get; set; }
+        public virtual DbSet<SchoolActivity> SchoolActivities { get; set; }
+        public virtual DbSet<Suitability> Suitabilities { get; set; }
+        public virtual DbSet<SuitabilityItem> SuitabilityItems { get; set; }
+        public virtual DbSet<SuitabilityCache> SuitabilityCaches { get; set; }
         public virtual DbSet<Workshop> Workshop { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

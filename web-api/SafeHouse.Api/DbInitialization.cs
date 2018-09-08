@@ -1,11 +1,16 @@
-﻿using SafeHouse.Data.Entities;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SafeHouse.Data.Entities;
+using System;
 
 namespace SafeHouse.Api
 {
-    public class DbInitialization
+    public static class DbInitialization
     {
-        public static void FillSuitabiltyCache(SafeHouseContext dbContext)
+        public static void FillSuitabiltyCache(IServiceProvider serviceProvider)
         {
+            var dbContext = serviceProvider.GetRequiredService<SafeHouseContext>();
+            dbContext.Database.EnsureCreated();
+
             dbContext.SuitabilityCaches.Add(new SuitabilityCache() { Name = "Spava na ulici" });
             dbContext.SuitabilityCaches.Add(new SuitabilityCache() { Name = "Hranu pronalazi u kontejnerima" });
             dbContext.SuitabilityCaches.Add(new SuitabilityCache() { Name = "Skuplja sekundarne sirovine" });
