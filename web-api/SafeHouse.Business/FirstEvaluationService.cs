@@ -1,6 +1,8 @@
-﻿using SafeHouse.Business.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using SafeHouse.Business.Contracts;
 using SafeHouse.Data.Entities;
 using System;
+using System.Linq;
 
 namespace SafeHouse.Business
 {
@@ -15,12 +17,12 @@ namespace SafeHouse.Business
 
         public FirstEvaluation Get(Guid id)
         {
-            return _dbContex.FirstEvaluations.Find(id);
+            return _dbContex.FirstEvaluations.Include("Carton").First(x => x.Carton.Id == id);
         }
 
         public void Add(FirstEvaluation evaluation)
         {
-            _dbContex.Add(evaluation);
+            _dbContex.FirstEvaluations.Add(evaluation);
         }
     }
 }
