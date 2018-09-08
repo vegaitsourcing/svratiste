@@ -3,7 +3,79 @@
 {> "partials/shared/header" /}
 
 <main class="main">
-	DAILY ENTRY
+	<div class="container wrap">
+		<div class="reports">
+			<div class="report">
+				<input type="date" name="date">
+				<input type="date" name="date">
+				<span>Search</span>
+				<input type="text">
+			</div>
+			<div class="table-carton">
+				<table class="table table-position">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">First</th>
+							<th scope="col">Last</th>
+							<th scope="col">Handle</th>
+							<th scope="col">Notification</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="table-details">
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>@mdo</td>
+							<td class="notify notify-danger">5</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Jacob</td>
+							<td>Thornton</td>
+							<td>@fat</td>
+							<td class="notify notify-warning">2</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>Larry</td>
+							<td>the Bird</td>
+							<td>@twitter</td>
+							<td class="notify notify-normal">1</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="side-items side-items-create">
+				<table class="table table-position">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Poglavlje</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="info">poglavlje1</td>
+							<td><input type="checkbox"></td>
+						</tr>
+						<tr>
+							<td class="info">poglavlje2</td>
+							<td><input type="checkbox"></td>
+						</tr>
+						<tr>
+							<td class="info">poglavlje3</td>
+							<td><input type="checkbox"></td>
+						</tr>
+					</tbody>
+				</table>
+				<button type="button" class="btn btn-custom">Save</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- {> "partials/side-create" /} -->
 </main>
 
-{> "partials/shared/footer" /}
+<!-- {> "partials/shared/footer" /} -->
