@@ -28,7 +28,7 @@ namespace SafeHouse.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SafeHouseContext db)
         {
             if (env.IsDevelopment())
             {
@@ -37,7 +37,7 @@ namespace SafeHouse.Api
 
             app.UseMvc();
 
-            DbInitialization.FillSuitabiltyCache(app.ApplicationServices);
+            DbInitialization.FillSuitabiltyCache(db);
         }
     }
 }
