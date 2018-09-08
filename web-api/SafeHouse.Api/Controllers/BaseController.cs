@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SafeHouse.Api.Controllers
 {
+    [EnableCors("SafeHouseCorsPolicy")]
     [Authorize]
     public abstract class BaseController : Controller
     {
