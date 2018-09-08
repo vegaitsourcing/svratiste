@@ -17,8 +17,8 @@ namespace SafeHouse.Api.Controllers
             _cartonService = cartonService;
         }
 
-        [HttpGet("{page}")]
-        public IEnumerable<CartonDto> Get(int? page)
+        [HttpGet]
+        public IEnumerable<CartonDto> Get([FromQuery]int? page)
         {
             return _cartonService.Get(page);
         }
@@ -29,7 +29,7 @@ namespace SafeHouse.Api.Controllers
             return _cartonService.Get(id);
         }
 
-        [HttpGet("{pagenumber}")]
+        [HttpGet]
         public int GetCount()
         {
             return _cartonService.GetPageNumber();
@@ -49,7 +49,7 @@ namespace SafeHouse.Api.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Update([FromBody]CartonDto newValue)
         {
             try

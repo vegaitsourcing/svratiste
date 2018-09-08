@@ -21,7 +21,7 @@ public static class IServiceCollectionExtensions
 
                 ValidIssuer = configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Issuer),
                 ValidAudience = configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Audience),
-                IssuerSigningKey = JwtSecurityKey.Create(configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Secreet))
+                IssuerSigningKey = JwtSecurityKey.Create(configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Secret))
                 };
 
                 options.Events = new JwtBearerEvents

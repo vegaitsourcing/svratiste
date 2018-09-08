@@ -9,6 +9,6 @@ export function login(credentials) {
         dispatcher.dispatch({
             type: "FETCHED_TOKEN",
             payload: response.data
-        })
+        });
     }); 
 } 

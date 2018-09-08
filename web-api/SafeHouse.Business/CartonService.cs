@@ -29,7 +29,7 @@ namespace SafeHouse.Business
         public IEnumerable<CartonDto> Get(int? page)
         {
             return _dbContex.Cartons
-                .Skip((page ?? 1) * PageSize)
+                .Skip(((page ?? 1) - 1) * PageSize)
                 .Take(PageSize)
                 .Select(m => _cartonMapper.ToDto(m));
         }

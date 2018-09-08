@@ -38,7 +38,7 @@ namespace SafeHouse.Api.Controllers
             }
 
             var token = new JwtTokenBuilder()
-                                .AddSecurityKey(JwtSecurityKey.Create(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Secreet)))
+                                .AddSecurityKey(JwtSecurityKey.Create(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Secret)))
                                 .AddSubject(userId.Value.ToString())
                                 .AddIssuer(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Issuer))
                                 .AddAudience(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Audience))
