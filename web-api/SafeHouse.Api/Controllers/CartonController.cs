@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Data.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace SafeHouse.Api.Controllers
 {
@@ -20,8 +17,8 @@ namespace SafeHouse.Api.Controllers
             _cartonService = cartonService;
         }
 
-        [HttpGet]
-        public IEnumerable<Carton> Get([FromBody]int? page)
+        [HttpGet("{page}")]
+        public IEnumerable<Carton> Get(int? page)
         {
             return _cartonService.Get(page);
         }
