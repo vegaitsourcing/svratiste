@@ -1,11 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using PagedList;
 using SafeHouse.Business.Contracts;
-using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SafeHouse.Business
 {

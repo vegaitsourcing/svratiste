@@ -1,6 +1,6 @@
 ﻿namespace SafeHouse.Business.Contracts
 {
-    interface IInitialEvaluationService
+    public interface IInitialEvaluationService
     {
     }
 }
