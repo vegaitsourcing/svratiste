@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import * as CardboardActions from '../../actions/CardboardActions';
+
 
 class AddCartonSide extends Component {
     constructor(props) {
@@ -18,7 +20,8 @@ class AddCartonSide extends Component {
         };
 
         this.onSave = this.onSave.bind(this);
-
+        this.onClose = this.onClose.bind(this);
+        
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -31,6 +34,21 @@ class AddCartonSide extends Component {
 
     onSave() {
         console.log(this.state);
+    }
+
+    onClose() {
+        CardboardActions.hideAddBar();
+        this.setState({
+            FirstName: '',
+            LastName: '',
+            Nickname: '',
+            Gender: '',
+            DateOfBirth: '',
+            AddressStreetName: '',
+            AddressStreetNumber: '',
+            FathersName: '',
+            MothersName: ''
+        });
     }
 
     render() {
@@ -55,6 +73,7 @@ class AddCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="FirstName" type="text"
+                                        value={this.state.FirstName}
                                         onChange={this.handleInputChange} />
                                 </td>
                             </tr>
@@ -63,6 +82,7 @@ class AddCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="LastName" type="text"
+                                        value={this.state.LastName}
                                         onChange={this.handleInputChange} />
                                 </td>
                             </tr>
@@ -71,13 +91,16 @@ class AddCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="Nickname" type="text" 
+                                        value={this.state.Nickname}
                                         onChange={this.handleInputChange} />
                                 </td>
                             </tr>
                             <tr>
                                 <td className="info">Pol</td>
                                 <td>
-                                    <select className="combobox" name="Gender" onChange={this.handleInputChange} >
+                                    <select className="combobox" 
+                                        name="Gender" onChange={this.handleInputChange}
+                                        value={this.state.Gender} >
                                         <option></option>
                                         <option value="1">M</option>
                                         <option value="0">Ž</option>
@@ -89,6 +112,7 @@ class AddCartonSide extends Component {
                                 <td>
                                     <input 
                                         type="date" name="DateOfBirth"
+                                        value={this.state.DateOfBirth}
                                         onChange={this.handleInputChange} />
                                 </td>
                             </tr>
@@ -97,6 +121,7 @@ class AddCartonSide extends Component {
                                 <td>
                                     <input 
                                     name="AddressStreetName" type="text"
+                                    value={this.state.AddressStreetName}
                                     onChange={this.handleInputChange} />
                                 </td>
                             </tr>
@@ -105,6 +130,7 @@ class AddCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="AddressStreetNumber" type="text"
+                                        value={this.state.AddressStreetNumber}
                                         onChange={this.handleInputChange} />
                                 </td>
                             </tr>
@@ -113,6 +139,7 @@ class AddCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="FathersName" type="text"
+                                        value={this.state.FathersName}
                                         onChange={this.handleInputChange} />
                                 </td>
                             </tr>
@@ -121,6 +148,7 @@ class AddCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="MothersName" type="text"
+                                        value={this.state.MothersName}
                                         onChange={this.handleInputChange} />
                                 </td>
                             </tr>
@@ -129,7 +157,12 @@ class AddCartonSide extends Component {
                     <button 
                         type="button" className="btn btn-custom"
                         onClick={this.onSave}>
-                            Save
+                            Sačuvaj
+                    </button>
+                    <button 
+                        type="button" className="btn btn-warning btn-back"
+                        onClick={this.onClose}>
+                            Otkaži
                     </button>
                 </div>
             </div>
