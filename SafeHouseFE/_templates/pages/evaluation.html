@@ -3,10 +3,12 @@
 {> "partials/shared/header" /}
 
 <main class="main">
-   <div class="container wrap">
-	   <div class="evaluation">
-			<input type="date" name="date" max="2018-12-31">
-			<button type="button" class="btn color-primary">Save</button>
+	<div class="container wrap">
+		<div class="evaluation">
+			<div class="ev-input">
+				<input type="date" name="date" max="2018-12-31">
+				<button type="button" class="btn color-primary">Search</button>
+			</div>
 			<div class="tabs" id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Procena1</a></li>
@@ -18,14 +20,74 @@
 				</div>
 				<div class="tab show" id="tabs-2">
 					<div class="tab-content">
-						{> "partials/side-create" /}
+						<div class="side-items side-items-create">
+							<table class="table table-position">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Stavka</th>
+										<th scope="col">#</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="info">Ime</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">Prezime</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">text</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">text</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">text</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">text</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">text</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">text</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">text</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">text</td>
+										<td><input type="text"></td>
+									</tr>
+									<tr>
+										<td class="info">Godina</td>
+										<td><input type="text"></td>
+									</tr>
+								</tbody>
+							</table>
+							<button type="button" class="btn btn-custom">Save</button>
+						</div>
+						<div class="buttons">
+							<button type="button" class="btn color-primary">Print</button>
+							<button type="button" class="btn color-primary">Save</button>
+						</div>
 					</div>
 				</div>
 				<div class="tab" id="tabs-3">
 					<div class="tab-content">Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</div>
 				</div>
-				</div>
-	   </div>
-   </div>
+			</div>
+		</div>
+	</div>
 </main>
 

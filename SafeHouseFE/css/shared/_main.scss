@@ -1,6 +1,19 @@
 .table-position {
 	position: relative;
 	margin-top: 50px;
+	.notify {
+		background-color: transparent;
+		width: 100px;
+		&.notify-normal {
+			background-color: $green;
+		}
+		&.notify-warning {
+			background-color: $orange;
+		}
+		&.notify-danger {
+			background-color: $red;
+		}
+	}
 }
 
 .side-items {
