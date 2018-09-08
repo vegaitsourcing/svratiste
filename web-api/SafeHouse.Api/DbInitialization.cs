@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Data.Entities;
-using System;
 
 namespace SafeHouse.Api
 {
