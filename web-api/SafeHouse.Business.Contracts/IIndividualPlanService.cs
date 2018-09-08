@@ -1,6 +1,11 @@
-﻿namespace SafeHouse.Business.Contracts
+﻿using SafeHouse.Data.Entities;
+using System;
+
+namespace SafeHouse.Business.Contracts
 {
-    public interface IIndividualServicePlan
+    public interface IIndividualPlanService
     {
+        IndividualServicePlan Get(Guid id);
+        void Add(IndividualServicePlan plan);
     }
 }

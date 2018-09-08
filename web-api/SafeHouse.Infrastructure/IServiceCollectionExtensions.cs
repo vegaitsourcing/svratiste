@@ -16,6 +16,7 @@ namespace SafeHouse.Infrastructure
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
             services.AddTransient<IEvaluationService, EvaluationService>();
+            services.AddTransient<IIndividualPlanService, IndividualPlanService>();
             return services;
         }
 
