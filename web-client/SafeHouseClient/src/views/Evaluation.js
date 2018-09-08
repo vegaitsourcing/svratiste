@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 
-class Reports extends Component {
+class Evaluation extends Component {
     render() {
         return (
-            <h2>Izveštaji</h2>
+            <h2>Procena</h2>
         );
     };
 }
 
-export default Reports;
+export default Evaluation;
