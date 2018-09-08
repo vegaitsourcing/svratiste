@@ -13,6 +13,15 @@ export function getCartons(page) {
     });
 }
 
+export function getCartonsPageCount() {
+    axios.get(web_api_url + '/Carton').then((response) => {
+        dispatcher.dispatch({
+            type: "FETCHED_PAGES_COUNT",
+            payload: response.data
+        });
+    });
+}
+
 export function addCarton(carton) {
     axios.post(web_api_url + '/Carton', carton).then(() => {
         getCartons();
@@ -22,8 +31,23 @@ export function addCarton(carton) {
     });
 }
 
+export function editCarton(carton) {
+    axios.put(web_api_url + '/Carton', carton).then(() => {
+        getCartons();
+        dispatcher.dispatch({
+            type: "HIDE_EDIT_BAR"
+        });
+    });
+}
+
 export function hideAddBar() {
     dispatcher.dispatch({
         type: "HIDE_ADD_BAR"
+    });
+}
+
+export function hideEditBar() {
+    dispatcher.dispatch({
+        type: "HIDE_EDIT_BAR"
     });
 }
