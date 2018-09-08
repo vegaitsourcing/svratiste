@@ -4,14 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Data.Migrations
 {
     [DbContext(typeof(SafeHouseContext))]
-    [Migration("20180908094446_NamingConsistencyMigrations")]
-    partial class NamingConsistencyMigrations
+    [Migration("20180907202405_ContextChanges")]
+    partial class ContextChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,21 +20,18 @@ namespace SafeHouse.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.ActivityDetails", b =>
+            modelBuilder.Entity("SafeHouse.Model.ActivityDetails", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Activity")
-                        .HasMaxLength(512);
+                    b.Property<string>("Activity");
 
                     b.Property<Guid?>("IndividualServicePlanId");
 
-                    b.Property<string>("ResponiblePerson")
-                        .HasMaxLength(32);
+                    b.Property<string>("ResponiblePerson");
 
-                    b.Property<string>("TimeLimit")
-                        .HasMaxLength(32);
+                    b.Property<string>("TimeLimit");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -48,7 +44,7 @@ namespace SafeHouse.Data.Migrations
                     b.ToTable("ActivityDetails");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.Carton", b =>
+            modelBuilder.Entity("SafeHouse.Model.Carton", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -59,7 +55,7 @@ namespace SafeHouse.Data.Migrations
                     b.Property<string>("AddressStreetNumber")
                         .HasMaxLength(32);
 
-                    b.Property<DateTime>("DateOfBirth");
+                    b.Property<DateTime>("Birthday");
 
                     b.Property<bool>("EvaluationDone");
 
@@ -99,36 +95,26 @@ namespace SafeHouse.Data.Migrations
                     b.ToTable("Carton");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.DailyEntry", b =>
+            modelBuilder.Entity("SafeHouse.Model.DailyEntry", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Arrival");
-
                     b.Property<bool>("Bath");
+
+                    b.Property<bool>("Breakfast");
 
                     b.Property<Guid?>("CartonId");
 
-                    b.Property<int>("Clothing");
+                    b.Property<bool>("Clothing");
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<DateTime>("Departure");
+                    b.Property<bool>("Dinner");
 
                     b.Property<bool>("LiecesRemoval");
 
-                    b.Property<int>("Meal");
-
-                    b.Property<int>("MediationSpeaking");
-
-                    b.Property<int>("MediationWriting");
-
-                    b.Property<int>("MedicalInterventions");
-
-                    b.Property<int>("ParentsContact");
-
-                    b.Property<bool>("PsihosocialSupport");
+                    b.Property<bool>("Lunch");
 
                     b.Property<bool>("Stay");
 
@@ -143,85 +129,62 @@ namespace SafeHouse.Data.Migrations
                     b.ToTable("DailyEntry");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.Evaluation", b =>
+            modelBuilder.Entity("SafeHouse.Model.Evaluation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AdvicedLevelOfSupport")
-                        .HasMaxLength(512);
+                    b.Property<string>("AdvicedLevelOfSupport");
 
                     b.Property<int>("Age");
 
-                    b.Property<string>("BasicPhysicalNeeds")
-                        .HasMaxLength(512);
+                    b.Property<string>("BasicPhysicalNeeds");
 
-                    b.Property<string>("BehaviorRisks")
-                        .HasMaxLength(512);
+                    b.Property<string>("BehaviorRisks");
 
-                    b.Property<string>("Capabilities")
-                        .HasMaxLength(512);
+                    b.Property<string>("Capabilities");
 
                     b.Property<Guid?>("CartonId");
 
-                    b.Property<string>("CaseLeader")
-                        .HasMaxLength(32);
+                    b.Property<string>("CaseLeader");
 
-                    b.Property<string>("CulturalSpecifics")
-                        .HasMaxLength(512);
+                    b.Property<string>("CulturalSpecifics");
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("DedicatedWorker")
-                        .HasMaxLength(32);
+                    b.Property<string>("DedicatedWorker");
 
-                    b.Property<string>("DominantBehaviors")
-                        .HasMaxLength(512);
+                    b.Property<string>("DominantBehaviors");
 
-                    b.Property<string>("DominantEmotions")
-                        .HasMaxLength(512);
+                    b.Property<string>("DominantEmotions");
 
-                    b.Property<string>("EducationalNeeds")
-                        .HasMaxLength(512);
+                    b.Property<string>("EducationalNeeds");
 
-                    b.Property<string>("EvaluationDoneBy")
-                        .HasMaxLength(512);
+                    b.Property<string>("EvaluationDoneBy");
 
-                    b.Property<string>("FamilyMembers")
-                        .HasMaxLength(32);
+                    b.Property<string>("FamilyMembers");
 
-                    b.Property<string>("FamilyRisks")
-                        .HasMaxLength(512);
+                    b.Property<string>("FamilyRisks");
 
-                    b.Property<string>("FamilyStrenghts")
-                        .HasMaxLength(512);
+                    b.Property<string>("FamilyStrenghts");
 
-                    b.Property<string>("OtherMembers")
-                        .HasMaxLength(512);
+                    b.Property<string>("OtherMembers");
 
-                    b.Property<string>("OtherNeeds")
-                        .HasMaxLength(512);
+                    b.Property<string>("OtherNeeds");
 
-                    b.Property<string>("OtherRisks")
-                        .HasMaxLength(512);
+                    b.Property<string>("OtherRisks");
 
-                    b.Property<string>("OtherStrenghts")
-                        .HasMaxLength(512);
+                    b.Property<string>("OtherStrenghts");
 
-                    b.Property<string>("PersonalStrenghts")
-                        .HasMaxLength(512);
+                    b.Property<string>("PersonalStrenghts");
 
-                    b.Property<string>("PsyhoSocialNeeds")
-                        .HasMaxLength(512);
+                    b.Property<string>("PsyhoSocialNeeds");
 
-                    b.Property<string>("SchoolStatus")
-                        .HasMaxLength(32);
+                    b.Property<string>("SchoolStatus");
 
-                    b.Property<string>("SurroundRisks")
-                        .HasMaxLength(512);
+                    b.Property<string>("SurroundRisks");
 
-                    b.Property<string>("SurroundStrenghts")
-                        .HasMaxLength(512);
+                    b.Property<string>("SurroundStrenghts");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -234,7 +197,7 @@ namespace SafeHouse.Data.Migrations
                     b.ToTable("Evaluation");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.FirstEvaluation", b =>
+            modelBuilder.Entity("SafeHouse.Model.FirstEvaluation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -327,18 +290,16 @@ namespace SafeHouse.Data.Migrations
                     b.ToTable("FirstEvaluation");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.GoalAndResult", b =>
+            modelBuilder.Entity("SafeHouse.Model.GoalAndResult", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Goal")
-                        .HasMaxLength(100);
+                    b.Property<string>("Goal");
 
                     b.Property<Guid?>("IndividualServicePlanId");
 
-                    b.Property<string>("Result")
-                        .HasMaxLength(100);
+                    b.Property<string>("Result");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -351,21 +312,18 @@ namespace SafeHouse.Data.Migrations
                     b.ToTable("GoalAndResult");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.IncludedPerson", b =>
+            modelBuilder.Entity("SafeHouse.Model.IncludedPerson", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("FirstName")
-                        .HasMaxLength(32);
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("Function")
-                        .HasMaxLength(32);
+                    b.Property<string>("Function");
 
                     b.Property<Guid?>("IndividualServicePlanId");
 
-                    b.Property<string>("LastName")
-                        .HasMaxLength(32);
+                    b.Property<string>("LastName");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -378,18 +336,16 @@ namespace SafeHouse.Data.Migrations
                     b.ToTable("IncludedPerson");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.IndividualServicePlan", b =>
+            modelBuilder.Entity("SafeHouse.Model.IndividualServicePlan", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Age")
-                        .HasMaxLength(8);
+                    b.Property<string>("Age");
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("DedicatedWorker")
-                        .HasMaxLength(32);
+                    b.Property<string>("DedicatedWorker");
 
                     b.Property<DateTime>("TimeLimitForNextAppointment");
 
@@ -402,7 +358,29 @@ namespace SafeHouse.Data.Migrations
                     b.ToTable("IndividualServicePlan");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.LifeSkill", b =>
+            modelBuilder.Entity("SafeHouse.Model.LifeSkillDailyEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("DailyEntryIdId");
+
+                    b.Property<Guid?>("LifeSkillIdId");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DailyEntryIdId");
+
+                    b.HasIndex("LifeSkillIdId");
+
+                    b.ToTable("LifeSkillDailyEntry");
+                });
+
+            modelBuilder.Entity("SafeHouse.Model.LifeSkills", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -418,218 +396,169 @@ namespace SafeHouse.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LifeSkill");
+                    b.ToTable("LifeSkills");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.LifeSkillDailyEntry", b =>
+            modelBuilder.Entity("SafeHouse.Model.SafeHouseUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("DailyEntryId");
-
-                    b.Property<Guid?>("LifeSkillId");
-
-                    b.Property<byte[]>("Version")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DailyEntryId");
-
-                    b.HasIndex("LifeSkillId");
-
-                    b.ToTable("LifeSkillDailyEntry");
-                });
-
-            modelBuilder.Entity("SafeHouse.Data.Entities.SafeHouseUser", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CommonName")
-                        .IsRequired();
+                    b.Property<string>("CommonName");
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
-                    b.Property<string>("Password")
-                        .IsRequired();
+                    b.Property<string>("Password");
 
-                    b.Property<string>("PasswordSalt")
-                        .IsRequired();
-
-                    b.Property<byte[]>("Version")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<string>("PasswordSalt");
 
                     b.HasKey("Id");
 
                     b.ToTable("SafeHouseUser");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.SchoolActivity", b =>
+            modelBuilder.Entity("SafeHouse.Model.SchoolActivity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("DailyEntryId");
+                    b.Property<Guid?>("DailyEntryIdId");
 
                     b.Property<int>("Type");
 
-                    b.Property<byte[]>("Version")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
                     b.HasKey("Id");
 
-                    b.HasIndex("DailyEntryId");
+                    b.HasIndex("DailyEntryIdId");
 
                     b.ToTable("SchoolActivity");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.Suitability", b =>
+            modelBuilder.Entity("SafeHouse.Model.Suitability", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(1024);
-
-                    b.Property<byte[]>("Version")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<string>("Description");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suitabilities");
+                    b.ToTable("Suitability");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.SuitabilityItem", b =>
+            modelBuilder.Entity("SafeHouse.Model.SuitabilityItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(1024);
+                    b.Property<string>("Description");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(32);
+                    b.Property<string>("Name");
 
-                    b.Property<Guid?>("SuitabilityId");
-
-                    b.Property<byte[]>("Version")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<Guid?>("SuitabilityIdId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SuitabilityId");
+                    b.HasIndex("SuitabilityIdId");
 
                     b.ToTable("SuitabilityItem");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.Workshop", b =>
+            modelBuilder.Entity("SafeHouse.Model.Workshop", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("DailyEntryId");
+                    b.Property<Guid?>("DailyEntryIdId");
 
                     b.Property<int>("Number");
 
                     b.Property<int>("Type");
 
-                    b.Property<byte[]>("Version")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
                     b.HasKey("Id");
 
-                    b.HasIndex("DailyEntryId");
+                    b.HasIndex("DailyEntryIdId");
 
                     b.ToTable("Workshop");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.ActivityDetails", b =>
+            modelBuilder.Entity("SafeHouse.Model.ActivityDetails", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.IndividualServicePlan", "IndividualServicePlan")
+                    b.HasOne("SafeHouse.Model.IndividualServicePlan", "IndividualServicePlan")
                         .WithMany()
                         .HasForeignKey("IndividualServicePlanId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.DailyEntry", b =>
+            modelBuilder.Entity("SafeHouse.Model.DailyEntry", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.Carton", "Carton")
+                    b.HasOne("SafeHouse.Model.Carton", "Carton")
                         .WithMany()
                         .HasForeignKey("CartonId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.Evaluation", b =>
+            modelBuilder.Entity("SafeHouse.Model.Evaluation", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.Carton", "Carton")
+                    b.HasOne("SafeHouse.Model.Carton", "Carton")
                         .WithMany()
                         .HasForeignKey("CartonId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.FirstEvaluation", b =>
+            modelBuilder.Entity("SafeHouse.Model.FirstEvaluation", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.Carton", "Carton")
+                    b.HasOne("SafeHouse.Model.Carton", "Carton")
                         .WithMany()
                         .HasForeignKey("CartonId");
 
-                    b.HasOne("SafeHouse.Data.Entities.Suitability", "SuitabilityId")
+                    b.HasOne("SafeHouse.Model.Suitability", "SuitabilityId")
                         .WithMany()
                         .HasForeignKey("SuitabilityIdId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.GoalAndResult", b =>
+            modelBuilder.Entity("SafeHouse.Model.GoalAndResult", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.IndividualServicePlan", "IndividualServicePlan")
+                    b.HasOne("SafeHouse.Model.IndividualServicePlan", "IndividualServicePlan")
                         .WithMany()
                         .HasForeignKey("IndividualServicePlanId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.IncludedPerson", b =>
+            modelBuilder.Entity("SafeHouse.Model.IncludedPerson", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.IndividualServicePlan", "IndividualServicePlan")
+                    b.HasOne("SafeHouse.Model.IndividualServicePlan", "IndividualServicePlan")
                         .WithMany()
                         .HasForeignKey("IndividualServicePlanId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.LifeSkillDailyEntry", b =>
+            modelBuilder.Entity("SafeHouse.Model.LifeSkillDailyEntry", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.DailyEntry", "DailyEntry")
+                    b.HasOne("SafeHouse.Model.DailyEntry", "DailyEntryId")
                         .WithMany()
-                        .HasForeignKey("DailyEntryId");
+                        .HasForeignKey("DailyEntryIdId");
 
-                    b.HasOne("SafeHouse.Data.Entities.LifeSkill", "LifeSkill")
+                    b.HasOne("SafeHouse.Model.LifeSkills", "LifeSkillId")
                         .WithMany()
-                        .HasForeignKey("LifeSkillId");
+                        .HasForeignKey("LifeSkillIdId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.SchoolActivity", b =>
+            modelBuilder.Entity("SafeHouse.Model.SchoolActivity", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.DailyEntry", "DailyEntry")
+                    b.HasOne("SafeHouse.Model.DailyEntry", "DailyEntryId")
                         .WithMany()
-                        .HasForeignKey("DailyEntryId");
+                        .HasForeignKey("DailyEntryIdId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.SuitabilityItem", b =>
+            modelBuilder.Entity("SafeHouse.Model.SuitabilityItem", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.Suitability", "Suitability")
+                    b.HasOne("SafeHouse.Model.Suitability", "SuitabilityId")
                         .WithMany()
-                        .HasForeignKey("SuitabilityId");
+                        .HasForeignKey("SuitabilityIdId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Data.Entities.Workshop", b =>
+            modelBuilder.Entity("SafeHouse.Model.Workshop", b =>
                 {
-                    b.HasOne("SafeHouse.Data.Entities.DailyEntry", "DailyEntry")
+                    b.HasOne("SafeHouse.Model.DailyEntry", "DailyEntryId")
                         .WithMany()
-                        .HasForeignKey("DailyEntryId");
+                        .HasForeignKey("DailyEntryIdId");
                 });
 #pragma warning restore 612, 618
         }

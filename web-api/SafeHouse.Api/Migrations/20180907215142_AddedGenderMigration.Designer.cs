@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SafeHouse.Data.Entities;
 
-namespace SafeHouse.Data.Migrations
+namespace SafeHouse.Api.Migrations
 {
     [DbContext(typeof(SafeHouseContext))]
-    [Migration("20180908092325_MovedToDataMigrations")]
-    partial class MovedToDataMigrations
+    [Migration("20180907215142_AddedGenderMigration")]
+    partial class AddedGenderMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

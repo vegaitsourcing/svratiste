@@ -26,6 +26,7 @@ namespace SafeHouse.Data.Entities
         public virtual DbSet<SchoolActivity> SchoolActivities { get; set; }
         public virtual DbSet<Suitability> Suitabilities { get; set; }
         public virtual DbSet<SuitabilityItem> SuitabilityItems { get; set; }
+        public virtual DbSet<SuitabilityCache> SuitabilityCaches { get; set; }
         public virtual DbSet<Workshop> Workshops { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -43,6 +44,7 @@ namespace SafeHouse.Data.Entities
             modelBuilder.Entity<LifeSkill>().ToTable("LifeSkill");
             modelBuilder.Entity<SchoolActivity>().ToTable("SchoolActivity");
             modelBuilder.Entity<SuitabilityItem>().ToTable("SuitabilityItem");
+            modelBuilder.Entity<SuitabilityCache>().ToTable("SuitabilityCache");
             modelBuilder.Entity<Workshop>().ToTable("Workshop");
         }
     }
