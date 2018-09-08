@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/SafeHouse/SafeHouse/bin/Debug/netcoreapp2.0/SafeHouse.dll",
+            "program": "${workspaceFolder}/SafeHouse.Api/bin/Debug/netcoreapp2.0/SafeHouse.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/SafeHouse/SafeHouse",
+            "cwd": "${workspaceFolder}/SafeHouse.Api",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {

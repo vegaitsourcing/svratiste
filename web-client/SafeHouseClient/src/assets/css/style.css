@@ -322,10 +322,10 @@ td {
   color: #fff; }
 
 .bg-orange {
-  background-color: #f1592a; }
+  background-color: #ffbc70; }
 
 .color-orange {
-  color: #f1592a; }
+  color: #ffbc70; }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -378,7 +378,7 @@ button {
   @media only screen and (min-width: 992px) {
     a:focus,
     button:focus {
-      outline: 1px dashed rgba(241, 89, 42, 0.2); } }
+      outline: 1px dashed rgba(255, 188, 112, 0.2); } }
 
 button,
 input[type='button'],
@@ -442,6 +442,117 @@ textarea {
   textarea::placeholder {
     color: #000; }
 
+.evaluation {
+  margin-top: 50px; }
+  .evaluation input {
+    display: block;
+    width: 200px;
+    height: 30px;
+    border: 2px solid #343a40;
+    border-radius: 5px;
+    margin-bottom: 10px; }
+
+.ev-input {
+  display: inline-block;
+  background: #343a40;
+  padding: 10px;
+  width: 100%; }
+  .ev-input input,
+  .ev-input button {
+    display: inline-block; }
+  .ev-input input {
+    border: 2px solid #17a2b8;
+    padding-bottom: 4px; }
+
+.tabs ul {
+  margin-bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.tabs li {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1 1;
+  background: #ccc;
+  margin-right: 0; }
+  .tabs li.active {
+    background: #17a2b8; }
+  .tabs li:hover a {
+    color: #343a40;
+    opacity: 0.7;
+    text-decoration: none; }
+
+.tabs a {
+  color: #fff;
+  padding: 10px;
+  display: block; }
+
+.tabs .tab {
+  border: 5px solid #17a2b8;
+  display: none;
+  margin-bottom: 50px; }
+  .tabs .tab.show {
+    display: block; }
+
+.tab-content {
+  background-color: #343a40;
+  padding-top: 20px;
+  padding-bottom: 16px;
+  position: relative; }
+  .tab-content .side-items {
+    display: inline-block;
+    position: relative; }
+    .tab-content .side-items.side-items-create {
+      width: calc(100% - 340px); }
+    .tab-content .side-items .table-position {
+      margin-top: 0;
+      border-radius: 5px; }
+  .tab-content .buttons {
+    width: 300px;
+    border: 2px solid #fff;
+    height: auto;
+    float: right;
+    display: inline-block;
+    margin-right: 20px;
+    padding: 20px;
+    border-radius: 5px; }
+    .tab-content .buttons .btn {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 20px; }
+      .tab-content .buttons .btn:last-child {
+        margin-bottom: 0; }
+
+.reports .table-position {
+  margin-top: 0; }
+
+.report {
+  display: inline-block;
+  background: #343a40;
+  padding: 10px;
+  width: 100%;
+  margin-top: 50px; }
+  .report input {
+    border: 2px solid #17a2b8;
+    padding-bottom: 4px;
+    display: inline-block;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 20px; }
+  .report span {
+    color: #fff;
+    display: inline-block; }
+
 .footer {
   position: relative;
   padding: 30px 0; }
@@ -449,6 +560,20 @@ textarea {
 .table-position {
   position: relative;
   margin-top: 50px; }
+  .table-position .combobox {
+    width: 400px;
+    height: 35px;
+    margin-top: 7px;
+    border: 1px solid #343a40; }
+  .table-position .notify {
+    background-color: transparent;
+    width: 100px; }
+    .table-position .notify.notify-normal {
+      background-color: #70ffa2; }
+    .table-position .notify.notify-warning {
+      background-color: #ffbc70; }
+    .table-position .notify.notify-danger {
+      background-color: #f54642; }
 
 .side-items {
   max-width: 800px;
@@ -459,10 +584,12 @@ textarea {
   right: 0;
   top: 0;
   background-color: #343a40; }
+  .side-items.side-items-read {
+    width: 0; }
   .side-items.side-items-read.opened {
     width: 100%; }
   .side-items.side-items-create {
-    width: 100%; }
+    width: 0; }
     .side-items.side-items-create.opened {
       width: 100%; }
     .side-items.side-items-create .info {

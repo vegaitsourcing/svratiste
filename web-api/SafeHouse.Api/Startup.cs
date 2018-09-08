@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SafeHouse.Infrastructure;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Api
@@ -21,14 +22,13 @@ namespace SafeHouse.Api
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<SafeHouseContext>(options =>
-                options.UseSqlServer(connection, x => x.MigrationsAssembly("SafeHouse.Data")));
-
-            services.AddMvc();
+            services.AddDataServices(connection)
+                .AddBusinessServices()
+                .AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SafeHouseContext db)
         {
             if (env.IsDevelopment())
             {
@@ -37,7 +37,7 @@ namespace SafeHouse.Api
 
             app.UseMvc();
 
-            DbInitialization.FillSuitabiltyCache(app.ApplicationServices);
+            DbInitialization.FillSuitabiltyCache(db);
         }
     }
 }
