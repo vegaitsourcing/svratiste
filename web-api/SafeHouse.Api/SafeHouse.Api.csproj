@@ -22,8 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SafeHouse.Business.Contracts\SafeHouse.Business.Contracts.csproj" />
-    <ProjectReference Include="..\SafeHouse.Business\SafeHouse.Business.csproj" />
+    <ProjectReference Include="..\SafeHouse.Infrastructure\SafeHouse.Infrastructure.csproj" />
     <ProjectReference Include="..\SafeHouse.Data\SafeHouse.Data.csproj" />
   </ItemGroup>
 
