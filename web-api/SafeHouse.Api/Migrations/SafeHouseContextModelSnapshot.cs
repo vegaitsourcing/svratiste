@@ -57,7 +57,7 @@ namespace SafeHouse.Api.Migrations
                     b.Property<string>("AddressStreetNumber")
                         .HasMaxLength(32);
 
-                    b.Property<DateTime>("Birthday");
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<bool>("EvaluationDone");
 
