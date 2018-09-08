@@ -10,6 +10,7 @@ using SafeHouse.Api.Helpers;
 using SafeHouse.Data;
 using SafeHouse.Data.Entities;
 using SafeHouse.Infrastructure;
+using Microsoft.AspNetCore.Cors;
 
 namespace SafeHouse.Api
 {
@@ -30,6 +31,8 @@ namespace SafeHouse.Api
             services.AddDataServices(connection)
                 .AddBusinessServices()
                 .AddMvc();
+
+            services.AddCors();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -71,6 +74,7 @@ namespace SafeHouse.Api
 
             app.UseAuthentication();
             app.UseMvc();
+            app.UseCors(b => b.AllowAnyOrigin());
 
             db.EnsureSeedData();
         }

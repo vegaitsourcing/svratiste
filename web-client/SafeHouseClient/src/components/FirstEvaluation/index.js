@@ -53,39 +53,83 @@ class FirstEvaluation extends Component {
                             </tr>
                             <tr>
                                 <td className="info">Zdravstvena knjižica:</td>
-                                <td><input type="checkbox" checked={this.state.data.Languages}/></td>
+                                <td><input type="checkbox" defaultChecked={this.state.data.HealthCard}/></td>
                             </tr>
                             <tr>
                                 <td className="info">Datum Rodjenja:</td>
-                                <td><input type="date" defaultValue={this.state.dateofBirth}/></td>
+                                <td><input type="date" defaultValue={this.state.dateofBirth} disabled/></td>
                             </tr>
                             <tr>
-                                <td className="info">Maternji i drugi jezici:</td>
+                                <td className="info">Voditelj slučaja:</td>
+                                <td><input type="text" defaultValue={this.state.data.CaseLeaderName}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Procena podobnosti:</td>
                                 <td><input type="text" defaultValue={this.state.data.Languages}/></td>
                             </tr>
                             <tr>
-                                <td className="info">Maternji i drugi jezici:</td>
-                                <td><input type="text" defaultValue={this.state.data.Languages}/></td>
+                                <td className="info">Postoje kapaciteti usluge da zadovolji potrebe korisnika:</td>
+                                <td><input type="checkbox" defaultChecked={this.state.data.Capability}/></td>
                             </tr>
                             <tr>
-                                <td className="info">Maternji i drugi jezici:</td>
-                                <td><input type="text" defaultValue={this.state.data.Languages}/></td>
+                                <td className="info">Na listi čekanja:</td>
+                                <td><input type="checkbox" defaultChecked={this.state.data.OnTheWaitingList}/></td>                                
                             </tr>
                             <tr>
-                                <td className="info">Maternji i drugi jezici:</td>
-                                <td><input type="text" defaultValue={this.state.data.Languages}/></td>
+                                <td className="info">Datum početka korišćenja usluge:</td>
+                                <td><input type="date" defaultValue={this.state.StartedEvaluation}/></td>
                             </tr>
                             <tr>
-                                <td className="info">Maternji i drugi jezici:</td>
-                                <td><input type="text" defaultValue={this.state.data.Languages}/></td>
+                                <td className="info">Sposobnost samostalnog kretanja:</td>
+                                <td><input type="checkbox" defaultChecked={this.state.data.OnTheWaitingList}/></td>  
                             </tr>
                             <tr>
-                                <td className="info">Maternji i drugi jezici:</td>
-                                <td><input type="text" defaultValue={this.state.data.Languages}/></td>
+                                <td className="info">Sposobnost verbalne komunikacije:</td>
+                                <td><input type="text" defaultValue={this.state.data.VerbalComunicationAbility}/></td>
                             </tr>
                             <tr>
-                                <td className="info">Maternji i drugi jezici:</td>
-                                <td><input type="text" defaultValue={this.state.data.Languages}/></td>
+                                <td className="info">Kratak opis fizičkog izgleda:</td>
+                                <td><input type="text" defaultValue={this.state.data.PhysicalDescription}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Dijagnostikofana bolest, alergija:</td>
+                                <td><input type="text" defaultValue={this.state.data.DiagnosedDisease}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Propritetne potrebe korisnika:</td>
+                                <td><input type="text" defaultValue={this.state.data.PriorityNeeds}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Stav:</td>
+                                <td><input type="text" defaultValue={this.state.data.Attitude}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Očekivanja:</td>
+                                <td><input type="text" defaultValue={this.state.data.Expectations}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Upućen od strane:</td>
+                                <td><input type="text" defaultValue={this.state.data.DirectedFromName}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Ostalo:</td>
+                                <td><input type="text" defaultValue={this.state.data.Other}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Prijem Započet:</td>
+                                <td><input type="date" defaultValue={this.state.data.StartedEvaluation}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Prijem Završen:</td>
+                                <td><input type="date" defaultValue={this.state.data.FinishedEvaluation}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Prijem uradio:</td>
+                                <td><input type="text" defaultValue={this.state.data.EvaluationDoneBy}/></td>
+                            </tr>
+                            <tr>
+                                <td className="info">Pregledao:</td>
+                                <td><input type="text" defaultValue={this.state.data.EvaluationDoneBy}/></td>
                             </tr>
                         </tbody>
                     </table>

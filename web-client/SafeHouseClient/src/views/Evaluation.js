@@ -28,7 +28,7 @@ class Evaluation extends Component {
                 OnTheWaitingList: false,
                 ServiceStart: "11-12-2016",
                 DirectedToName: "fdfTesting",
-                IndividualMovementAbility: "asdasdTesting",
+                IndividualMovementAbility: true,
                 VerbalComunicationAbility: "Tevcsting",
                 PhysicalDescription: "Testing",
                 DiagnosedDisease: "Testing",
@@ -41,6 +41,14 @@ class Evaluation extends Component {
                 FinishedEvaluation: "11-12-2018",
                 EvaluationDoneBy: "Testing",
                 EvaluationRevisedBy: "Testing",
+                Suitability:
+                {
+                    SuitabilityItems:
+                    {
+                        Name: "tesing the test"
+                    },
+                    Description: "One two three"
+                }
             }
         };
     }

@@ -18,7 +18,9 @@ namespace SafeHouse.Business
 
         public FirstEvaluation Get(Guid id)
         {
-            return _dbContex.FirstEvaluations.Include("Carton").First(x => x.Carton.Id == id);
+            return _dbContex.FirstEvaluations
+                .Include("Carton")
+                .First(x => x.Carton.Id == id);
         }
 
         public void Add(FirstEvaluation evaluation)
