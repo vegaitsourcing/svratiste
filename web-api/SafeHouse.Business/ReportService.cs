@@ -1,6 +1,7 @@
 ﻿using System;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business
 {
