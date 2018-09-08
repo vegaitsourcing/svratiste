@@ -24,6 +24,6 @@ class LoginStore extends EventEmitter {
 }
 
 const loginStore = new LoginStore();
-dispatcher.register(loginStore.handleActions.bind(this));
+dispatcher.register(loginStore.handleActions.bind(loginStore));
 
 export default loginStore;

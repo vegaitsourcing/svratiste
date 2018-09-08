@@ -25,6 +25,11 @@ namespace SafeHouse.Business
             return _dbContex.Cartons.Find(id);
         }
 
+        public int GetPageNumber()
+        {
+            return _dbContex.Cartons.Count()/20;
+        }
+
         public void Add(Carton carton)
         {
             _dbContex.Cartons.Add(carton);

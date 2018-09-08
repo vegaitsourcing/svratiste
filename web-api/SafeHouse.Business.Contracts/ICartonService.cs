@@ -8,6 +8,7 @@ namespace SafeHouse.Business.Contracts
     {
         IEnumerable<Carton> Get(int? page);
         Carton Get(Guid id);
+        int GetPageNumber();
         void Add(Carton carton);
         void Update(Carton cartonNewValues);
     }

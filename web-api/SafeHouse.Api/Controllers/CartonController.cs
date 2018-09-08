@@ -8,7 +8,7 @@ namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/Carton")]
-    public class CartonController : Controller
+    public class CartonController : BaseController
     {
         private ICartonService _cartonService;
 
@@ -27,6 +27,12 @@ namespace SafeHouse.Api.Controllers
         public Carton Get(Guid id)
         {
             return _cartonService.Get(id);
+        }
+
+        [HttpGet("{pagenumber}")]
+        public int GetCount()
+        {
+            return _cartonService.GetPageNumber();
         }
 
         [HttpPost]

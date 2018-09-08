@@ -10,29 +10,29 @@ using SafeHouse.Data.Entities;
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Evaluation")]
-    public class EvaluationController : BaseController
+    [Route("api/IndividualPlan")]
+    public class IndividualPlanController : Controller
     {
-        private IEvaluationService _evaluationService;
+        private IIndividualPlanService _individualPlanService;
 
-        public EvaluationController(IEvaluationService evaluationService)
+        public IndividualPlanController(IIndividualPlanService individualPlanService)
         {
-            _evaluationService = evaluationService;
+            _individualPlanService = individualPlanService;
         }
 
         // Pass Carton Id into this one!
         [HttpGet("{id}")]
-        public Evaluation Get(Guid id)
+        public IndividualServicePlan Get(Guid id)
         {
-            return _evaluationService.Get(id);
+            return _individualPlanService.Get(id);
         }
 
         [HttpPost]
-        public void Create([FromBody]Evaluation newValue)
+        public void Create([FromBody]IndividualServicePlan newValue)
         {
             try
             {
-                _evaluationService.Add(newValue);
+                _individualPlanService.Add(newValue);
             }
             catch (Exception e)
             {
