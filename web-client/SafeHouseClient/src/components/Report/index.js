@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
+import * as ReportActions from '../../actions/ReportActions';
+import ReportStore from '../../stores/ReportStore';
+
+import TableData from './TableData';
+import TableHeader from './TableHeader';
+
 class Report extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            from: "",
-            to:""
+            from: new Date('1995-12-17T03:24:00'),
+            to: new Date('1995-12-17T03:24:00'),
+            reportData: {}
         };
+
+        this.getReports = this.getReports.bind(this);
+    }
+
+    componentWillMount() {
+        ReportStore.on("fetched_reports", this.getReports);
+    }
+
+    componentDidMount() {
+        ReportActions.getReports(this.state.reportData);
+    }
+
+    componentWillUnmount() {
+        ReportStore.removeListener("fetched_reports", this.getReports);
     }
 
     handleInputChange(event) {
@@ -18,44 +39,31 @@ class Report extends Component {
         this.setState({ [name]: value });
     }
 
+    getReports() {
+        this.setState({
+            reportData: ReportStore.getAll()
+        });
+    }
+
     render() {
         return (
-            <main class="main">
-                <div class="container wrap">
-                    <div class="reports">
-                        <div class="report">
+            <main className="main">
+                <div className="container wrap">
+                    <div className="reports">
+                        <div className="report">
                             <input type="date"
                                 name="from"
                                 onChange={this.handleCheckboxChange} />/>
                             <input type="date" name="to"
                                 onChange={this.handleCheckboxChange}/>
 			            </div>
-                        <div class="table-carton">
-                            <table class="table table-position">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Broj posetilaca</th>
-                                        <th scope="col">Broj muskih posetilaca</th>
-                                        <th scope="col">Broj zenskih posetilaca</th>
-                                        <th scope="col">Broj poseta</th>
-                                        <th scope="col">Broj obroka</th>
-                                        <th scope="col">Broj kupanja</th>
-                                        <th scope="col">Broj devansiranja</th>
-                                        <th scope="col">Odeca i obuca</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="table-details">
-                                        <td>text</td>
-                                        <td>text</td>
-                                        <td>text</td>
-                                        <td>text</td>
-                                        <td>text</td>
-                                        <td>text</td>
-                                        <td>text</td>
-                                        <td>text</td>
-                                    </tr>
-                                </tbody>
+                        <div className="table-carton">
+                            <table className="table table-position">
+                                <TableHeader />
+
+                                <TableData
+                                    data={this.state.reportData}
+                                    selectItem={this.onItemSelected} />
                             </table>
                         </div>
 		            </div>
