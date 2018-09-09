@@ -5,6 +5,6 @@ namespace SafeHouse.Business.Contracts
 {
     public interface IReportService
     {
-        ReportDataDto GetReportData(DateTime from, DateTime to, string childName);
+        ReportDataDto GetReportData(ReportRequestDto request);
     }
 }

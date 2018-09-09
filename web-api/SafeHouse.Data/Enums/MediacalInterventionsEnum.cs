@@ -1,5 +1,8 @@
-﻿namespace SafeHouse.Data.Enums
+﻿using System;
+
+namespace SafeHouse.Data.Enums
 {
+    [Flags]
     public enum MediacalInterventionsEnum
     {
         Intervention = 1,
