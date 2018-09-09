@@ -760,6 +760,10 @@ textarea {
     margin-top: 50px;
 }
 
+.side-items.side-items-create input {
+    margin-right: 10px;
+}
+
     .table-position .table-details {
         cursor: pointer;
     }
