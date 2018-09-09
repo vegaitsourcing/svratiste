@@ -17,7 +17,7 @@ const AppRouter = () => {
             <Route exact path="/reports" component={Reports} />
 
             {/* Evaluation */}
-            <Route exact path="/evaluation" component={Evaluation} />
+            <Route exact path="/evaluation/:id" component={Evaluation} />
 
             {/* Login */}
             <Route exact path="/login" component={Login} />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import * as CardboardActions from '../../actions/CardboardActions';
 import CardboardStore from '../../stores/CardboardStore';
@@ -18,7 +19,7 @@ class CartonTable extends Component {
         this.state = {
             catons: [
                 { 
-                    Id: '',
+                    Id: '123',
                     FirstName: 'Mark',
                     LastName: 'Otto',
                     Nickname: 'otot',
@@ -46,6 +47,7 @@ class CartonTable extends Component {
 
         this.onItemSelected = this.onItemSelected.bind(this);
         this.showAddSide = this.showAddSide.bind(this);
+        this.evaluation = this.evaluation.bind(this);
 
         // pagination
         this.onPreviousClick = this.onPreviousClick.bind(this);
@@ -75,6 +77,12 @@ class CartonTable extends Component {
         this.setState({
             catons: CardboardStore.getAll()
         });
+    }
+
+    evaluation() {
+        if (this.state.selectedRow.Id) {
+            this.props.history.push('/evaluation/' + this.state.selectedRow.Id);
+        }
     }
 
     getNumOfPages() {
@@ -134,9 +142,14 @@ class CartonTable extends Component {
                     </div>
                     
                     <button 
+                        type="button" className="btn color-secondary"
+                        onClick={this.showAddSide}>
+                        Dodaj karton
+                    </button>
+                    <button 
                         type="button" className="btn btn-info btn-inverse"
-                        onClick={this.showAddSide} >
-                        Dodaj
+                        onClick={this.evaluation} >
+                        Procena
                     </button>
 
                     <Pagination 
@@ -160,4 +173,4 @@ class CartonTable extends Component {
     };
 }
 
-export default CartonTable;
+export default withRouter(CartonTable);
