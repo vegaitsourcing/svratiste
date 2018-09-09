@@ -112,10 +112,14 @@ class CartonTable extends Component {
         if (currentPage > 1) {
             this.setState({ currentPage: --currentPage });
         }
+
+        CardboardActions.getCartons(currentPage);
     }
 
     onPageClick(page) {
+        
         this.setState({ currentPage: page });
+        CardboardActions.getCartons(page);
     }
 
     onNextClick() {
@@ -124,6 +128,8 @@ class CartonTable extends Component {
         if (currentPage < totalPages) {
             this.setState({ currentPage: ++currentPage });
         }
+
+        CardboardActions.getCartons(currentPage);
     }
 
     render() {
