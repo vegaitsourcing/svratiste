@@ -71,7 +71,62 @@ class FirstEvaluation extends Component {
         let evaluation = EvaluationStore.getFirstEvaluation();
         if (evaluation) {
             console.log(evaluation);
-            console.log("IMA");
+            const {
+                otherChildernName,
+                otherMembersName,
+                guardiansName,
+                livingSpace,
+                schoolAndGrade,
+                languages,
+                healthCard,
+                caseLeaderName,
+                SuitabilityId,
+                capability,
+                onTheWaitingList,
+                serviceStart,
+                directedToName,
+                individualMovementAbility,
+                verbalComunicationAbility,
+                physicalDescription,
+                diagnosedDisease,
+                priorityNeeds,
+                attitude,
+                expectations,
+                directedFromName,
+                other,
+                startedEvaluation,
+                finishedEvaluation,
+                evaluationDoneBy,
+                evaluationRevisedBy } = evaluation;
+
+            this.setState({
+                otherChildernName,
+                otherMembersName,
+                guardiansName,
+                livingSpace,
+                schoolAndGrade,
+                languages,
+                healthCard,
+                caseLeaderName,
+                SuitabilityId,
+                capability,
+                onTheWaitingList,
+                serviceStart,
+                directedToName,
+                individualMovementAbility,
+                verbalComunicationAbility,
+                physicalDescription,
+                diagnosedDisease,
+                priorityNeeds,
+                attitude,
+                expectations,
+                directedFromName,
+                other,
+                startedEvaluation,
+                finishedEvaluation,
+                evaluationDoneBy,
+                evaluationRevisedBy
+            });
         }
     }
 
