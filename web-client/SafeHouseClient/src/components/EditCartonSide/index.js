@@ -18,7 +18,8 @@ class EditCartonSide extends Component {
             addressStreetNumber: '',
             fathersName: '',
             mothersName: '',
-            disableEdit: true
+            disableEdit: true,
+            pageNumber: props.pageNumber
         };
 
         this.onSave = this.onSave.bind(this);

@@ -22,6 +22,7 @@ class CardboardStore extends EventEmitter {
     handleActions(action) {
         switch(action.type) {
             case "FETCHED_ALL_CARTONS":
+                console.log(action.payload);
                 this.cartons = action.payload;
                 this.emit("fetched_cartons");
                 break;

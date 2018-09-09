@@ -25,7 +25,7 @@ export function getCartonsPageCount() {
 
 export function addCarton(carton) {
     axios.post(web_api_url + '/Carton', carton).then(() => {
-        getCartons();
+        getCartons(carton.pageNumber);
         dispatcher.dispatch({
             type: "HIDE_ADD_BAR"
         });
@@ -34,7 +34,7 @@ export function addCarton(carton) {
 
 export function editCarton(carton) {
     axios.put(web_api_url + '/Carton', carton).then(() => {
-        getCartons();
+        getCartons(carton.pageNumber);
         dispatcher.dispatch({
             type: "HIDE_EDIT_BAR"
         });

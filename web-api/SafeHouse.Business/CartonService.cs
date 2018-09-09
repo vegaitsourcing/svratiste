@@ -52,6 +52,7 @@ namespace SafeHouse.Business
         public void Add(CartonDto carton)
         {
             _dbContex.Cartons.Add(_cartonMapper.ToEntity(carton));
+            _dbContex.SaveChanges();
         }
 
         public void Update(CartonDto cartonNewValues)
