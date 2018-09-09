@@ -18,6 +18,7 @@ namespace SafeHouse.Infrastructure
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
             services.AddTransient<IEvaluationService, EvaluationService>();
+            services.AddTransient<ISuitableItemService, SuitableItemService>();
             services.AddTransient<IIndividualPlanService, IndividualPlanService>();
             services.AddSingleton<IGenderMapper, GenderMapper>();
             services.AddSingleton<ICartonMapper, CartonMapper>();

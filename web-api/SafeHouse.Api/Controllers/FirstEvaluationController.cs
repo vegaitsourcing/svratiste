@@ -22,7 +22,7 @@ namespace SafeHouse.Api.Controllers
         [HttpGet("{id}")]
         public FirstEvaluation Get(Guid id)
         {
-            return _firstEvaluationService.Get(id);
+            return _firstEvaluationService.GetByCartonId(id);
         }
 
         [HttpPost]

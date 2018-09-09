@@ -18,7 +18,7 @@ namespace SafeHouse.Business
             _dbContext = context;
         }
 
-        public FirstEvaluation Get(Guid id)
+        public FirstEvaluation GetByCartonId(Guid id)
         {
             return _dbContext.FirstEvaluations
                 .Include(x => x.Carton)
