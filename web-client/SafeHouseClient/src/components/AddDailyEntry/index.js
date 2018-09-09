@@ -8,10 +8,33 @@ class AddDailyEntry extends Component {
         super(props);
 
         this.state = {
+            id: '',
+            firstName: '',
+            lastName: '',
+            nickname: '',
+            gender: '',
+            dateOfBirth: '',
+            addressStreetName: '',
+            addressStreetNumber: '',
+            fathersName: '',
+            mothersName: '',
+            disableEdit: true,
+            pageNumber: props.pageNumber
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onClose = this.onClose.bind(this);
+    }
+
+    componentDidMount() {
+        const { id, firstName, lastName,
+            nickname, gender, dateOfBirth,
+            addressStreetName, addressStreetNumber,
+            fathersName, mothersName } = this.props.data;
+
+        this.setState({
+            id, firstName, lastName, nickname, gender, dateOfBirth, addressStreetName, addressStreetNumber, fathersName, mothersName
+        });
     }
 
     handleInputChange(event) {
@@ -34,6 +57,7 @@ class AddDailyEntry extends Component {
 
         return (<div className="carton-table">
             <div className={className}>
+                <h2><font color="white">{this.state.firstName} {this.state.lastName}</font></h2>
                 <table className="table table-position">
                     <thead className="thead-light">
                         <tr>
@@ -43,7 +67,7 @@ class AddDailyEntry extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className="info">Ime</td>
+                            <td className="info">Boravak</td>
                             <td>
                                 <input
                                     name="FirstName" type="text"

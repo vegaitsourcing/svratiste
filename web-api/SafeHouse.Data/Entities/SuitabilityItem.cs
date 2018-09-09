@@ -5,7 +5,6 @@ namespace SafeHouse.Data.Entities
 {
     public class SuitabilityItem : BaseEntity
     {
-        public Suitability Suitability { get; set; }
 
         public SuitabilityCache SuitabilityCache { get; set; }
 

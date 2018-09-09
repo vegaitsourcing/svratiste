@@ -7,7 +7,7 @@ using SafeHouse.Business.Contracts.Models;
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
-    public class CartonController : Controller
+    public class CartonController : BaseController
     {
         private ICartonService _cartonService;
 
