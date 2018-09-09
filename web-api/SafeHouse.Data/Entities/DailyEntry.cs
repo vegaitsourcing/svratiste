@@ -34,10 +34,10 @@ namespace SafeHouse.Data.Entities
         public bool PsihosocialSupport { get; set; }
 
         // Kontakti sa roditeljima
-        public int ParentsContact { get; set; }
+        public string ParentsContact { get; set; }
 
         // Pružanje medicinskih intervencija i savetovanja
-        public int MedicalInterventions { get; set; }
+        public MediacalInterventionsEnum MedicalInterventions { get; set; }
 
         public DateTime Arrival { get; set; }
         public DateTime Departure { get; set; }

@@ -80,7 +80,8 @@ class AddCartonSide extends Component {
                                     <input 
                                         name="FirstName" type="text"
                                         value={this.state.FirstName}
-                                        onChange={this.handleInputChange} />
+                                        onChange={this.handleInputChange}
+                                        required />
                                 </td>
                             </tr>
                             <tr>
@@ -89,7 +90,8 @@ class AddCartonSide extends Component {
                                     <input 
                                         name="LastName" type="text"
                                         value={this.state.LastName}
-                                        onChange={this.handleInputChange} />
+                                        onChange={this.handleInputChange}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -98,7 +100,8 @@ class AddCartonSide extends Component {
                                     <input 
                                         name="Nickname" type="text" 
                                         value={this.state.Nickname}
-                                        onChange={this.handleInputChange} />
+                                        onChange={this.handleInputChange}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -106,7 +109,8 @@ class AddCartonSide extends Component {
                                 <td>
                                     <select className="combobox" 
                                         name="Gender" onChange={this.handleInputChange}
-                                        value={this.state.Gender} >
+                                        value={this.state.Gender}
+                                        required>
                                         <option></option>
                                         <option value="1">M</option>
                                         <option value="0">Ž</option>
@@ -119,7 +123,8 @@ class AddCartonSide extends Component {
                                     <input 
                                         type="date" name="DateOfBirth"
                                         value={this.state.DateOfBirth}
-                                        onChange={this.handleInputChange} />
+                                        onChange={this.handleInputChange}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -128,7 +133,8 @@ class AddCartonSide extends Component {
                                     <input 
                                     name="AddressStreetName" type="text"
                                     value={this.state.AddressStreetName}
-                                    onChange={this.handleInputChange} />
+                                        onChange={this.handleInputChange}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -137,7 +143,8 @@ class AddCartonSide extends Component {
                                     <input 
                                         name="AddressStreetNumber" type="text"
                                         value={this.state.AddressStreetNumber}
-                                        onChange={this.handleInputChange} />
+                                        onChange={this.handleInputChange}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -146,7 +153,8 @@ class AddCartonSide extends Component {
                                     <input 
                                         name="FathersName" type="text"
                                         value={this.state.FathersName}
-                                        onChange={this.handleInputChange} />
+                                        onChange={this.handleInputChange}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -155,7 +163,8 @@ class AddCartonSide extends Component {
                                     <input 
                                         name="MothersName" type="text"
                                         value={this.state.MothersName}
-                                        onChange={this.handleInputChange} />
+                                        onChange={this.handleInputChange}
+                                        required/>
                                 </td>
                             </tr>
                         </tbody>
@@ -173,7 +182,7 @@ class AddCartonSide extends Component {
                 </div>
             </div>
         );
-    };
+    }
 }
 
 export default AddCartonSide;

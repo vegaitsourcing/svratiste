@@ -16,8 +16,7 @@ namespace SafeHouse.Business
         private readonly ICartonMapper _cartonMapper;
         private readonly IConfiguration _configuration;
 
-        private int PageSize 
-            => _configuration.GetValue<int>(Constants.PageSize);
+        private int PageSize => _configuration.GetValue<int>(Constants.PageSize);
 
         public CartonService(SafeHouseContext context, ICartonMapper cartonMapper, IConfiguration configuration)
         {
@@ -57,7 +56,7 @@ namespace SafeHouse.Business
 
         public void Update(CartonDto cartonNewValues)
         {
-            var carton =_dbContex.Cartons.Find(cartonNewValues.Id);
+            var carton = _dbContex.Cartons.Find(cartonNewValues.Id);
             if (carton == null)
             {
                 return;
@@ -67,7 +66,6 @@ namespace SafeHouse.Business
             _dbContex.SaveChanges();
         }
 
-        private bool IsDivideableByPageSize(int itemsCount)
-            => itemsCount % PageSize == 0;
+        private bool IsDivideableByPageSize(int itemsCount) => itemsCount % PageSize == 0;
     }
 }

@@ -22,12 +22,14 @@ class CardboardStore extends EventEmitter {
     handleActions(action) {
         switch(action.type) {
             case "FETCHED_ALL_CARTONS":
-                console.log(action.payload);
                 this.cartons = action.payload;
                 this.emit("fetched_cartons");
                 break;
             case "HIDE_ADD_BAR":
                 this.emit("hide_add_bar");
+                break;
+            case "HIDE_ADD_DAILY_ENTRY_BAR":
+                this.emit("hide_add_daily_entry_bar");
                 break;
             case "HIDE_EDIT_BAR":
                 this.emit("hide_edit_bar");
@@ -35,6 +37,9 @@ class CardboardStore extends EventEmitter {
             case "FETCHED_PAGES_COUNT":
                 this.totalPages = action.payload;
                 this.emit("fetched_pages_count");
+                break;
+            case "UNAUTHORIZED":
+                this.emit("unauthorized");
                 break;
             default:
         }
