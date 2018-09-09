@@ -45,7 +45,7 @@ namespace SafeHouse.Api.Controllers
                 .AddIssuer(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Issuer))
                 .AddAudience(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Audience))
                 .AddClaim(Common.Constants.SafeHouseUserIdClaimKey, userId.Value.ToString())
-                .AddExpiry(10)
+                .AddExpiry(100)
                 .Build();
 
             return Ok(token.Value);

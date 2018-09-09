@@ -79,6 +79,11 @@
 			margin-top: 0;
 			border-radius: 5px;
 		}
+		button {
+			&:hover {
+				opacity: 0.6;
+			}
+		}
 	}
 	.buttons {
 		width: 300px;
