@@ -11,6 +11,10 @@ class CardboardStore extends EventEmitter {
         this.totalPages = 1;
     }
 
+    getNumOfPages() {
+        return this.totalPages;
+    }
+
     getAll() {
         return this.cartons;
     }

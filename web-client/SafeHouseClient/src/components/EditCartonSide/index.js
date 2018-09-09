@@ -8,32 +8,34 @@ class EditCartonSide extends Component {
         super(props);
 
         this.state = {
-            Id: '',
-            FirstName: '',
-            LastName: '',
-            Nickname: '',
-            Gender: '',
-            DateOfBirth: '',
-            AddressStreetName: '',
-            AddressStreetNumber: '',
-            FathersName: '',
-            MothersName: ''
+            id: '',
+            firstName: '',
+            lastName: '',
+            nickname: '',
+            gender: '',
+            dateOfBirth: '',
+            addressStreetName: '',
+            addressStreetNumber: '',
+            fathersName: '',
+            mothersName: '',
+            disableEdit: false
         };
 
         this.onSave = this.onSave.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.onEnableEdit = this.onEnableEdit.bind(this);
         
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     componentDidMount() {
-        const { Id, FirstName, LastName, 
-                Nickname, Gender, DateOfBirth, 
-                AddressStreetName, AddressStreetNumber,
-                FathersName, MothersName } = this.props.data;
+        const { id, firstName, lastName, 
+                nickname, gender, dateOfBirth, 
+                addressStreetName, addressStreetNumber,
+                fathersName, mothersName } = this.props.data;
 
         this.setState({
-            Id, FirstName, LastName, Nickname, Gender, DateOfBirth, AddressStreetName, AddressStreetNumber, FathersName, MothersName
+            id, firstName, lastName, nickname, gender, dateOfBirth, addressStreetName, addressStreetNumber, fathersName, mothersName
         });
     }
 
@@ -46,6 +48,10 @@ class EditCartonSide extends Component {
 
     onSave() {
         console.log(this.state);
+    }
+
+    onEnableEdit() {
+        this.setState({ disableEdit : false });
     }
 
     onClose() {
@@ -74,8 +80,9 @@ class EditCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="FirstName" type="text"
-                                        value={this.state.FirstName}
-                                        onChange={this.handleInputChange} />
+                                        value={this.state.firstName}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disabled) ? "disabled" : ""} />
                                 </td>
                             </tr>
                             <tr>
@@ -83,8 +90,9 @@ class EditCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="LastName" type="text"
-                                        value={this.state.LastName}
-                                        onChange={this.handleInputChange} />
+                                        value={this.state.lastName}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disabled) ? "disabled" : ""} />
                                 </td>
                             </tr>
                             <tr>
@@ -92,8 +100,9 @@ class EditCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="Nickname" type="text" 
-                                        value={this.state.Nickname}
-                                        onChange={this.handleInputChange} />
+                                        value={this.state.nickname}
+                                        onChange={this.handleInputChange} 
+                                        disabled={(this.state.disabled) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
@@ -101,7 +110,8 @@ class EditCartonSide extends Component {
                                 <td>
                                     <select className="combobox" 
                                         name="Gender" onChange={this.handleInputChange}
-                                        value={this.state.Gender} >
+                                        value={this.state.gender}
+                                        disabled={(this.state.disabled) ? "disabled" : ""}>
                                         <option></option>
                                         <option value="1">M</option>
                                         <option value="0">Ž</option>
@@ -113,8 +123,9 @@ class EditCartonSide extends Component {
                                 <td>
                                     <input 
                                         type="date" name="DateOfBirth"
-                                        value={this.state.DateOfBirth}
-                                        onChange={this.handleInputChange} />
+                                        value={this.state.dateOfBirth}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disabled) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
@@ -122,8 +133,9 @@ class EditCartonSide extends Component {
                                 <td>
                                     <input 
                                     name="AddressStreetName" type="text"
-                                    value={this.state.AddressStreetName}
-                                    onChange={this.handleInputChange} />
+                                    value={this.state.addressStreetName}
+                                    onChange={this.handleInputChange}
+                                    disabled={(this.state.disabled) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
@@ -131,8 +143,9 @@ class EditCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="AddressStreetNumber" type="text"
-                                        value={this.state.AddressStreetNumber}
-                                        onChange={this.handleInputChange} />
+                                        value={this.state.addressStreetNumber}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disabled) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
@@ -140,8 +153,9 @@ class EditCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="FathersName" type="text"
-                                        value={this.state.FathersName}
-                                        onChange={this.handleInputChange} />
+                                        value={this.state.fathersName}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disabled) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
@@ -149,12 +163,18 @@ class EditCartonSide extends Component {
                                 <td>
                                     <input 
                                         name="MothersName" type="text"
-                                        value={this.state.MothersName}
-                                        onChange={this.handleInputChange} />
+                                        value={this.state.mothersName}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disabled) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <button
+                        type="button" className="btn btn-custom"
+                        onClick={this.onEnableEdit}>
+                        Izmeni
+                    </button>
                     <button 
                         type="button" className="btn btn-custom"
                         onClick={this.onSave}>
