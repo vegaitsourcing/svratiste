@@ -192,6 +192,7 @@ class CartonTable extends Component {
                 {this.state.showAddDailyEntry && <AddDailyEntry
                     open={this.state.showAddDailyEntry}
                     data={this.state.selectedRow}
+                    pageNumber={this.state.currentPage}
                     />}
 
                 <div className="carton-table-edit">

@@ -4,9 +4,10 @@ import axios from 'axios';
 import { web_api_url } from '../constants';
 
 import * as authToken from '../authToken';
+import { getCartons } from './CardboardActions';
 
 export function addDailyEntry(dailyEntry) {
-    console.log(dailyEntry);
+    getCartons(dailyEntry.pageNumber);
     axios.post(web_api_url + '/DailyEntry', dailyEntry,
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
