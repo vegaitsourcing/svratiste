@@ -7,13 +7,16 @@ import * as authToken from '../authToken';
 import { getCartons } from './CardboardActions';
 
 export function addDailyEntry(dailyEntry) {
-    getCartons(dailyEntry.pageNumber);
     axios.post(web_api_url + '/DailyEntry', dailyEntry,
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
         }).then(() => {
+            getCartons(dailyEntry.pageNumber);
             dispatcher.dispatch({
                 type: "HIDE_ADD_DAILY_ENTRY_BAR"
+            });
+            dispatcher.dispatch({
+                type: "HIDE_EDIT_BAR"
             });
         }).catch(error => {
             if (error.response.status === 401) {
