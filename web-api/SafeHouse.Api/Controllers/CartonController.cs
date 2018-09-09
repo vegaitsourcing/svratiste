@@ -37,6 +37,7 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpPost]
+        [Route("api/Carton")]
         public void Create([FromBody]CartonDto newValue)
         {
             try

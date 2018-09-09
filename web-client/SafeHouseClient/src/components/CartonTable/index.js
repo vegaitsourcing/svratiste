@@ -147,7 +147,9 @@ class CartonTable extends Component {
 
                 </div>
                 
-                <AddCartonSide open={this.state.showAddSide} />
+                <AddCartonSide
+                    open={this.state.showAddSide}
+                    pageNumber={this.state.currentPage}/>
                 {this.state.showEditSide && <EditCartonSide 
                     open={this.state.showEditSide}
                     data={this.state.selectedRow}

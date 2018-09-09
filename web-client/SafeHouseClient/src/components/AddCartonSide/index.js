@@ -16,28 +16,17 @@ class AddCartonSide extends Component {
             AddressStreetName: '',
             AddressStreetNumber: '',
             FathersName: '',
-            MothersName: ''
+            MothersName: '',
+            pageNumber: props.pageNumber
         };
 
         this.onSave = this.onSave.bind(this);
         this.onClose = this.onClose.bind(this);
-        
+        this.initState = this.initState.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleInputChange(event) {
-        const { target } = event;
-        const { name, value } = target;
-
-        this.setState({ [name]: value });
-    }
-
-    onSave() {
-        console.log(this.state);
-    }
-
-    onClose() {
-        CardboardActions.hideAddBar();
+    initState() {
         this.setState({
             FirstName: '',
             LastName: '',
@@ -49,6 +38,23 @@ class AddCartonSide extends Component {
             FathersName: '',
             MothersName: ''
         });
+    }
+
+    handleInputChange(event) {
+        const { target } = event;
+        const { name, value } = target;
+
+        this.setState({ [name]: value });
+    }
+
+    onSave() {
+        CardboardActions.addCarton(this.state);
+        this.initState();
+    }
+
+    onClose() {
+        CardboardActions.hideAddBar();
+        this.initState();
     }
 
     render() {
