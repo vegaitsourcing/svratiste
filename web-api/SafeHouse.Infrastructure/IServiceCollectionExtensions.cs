@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Business;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Mappers;
+using SafeHouse.Business.Helpers;
 using SafeHouse.Business.Mappers;
 using SafeHouse.Data;
 
@@ -20,6 +21,7 @@ namespace SafeHouse.Infrastructure
             services.AddTransient<IIndividualPlanService, IndividualPlanService>();
             services.AddSingleton<IGenderMapper, GenderMapper>();
             services.AddSingleton<ICartonMapper, CartonMapper>();
+            services.AddSingleton<HashingHelper>();
             return services;
         }
 

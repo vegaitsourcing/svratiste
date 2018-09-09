@@ -18,6 +18,7 @@
     "SafeHouse": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "/login",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

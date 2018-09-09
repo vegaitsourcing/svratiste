@@ -59,6 +59,7 @@ namespace SafeHouse.Api
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -78,7 +79,6 @@ namespace SafeHouse.Api
 
             app.UseCors("SafeHouseCorsPolicy");
 
-            app.UseAuthentication();
 
             db.EnsureSeedData();
         }

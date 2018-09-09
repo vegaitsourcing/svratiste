@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import * as LoginActions from '../../actions/LoginActions';
+import LoginStore from '../../stores/LoginStore';
+
+import * as authToken from '../../authToken';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -12,6 +17,23 @@ class LoginForm extends Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.loginClick = this.loginClick.bind(this);
+
+        this.fetchEdToken = this.fetchEdToken.bind(this);
+    }
+
+    componentWillMount() {
+        if (authToken.getToken()) {
+            this.props.history.push('/');
+        }
+        LoginStore.on("fetched_token", this.fetchEdToken);
+    }
+
+    componentWillUnmount() {
+        LoginStore.removeListener("fetched_token", this.fetchEdToken);
+    }
+
+    fetchEdToken() {
+        this.props.history.push('/');
     }
 
     handleInputChange(event) {
@@ -21,8 +43,7 @@ class LoginForm extends Component {
         this.setState({ [name]: value });
     }
 
-    loginClick()
-    {
+    loginClick() {
         LoginActions.login(this.state);
     }
 
@@ -43,4 +64,4 @@ class LoginForm extends Component {
     };
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

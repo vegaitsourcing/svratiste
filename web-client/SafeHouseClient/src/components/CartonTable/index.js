@@ -17,25 +17,9 @@ class CartonTable extends Component {
         super(props);
 
         this.state = {
-            catons: [
-                { 
-                    Id: '123',
-                    FirstName: 'Mark',
-                    LastName: 'Otto',
-                    Nickname: 'otot',
-                    Gender: '1',
-                    DateOfBirth: '2018-09-13',
-                    AddressStreetName: 'test',
-                    AddressStreetNumber: '22',
-                    FathersName: 'tata',
-                    MothersName: 'Mama',
-                    notifications: '2'
-                },
-                { FirstName: 'Jacob', LastName: 'Thornton', notifications: '2' },
-                { FirstName: 'Larry', LastName: 'the Bird', notifications: '1' }
-            ],
-            currentPage: 5,
-            totalPages: 5,
+            catons: [],
+            currentPage: 1,
+            totalPages: 0,
             selectedRow: {},
             showAddSide: false,
             showEditSide: false
@@ -53,6 +37,7 @@ class CartonTable extends Component {
         this.onPreviousClick = this.onPreviousClick.bind(this);
         this.onPageClick = this.onPageClick.bind(this);
         this.onNextClick = this.onNextClick.bind(this);
+        this.getNumOfPages = this.getNumOfPages.bind(this);
     }
 
     componentWillMount() {
@@ -63,7 +48,8 @@ class CartonTable extends Component {
     }
 
     componentDidMount() {
-        //CardboardActions.getCartons(1);
+        CardboardActions.getCartonsPageCount();
+        CardboardActions.getCartons(1);
     }
 
     componentWillUnmount() {
@@ -80,8 +66,8 @@ class CartonTable extends Component {
     }
 
     evaluation() {
-        if (this.state.selectedRow.Id) {
-            this.props.history.push('/evaluation/' + this.state.selectedRow.Id);
+        if (this.state.selectedRow.id) {
+            this.props.history.push('/evaluation/' + this.state.selectedRow.id);
         }
     }
 
@@ -161,10 +147,13 @@ class CartonTable extends Component {
 
                 </div>
                 
-                <AddCartonSide open={this.state.showAddSide} />
+                <AddCartonSide
+                    open={this.state.showAddSide}
+                    pageNumber={this.state.currentPage}/>
                 {this.state.showEditSide && <EditCartonSide 
                     open={this.state.showEditSide}
-                    data={this.state.selectedRow}/>}
+                    data={this.state.selectedRow}
+                    pageNumber={this.state.currentPage} />}
 
                 <div className="carton-table-edit">
                 </div>

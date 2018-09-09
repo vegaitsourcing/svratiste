@@ -8,32 +8,35 @@ class EditCartonSide extends Component {
         super(props);
 
         this.state = {
-            Id: '',
-            FirstName: '',
-            LastName: '',
-            Nickname: '',
-            Gender: '',
-            DateOfBirth: '',
-            AddressStreetName: '',
-            AddressStreetNumber: '',
-            FathersName: '',
-            MothersName: ''
+            id: '',
+            firstName: '',
+            lastName: '',
+            nickname: '',
+            gender: '',
+            dateOfBirth: '',
+            addressStreetName: '',
+            addressStreetNumber: '',
+            fathersName: '',
+            mothersName: '',
+            disableEdit: true,
+            pageNumber: props.pageNumber
         };
 
         this.onSave = this.onSave.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.onEnableEdit = this.onEnableEdit.bind(this);
         
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     componentDidMount() {
-        const { Id, FirstName, LastName, 
-                Nickname, Gender, DateOfBirth, 
-                AddressStreetName, AddressStreetNumber,
-                FathersName, MothersName } = this.props.data;
+        const { id, firstName, lastName, 
+                nickname, gender, dateOfBirth, 
+                addressStreetName, addressStreetNumber,
+                fathersName, mothersName } = this.props.data;
 
         this.setState({
-            Id, FirstName, LastName, Nickname, Gender, DateOfBirth, AddressStreetName, AddressStreetNumber, FathersName, MothersName
+            id, firstName, lastName, nickname, gender, dateOfBirth, addressStreetName, addressStreetNumber, fathersName, mothersName
         });
     }
 
@@ -45,7 +48,11 @@ class EditCartonSide extends Component {
     }
 
     onSave() {
-        console.log(this.state);
+        CardboardActions.editCarton(this.state);
+    }
+
+    onEnableEdit() {
+        this.setState({ disableEdit: !this.state.disableEdit });
     }
 
     onClose() {
@@ -73,35 +80,39 @@ class EditCartonSide extends Component {
                                 <td className="info">Ime</td>
                                 <td>
                                     <input 
-                                        name="FirstName" type="text"
-                                        value={this.state.FirstName}
-                                        onChange={this.handleInputChange} />
+                                        name="firstName" type="text"
+                                        value={this.state.firstName}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""} />
                                 </td>
                             </tr>
                             <tr>
                                 <td className="info">Prezime</td>
                                 <td>
                                     <input 
-                                        name="LastName" type="text"
-                                        value={this.state.LastName}
-                                        onChange={this.handleInputChange} />
+                                        name="lastName" type="text"
+                                        value={this.state.lastName}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""} />
                                 </td>
                             </tr>
                             <tr>
                                 <td className="info">Nadimak</td>
                                 <td>
                                     <input 
-                                        name="Nickname" type="text" 
-                                        value={this.state.Nickname}
-                                        onChange={this.handleInputChange} />
+                                        name="nickname" type="text" 
+                                        value={this.state.nickname}
+                                        onChange={this.handleInputChange} 
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td className="info">Pol</td>
                                 <td>
                                     <select className="combobox" 
-                                        name="Gender" onChange={this.handleInputChange}
-                                        value={this.state.Gender} >
+                                        name="gender" onChange={this.handleInputChange}
+                                        value={this.state.gender}
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}>
                                         <option></option>
                                         <option value="1">M</option>
                                         <option value="0">Ž</option>
@@ -112,49 +123,59 @@ class EditCartonSide extends Component {
                                 <td className="info">Datum rođenja</td>
                                 <td>
                                     <input 
-                                        type="date" name="DateOfBirth"
-                                        value={this.state.DateOfBirth}
-                                        onChange={this.handleInputChange} />
+                                        type="date" name="dateOfBirth"
+                                        value={this.state.dateOfBirth}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td className="info">Adresa stanovanja</td>
                                 <td>
                                     <input 
-                                    name="AddressStreetName" type="text"
-                                    value={this.state.AddressStreetName}
-                                    onChange={this.handleInputChange} />
+                                    name="addressStreetName" type="text"
+                                    value={this.state.addressStreetName}
+                                    onChange={this.handleInputChange}
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td className="info">Broj ulice</td>
                                 <td>
                                     <input 
-                                        name="AddressStreetNumber" type="text"
-                                        value={this.state.AddressStreetNumber}
-                                        onChange={this.handleInputChange} />
+                                        name="addressStreetNumber" type="text"
+                                        value={this.state.addressStreetNumber}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td className="info">Ime oca</td>
                                 <td>
                                     <input 
-                                        name="FathersName" type="text"
-                                        value={this.state.FathersName}
-                                        onChange={this.handleInputChange} />
+                                        name="fathersName" type="text"
+                                        value={this.state.fathersName}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td className="info">Ime majke</td>
                                 <td>
                                     <input 
-                                        name="MothersName" type="text"
-                                        value={this.state.MothersName}
-                                        onChange={this.handleInputChange} />
+                                        name="mothersName" type="text"
+                                        value={this.state.mothersName}
+                                        onChange={this.handleInputChange}
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <button
+                        type="button" className="btn btn-custom"
+                        onClick={this.onEnableEdit}>
+                        Izmeni
+                    </button>
                     <button 
                         type="button" className="btn btn-custom"
                         onClick={this.onSave}>

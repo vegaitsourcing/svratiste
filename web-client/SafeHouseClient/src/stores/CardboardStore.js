@@ -11,6 +11,10 @@ class CardboardStore extends EventEmitter {
         this.totalPages = 1;
     }
 
+    getNumOfPages() {
+        return this.totalPages;
+    }
+
     getAll() {
         return this.cartons;
     }
@@ -18,6 +22,7 @@ class CardboardStore extends EventEmitter {
     handleActions(action) {
         switch(action.type) {
             case "FETCHED_ALL_CARTONS":
+                console.log(action.payload);
                 this.cartons = action.payload;
                 this.emit("fetched_cartons");
                 break;
