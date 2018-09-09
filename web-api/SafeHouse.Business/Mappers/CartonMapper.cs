@@ -30,7 +30,7 @@ namespace SafeHouse.Business.Mappers
                 InitialEvaluationDone = entity.InitialEvaluationDone,
                 EvaluationDone = entity.EvaluationDone,
                 IndividualPlanDone = entity.IndividualPlanDone,
-                IndividualPlanRevised = entity.IndividualPlanRevised
+                IndividualPlanRevised = entity.IndividualPlanRevised,
             };
         }
 
