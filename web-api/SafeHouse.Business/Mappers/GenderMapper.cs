@@ -1,4 +1,5 @@
 ﻿using System;
+using SafeHouse.Business.Contracts.Mappers;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Enums;
 

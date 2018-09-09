@@ -4,8 +4,8 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Common;
+using SafeHouse.Business.Contracts.Mappers;
 using SafeHouse.Business.Contracts.Models;
-using SafeHouse.Business.Mappers;
 using SafeHouse.Data;
 
 namespace SafeHouse.Business

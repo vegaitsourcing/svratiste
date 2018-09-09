@@ -28,7 +28,7 @@ namespace SafeHouse.Data.Entities
 
         [MaxLength(256)]
         public String CaseLeaderName { get; set; }
-        public Suitability SuitabilityId { get; set;}
+        public Suitability Suitability { get; set;}
 
         public bool Capability { get; set; }
         public bool OnTheWaitingList { get; set; }

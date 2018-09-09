@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Business;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Mappers;
 using SafeHouse.Business.Mappers;
 using SafeHouse.Data;
 

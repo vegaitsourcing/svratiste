@@ -1,4 +1,5 @@
-﻿using SafeHouse.Business.Contracts.Models;
+﻿using SafeHouse.Business.Contracts.Mappers;
+using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business.Mappers

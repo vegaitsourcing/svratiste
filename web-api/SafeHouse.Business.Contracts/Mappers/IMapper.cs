@@ -1,4 +1,4 @@
-﻿namespace SafeHouse.Business.Mappers
+﻿namespace SafeHouse.Business.Contracts.Mappers
 {
     public interface IMapper<TEntity, TDto>
     {
