@@ -7,16 +7,6 @@ namespace SafeHouse.Business.Mappers
 {
     public class DailyEntryMapper : IDailyEntryMapper
     {
-        public DailyEntryDto ToDto(DailyEntry entity)
-        {
-            throw new System.NotSupportedException();
-        }
-
-        public DailyEntry ToEntity(DailyEntryDto dto)
-        {
-            throw new System.NotSupportedException();
-        }
-
         public DailyEntry ToEntity(DailyEntryDto dto, Carton carton)
         {
             var meal = dto.Breakfast ? 1 : 0;

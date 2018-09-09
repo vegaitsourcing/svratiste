@@ -67,7 +67,7 @@ class AddDailyEntry extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className="info">Ime</td>
+                            <td className="info">Boravak</td>
                             <td>
                                 <input
                                     name="FirstName" type="text"

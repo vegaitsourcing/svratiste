@@ -4,6 +4,6 @@ namespace SafeHouse.Business.Contracts
 {
     public interface IDailyEntryService
     {
-        void Add(DailyEntryDto carton);
+        void Add(DailyEntryDto dailyEntry);
     }
 }
