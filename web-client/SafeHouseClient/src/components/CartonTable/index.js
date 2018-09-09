@@ -22,12 +22,14 @@ class CartonTable extends Component {
             totalPages: 0,
             selectedRow: {},
             showAddSide: false,
-            showEditSide: false
+            showEditSide: false,
+            showAddDailyEntry: false
         };
 
         this.getCartons = this.getCartons.bind(this);
         this.hideAddBar = this.hideAddBar.bind(this);
         this.hideEditBar = this.hideEditBar.bind(this);
+        this.hideAddDailyEntryBar = this.hideAddDailyEntryBar.bind(this);
 
         this.onItemSelected = this.onItemSelected.bind(this);
         this.showAddSide = this.showAddSide.bind(this);
@@ -46,6 +48,7 @@ class CartonTable extends Component {
         CardboardStore.on("fetched_pages_count", this.getNumOfPages);
         CardboardStore.on("hide_add_bar", this.hideAddBar);
         CardboardStore.on("hide_edit_bar", this.hideEditBar);
+        CardboardStore.on("hide_add_daily_entry_bar", this.hideAddDailyEntryBar);
     }
 
     componentDidMount() {
@@ -58,6 +61,7 @@ class CartonTable extends Component {
         CardboardStore.removeListener("fetched_pages_count", this.getNumOfPages);
         CardboardStore.removeListener("hide_add_bar", this.hideAddBar);
         CardboardStore.removeListener("hide_edit_bar", this.hideEditBar);
+        CardboardStore.removeListener("hide_add_daily_entry_bar", this.hideAddDailyEntryBar);
     }
 
     getCartons() {
@@ -80,6 +84,10 @@ class CartonTable extends Component {
         this.setState({ showAddSide: false });
     }
 
+    hideAddDailyEntryBar() {
+        this.setState({ showAddDailyEntry: false });
+    }
+
     hideEditBar() {
         this.setState({ showEditSide: false });
     }
@@ -93,7 +101,9 @@ class CartonTable extends Component {
     }
 
     showAddDailyEntry() {
-        this.setState({ showAddDailyEntry: true });
+        if (this.state.selectedRow.id) {
+            this.setState({ showAddDailyEntry: true });
+        }
     }
 
     onPreviousClick() {
@@ -138,7 +148,7 @@ class CartonTable extends Component {
                         Dodaj dnevni unos za gosta
                     </button>
                     <button 
-                        type="button" className="btn color-secondary"
+                        type="button" className="btn color-secondary btn-inverse"
                         onClick={this.showAddSide}>
                         Dodaj karton
                     </button>

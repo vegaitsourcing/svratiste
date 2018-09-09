@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 
 import * as DailyEntyActions from '../../actions/DailyEntryActions';
+import * as CardboardActions from '../../actions/CardboardActions';
 
 class AddDailyEntry extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class AddDailyEntry extends Component {
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.onClose = this.onClose.bind(this);
     }
 
     handleInputChange(event) {
@@ -17,6 +19,11 @@ class AddDailyEntry extends Component {
         const { name, value } = target;
 
         this.setState({ [name]: value });
+    }
+
+    onClose() {
+        CardboardActions.hideAddDailyEntryBar();
+        CardboardActions.hideEditBar();
     }
 
     render() {
