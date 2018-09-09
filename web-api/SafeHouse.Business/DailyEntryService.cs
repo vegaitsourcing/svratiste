@@ -1,0 +1,8 @@
+﻿using SafeHouse.Business.Contracts;
+
+namespace SafeHouse.Business
+{
+    public class DailyEntryService : IDailyEntryService
+    {
+    }
+}
