@@ -8,6 +8,6 @@ namespace SafeHouse.Business.Contracts
     {
         FirstEvaluation Get(Guid id);
 
-        void Add(CreateFirstEvaluationRequest evaluation);
+        void AddOrUpdate(CreateFirstEvaluationRequest evaluation);
     }
 }

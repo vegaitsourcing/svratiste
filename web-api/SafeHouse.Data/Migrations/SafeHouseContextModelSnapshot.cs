@@ -507,7 +507,7 @@ namespace SafeHouse.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suitabilities");
+                    b.ToTable("Suitability");
                 });
 
             modelBuilder.Entity("SafeHouse.Data.Entities.SuitabilityCache", b =>
@@ -651,7 +651,7 @@ namespace SafeHouse.Data.Migrations
                         .WithMany()
                         .HasForeignKey("SuitabilityCacheId");
 
-                    b.HasOne("SafeHouse.Data.Entities.Suitability", "Suitability")
+                    b.HasOne("SafeHouse.Data.Entities.Suitability")
                         .WithMany("SuitabilityItems")
                         .HasForeignKey("SuitabilityId");
                 });
