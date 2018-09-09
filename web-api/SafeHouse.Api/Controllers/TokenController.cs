@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SafeHouse.Api.Helpers;
@@ -8,6 +9,7 @@ using SafeHouse.Business.Contracts;
 
 namespace SafeHouse.Api.Controllers
 {
+    [EnableCors("SafeHouseCorsPolicy")]
     [Produces("application/json")]
     [Route("api/token")]
     [AllowAnonymous]

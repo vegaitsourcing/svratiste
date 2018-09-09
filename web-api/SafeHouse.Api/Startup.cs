@@ -33,7 +33,13 @@ namespace SafeHouse.Api
                 configuration.RootPath = "../../web-client/SafeHouseClient/build";
             });
 
-            services.AddCors();
+            services.AddCors(o => o.AddPolicy("SafeHouseCorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddAuthorizationServices(Configuration);
         }
 
@@ -49,8 +55,7 @@ namespace SafeHouse.Api
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
@@ -70,6 +75,8 @@ namespace SafeHouse.Api
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+            app.UseCors("SafeHouseCorsPolicy");
 
             app.UseAuthentication();
 
