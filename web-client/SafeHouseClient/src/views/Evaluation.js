@@ -9,6 +9,7 @@ class Evaluation extends Component {
         super(props);
 
         this.state = {
+            activeTab: 1,
             FirstName: "Test",
             LastName: "Testing",
             AddressStreetName:"neka ulica",
@@ -51,10 +52,17 @@ class Evaluation extends Component {
                 }
             }
         };
+
+        this.onTabClick = this.onTabClick.bind(this);
+    }
+
+    onTabClick(tab) {
+        this.setState({ activeTab: tab });
     }
 
     render() {
         const { 
+            activeTab,
             FirstName, 
             LastName,
             FirstEvaluation111
@@ -69,29 +77,31 @@ class Evaluation extends Component {
                         </div>
                         <div className="tabs" id="tabs">
                             <ul>
-                                <li className="active"><a href="#tabs-1">Prijemna Procena</a></li>
-                                <li><a href="#tabs-2">Procena</a></li>
-                                <li><a href="#tabs-3">Individualni Plan</a></li>
+                                <li className={activeTab === 1 ? "active" : ""}><a onClick={() => this.onTabClick(1)}>Prijemna Procena</a></li>
+                                <li className={activeTab === 2 ? "active" : ""}><a onClick={() => this.onTabClick(2)}>Procena</a></li>
+                                <li className={activeTab === 3 ? "active" : ""}><a onClick={() => this.onTabClick(3)}>Individualni Plan</a></li>
                             </ul>
-                            <div className="tab show" id="tabs-1">
+                            {(activeTab === 1) && <div className="tab show" id="tabs-1">
                                 <div className="tab-content">
-                                    <FirstEvaluation 
+                                    <FirstEvaluation
                                         data={FirstEvaluation111}
                                         addressName={this.state.AddressStreetName}
                                         addressNumber={this.state.AddressStreetNumber}
                                         dateOfBirth={this.state.DateOfBirth} />
                                 </div>
-                            </div>
-                            <div className="tab" id="tabs-2">
-                                <div className="tab-content">
-                                    <EvaluationComponent />
-                                </div>
-                            </div>
-                            <div className="tab" id="tabs-3">
-                                <div className="tab-content">
-                                    <IndividualPlan />
-                                </div>
-                            </div>
+                            </div>}
+                            {(activeTab === 2) && <div className="tab" id="tabs-2">
+                                        <div className="tab-content">
+                                            <EvaluationComponent />
+                                        </div>
+                                      </div>
+                            }
+                            {(activeTab === 3) && <div className="tab" id="tabs-3">
+                                        <div className="tab-content">
+                                             <IndividualPlan />
+                                        </div>
+                                      </div>
+                            }
                         </div>
                     </div>
                 </div>
