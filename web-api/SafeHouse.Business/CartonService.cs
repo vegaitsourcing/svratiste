@@ -56,7 +56,14 @@ namespace SafeHouse.Business
 
         public void Update(CartonDto cartonNewValues)
         {
-            _dbContex.Cartons.Update(_cartonMapper.ToEntity(cartonNewValues));
+            var carton =_dbContex.Cartons.Find(cartonNewValues.Id);
+            if (carton == null)
+            {
+                return;
+            }
+
+            _dbContex.Entry(carton).CurrentValues.SetValues(_cartonMapper.ToEntity(cartonNewValues));
+            _dbContex.SaveChanges();
         }
 
         private bool IsDivideableByPageSize(int itemsCount)

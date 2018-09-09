@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SafeHouse.Data.Entities 
+namespace SafeHouse.Data.Entities
 {
     public class FirstEvaluation : BaseEntity
     {
@@ -20,7 +20,7 @@ namespace SafeHouse.Data.Entities
         public String LivingSpace { get; set; }
 
         [MaxLength(512)]
-        public String  SchoolAndGrade { get; set; }
+        public String SchoolAndGrade { get; set; }
 
         [MaxLength(256)]
         public String Languages { get; set; }
@@ -28,7 +28,7 @@ namespace SafeHouse.Data.Entities
 
         [MaxLength(256)]
         public String CaseLeaderName { get; set; }
-        public Suitability SuitabilityId { get; set;}
+        public Suitability SuitabilityId { get; set; }
 
         public bool Capability { get; set; }
         public bool OnTheWaitingList { get; set; }
