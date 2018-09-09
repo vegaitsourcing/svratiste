@@ -150,7 +150,8 @@ class CartonTable extends Component {
                 <AddCartonSide open={this.state.showAddSide} />
                 {this.state.showEditSide && <EditCartonSide 
                     open={this.state.showEditSide}
-                    data={this.state.selectedRow}/>}
+                    data={this.state.selectedRow}
+                    pageNumber={this.state.currentPage} />}
 
                 <div className="carton-table-edit">
                 </div>
