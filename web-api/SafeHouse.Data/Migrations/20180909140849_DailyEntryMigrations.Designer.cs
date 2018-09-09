@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SafeHouse.Data;
 
 namespace SafeHouse.Data.Migrations
 {
     [DbContext(typeof(SafeHouseContext))]
-    partial class SafeHouseContextModelSnapshot : ModelSnapshot
+    [Migration("20180909140849_DailyEntryMigrations")]
+    partial class DailyEntryMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -651,7 +653,7 @@ namespace SafeHouse.Data.Migrations
                         .WithMany()
                         .HasForeignKey("SuitabilityCacheId");
 
-                    b.HasOne("SafeHouse.Data.Entities.Suitability")
+                    b.HasOne("SafeHouse.Data.Entities.Suitability", "Suitability")
                         .WithMany("SuitabilityItems")
                         .HasForeignKey("SuitabilityId");
                 });

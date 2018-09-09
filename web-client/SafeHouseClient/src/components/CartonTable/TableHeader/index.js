@@ -8,7 +8,7 @@ const TableHeader = () => {
                 <th scope="col">#</th>
                 <th scope="col">Ime</th>
                 <th scope="col">Prezime</th>
-                <th scope="col">Notifikacije</th>
+                <th scope="col">Broj Poseta</th>
             </tr>
         </thead>
     );

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Api.Controllers
@@ -24,15 +21,15 @@ namespace SafeHouse.Api.Controllers
         [HttpGet("{id}")]
         public Evaluation Get(Guid id)
         {
-            return _evaluationService.Get(id);
+            return _evaluationService.GetByCartonId(id);
         }
 
         [HttpPost]
-        public void Create([FromBody]Evaluation newValue)
+        public void Create([FromBody]CreateEvaluationRequest model)
         {
             try
             {
-                _evaluationService.Add(newValue);
+                _evaluationService.AddOrUpdate(model);
             }
             catch (Exception e)
             {
