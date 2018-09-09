@@ -4,7 +4,7 @@ import React from 'react';
 const TableData = ({ data }) => {
     return (
         <tbody>
-            <tr className="table-details">
+            <tr className="table-details table-report">
                 <td>{data.guestsCount}</td>
                 <td>{data.maleGuestsCount}</td>
                 <td>{data.femaleGuestsCount}</td>

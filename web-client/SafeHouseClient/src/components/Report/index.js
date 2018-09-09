@@ -13,11 +13,12 @@ class Report extends Component {
 
         this.state = {
             from: new Date('1995-12-17T03:24:00'),
-            to: new Date('1995-12-17T03:24:00'),
+            to: new Date('2060-12-17T03:24:00'),
             reportData: {}
         };
 
         this.getReports = this.getReports.bind(this);
+        this.requestReport = this.requestReport.bind(this);
     }
 
     componentWillMount() {
@@ -25,7 +26,7 @@ class Report extends Component {
     }
 
     componentDidMount() {
-        ReportActions.getReports(this.state.reportData);
+        ReportActions.getReports(this.state);
     }
 
     componentWillUnmount() {
@@ -45,6 +46,10 @@ class Report extends Component {
         });
     }
 
+    requestReport() {
+        ReportActions.getReports(this.state);
+    }
+
     render() {
         return (
             <main className="main">
@@ -55,7 +60,10 @@ class Report extends Component {
                                 name="from"
                                 onChange={this.handleCheckboxChange} />/>
                             <input type="date" name="to"
-                                onChange={this.handleCheckboxChange}/>
+                                onChange={this.handleCheckboxChange} />
+                            <button type="button"
+                                className="btn btn-inverse color-primary"
+                                onClick={this.requestReport}>Izvestaj</button>    
 			            </div>
                         <div className="table-carton">
                             <table className="table table-position">
