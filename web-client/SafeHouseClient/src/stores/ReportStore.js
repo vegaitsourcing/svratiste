@@ -5,8 +5,9 @@ import dispatcher from '../dispatcher';
 class ReportStore extends EventEmitter {
     constructor(props) {
         super(props);
-    }
 
+        this.report = {}
+    }
 
     handleActions(action) {
         switch (action.type) {
@@ -20,6 +21,10 @@ class ReportStore extends EventEmitter {
                 break;
             default:
         }
+    }
+
+    getAll() {
+        return this.report;
     }
 }
 

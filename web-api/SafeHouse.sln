@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeHouse.Data", "SafeHouse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeHouse.Infrastructure", "SafeHouse.Infrastructure\SafeHouse.Infrastructure.csproj", "{8283ACA2-D2F8-499F-8189-00BCE92BD410}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeHouse.Business.UnitTests", "SafeHouse.Business.UnitTests\SafeHouse.Business.UnitTests.csproj", "{D8A1BC6A-7F7F-4092-A606-2F29F63277B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8283ACA2-D2F8-499F-8189-00BCE92BD410}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8283ACA2-D2F8-499F-8189-00BCE92BD410}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8283ACA2-D2F8-499F-8189-00BCE92BD410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A1BC6A-7F7F-4092-A606-2F29F63277B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A1BC6A-7F7F-4092-A606-2F29F63277B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A1BC6A-7F7F-4092-A606-2F29F63277B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A1BC6A-7F7F-4092-A606-2F29F63277B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
