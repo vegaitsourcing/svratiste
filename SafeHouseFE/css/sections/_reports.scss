@@ -7,15 +7,32 @@
 		max-height: 780px;
 	}
 	.side-items {
+		transition: width 2s;
 		&.side-items-create {
-			width: 100%;
-			input {
-				max-width: 400px;
-				width: 100%;
-			}
+			width: 0;
+			// input {
+			// 	max-width: 400px;
+			// 	width: 100%;
+			// }
 			.info {
 				&.info-content {
 					padding-left: 30px;
+					color: $primary;
+				}
+				&.info-two {
+					padding-left: 30px;
+					color: $grey;
+				}
+				&.info-content-two {
+					padding-left: 50px;
+					color: $primary;
+				}
+				&.info-three {
+					padding-left: 50px;
+					color: $grey;
+				}
+				&.info-content-three {
+					padding-left: 70px;
 					color: $primary;
 				}
 			}
