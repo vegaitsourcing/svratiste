@@ -128,16 +128,19 @@ namespace SafeHouse.Business
                 existingEvaluation.StartedEvaluation = evaluation.StartedEvaluation;
                 existingEvaluation.VerbalComunicationAbility = evaluation.VerbalComunicationAbility;
 
-                var listToDelete = new List<SuitabilityItem>();
-                foreach(var item in existingEvaluation.Suitability.SuitabilityItems)
-                {
-                    listToDelete.Add(item);
-                }
+				var listToDelete = new List<SuitabilityItem>();
+	            if (existingEvaluation.Suitability.SuitabilityItems.Any())
+	            {
+		            foreach (var item in existingEvaluation.Suitability.SuitabilityItems)
+		            {
+			            listToDelete.Add(item);
+		            }
 
-                _dbContext.SuitabilityItems.RemoveRange(listToDelete);
-                _dbContext.Suitabilities.Remove(existingEvaluation.Suitability);
+		            _dbContext.SuitabilityItems.RemoveRange(listToDelete);
+		            _dbContext.Suitabilities.Remove(existingEvaluation.Suitability);
+	            }
 
-                var suitabilityItems = new List<SuitabilityItem>();
+				var suitabilityItems = new List<SuitabilityItem>();
 
                 foreach (var ev in evaluation.Suitability.SuitabilityItems)
                 {
