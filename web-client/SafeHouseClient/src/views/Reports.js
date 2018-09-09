@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
+import Report from '../components/Report';
 
 class Reports extends Component {
     render() {
         return (
-            <h2>Izveštaji</h2>
+            <div>
+                <Report />
+            </div>
         );
     };
 }
