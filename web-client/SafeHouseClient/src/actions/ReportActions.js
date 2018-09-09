@@ -1,10 +1,12 @@
+import dispatcher from '../dispatcher';
+
 import axios from 'axios';
 import { web_api_url } from '../constants';
 
 import * as authToken from '../authToken';
 
-export function getReport() {
-    axios.get(web_api_url + '/Report/',
+export function getReports(requestObject) {
+    axios.post(web_api_url + '/reports/', requestObject,
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
         }).then((response) => {
