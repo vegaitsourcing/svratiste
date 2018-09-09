@@ -19,9 +19,9 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpPost]
-        public ReportDataDto FindReportData([FromBody] ReportRequestDto request)
+        public IActionResult FindReportData([FromBody] ReportRequestDto request)
         {
-            return _reportService.GetReportData(request);
+            return Ok(_reportService.GetReportData(request));
         }
     }
 }
