@@ -36,8 +36,8 @@ namespace SafeHouse.Api
             services.AddCors(o => o.AddPolicy("SafeHouseCorsPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
             }));
 
             services.AddAuthorizationServices(Configuration);
@@ -55,7 +55,7 @@ namespace SafeHouse.Api
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-            
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
@@ -78,7 +78,6 @@ namespace SafeHouse.Api
             });
 
             app.UseCors("SafeHouseCorsPolicy");
-
 
             db.EnsureSeedData();
         }
