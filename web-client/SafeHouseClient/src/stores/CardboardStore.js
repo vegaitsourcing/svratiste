@@ -22,7 +22,6 @@ class CardboardStore extends EventEmitter {
     handleActions(action) {
         switch(action.type) {
             case "FETCHED_ALL_CARTONS":
-                console.log(action.payload);
                 this.cartons = action.payload;
                 this.emit("fetched_cartons");
                 break;
@@ -38,6 +37,9 @@ class CardboardStore extends EventEmitter {
             case "FETCHED_PAGES_COUNT":
                 this.totalPages = action.payload;
                 this.emit("fetched_pages_count");
+                break;
+            case "UNAUTHORIZED":
+                this.emit("unauthorized");
                 break;
             default:
         }

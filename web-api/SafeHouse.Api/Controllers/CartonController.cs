@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
-using System;
-using System.Collections.Generic;
 
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
-    public class CartonController : Controller
+    public class CartonController : BaseController
     {
         private ICartonService _cartonService;
 
@@ -23,12 +23,6 @@ namespace SafeHouse.Api.Controllers
             return _cartonService.Get(pageNumber);
         }
 
-        //[HttpGet("{id}")]
-        //public CartonDto Get(Guid id)
-        //{
-        //    return _cartonService.Get(id);
-        //}
-
         [HttpGet]
         [Route("api/Carton/count")]
         public int GetCount()
@@ -38,7 +32,7 @@ namespace SafeHouse.Api.Controllers
 
         [HttpPost]
         [Route("api/Carton")]
-        public void Create([FromBody]CartonDto newValue)
+        public void Create([FromBody] CartonDto newValue)
         {
             try
             {
@@ -53,7 +47,7 @@ namespace SafeHouse.Api.Controllers
 
         [HttpPut]
         [Route("api/Carton")]
-        public void Update([FromBody]CartonDto newValue)
+        public void Update([FromBody] CartonDto newValue)
         {
             try
             {

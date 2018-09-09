@@ -5,7 +5,7 @@ const TableData = ({ data, selectItem }) => {
     return (
         <tbody>
             {data.map((row, index) => (
-                <tr key={ index } onClick={() => selectItem(row)}>
+                <tr className="table-details" key={ index } onClick={() => selectItem(row)}>
                     <th scope="row">{ ++index }</th>
                     <td>{ row.firstName }</td>
                     <td>{ row.lastName }</td>
