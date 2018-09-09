@@ -14,14 +14,14 @@ public static class IServiceCollectionExtensions
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-
-                ValidIssuer = configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Issuer),
-                ValidAudience = configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Audience),
-                IssuerSigningKey = JwtSecurityKey.Create(configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Secret))
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+    
+                    ValidIssuer = configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Issuer),
+                    ValidAudience = configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Audience),
+                    IssuerSigningKey = JwtSecurityKey.Create(configuration.GetValue<string>(SafeHouse.Api.Common.Constants.ConfigKeys.Secret))
                 };
 
                 options.Events = new JwtBearerEvents

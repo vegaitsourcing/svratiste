@@ -41,7 +41,6 @@ namespace SafeHouse.Api
             }));
 
             services.AddAuthorizationServices(Configuration);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
