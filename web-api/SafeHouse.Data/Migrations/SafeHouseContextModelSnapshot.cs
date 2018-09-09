@@ -651,7 +651,7 @@ namespace SafeHouse.Data.Migrations
                         .WithMany()
                         .HasForeignKey("SuitabilityCacheId");
 
-                    b.HasOne("SafeHouse.Data.Entities.Suitability", "Suitability")
+                    b.HasOne("SafeHouse.Data.Entities.Suitability")
                         .WithMany("SuitabilityItems")
                         .HasForeignKey("SuitabilityId");
                 });

@@ -57,6 +57,7 @@ class AddDailyEntry extends Component {
     onClose() {
         CardboardActions.hideAddDailyEntryBar();
         CardboardActions.hideEditBar();
+        CardboardActions.hideAddBar();
     }
 
     onSave() {

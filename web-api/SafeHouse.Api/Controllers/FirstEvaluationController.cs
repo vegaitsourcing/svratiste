@@ -30,7 +30,7 @@ namespace SafeHouse.Api.Controllers
         {
             try
             {
-                _firstEvaluationService.Add(newValue.ToCreateFirstEvaluationRequest());
+                _firstEvaluationService.AddOrUpdate(newValue.ToCreateFirstEvaluationRequest());
             }
             catch (Exception e)
             {

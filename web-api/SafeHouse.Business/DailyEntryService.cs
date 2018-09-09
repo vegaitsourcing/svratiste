@@ -19,7 +19,9 @@ namespace SafeHouse.Business
         public void Add(DailyEntryDto dailyEntry)
         {
             var carton = _dbContex.Cartons.Find(dailyEntry.CartonGuid);
+            carton.NumberOfVisits++;
             _dbContex.DailyEntries.Add(_mapper.ToEntity(dailyEntry, carton));
+            _dbContex.Cartons.Update(carton);
             _dbContex.SaveChanges();
         }
     }
