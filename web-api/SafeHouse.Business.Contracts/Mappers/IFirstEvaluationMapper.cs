@@ -3,8 +3,7 @@ using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business.Contracts.Mappers
 {
-    public interface ICartonMapper: IMapper<Carton, CartonDto>
+    public interface IFirstEvaluationMapper: IMapper<FirstEvaluation, FirstEvaluationDto>
     {
-
     }
 }

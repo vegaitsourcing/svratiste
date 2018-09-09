@@ -1,4 +1,5 @@
-﻿using SafeHouse.Business.Contracts.Models;
+﻿using SafeHouse.Business.Contracts.Mappers;
+using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Business.Mappers
@@ -17,20 +18,20 @@ namespace SafeHouse.Business.Mappers
             return new CartonDto
             {
                 Id = entity.Id,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                Nickname = entity.Nickname,
-                Gender = _genderMapper.ToDto(entity.Gender),
-                DateOfBirth = entity.DateOfBirth,
-                NumberOfVisits = entity.NumberOfVisits,
-                AddressStreetName = entity.AddressStreetName,
-                AddressStreetNumber = entity.AddressStreetNumber,
-                FathersName = entity.FathersName,
-                MothersName = entity.MothersName,
-                InitialEvaluationDone = entity.InitialEvaluationDone,
-                EvaluationDone = entity.EvaluationDone,
-                IndividualPlanDone = entity.IndividualPlanDone,
-                IndividualPlanRevised = entity.IndividualPlanRevised,
+                    FirstName = entity.FirstName,
+                    LastName = entity.LastName,
+                    Nickname = entity.Nickname,
+                    Gender = _genderMapper.ToDto(entity.Gender),
+                    DateOfBirth = entity.DateOfBirth,
+                    NumberOfVisits = entity.NumberOfVisits,
+                    AddressStreetName = entity.AddressStreetName,
+                    AddressStreetNumber = entity.AddressStreetNumber,
+                    FathersName = entity.FathersName,
+                    MothersName = entity.MothersName,
+                    InitialEvaluationDone = entity.InitialEvaluationDone,
+                    EvaluationDone = entity.EvaluationDone,
+                    IndividualPlanDone = entity.IndividualPlanDone,
+                    IndividualPlanRevised = entity.IndividualPlanRevised,
             };
         }
 
@@ -39,20 +40,20 @@ namespace SafeHouse.Business.Mappers
             return new Carton
             {
                 Id = dto.Id,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                Nickname = dto.Nickname,
-                Gender = _genderMapper.ToEntity(dto.Gender),
-                DateOfBirth = dto.DateOfBirth,
-                NumberOfVisits = dto.NumberOfVisits,
-                AddressStreetName = dto.AddressStreetName,
-                AddressStreetNumber = dto.AddressStreetNumber,
-                FathersName = dto.FathersName,
-                MothersName = dto.MothersName,
-                InitialEvaluationDone = dto.InitialEvaluationDone,
-                EvaluationDone = dto.EvaluationDone,
-                IndividualPlanDone = dto.IndividualPlanDone,
-                IndividualPlanRevised = dto.IndividualPlanRevised
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName,
+                    Nickname = dto.Nickname,
+                    Gender = _genderMapper.ToEntity(dto.Gender),
+                    DateOfBirth = dto.DateOfBirth,
+                    NumberOfVisits = dto.NumberOfVisits,
+                    AddressStreetName = dto.AddressStreetName,
+                    AddressStreetNumber = dto.AddressStreetNumber,
+                    FathersName = dto.FathersName,
+                    MothersName = dto.MothersName,
+                    InitialEvaluationDone = dto.InitialEvaluationDone,
+                    EvaluationDone = dto.EvaluationDone,
+                    IndividualPlanDone = dto.IndividualPlanDone,
+                    IndividualPlanRevised = dto.IndividualPlanRevised
             };
         }
     }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SafeHouse.Api.Models;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
 using System;
 
@@ -24,11 +26,11 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody]FirstEvaluation newValue)
+        public void Create([FromBody]CreateFirstEvaluationModel newValue)
         {
             try
             {
-                _firstEvaluationService.Add(newValue);
+                _firstEvaluationService.Add(newValue.ToCreateFirstEvaluationRequest());
             }
             catch (Exception e)
             {
