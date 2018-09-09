@@ -11,14 +11,16 @@ class LoginStore extends EventEmitter {
     }
 
     getToken() {
-        return this.token;
+        return localStorage.get('accessToken');
     }
 
     handleActions(action) {
         switch(action.type) {
             case "FETCHED_TOKEN":
-                this.token = action.payload;
+                localStorage.setItem('accessToken', action.payload);
+                this.emit("fetched_token");
                 break;
+            default:
         }
     }
 }
