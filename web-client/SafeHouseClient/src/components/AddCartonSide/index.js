@@ -173,7 +173,7 @@ class AddCartonSide extends Component {
                 </div>
             </div>
         );
-    };
+    }
 }
 
 export default AddCartonSide;

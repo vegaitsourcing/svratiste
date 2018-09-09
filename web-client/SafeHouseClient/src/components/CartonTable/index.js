@@ -10,7 +10,7 @@ import Pagination from '../Pagination';
 
 import AddCartonSide from '../AddCartonSide';
 import EditCartonSide from '../EditCartonSide';
-
+import AddDailyEntry from '../AddDailyEntry';
 
 class CartonTable extends Component {
     constructor(props) {
@@ -32,6 +32,7 @@ class CartonTable extends Component {
         this.onItemSelected = this.onItemSelected.bind(this);
         this.showAddSide = this.showAddSide.bind(this);
         this.evaluation = this.evaluation.bind(this);
+        this.showAddDailyEntry = this.showAddDailyEntry.bind(this);
 
         // pagination
         this.onPreviousClick = this.onPreviousClick.bind(this);
@@ -91,6 +92,10 @@ class CartonTable extends Component {
         this.setState({ showAddSide: true });
     }
 
+    showAddDailyEntry() {
+        this.setState({ showAddDailyEntry: true });
+    }
+
     onPreviousClick() {
         let { currentPage } = this.state;
         
@@ -126,7 +131,12 @@ class CartonTable extends Component {
 
                         </table>
                     </div>
-                    
+
+                    <button
+                        type="button" className="btn color-secondary"
+                        onClick={this.showAddDailyEntry}>
+                        Dodaj dnevni unos za gosta
+                    </button>
                     <button 
                         type="button" className="btn color-secondary"
                         onClick={this.showAddSide}>
@@ -154,6 +164,10 @@ class CartonTable extends Component {
                     open={this.state.showEditSide}
                     data={this.state.selectedRow}
                     pageNumber={this.state.currentPage} />}
+
+                {this.state.showAddDailyEntry && <AddDailyEntry
+                    open={this.state.showAddDailyEntry}
+                    />}
 
                 <div className="carton-table-edit">
                 </div>
