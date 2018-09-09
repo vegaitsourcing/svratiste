@@ -47,6 +47,12 @@ export function hideAddBar() {
     });
 }
 
+export function hideAddDailyEntryBar() {
+    dispatcher.dispatch({
+        type: "HIDE_ADD_DAILY_ENTRY_BAR"
+    });
+}
+
 export function hideEditBar() {
     dispatcher.dispatch({
         type: "HIDE_EDIT_BAR"

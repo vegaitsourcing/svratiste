@@ -29,6 +29,9 @@ class CardboardStore extends EventEmitter {
             case "HIDE_ADD_BAR":
                 this.emit("hide_add_bar");
                 break;
+            case "HIDE_ADD_DAILY_ENTRY_BAR":
+                this.emit("hide_add_daily_entry_bar");
+                break;
             case "HIDE_EDIT_BAR":
                 this.emit("hide_edit_bar");
                 break;

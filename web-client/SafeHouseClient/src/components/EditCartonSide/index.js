@@ -83,7 +83,8 @@ class EditCartonSide extends Component {
                                         name="firstName" type="text"
                                         value={this.state.firstName}
                                         onChange={this.handleInputChange}
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""} />
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -93,7 +94,8 @@ class EditCartonSide extends Component {
                                         name="lastName" type="text"
                                         value={this.state.lastName}
                                         onChange={this.handleInputChange}
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""} />
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -103,7 +105,8 @@ class EditCartonSide extends Component {
                                         name="nickname" type="text" 
                                         value={this.state.nickname}
                                         onChange={this.handleInputChange} 
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -112,7 +115,8 @@ class EditCartonSide extends Component {
                                     <select className="combobox" 
                                         name="gender" onChange={this.handleInputChange}
                                         value={this.state.gender}
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""}>
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required>
                                         <option></option>
                                         <option value="1">M</option>
                                         <option value="0">Ž</option>
@@ -126,7 +130,8 @@ class EditCartonSide extends Component {
                                         type="date" name="dateOfBirth"
                                         value={this.state.dateOfBirth}
                                         onChange={this.handleInputChange}
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -136,7 +141,8 @@ class EditCartonSide extends Component {
                                     name="addressStreetName" type="text"
                                     value={this.state.addressStreetName}
                                     onChange={this.handleInputChange}
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -146,7 +152,8 @@ class EditCartonSide extends Component {
                                         name="addressStreetNumber" type="text"
                                         value={this.state.addressStreetNumber}
                                         onChange={this.handleInputChange}
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -156,7 +163,8 @@ class EditCartonSide extends Component {
                                         name="fathersName" type="text"
                                         value={this.state.fathersName}
                                         onChange={this.handleInputChange}
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required/>
                                 </td>
                             </tr>
                             <tr>
@@ -166,7 +174,8 @@ class EditCartonSide extends Component {
                                         name="mothersName" type="text"
                                         value={this.state.mothersName}
                                         onChange={this.handleInputChange}
-                                        disabled={(this.state.disableEdit) ? "disabled" : ""}/>
+                                        disabled={(this.state.disableEdit) ? "disabled" : ""}
+                                        required/>
                                 </td>
                             </tr>
                         </tbody>
