@@ -25,7 +25,7 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]LoginCredentialsModel model)
+        public IActionResult Create([FromBody] LoginCredentialsModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -40,13 +40,13 @@ namespace SafeHouse.Api.Controllers
             }
 
             var token = new JwtTokenBuilder()
-                                .AddSecurityKey(JwtSecurityKey.Create(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Secret)))
-                                .AddSubject(userId.Value.ToString())
-                                .AddIssuer(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Issuer))
-                                .AddAudience(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Audience))
-                                .AddClaim(Common.Constants.SafeHouseUserIdClaimKey, userId.Value.ToString())
-                                .AddExpiry(10)
-                                .Build();
+                .AddSecurityKey(JwtSecurityKey.Create(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Secret)))
+                .AddSubject(userId.Value.ToString())
+                .AddIssuer(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Issuer))
+                .AddAudience(_configuration.GetValue<string>(Common.Constants.ConfigKeys.Audience))
+                .AddClaim(Common.Constants.SafeHouseUserIdClaimKey, userId.Value.ToString())
+                .AddExpiry(10)
+                .Build();
 
             return Ok(token.Value);
         }

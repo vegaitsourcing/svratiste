@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SafeHouse.Business.Helpers;
 using SafeHouse.Data;
 using SafeHouse.Infrastructure;
 
@@ -30,15 +31,13 @@ namespace SafeHouse.Api
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "../../web-client/SafeHouseClient/build";
+                configuration.RootPath = "./../../web-client/SafeHouseClient/build";
             });
 
-            services.AddCors(o => o.AddPolicy("SafeHouseCorsPolicy", builder =>
-            {
+            services.AddCors(setup => setup.AddPolicy("SafeHouseCorsPolicy", builder =>
                 builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+                .AllowAnyMethod()
+                .AllowAnyHeader()));
 
             services.AddAuthorizationServices(Configuration);
         }
@@ -55,7 +54,7 @@ namespace SafeHouse.Api
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-            
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
@@ -68,7 +67,7 @@ namespace SafeHouse.Api
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "../../web-client/SafeHouseClient";
+                spa.Options.SourcePath = "./../../web-client/SafeHouseClient";
 
                 if (env.IsDevelopment())
                 {
@@ -77,7 +76,6 @@ namespace SafeHouse.Api
             });
 
             app.UseCors("SafeHouseCorsPolicy");
-
             app.UseAuthentication();
 
             db.EnsureSeedData();
