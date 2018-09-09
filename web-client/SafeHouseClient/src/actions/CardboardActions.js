@@ -14,7 +14,8 @@ export function getCartons(page) {
 }
 
 export function getCartonsPageCount() {
-    axios.get(web_api_url + '/Carton').then((response) => {
+    axios.get(web_api_url + '/Carton/count').then((response) => {
+        console.log(response.data);
         dispatcher.dispatch({
             type: "FETCHED_PAGES_COUNT",
             payload: response.data

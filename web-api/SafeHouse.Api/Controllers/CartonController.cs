@@ -7,8 +7,7 @@ using System.Collections.Generic;
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Carton")]
-    public class CartonController : BaseController
+    public class CartonController : Controller
     {
         private ICartonService _cartonService;
 
@@ -18,18 +17,20 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<CartonDto> Get([FromQuery]int? page)
+        [Route("api/Carton/{pageNumber}")]
+        public IEnumerable<CartonDto> Get(int pageNumber)
         {
-            return _cartonService.Get(page);
+            return _cartonService.Get(pageNumber);
         }
 
-        [HttpGet("{id}")]
-        public CartonDto Get(Guid id)
-        {
-            return _cartonService.Get(id);
-        }
+        //[HttpGet("{id}")]
+        //public CartonDto Get(Guid id)
+        //{
+        //    return _cartonService.Get(id);
+        //}
 
         [HttpGet]
+        [Route("api/Carton/count")]
         public int GetCount()
         {
             return _cartonService.GetPageNumber();
