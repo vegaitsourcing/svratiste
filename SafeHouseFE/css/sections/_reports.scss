@@ -3,6 +3,23 @@
 .reports {
 	.table-position {
 		margin-top: 0;
+		overflow-y: scroll;
+		max-height: 780px;
+	}
+	.side-items {
+		&.side-items-create {
+			width: 0;
+			input {
+				max-width: 400px;
+				width: 100%;
+			}
+			.info {
+				&.info-content {
+					padding-left: 30px;
+					color: $primary;
+				}
+			}
+		}
 	}
 }
 .report {

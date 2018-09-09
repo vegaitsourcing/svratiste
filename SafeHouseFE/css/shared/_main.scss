@@ -1,6 +1,14 @@
 .table-position {
 	position: relative;
 	margin-top: 50px;
+	.table-details {
+		cursor: pointer;
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: rgba($primary, 0.6);
+		}
+	}
 	.combobox {
 		width: 400px;
 		height: 35px;
@@ -75,6 +83,8 @@
 		background-color: $white;
 		margin: 0 20px;
 		margin-top: 56px;
+		display: block;
+
 		.info {
 			font-weight: 700;
 		}
@@ -84,6 +94,9 @@
 		width: calc(100% - 40px);
 		background-color: $primary;
 		border: 0;
+		&:hover {
+			opacity: 0.6;
+		}
 	}
 }
 
