@@ -35,6 +35,7 @@ class CartonTable extends Component {
         this.showAddSide = this.showAddSide.bind(this);
         this.evaluation = this.evaluation.bind(this);
         this.showAddDailyEntry = this.showAddDailyEntry.bind(this);
+        this.redirectToLogin = this.redirectToLogin.bind(this);
 
         // pagination
         this.onPreviousClick = this.onPreviousClick.bind(this);
@@ -49,6 +50,7 @@ class CartonTable extends Component {
         CardboardStore.on("hide_add_bar", this.hideAddBar);
         CardboardStore.on("hide_edit_bar", this.hideEditBar);
         CardboardStore.on("hide_add_daily_entry_bar", this.hideAddDailyEntryBar);
+        CardboardStore.on("unauthorized", this.redirectToLogin);
     }
 
     componentDidMount() {
@@ -62,6 +64,12 @@ class CartonTable extends Component {
         CardboardStore.removeListener("hide_add_bar", this.hideAddBar);
         CardboardStore.removeListener("hide_edit_bar", this.hideEditBar);
         CardboardStore.removeListener("hide_add_daily_entry_bar", this.hideAddDailyEntryBar);
+        CardboardStore.removeListener("unauthorized", this.redirectToLogin);
+    }
+
+    redirectToLogin() {
+        localStorage.clear();
+        this.props.history.push('/login');
     }
 
     getCartons() {
