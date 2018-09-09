@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using SafeHouse.Api.Models;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
@@ -17,11 +18,10 @@ namespace SafeHouse.Api.Controllers
             _reportService = reportService;
         }
 
-        [HttpGet]
-        public ReportDataDto Get([FromQuery] DateTime from, [FromQuery] DateTime to, [FromQuery] string childName)
+        [HttpPost]
+        public IActionResult FindReportData([FromBody] ReportRequestDto request)
         {
-            return _reportService.GetReportData(from, to, childName);
+            return Ok(_reportService.GetReportData(request));
         }
-
     }
 }

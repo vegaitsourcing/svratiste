@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using SafeHouse.Data.Enums;
 
-namespace SafeHouse.Data.Entities 
+namespace SafeHouse.Data.Entities
 {
     public class DailyEntry : BaseEntity
     {
@@ -24,6 +24,7 @@ namespace SafeHouse.Data.Entities
 
         // Posredovanje u obezbeđivanju dostupnosti usluga u zajednici
         public MediationWritingEnum MediationWriting { get; set; }
+
         [MaxLength(512)]
         public string MediationWritingDescription { get; set; }
 

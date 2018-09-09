@@ -44,15 +44,18 @@ namespace SafeHouse.Business
         {
             var carton = _dbContext.Cartons.Find(evaluation.CartonId);
             var suitabilityItems = new List<SuitabilityItem>();
-
-            foreach(var ev in evaluation.Suitability.SuitabilityItems)
+            if(evaluation.Suitability != null)
             {
-                suitabilityItems.Add(new SuitabilityItem
+                foreach (var ev in evaluation.Suitability.SuitabilityItems)
                 {
-                    Description = ev.Description,
-                    SuitabilityCache = _dbContext.SuitabilityCaches.Find(ev.SuitabilityCache.Id)
-                });
+                    suitabilityItems.Add(new SuitabilityItem
+                    {
+                        Description = ev.Description,
+                        SuitabilityCache = _dbContext.SuitabilityCaches.Find(ev.SuitabilityCache.Id)
+                    });
+                }
             }
+            
 
             var newEvaluation = new FirstEvaluation
             {
@@ -82,11 +85,11 @@ namespace SafeHouse.Business
                 StartedEvaluation = evaluation.StartedEvaluation,
                 VerbalComunicationAbility = evaluation.VerbalComunicationAbility,
                 Carton = carton,
-                Suitability = new Suitability
+                Suitability = suitabilityItems.Any() ? new Suitability
                 {
                     Description = evaluation.Suitability.Description,
                     SuitabilityItems = suitabilityItems
-                }
+                } :null
             };
 
             _dbContext.FirstEvaluations.Add(newEvaluation);
@@ -128,34 +131,37 @@ namespace SafeHouse.Business
                 existingEvaluation.StartedEvaluation = evaluation.StartedEvaluation;
                 existingEvaluation.VerbalComunicationAbility = evaluation.VerbalComunicationAbility;
 
-				var listToDelete = new List<SuitabilityItem>();
-	            if (existingEvaluation.Suitability.SuitabilityItems.Any())
-	            {
-		            foreach (var item in existingEvaluation.Suitability.SuitabilityItems)
-		            {
-			            listToDelete.Add(item);
-		            }
-
-		            _dbContext.SuitabilityItems.RemoveRange(listToDelete);
-		            _dbContext.Suitabilities.Remove(existingEvaluation.Suitability);
-	            }
-
-				var suitabilityItems = new List<SuitabilityItem>();
-
-                foreach (var ev in evaluation.Suitability.SuitabilityItems)
+                var listToDelete = new List<SuitabilityItem>();
+                if (existingEvaluation.Suitability != null && existingEvaluation.Suitability.SuitabilityItems.Any())
                 {
-                    suitabilityItems.Add(new SuitabilityItem
+                    foreach (var item in existingEvaluation.Suitability.SuitabilityItems)
                     {
-                        Description = ev.Description,
-                        SuitabilityCache = _dbContext.SuitabilityCaches.Find(ev.SuitabilityCache.Id)
-                    });
-                }
+                        listToDelete.Add(item);
+                    }
 
-                existingEvaluation.Suitability = new Suitability
+                    _dbContext.SuitabilityItems.RemoveRange(listToDelete);
+                    _dbContext.Suitabilities.Remove(existingEvaluation.Suitability);
+                }
+                
+                var suitabilityItems = new List<SuitabilityItem>();
+
+                if(evaluation.Suitability != null)
                 {
-                    Description = evaluation.Suitability.Description,
-                    SuitabilityItems = suitabilityItems
-                };
+                    foreach (var ev in evaluation.Suitability.SuitabilityItems)
+                    {
+                        suitabilityItems.Add(new SuitabilityItem
+                        {
+                            Description = ev.Description,
+                            SuitabilityCache = _dbContext.SuitabilityCaches.Find(ev.SuitabilityCache.Id)
+                        });
+                    }
+
+                    existingEvaluation.Suitability = new Suitability
+                    {
+                        Description = evaluation.Suitability.Description,
+                        SuitabilityItems = suitabilityItems.Any()? suitabilityItems :null
+                    };
+                }
 
                 _dbContext.FirstEvaluations.Update(existingEvaluation);
                 _dbContext.SaveChanges();
