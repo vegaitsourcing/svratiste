@@ -2,8 +2,8 @@
 {
     public enum MediacalInterventionsEnum
     {
-        Intervention,
-        Consultancy,
-        Medications
+        Intervention = 1,
+        Consultancy = 2,
+        Medications = 4
     }
 }

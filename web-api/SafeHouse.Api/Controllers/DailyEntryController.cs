@@ -20,7 +20,7 @@ namespace SafeHouse.Api.Controllers
 
         [HttpPost]
         [Route("api/DailyEntry")]
-        public void Create([FromBody] DailyEntryDto newValue)
+        public void Create([FromBody]DailyEntryDto newValue)
         {
             try
             {

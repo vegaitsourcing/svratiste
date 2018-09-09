@@ -9,7 +9,7 @@ const TableData = ({ data, selectItem }) => {
                     <th scope="row">{ ++index }</th>
                     <td>{ row.firstName }</td>
                     <td>{ row.lastName }</td>
-                    <td className="notify notify-warning">{ row.notifications }</td>
+                    <td className="notify notify-warning">{ row.numberOfVisits }</td>
                 </tr>
             ))}
         </tbody>

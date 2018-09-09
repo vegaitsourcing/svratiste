@@ -20,8 +20,10 @@ namespace SafeHouse.Infrastructure
             services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<ISuitableItemService, SuitableItemService>();
             services.AddTransient<IIndividualPlanService, IndividualPlanService>();
+            services.AddTransient<IDailyEntryService, DailyEntryService>();
             services.AddSingleton<IGenderMapper, GenderMapper>();
             services.AddSingleton<ICartonMapper, CartonMapper>();
+            services.AddSingleton<IDailyEntryMapper, DailyEntryMapper>();
             services.AddSingleton<HashingHelper>();
             return services;
         }
