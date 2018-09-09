@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SafeHouse.Data.Entities 
+namespace SafeHouse.Data.Entities
 {
     public class Evaluation : BaseEntity
     {
         public Carton Carton { get; set; }
         public int Age { get; set; }
+
         [MaxLength(32)]
         public string FamilyMembers { get; set; }
 

@@ -11,10 +11,12 @@ namespace SafeHouse.Business
     public class AccountService : IAccountService
     {
         private readonly SafeHouseContext _dbContex;
+        private readonly HashingHelper _hashingHelper;
 
-        public AccountService(SafeHouseContext context)
+        public AccountService(SafeHouseContext context, HashingHelper hashingHelper)
         {
             _dbContex = context;
+            _hashingHelper = hashingHelper;
         }
 
         public Guid? GetUserIdIfCredentialsAreValid(CheckCredentialsRequest request)
@@ -24,7 +26,6 @@ namespace SafeHouse.Business
             return user == null ? null : (CheckIfPasswordIsCorrect(user.Password, request.Password) ? user.Id : (Guid?)null);
         }
 
-        private bool CheckIfPasswordIsCorrect(string userPassword, string enteredPassword) 
-            => HashingHelper.Verify(enteredPassword, userPassword);
+        private bool CheckIfPasswordIsCorrect(string userPassword, string enteredPassword) => _hashingHelper.Verify(enteredPassword, userPassword);
     }
 }

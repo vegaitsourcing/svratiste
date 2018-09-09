@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import * as CardboardActions from '../../actions/CardboardActions';
 import CardboardStore from '../../stores/CardboardStore';
@@ -16,25 +17,9 @@ class CartonTable extends Component {
         super(props);
 
         this.state = {
-            catons: [
-                { 
-                    Id: '',
-                    FirstName: 'Mark',
-                    LastName: 'Otto',
-                    Nickname: 'otot',
-                    Gender: '1',
-                    DateOfBirth: '2018-09-13',
-                    AddressStreetName: 'test',
-                    AddressStreetNumber: '22',
-                    FathersName: 'tata',
-                    MothersName: 'Mama',
-                    notifications: '2'
-                },
-                { FirstName: 'Jacob', LastName: 'Thornton', notifications: '2' },
-                { FirstName: 'Larry', LastName: 'the Bird', notifications: '1' }
-            ],
-            currentPage: 5,
-            totalPages: 5,
+            catons: [],
+            currentPage: 1,
+            totalPages: 0,
             selectedRow: {},
             showAddSide: false,
             showEditSide: false
@@ -46,11 +31,13 @@ class CartonTable extends Component {
 
         this.onItemSelected = this.onItemSelected.bind(this);
         this.showAddSide = this.showAddSide.bind(this);
+        this.evaluation = this.evaluation.bind(this);
 
         // pagination
         this.onPreviousClick = this.onPreviousClick.bind(this);
         this.onPageClick = this.onPageClick.bind(this);
         this.onNextClick = this.onNextClick.bind(this);
+        this.getNumOfPages = this.getNumOfPages.bind(this);
     }
 
     componentWillMount() {
@@ -61,7 +48,8 @@ class CartonTable extends Component {
     }
 
     componentDidMount() {
-        //CardboardActions.getCartons(1);
+        CardboardActions.getCartonsPageCount();
+        CardboardActions.getCartons(1);
     }
 
     componentWillUnmount() {
@@ -75,6 +63,12 @@ class CartonTable extends Component {
         this.setState({
             catons: CardboardStore.getAll()
         });
+    }
+
+    evaluation() {
+        if (this.state.selectedRow.id) {
+            this.props.history.push('/evaluation/' + this.state.selectedRow.id);
+        }
     }
 
     getNumOfPages() {
@@ -134,9 +128,14 @@ class CartonTable extends Component {
                     </div>
                     
                     <button 
+                        type="button" className="btn color-secondary"
+                        onClick={this.showAddSide}>
+                        Dodaj karton
+                    </button>
+                    <button 
                         type="button" className="btn btn-info btn-inverse"
-                        onClick={this.showAddSide} >
-                        Dodaj
+                        onClick={this.evaluation} >
+                        Procena
                     </button>
 
                     <Pagination 
@@ -160,4 +159,4 @@ class CartonTable extends Component {
     };
 }
 
-export default CartonTable;
+export default withRouter(CartonTable);

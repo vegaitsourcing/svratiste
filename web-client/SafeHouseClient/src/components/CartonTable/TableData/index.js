@@ -7,8 +7,8 @@ const TableData = ({ data, selectItem }) => {
             {data.map((row, index) => (
                 <tr key={ index } onClick={() => selectItem(row)}>
                     <th scope="row">{ ++index }</th>
-                    <td>{ row.FirstName }</td>
-                    <td>{ row.LastName }</td>
+                    <td>{ row.firstName }</td>
+                    <td>{ row.lastName }</td>
                     <td className="notify notify-warning">{ row.notifications }</td>
                 </tr>
             ))}

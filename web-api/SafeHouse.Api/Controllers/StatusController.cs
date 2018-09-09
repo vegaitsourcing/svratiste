@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-
 namespace SafeHouse.Api.Controllers
 {
     [Route("api/Status")]
-    public class StatusController : BaseController
+    public class StatusController : Controller
     {
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(SafeHouseUserId);
+            return Ok("I'm alive");
         }
     }
 }

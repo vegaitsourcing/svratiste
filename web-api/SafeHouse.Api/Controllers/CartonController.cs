@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SafeHouse.Business.Contracts;
-using SafeHouse.Data.Entities;
+using SafeHouse.Business.Contracts.Models;
 using System;
 using System.Collections.Generic;
 
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Carton")]
-    public class CartonController : BaseController
+    public class CartonController : Controller
     {
         private ICartonService _cartonService;
 
@@ -17,26 +16,28 @@ namespace SafeHouse.Api.Controllers
             _cartonService = cartonService;
         }
 
-        [HttpGet("{page}")]
-        public IEnumerable<Carton> Get(int? page)
+        [HttpGet]
+        [Route("api/Carton/{pageNumber}")]
+        public IEnumerable<CartonDto> Get(int pageNumber)
         {
-            return _cartonService.Get(page);
+            return _cartonService.Get(pageNumber);
         }
 
-        [HttpGet("{id}")]
-        public Carton Get(Guid id)
-        {
-            return _cartonService.Get(id);
-        }
+        //[HttpGet("{id}")]
+        //public CartonDto Get(Guid id)
+        //{
+        //    return _cartonService.Get(id);
+        //}
 
-        [HttpGet("{pagenumber}")]
+        [HttpGet]
+        [Route("api/Carton/count")]
         public int GetCount()
         {
             return _cartonService.GetPageNumber();
         }
 
         [HttpPost]
-        public void Create([FromBody]Carton newValue)
+        public void Create([FromBody]CartonDto newValue)
         {
             try
             {
@@ -49,8 +50,9 @@ namespace SafeHouse.Api.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public void Update([FromBody]Carton newValue)
+        [HttpPut]
+        [Route("api/Carton")]
+        public void Update([FromBody]CartonDto newValue)
         {
             try
             {

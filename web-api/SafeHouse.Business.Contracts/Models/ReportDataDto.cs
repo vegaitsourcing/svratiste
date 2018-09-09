@@ -1,6 +1,6 @@
 ﻿namespace SafeHouse.Business.Contracts.Models
 {
-    public class ReportData
+    public class ReportDataDto
     {
         public int GuestsCount { get; set; }
         public int VisitsCount { get; set; }
