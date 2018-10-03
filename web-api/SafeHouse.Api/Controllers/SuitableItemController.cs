@@ -3,8 +3,6 @@ using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
 using System.Collections.Generic;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]

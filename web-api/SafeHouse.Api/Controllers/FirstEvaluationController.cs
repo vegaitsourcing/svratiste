@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SafeHouse.Api.Models;
 using SafeHouse.Business.Contracts;
-using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
 using System;
 
@@ -11,11 +11,13 @@ namespace SafeHouse.Api.Controllers
     [Route("api/FirstEvaluation")]
     public class FirstEvaluationController : BaseController
     {
-        private IFirstEvaluationService _firstEvaluationService;
+        private readonly IFirstEvaluationService _firstEvaluationService;
+        private readonly ILogger _logger;
 
-        public FirstEvaluationController(IFirstEvaluationService firstEvaluationService)
+        public FirstEvaluationController(IFirstEvaluationService firstEvaluationService, ILogger<FirstEvaluation> logger)
         {
             _firstEvaluationService = firstEvaluationService;
+            _logger = logger;
         }
 
         // Pass Carton Id into this one!
@@ -26,16 +28,18 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody]CreateFirstEvaluationModel newValue)
+        public IActionResult Create([FromBody]CreateFirstEvaluationModel newValue)
         {
             try
             {
                 _firstEvaluationService.AddOrUpdate(newValue.ToCreateFirstEvaluationRequest());
+
+                return HandleSuccessResult();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogError("Error occured while creating new record.", e);
+                return HandleErrorResult();
             }
         }
     }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SafeHouse.Data;
 using SafeHouse.Infrastructure;
 
@@ -31,7 +32,7 @@ namespace SafeHouse.Api
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "./../../web-client/SafeHouseClient/build";
+                configuration.RootPath = "./../../web-client/SafeHouseClient/src";
             });
 
             services.AddCors(o => o.AddPolicy("SafeHouseCorsPolicy", builder =>
@@ -45,7 +46,7 @@ namespace SafeHouse.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SafeHouseContext db)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SafeHouseContext db, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -57,6 +58,7 @@ namespace SafeHouse.Api
                 app.UseHsts();
             }
 
+            loggerFactory.AddFile("Logs/safeHouse-{Date}.txt");
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 

@@ -19,7 +19,6 @@ namespace SafeHouse.Business.Contracts.Models
         public bool EvaluationDone { get; set; }
         public bool IndividualPlanDone { get; set; }
         public bool IndividualPlanRevised { get; set; }
-
         public int Notifications { get; set; }
     }
 }

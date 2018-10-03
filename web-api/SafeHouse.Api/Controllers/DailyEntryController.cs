@@ -1,35 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
     public class DailyEntryController : BaseController
     {
-        private IDailyEntryService _dailyEntryService;
+        private readonly IDailyEntryService _dailyEntryService;
+        private readonly ILogger _logger;
 
-        public DailyEntryController(IDailyEntryService dailyEntryService)
+        public DailyEntryController(IDailyEntryService dailyEntryService, ILogger<DailyEntryController> logger)
         {
             _dailyEntryService = dailyEntryService;
+            _logger = logger;
         }
 
         [HttpPost]
         [Route("api/DailyEntry")]
-        public void Create([FromBody]DailyEntryDto newValue)
+        public IActionResult Create([FromBody]DailyEntryDto newValue)
         {
             try
             {
                 _dailyEntryService.Add(newValue);
+                return HandleSuccessResult();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogError("Error occured while adding new entity", e);
+                return HandleErrorResult();
             }
         }
     }

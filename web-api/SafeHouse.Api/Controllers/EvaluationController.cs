@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
@@ -10,11 +11,13 @@ namespace SafeHouse.Api.Controllers
     [Route("api/Evaluation")]
     public class EvaluationController : BaseController
     {
-        private IEvaluationService _evaluationService;
+        private readonly IEvaluationService _evaluationService;
+        private readonly ILogger _logger;
 
-        public EvaluationController(IEvaluationService evaluationService)
+        public EvaluationController(IEvaluationService evaluationService, ILogger<Evaluation> logger)
         {
             _evaluationService = evaluationService;
+            _logger = logger;
         }
 
         // Pass Carton Id into this one!
@@ -25,16 +28,17 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody]CreateEvaluationRequest model)
+        public IActionResult Create([FromBody]CreateEvaluationRequest model)
         {
             try
             {
                 _evaluationService.AddOrUpdate(model);
+                return HandleSuccessResult();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogError("Error occured while adding new entity.", e);
+                return HandleErrorResult();
             }
         }
     }

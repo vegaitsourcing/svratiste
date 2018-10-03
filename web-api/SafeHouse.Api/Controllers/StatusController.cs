@@ -8,7 +8,7 @@ namespace SafeHouse.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("I'm alive");
+            return Ok("Everything is running correctly!");
         }
     }
 }

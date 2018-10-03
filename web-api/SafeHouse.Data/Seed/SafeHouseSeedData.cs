@@ -19,11 +19,9 @@ namespace SafeHouse.Api
                 db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Prodaje seksualne usluge" });
                 db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Prodaje na pijaci/ulici" });
                 db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Pomaze porodici u radu na ulici" });
-                db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Pomaze porodici u radu na ulici" });
                 db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Ekstremno siromasna porodica, postoji rizik za dete" });
                 db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Drugo" });
             }
-
             if (!db.SafeHouseUsers.Any())
             {
                 db.SafeHouseUsers.Add(new SafeHouseUser

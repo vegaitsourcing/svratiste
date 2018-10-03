@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -48,7 +47,7 @@ namespace SafeHouse.Api.Controllers
                 .AddExpiry(100)
                 .Build();
 
-            return Ok(token.Value);
+            return Ok(new { Token = token.Value });
         }
 
     }

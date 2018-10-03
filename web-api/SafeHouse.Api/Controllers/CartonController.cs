@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
 
@@ -9,11 +10,13 @@ namespace SafeHouse.Api.Controllers
     [Produces("application/json")]
     public class CartonController : BaseController
     {
-        private ICartonService _cartonService;
+        private readonly ICartonService _cartonService;
+        private readonly ILogger _logger;
 
-        public CartonController(ICartonService cartonService)
+        public CartonController(ICartonService cartonService, ILogger<CartonController> logger)
         {
             _cartonService = cartonService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -32,31 +35,35 @@ namespace SafeHouse.Api.Controllers
 
         [HttpPost]
         [Route("api/Carton")]
-        public void Create([FromBody] CartonDto newValue)
+        public IActionResult Create([FromBody] CartonDto newValue)
         {
             try
             {
                 _cartonService.Add(newValue);
+
+                return HandleSuccessResult();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogError("Error occured while adding new entity.", e);
+                return HandleErrorResult();
             }
         }
 
         [HttpPut]
         [Route("api/Carton")]
-        public void Update([FromBody] CartonDto newValue)
+        public IActionResult Update([FromBody] CartonDto newValue)
         {
             try
             {
                 _cartonService.Update(newValue);
+
+                return HandleSuccessResult();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogError("Error occured while updating entity.", e);
+                return HandleErrorResult();
             }
         }
     }
