@@ -38,7 +38,7 @@ namespace SafeHouse.Business
                     .Count(d => d.Carton.Gender == Gender.Female),
                 MaleGuestsCount = dailyEntriesInDatesRange.Where(d => d.Carton != null && d.Stay)
                     .Count(d => d.Carton.Gender == Gender.Male),
-                MealCount = dailyEntriesInDatesRange.Sum(d => d.Meal),
+                //MealCount = dailyEntriesInDatesRange.Sum(d => d.Meal),
                 BathsCount = dailyEntriesInDatesRange.Count(d => d.Bath),
                 LiecesRemovedCount = dailyEntriesInDatesRange.Count(d => d.LiecesRemoval),
                 ClothingSumCount = dailyEntriesInDatesRange.Sum(d => d.Clothing),

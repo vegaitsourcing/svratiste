@@ -8,69 +8,75 @@ namespace SafeHouse.Data.Entities
         public Carton Carton { get; set; }
 
         [MaxLength(512)]
-        public String OtherChildernName { get; set; }
+        public string OtherChildernName { get; set; }
 
         [MaxLength(512)]
-        public String OtherMembersName { get; set; }
+        public string OtherMembersName { get; set; }
 
         [MaxLength(512)]
-        public String GuardiansName { get; set; }
+        public string GuardiansName { get; set; }
 
         [MaxLength(128)]
-        public String LivingSpace { get; set; }
+        public string LivingSpace { get; set; }
 
         [MaxLength(512)]
-        public String SchoolAndGrade { get; set; }
+        public string SchoolAndGrade { get; set; }
 
         [MaxLength(256)]
-        public String Languages { get; set; }
+        public string Languages { get; set; }
+
         public bool HealthCard { get; set; }
 
         [MaxLength(256)]
-        public String CaseLeaderName { get; set; }
-        public Suitability Suitability { get; set;}
+        public string CaseLeaderName { get; set; }
+
+        public Suitability Suitability { get; set; }
 
         public bool Capability { get; set; }
+
         public bool OnTheWaitingList { get; set; }
+
         public DateTime ServiceStart { get; set; }
 
         [MaxLength(512)]
-        public String DirectedToName { get; set; }
+        public string DirectedToName { get; set; }
+
         //Procena Sposobnosti
         [MaxLength(512)]
-        public String IndividualMovementAbility { get; set; }
+        public string IndividualMovementAbility { get; set; }
 
         [MaxLength(512)]
-        public String VerbalComunicationAbility { get; set; }
+        public string VerbalComunicationAbility { get; set; }
 
         [MaxLength(512)]
-        public String PhysicalDescription { get; set; }
+        public string PhysicalDescription { get; set; }
 
         [MaxLength(512)]
-        public String DiagnosedDisease { get; set; }
+        public string DiagnosedDisease { get; set; }
 
         [MaxLength(512)]
-        public String PriorityNeeds { get; set; }
+        public string PriorityNeeds { get; set; }
 
         [MaxLength(512)]
-        public String Attitude { get; set; }
+        public string Attitude { get; set; }
 
         [MaxLength(512)]
-        public String Expectations { get; set; }
+        public string Expectations { get; set; }
 
         [MaxLength(512)]
-        public String DirectedFromName { get; set; }
+        public string DirectedFromName { get; set; }
 
         [MaxLength(512)]
-        public String Other { get; set; }
+        public string Other { get; set; }
 
         public DateTime StartedEvaluation { get; set; }
+
         public DateTime FinishedEvaluation { get; set; }
 
         [MaxLength(256)]
-        public String EvaluationDoneBy { get; set; }
+        public string EvaluationDoneBy { get; set; }
 
         [MaxLength(256)]
-        public String EvaluationRevisedBy { get; set; }
+        public string EvaluationRevisedBy { get; set; }
     }
 }

@@ -27,19 +27,19 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/Carton/count")]
-        public int GetCount()
+        [Route("api/Carton/pageCount")]
+        public int GetPageCount()
         {
             return _cartonService.GetPageNumber();
         }
 
         [HttpPost]
         [Route("api/Carton")]
-        public IActionResult Create([FromBody] CartonDto newValue)
+        public IActionResult Create([FromBody] CartonDto carton)
         {
             try
             {
-                _cartonService.Add(newValue);
+                _cartonService.Add(carton);
 
                 return HandleSuccessResult();
             }
@@ -52,11 +52,11 @@ namespace SafeHouse.Api.Controllers
 
         [HttpPut]
         [Route("api/Carton")]
-        public IActionResult Update([FromBody] CartonDto newValue)
+        public IActionResult Update([FromBody] CartonDto carton)
         {
             try
             {
-                _cartonService.Update(newValue);
+                _cartonService.Update(carton);
 
                 return HandleSuccessResult();
             }

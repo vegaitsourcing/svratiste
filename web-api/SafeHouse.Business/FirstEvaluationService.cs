@@ -44,7 +44,7 @@ namespace SafeHouse.Business
         {
             var carton = _dbContext.Cartons.Find(evaluation.CartonId);
             var suitabilityItems = new List<SuitabilityItem>();
-            if(evaluation.Suitability != null)
+            if (evaluation.Suitability != null)
             {
                 foreach (var ev in evaluation.Suitability.SuitabilityItems)
                 {
@@ -55,7 +55,6 @@ namespace SafeHouse.Business
                     });
                 }
             }
-            
 
             var newEvaluation = new FirstEvaluation
             {
@@ -89,7 +88,7 @@ namespace SafeHouse.Business
                 {
                     Description = evaluation.Suitability.Description,
                     SuitabilityItems = suitabilityItems
-                } :null
+                } : null
             };
 
             _dbContext.FirstEvaluations.Add(newEvaluation);
@@ -103,7 +102,7 @@ namespace SafeHouse.Business
                 .ThenInclude(x => x.SuitabilityItems)
                 .FirstOrDefault(x => x.Id == evaluation.Id);
 
-            if(existingEvaluation != null)
+            if (existingEvaluation != null)
             {
                 existingEvaluation.Attitude = evaluation.Attitude;
                 existingEvaluation.Capability = evaluation.Capability;
@@ -142,10 +141,10 @@ namespace SafeHouse.Business
                     _dbContext.SuitabilityItems.RemoveRange(listToDelete);
                     _dbContext.Suitabilities.Remove(existingEvaluation.Suitability);
                 }
-                
+
                 var suitabilityItems = new List<SuitabilityItem>();
 
-                if(evaluation.Suitability != null)
+                if (evaluation.Suitability != null)
                 {
                     foreach (var ev in evaluation.Suitability.SuitabilityItems)
                     {
@@ -159,7 +158,7 @@ namespace SafeHouse.Business
                     existingEvaluation.Suitability = new Suitability
                     {
                         Description = evaluation.Suitability.Description,
-                        SuitabilityItems = suitabilityItems.Any()? suitabilityItems :null
+                        SuitabilityItems = suitabilityItems.Any() ? suitabilityItems : null
                     };
                 }
 

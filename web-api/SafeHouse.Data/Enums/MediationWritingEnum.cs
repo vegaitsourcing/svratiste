@@ -5,11 +5,12 @@ namespace SafeHouse.Data.Enums
     [Flags]
     public enum MediationWritingEnum
     {
-        SocialCentar = 1,
-        EdicationalCentar = 2,
-        HealthCentar = 4,
-        CivilCentar = 8,
-        Police = 16,
-        Rest = 32,
+        None = 0,
+        SocialCentar = 1 << 0,
+        EdicationalCentar = 1 << 1,
+        HealthCentar = 1 << 2,
+        CivilCentar = 1 << 3,
+        Police = 1 << 4,
+        Rest = 1 << 5,
     }
 }

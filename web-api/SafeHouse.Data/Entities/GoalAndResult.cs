@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SafeHouse.Data.Entities 
+namespace SafeHouse.Data.Entities
 {
-    public class GoalAndResult: BaseEntity
+    public class GoalAndResult : BaseEntity
     {
         [MaxLength(100)]
         public string Goal { get; set; }

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using SafeHouse.Data.Enums;
 
-namespace SafeHouse.Data.Entities 
+namespace SafeHouse.Data.Entities
 {
     public class Carton : BaseEntity
     {
@@ -16,8 +16,11 @@ namespace SafeHouse.Data.Entities
 
         [MaxLength(32)]
         public string Nickname { get; set; }
+
         public Gender Gender { get; set; }
+
         public DateTime DateOfBirth { get; set; }
+
         public int NumberOfVisits { get; set; }
 
         [MaxLength(100)]
@@ -27,14 +30,17 @@ namespace SafeHouse.Data.Entities
         public string AddressStreetNumber { get; set; }
 
         [MaxLength(32)]
-        public string FathersName {get; set;}
+        public string FathersName { get; set; }
 
         [MaxLength(32)]
         public string MothersName { get; set; }
-        public bool InitialEvaluationDone {get; set;}
-        public bool EvaluationDone {get; set;}
-        public bool IndividualPlanDone {get; set;}
-        public bool IndividualPlanRevised {get; set;}
 
+        public bool InitialEvaluationDone { get; set; }
+
+        public bool EvaluationDone { get; set; }
+
+        public bool IndividualPlanDone { get; set; }
+
+        public bool IndividualPlanRevised { get; set; }
     }
 }

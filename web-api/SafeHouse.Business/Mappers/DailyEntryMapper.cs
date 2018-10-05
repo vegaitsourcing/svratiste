@@ -1,6 +1,7 @@
 ﻿using SafeHouse.Business.Contracts.Mappers;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
+using SafeHouse.Data.Enums;
 using System;
 
 namespace SafeHouse.Business.Mappers
@@ -9,9 +10,9 @@ namespace SafeHouse.Business.Mappers
     {
         public DailyEntry ToEntity(DailyEntryDto dto, Carton carton)
         {
-            var meal = dto.Breakfast ? 1 : 0;
-            meal |= dto.Lunch ? 2 : 1;
-            meal |= dto.Diner ? 4 : 1;
+            var meal = dto.Breakfast ? Meal.Breakfast : 0;
+                meal |= dto.Lunch ? Meal.Lunch : 0;
+                meal |= dto.Diner ? Meal.Dinner : 0;
 
             return new DailyEntry()
             {
@@ -30,7 +31,7 @@ namespace SafeHouse.Business.Mappers
                 MedicalInterventions = dto.MedicalInterventions,
                 ParentsContact = dto.ParentsContact,
                 PsihosocialSupport = dto.PsihosocialSupport,
-                Stay = dto.Stay,
+                Stay = dto.Stay
             };
         }
 

@@ -5,9 +5,10 @@ namespace SafeHouse.Data.Enums
     [Flags]
     public enum MediationSpeakingEnum
     {
-        SocialCentar = 1,
-        HealthCentar = 2,
-        Police = 4,
-        Rest = 8
+        None = 0,
+        SocialCentar = 1 << 0,
+        HealthCentar = 1 << 1,
+        Police = 1 << 2,
+        Rest = 1 << 3
     }
 }

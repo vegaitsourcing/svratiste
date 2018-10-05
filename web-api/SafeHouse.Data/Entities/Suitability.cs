@@ -7,7 +7,7 @@ namespace SafeHouse.Data.Entities
     {
         [MaxLength(1024)]
         public string Description { get; set; }
-        
+
         public ICollection<SuitabilityItem> SuitabilityItems { get; set; }
     }
 }

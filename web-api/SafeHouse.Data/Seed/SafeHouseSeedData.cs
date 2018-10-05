@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Data;
 using SafeHouse.Data.Entities;
+using SafeHouse.Data.Enums;
 
 namespace SafeHouse.Api
 {
@@ -21,6 +20,13 @@ namespace SafeHouse.Api
                 db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Pomaze porodici u radu na ulici" });
                 db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Ekstremno siromasna porodica, postoji rizik za dete" });
                 db.SuitabilityCaches.Add(new SuitabilityCache { Name = "Drugo" });
+            }
+            if (!db.LifeSkills.Any())
+            {
+                foreach (LifeSkillEnum lifeSkill in (LifeSkillEnum[])Enum.GetValues(typeof(LifeSkillEnum)))
+                {
+                    db.LifeSkills.Add(new LifeSkill { LifeSkillType = lifeSkill, IsGroupSkill = false });
+                }
             }
             if (!db.SafeHouseUsers.Any())
             {

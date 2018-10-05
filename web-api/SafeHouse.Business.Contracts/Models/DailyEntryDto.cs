@@ -1,11 +1,13 @@
 ﻿using SafeHouse.Data.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace SafeHouse.Business.Contracts.Models
 {
     public class DailyEntryDto
     {
-        public Guid CartonGuid { get; set; }
+        public Guid Id { get; set; }
+        public Guid CartonId { get; set; }
         public bool Stay { get; set; }
 
         public bool Breakfast { get; set; }
@@ -23,15 +25,19 @@ namespace SafeHouse.Business.Contracts.Models
         public string MediationSpeakingDescription { get; set; }
 
         //LifeSkill
+        public LifeSkillEnum LifeSkills { get; set; }
         //Workshops
+        public ICollection<WorkshopDto> Workshops { get; set; }
         //School
+        public SchoolActivityEnum SchoolAcivities { get; set; }
 
         public bool PsihosocialSupport { get; set; }
         public string ParentsContact { get; set; }
 
-        public MediacalInterventionsEnum MedicalInterventions { get; set; }
+        public MedicalInterventionsEnum MedicalInterventions { get; set; }
 
         public DateTime Arrival { get; set; }
+
         public DateTime Departure { get; set; }
     }
 }

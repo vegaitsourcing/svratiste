@@ -6,8 +6,8 @@ namespace SafeHouse.Data.Enums
     public enum MedicalInterventionsEnum
     {
         None = 0,
-        Intervention = 1,
-        Consultancy = 2,
-        Medications = 4
+        Intervention = 1 << 0,
+        Consultancy = 1 << 1,
+        Medications = 1 << 2
     }
 }

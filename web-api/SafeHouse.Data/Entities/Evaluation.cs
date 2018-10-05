@@ -6,6 +6,7 @@ namespace SafeHouse.Data.Entities
     public class Evaluation : BaseEntity
     {
         public Carton Carton { get; set; }
+
         public int Age { get; set; }
 
         [MaxLength(32)]
@@ -76,6 +77,7 @@ namespace SafeHouse.Data.Entities
 
         [MaxLength(512)]
         public string EvaluationDoneBy { get; set; }
+
         public DateTime Date { get; set; }
     }
 }

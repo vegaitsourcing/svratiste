@@ -20,11 +20,11 @@ namespace SafeHouse.Api.Controllers
 
         [HttpPost]
         [Route("api/DailyEntry")]
-        public IActionResult Create([FromBody]DailyEntryDto newValue)
+        public IActionResult Create([FromBody]DailyEntryDto dailyEntry)
         {
             try
             {
-                _dailyEntryService.Add(newValue);
+                _dailyEntryService.Add(dailyEntry);
                 return HandleSuccessResult();
             }
             catch (Exception e)

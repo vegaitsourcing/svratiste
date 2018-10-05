@@ -5,9 +5,10 @@ namespace SafeHouse.Data.Enums
     [Flags]
     public enum SchoolActivityEnum
     {
-        Homework = 1,
-        Practice = 2,
-        Studing = 4,
-        Specific = 8
+        None = 0,
+        Homework = 1 << 0,
+        Practice = 1 << 1,
+        Studing = 1 << 2,
+        Specific = 1 << 3
     }
 }

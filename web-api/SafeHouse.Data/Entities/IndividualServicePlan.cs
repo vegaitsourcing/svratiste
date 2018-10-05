@@ -12,7 +12,9 @@ namespace SafeHouse.Data.Entities
 
         [MaxLength(32)]
         public string DedicatedWorker { get; set; }
+
         public DateTime Date { get; set; }
+
         public DateTime TimeLimitForNextAppointment { get; set; }
     }
 }
