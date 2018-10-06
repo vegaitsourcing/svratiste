@@ -25,7 +25,7 @@ export function getCartons(page) {
 }
 
 export function getCartonsPageCount() {
-    axios.get(web_api_url + '/Carton/count',
+    axios.get(web_api_url + '/Carton/pageCount',
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
         }).then((response) => {

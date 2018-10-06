@@ -17,7 +17,7 @@ class LoginStore extends EventEmitter {
     handleActions(action) {
         switch(action.type) {
             case "FETCHED_TOKEN":
-                localStorage.setItem('accessToken', action.payload);
+                localStorage.setItem('accessToken', action.payload.token);
                 this.emit("fetched_token");
                 break;
             default:

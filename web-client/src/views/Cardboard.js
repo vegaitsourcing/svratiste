@@ -7,7 +7,6 @@ class Cardboard extends Component {
         return (
             <div>
                 <CartonTable />
-                
             </div>
         );
     };
