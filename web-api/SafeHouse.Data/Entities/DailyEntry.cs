@@ -14,7 +14,7 @@ namespace SafeHouse.Data.Entities
         public bool Stay { get; set; }
 
         // Obezbeđenje obroka za korisnike
-        public Meal Meal { get; set; }
+        public MealEnum Meal { get; set; }
 
         // Obezbeđenje uslova za održavanje lične higijene
         public bool Bath { get; set; }

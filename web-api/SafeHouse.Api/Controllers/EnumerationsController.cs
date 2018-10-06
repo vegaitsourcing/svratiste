@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SafeHouse.Api.Models;
 using SafeHouse.Data.Enums;
@@ -52,10 +49,12 @@ namespace SafeHouse.Api.Controllers
         private ICollection<NameValueModel> EnumToNameValueList<T>()
         {
             var result = new List<NameValueModel> { };
+
             foreach (var type in Enum.GetValues(typeof(T)))
             {
                 result.Add(new NameValueModel { Value = (int)type, Name = ((T)type).ToString() });
             }
+
             return result;
         }
     }

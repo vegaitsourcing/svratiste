@@ -1,5 +1,4 @@
-﻿using System;
-using SafeHouse.Business.Contracts.Models;
+﻿using SafeHouse.Business.Contracts.Models;
 
 namespace SafeHouse.Business.Contracts
 {

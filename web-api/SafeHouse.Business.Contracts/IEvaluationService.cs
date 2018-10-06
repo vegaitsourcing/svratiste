@@ -7,6 +7,7 @@ namespace SafeHouse.Business.Contracts
     public interface IEvaluationService
     {
         Evaluation GetByCartonId(Guid id);
+
         void AddOrUpdate(CreateEvaluationRequest evaluation);
     }
 }

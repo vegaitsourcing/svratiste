@@ -3,7 +3,7 @@ using System;
 namespace SafeHouse.Data.Enums
 {
     [Flags]
-    public enum Meal
+    public enum MealEnum
     {
         None = 0,
         Breakfast = 1 << 0,

@@ -78,7 +78,7 @@ namespace SafeHouse.Business
         {
             var existingEvaluation = _dbContext.Evaluations.Find(evaluation.Id);
 
-            if(existingEvaluation != null)
+            if (existingEvaluation != null)
             {
                 existingEvaluation.AdvicedLevelOfSupport = evaluation.AdvicedLevelOfSupport;
                 existingEvaluation.Age = evaluation.Age;
@@ -106,7 +106,6 @@ namespace SafeHouse.Business
                 existingEvaluation.SurroundRisks = evaluation.SurroundRisks;
                 existingEvaluation.SurroundStrenghts = evaluation.SurroundStrenghts;
             }
-            
 
             _dbContext.Evaluations.Update(existingEvaluation);
             _dbContext.SaveChanges();

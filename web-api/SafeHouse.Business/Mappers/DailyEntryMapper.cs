@@ -10,9 +10,9 @@ namespace SafeHouse.Business.Mappers
     {
         public DailyEntry ToEntity(DailyEntryDto dto, Carton carton)
         {
-            var meal = dto.Breakfast ? Meal.Breakfast : 0;
-                meal |= dto.Lunch ? Meal.Lunch : 0;
-                meal |= dto.Diner ? Meal.Dinner : 0;
+            var meal = dto.Breakfast ? MealEnum.Breakfast : 0;
+            meal |= dto.Lunch ? MealEnum.Lunch : 0;
+            meal |= dto.Diner ? MealEnum.Dinner : 0;
 
             return new DailyEntry()
             {
