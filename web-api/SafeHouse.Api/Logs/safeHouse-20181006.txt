@@ -5556,3 +5556,81 @@ OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
 2018-10-06T11:47:25.3006714+02:00 0HLHBDMVBKB1P:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44385/sockjs-node/784/feem1uqu/websocket   (ca22a1cb)
 2018-10-06T11:47:25.9434452+02:00 0HLHBDMVBKB1O:00000007 [INF] Request starting HTTP/1.1 POST http://localhost:44385/sockjs-node/784/jpgvmyf2/xhr_streaming?t=1538819245938  0 (ca22a1cb)
 2018-10-06T11:47:48.7334126+02:00 0HLHBDMVBKB1M:00000007 [INF] Request finished in 25024.7695ms 200 application/javascript; charset=UTF-8 (791a596a)
+2018-10-06T11:51:16.9139322+02:00 0HLHBDMVBKB1Q:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44385/api/Enumerations/WorkshopTypes   (ca22a1cb)
+2018-10-06T11:51:16.9175181+02:00 0HLHBDMVBKB1Q:00000001 [INF] Failed to validate the token. (616bef97)
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '10/05/2018 23:39:56', Current time: '10/06/2018 09:51:16'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2018-10-06T11:51:16.9179202+02:00 0HLHBDMVBKB1Q:00000001 [INF] "Bearer" was not authenticated. Failure message: "IDX10223: Lifetime validation failed. The token is expired. ValidTo: '10/05/2018 23:39:56', Current time: '10/06/2018 09:51:16'." (48071232)
+2018-10-06T11:51:16.9199884+02:00 0HLHBDMVBKB1Q:00000001 [INF] Route matched with "{action = \"GetWorkshopTypes\", controller = \"Enumerations\", page = \"\"}". Executing action "SafeHouse.Api.Controllers.EnumerationsController.GetWorkshopTypes (SafeHouse.Api)" (a44c0341)
+2018-10-06T11:51:16.9201780+02:00 0HLHBDMVBKB1Q:00000001 [INF] Authorization failed. (b15dd539)
+2018-10-06T11:51:16.9202628+02:00 0HLHBDMVBKB1Q:00000001 [INF] Authorization failed for the request at filter '"Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter"'. (8b6446cb)
+2018-10-06T11:51:16.9204511+02:00 0HLHBDMVBKB1Q:00000001 [INF] Executing ChallengeResult with authentication schemes ([]). (f3dca807)
+2018-10-06T11:51:16.9207590+02:00 0HLHBDMVBKB1Q:00000001 [INF] AuthenticationScheme: "Bearer" was challenged. (d45f1f38)
+2018-10-06T11:51:16.9208469+02:00 0HLHBDMVBKB1Q:00000001 [INF] Executed action "SafeHouse.Api.Controllers.EnumerationsController.GetWorkshopTypes (SafeHouse.Api)" in 0.7505ms (afa2e885)
+2018-10-06T11:51:16.9210669+02:00 0HLHBDMVBKB1Q:00000001 [INF] Request finished in 7.1922ms 401  (791a596a)
+2018-10-06T11:51:24.0724819+02:00 0HLHBDMVBKB1Q:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:44385/api/token application/json 53 (ca22a1cb)
+2018-10-06T11:51:24.0728232+02:00 0HLHBDMVBKB1Q:00000002 [INF] Route matched with "{action = \"Create\", controller = \"Token\", page = \"\"}". Executing action "SafeHouse.Api.Controllers.TokenController.Create (SafeHouse.Api)" (a44c0341)
+2018-10-06T11:51:24.0728973+02:00 0HLHBDMVBKB1Q:00000002 [INF] Policy execution successful. (0204925d)
+2018-10-06T11:51:24.0737473+02:00 0HLHBDMVBKB1Q:00000002 [INF] Executing action method "SafeHouse.Api.Controllers.TokenController.Create (SafeHouse.Api)" with arguments (["SafeHouse.Api.Models.LoginCredentialsModel"]) - Validation state: Valid (4e3479ed)
+2018-10-06T11:51:24.0746755+02:00 0HLHBDMVBKB1Q:00000002 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"SafeHouseContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=SafeHouse.Data " (9958f5bb)
+2018-10-06T11:51:24.0777447+02:00 0HLHBDMVBKB1Q:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__request_Username_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[CommonName], [u].[CreatedAt], [u].[Password], [u].[Username], [u].[Version]
+FROM [SafeHouseUser] AS [u]
+WHERE [u].[Username] = @__request_Username_0" (0723d8ff)
+2018-10-06T11:51:24.1874879+02:00 0HLHBDMVBKB1Q:00000002 [INF] Executed action method "SafeHouse.Api.Controllers.TokenController.Create (SafeHouse.Api)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 113.6052ms. (50a9e262)
+2018-10-06T11:51:24.1875994+02:00 0HLHBDMVBKB1Q:00000002 [INF] Executing ObjectResult, writing value of type '"<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (8a1b66c8)
+2018-10-06T11:51:24.1877489+02:00 0HLHBDMVBKB1Q:00000002 [INF] Executed action "SafeHouse.Api.Controllers.TokenController.Create (SafeHouse.Api)" in 114.8564ms (afa2e885)
+2018-10-06T11:51:24.1879091+02:00 0HLHBDMVBKB1Q:00000002 [INF] Request finished in 115.4762ms 200 application/json; charset=utf-8 (791a596a)
+2018-10-06T11:51:27.1528227+02:00 0HLHBDMVBKB1Q:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44385/api/Enumerations/LifeSkills   (ca22a1cb)
+2018-10-06T11:51:27.1532757+02:00 0HLHBDMVBKB1Q:00000003 [INF] Successfully validated the token. (60169667)
+2018-10-06T11:51:27.1551132+02:00 0HLHBDMVBKB1Q:00000003 [INF] Route matched with "{action = \"GetLifeSkills\", controller = \"Enumerations\", page = \"\"}". Executing action "SafeHouse.Api.Controllers.EnumerationsController.GetLifeSkills (SafeHouse.Api)" (a44c0341)
+2018-10-06T11:51:27.1552511+02:00 0HLHBDMVBKB1Q:00000003 [INF] Authorization was successful. (0d575a54)
+2018-10-06T11:51:27.1555885+02:00 0HLHBDMVBKB1Q:00000003 [INF] Executing action method "SafeHouse.Api.Controllers.EnumerationsController.GetLifeSkills (SafeHouse.Api)" - Validation state: Valid (dad538d7)
+2018-10-06T11:51:27.1571212+02:00 0HLHBDMVBKB1Q:00000003 [INF] Executed action method "SafeHouse.Api.Controllers.EnumerationsController.GetLifeSkills (SafeHouse.Api)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.419ms. (50a9e262)
+2018-10-06T11:51:27.1573291+02:00 0HLHBDMVBKB1Q:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[SafeHouse.Api.Models.NameValueModel, SafeHouse.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2018-10-06T11:51:27.1610204+02:00 0HLHBDMVBKB1Q:00000003 [INF] Executed action "SafeHouse.Api.Controllers.EnumerationsController.GetLifeSkills (SafeHouse.Api)" in 5.7911ms (afa2e885)
+2018-10-06T11:51:27.1611395+02:00 0HLHBDMVBKB1Q:00000003 [INF] Request finished in 8.356ms 200 application/json; charset=utf-8 (791a596a)
+2018-10-06T11:54:21.0811204+02:00 0HLHBDMVBKB1R:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:44385/api/reports/ application/json;charset=UTF-8 2 (ca22a1cb)
+2018-10-06T11:54:21.0816335+02:00 0HLHBDMVBKB1R:00000001 [INF] Successfully validated the token. (60169667)
+2018-10-06T11:54:21.0818468+02:00 0HLHBDMVBKB1R:00000001 [INF] Route matched with "{action = \"FindReportData\", controller = \"Reports\", page = \"\"}". Executing action "SafeHouse.Api.Controllers.ReportsController.FindReportData (SafeHouse.Api)" (a44c0341)
+2018-10-06T11:54:21.0819517+02:00 0HLHBDMVBKB1R:00000001 [INF] Policy execution successful. (0204925d)
+2018-10-06T11:54:21.0820882+02:00 0HLHBDMVBKB1R:00000001 [INF] Authorization was successful. (0d575a54)
+2018-10-06T11:54:21.0826897+02:00 0HLHBDMVBKB1R:00000001 [INF] Executing action method "SafeHouse.Api.Controllers.ReportsController.FindReportData (SafeHouse.Api)" with arguments (["SafeHouse.Business.Contracts.Models.ReportRequestDto"]) - Validation state: Valid (4e3479ed)
+2018-10-06T11:54:21.0832966+02:00 0HLHBDMVBKB1R:00000001 [INF] Entity Framework Core "2.1.4-rtm-31024" initialized '"SafeHouseContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "MigrationsAssembly=SafeHouse.Data " (9958f5bb)
+2018-10-06T11:54:21.0863220+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[Date]
+FROM [DailyEntry] AS [d]" (0723d8ff)
+2018-10-06T11:54:21.0885211+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[Date], [d].[CartonId], [d].[Stay]
+FROM [DailyEntry] AS [d]
+WHERE [d].[CartonId] IS NOT NULL AND ([d].[Stay] = 1)" (0723d8ff)
+2018-10-06T11:54:21.0918481+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[Date], [d].[CartonId], [d].[Stay], [d.Carton].[Gender]
+FROM [DailyEntry] AS [d]
+LEFT JOIN [Carton] AS [d.Carton] ON [d].[CartonId] = [d.Carton].[Id]
+WHERE ([d].[CartonId] IS NOT NULL AND ([d].[Stay] = 1)) AND ([d.Carton].[Gender] = 0)" (0723d8ff)
+2018-10-06T11:54:21.0953148+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[Date], [d].[CartonId], [d].[Stay], [d.Carton].[Gender]
+FROM [DailyEntry] AS [d]
+LEFT JOIN [Carton] AS [d.Carton] ON [d].[CartonId] = [d.Carton].[Id]
+WHERE ([d].[CartonId] IS NOT NULL AND ([d].[Stay] = 1)) AND ([d.Carton].[Gender] = 1)" (0723d8ff)
+2018-10-06T11:54:21.0972224+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[Date], [d].[Bath]
+FROM [DailyEntry] AS [d]
+WHERE [d].[Bath] = 1" (0723d8ff)
+2018-10-06T11:54:21.0989096+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[Date], [d].[LiecesRemoval]
+FROM [DailyEntry] AS [d]
+WHERE [d].[LiecesRemoval] = 1" (0723d8ff)
+2018-10-06T11:54:21.0999270+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[Date], [d].[Clothing]
+FROM [DailyEntry] AS [d]" (0723d8ff)
+2018-10-06T11:54:21.1000662+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed action method "SafeHouse.Api.Controllers.ReportsController.FindReportData (SafeHouse.Api)", returned result "Microsoft.AspNetCore.Mvc.OkObjectResult" in 17.2877ms. (50a9e262)
+2018-10-06T11:54:21.1002046+02:00 0HLHBDMVBKB1R:00000001 [INF] Executing ObjectResult, writing value of type '"SafeHouse.Business.Contracts.Models.ReportDataDto"'. (8a1b66c8)
+2018-10-06T11:54:21.1004183+02:00 0HLHBDMVBKB1R:00000001 [INF] Executed action "SafeHouse.Api.Controllers.ReportsController.FindReportData (SafeHouse.Api)" in 18.4715ms (afa2e885)
+2018-10-06T11:54:21.1005236+02:00 0HLHBDMVBKB1R:00000001 [INF] Request finished in 19.4751ms 200 application/json; charset=utf-8 (791a596a)
+2018-10-06T11:54:30.9543451+02:00 0HLHBDMVBKB1O:00000007 [INF] Request finished in 425010.8879ms 200 application/javascript; charset=UTF-8 (791a596a)

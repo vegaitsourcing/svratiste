@@ -1,0 +1,296 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Svratiste",
+		"_postman_id": "e8ffe691-b31e-962e-1f9c-ad9f5f1c7dec",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"description": "",
+			"item": [
+				{
+					"name": "Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"authToken\", jsonData.token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/api/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Username\":\"{{username}}\",\n\t\"Password\":\"{{password}}\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carton",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Cartons for Page",
+					"request": {
+						"url": "{{url}}/api/Carton/{{pageNumber}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Carton",
+					"request": {
+						"url": "{{url}}/api/Carton",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"FirstName\":\"John3\",\n\t\"LastName\":\"Dove3\",\n\t\"Nickname\":\"JD3\",\n\t\"Gender\":\"Female\",\n\t\"DateOfBirth\":\"10/23/1995\",\n\t\"NumberOfVisits\":1,\n\t\"AddressStreetName\":\"Novosadskog Sajma\",\n\t\"AddressStreetNumber\":\"13\",\n\t\"FathersName\":\"Theo3\",\n\t\"MothersName\":\"Rea3\",\n\t\"InitialEvaluationDone\": \"True\",\n\t\"EvaluationDone\":\"False\",\n\t\"IndividualPlanDone\":\"True\",\n\t\"IndividualPlanRevised\":\"False\",\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Carton Total Pages Count",
+					"request": {
+						"url": "{{url}}/api/Carton/pageCount",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Carton",
+					"request": {
+						"url": "{{url}}/api/Carton",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"56811108-35ee-4129-5cd1-08d62af3392d\",\n\t\"FirstName\":\"John3-1\",\n\t\"LastName\":\"Dove3-1\",\n\t\"Nickname\":\"JD3-1\",\n\t\"Gender\":\"Male\",\n\t\"DateOfBirth\":\"10/23/1996\",\n\t\"NumberOfVisits\":1,\n\t\"AddressStreetName\":\"Novosadskog Sajma\",\n\t\"AddressStreetNumber\":\"13-1\",\n\t\"FathersName\":\"Theo3-1\",\n\t\"MothersName\":\"Rea3-1\",\n\t\"InitialEvaluationDone\": \"True\",\n\t\"EvaluationDone\":\"True\",\n\t\"IndividualPlanDone\":\"True\",\n\t\"IndividualPlanRevised\":\"True\",\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"description": "",
+			"item": [
+				{
+					"name": "Web API Status check",
+					"request": {
+						"url": "{{url}}/api/Status",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Daily Entry",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Daily Entry",
+					"request": {
+						"url": "{{url}}/api/DailyEntry",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"CartonId\":\"56811108-35ee-4129-5cd1-08d62af3392d\",\n\t\"Stay\":\"True\",\n\t\"Breakfast\":\"True\",\n\t\"Lunch\":\"True\",\n\t\"Diner\":\"True\",\n\t\"Bath\":\"True\",\n\t\"LiecesRemoval\":\"True\",\n\t\"Clothes\":2,\n\t\"MediationWriting\":1,\n\t\"MediationWritingDescription\":\"Mediation Writing Description\",\n\t\"MediationSpeaking\":2,\n\t\"MediationSpeakingDescription\":\"Mediation Speaking Description\",\n\t\"LifeSkills\": 14,\n\t\"Workshops\": [{\"WorkshopType\":2, \"Number\":\"1\"}, {\"WorkshopType\": 1, \"Number\":\"2\"}],\n\t\"SchoolAcivities\": 3,\n\t\"PsihosocialSupport\":\"True\",\n\t\"ParentsContact\":\"True\",\n\t\"MedicalInterventions\":\"Consultancy\",\n\t\"Arrival\":\"10/5/2018\",\n\t\"Departure\":\"10/5/2018\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enums",
+			"description": "",
+			"item": [
+				{
+					"name": "LifeSkills",
+					"request": {
+						"url": "{{url}}/api/Enumerations/LifeSkills",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Mediation Speakings",
+					"request": {
+						"url": "{{url}}/api/Enumerations/MediationSpeakings",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Mediation Writings",
+					"request": {
+						"url": "{{url}}/api/Enumerations/MediationWritings",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Medical Interventions",
+					"request": {
+						"url": "{{url}}/api/Enumerations/MedicalInterventions",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "School Activities",
+					"request": {
+						"url": "{{url}}/api/Enumerations/SchoolActivities",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Workshop Types",
+					"request": {
+						"url": "{{url}}/api/Enumerations/WorkshopTypes",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

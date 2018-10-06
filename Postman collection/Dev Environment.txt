@@ -1,0 +1,5 @@
+url:https://localhost:44385
+authToken: ***this will be populated automatically***
+username: ***************
+password: ***************
+pageNumber:1
