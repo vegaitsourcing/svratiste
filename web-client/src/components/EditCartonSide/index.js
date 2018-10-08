@@ -36,7 +36,8 @@ class EditCartonSide extends Component {
                 fathersName, mothersName } = this.props.data;
 
         this.setState({
-            id, firstName, lastName, nickname, gender, dateOfBirth, addressStreetName, addressStreetNumber, fathersName, mothersName
+            id, firstName, lastName, nickname, gender, addressStreetName, addressStreetNumber, fathersName, mothersName,
+            dateOfBirth: this.formatDate(dateOfBirth)
         });
     }
 
@@ -57,6 +58,18 @@ class EditCartonSide extends Component {
 
     onClose() {
         CardboardActions.hideEditBar();
+    }
+
+    formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+    
+        return [year, month, day].join('-');
     }
 
     render() {
