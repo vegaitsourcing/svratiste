@@ -15,7 +15,7 @@ namespace SafeHouse.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -27,7 +27,11 @@ namespace SafeHouse.Data.Migrations
                     b.Property<string>("Activity")
                         .HasMaxLength(512);
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<Guid?>("IndividualServicePlanId");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<string>("ResponiblePerson")
                         .HasMaxLength(32);
@@ -57,6 +61,8 @@ namespace SafeHouse.Data.Migrations
                     b.Property<string>("AddressStreetNumber")
                         .HasMaxLength(32);
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<DateTime>("DateOfBirth");
 
                     b.Property<bool>("EvaluationDone");
@@ -75,6 +81,8 @@ namespace SafeHouse.Data.Migrations
                     b.Property<bool>("IndividualPlanRevised");
 
                     b.Property<bool>("InitialEvaluationDone");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -110,9 +118,13 @@ namespace SafeHouse.Data.Migrations
 
                     b.Property<int>("Clothing");
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<DateTime>("Date");
 
                     b.Property<DateTime>("Departure");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<bool>("LiecesRemoval");
 
@@ -170,6 +182,8 @@ namespace SafeHouse.Data.Migrations
                     b.Property<string>("CaseLeader")
                         .HasMaxLength(32);
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<string>("CulturalSpecifics")
                         .HasMaxLength(512);
 
@@ -198,6 +212,8 @@ namespace SafeHouse.Data.Migrations
 
                     b.Property<string>("FamilyStrenghts")
                         .HasMaxLength(512);
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<string>("OtherMembers")
                         .HasMaxLength(512);
@@ -252,6 +268,8 @@ namespace SafeHouse.Data.Migrations
                     b.Property<string>("CaseLeaderName")
                         .HasMaxLength(256);
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<string>("DiagnosedDisease")
                         .HasMaxLength(512);
 
@@ -282,6 +300,8 @@ namespace SafeHouse.Data.Migrations
 
                     b.Property<string>("Languages")
                         .HasMaxLength(256);
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<string>("LivingSpace")
                         .HasMaxLength(128);
@@ -333,10 +353,14 @@ namespace SafeHouse.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<string>("Goal")
                         .HasMaxLength(100);
 
                     b.Property<Guid?>("IndividualServicePlanId");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<string>("Result")
                         .HasMaxLength(100);
@@ -357,6 +381,8 @@ namespace SafeHouse.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<string>("FirstName")
                         .HasMaxLength(32);
 
@@ -364,6 +390,8 @@ namespace SafeHouse.Data.Migrations
                         .HasMaxLength(32);
 
                     b.Property<Guid?>("IndividualServicePlanId");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(32);
@@ -389,10 +417,14 @@ namespace SafeHouse.Data.Migrations
 
                     b.Property<Guid?>("CartonId");
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("DedicatedWorker")
                         .HasMaxLength(32);
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<DateTime>("TimeLimitForNextAppointment");
 
@@ -412,7 +444,11 @@ namespace SafeHouse.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<bool>("IsGroupSkill");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<int>("LifeSkillType")
                         .HasMaxLength(1024);
@@ -431,7 +467,11 @@ namespace SafeHouse.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<Guid?>("DailyEntryId");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<Guid?>("LifeSkillId");
 
@@ -458,6 +498,10 @@ namespace SafeHouse.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<DateTime>("LastModificationDate");
+
                     b.Property<string>("Password")
                         .IsRequired();
 
@@ -478,7 +522,11 @@ namespace SafeHouse.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<Guid?>("DailyEntryId");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<int>("Type");
 
@@ -498,8 +546,12 @@ namespace SafeHouse.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<string>("Description")
                         .HasMaxLength(1024);
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -514,6 +566,10 @@ namespace SafeHouse.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<string>("Name")
                         .HasMaxLength(80);
@@ -532,8 +588,12 @@ namespace SafeHouse.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<string>("Description")
                         .HasMaxLength(1024);
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<Guid?>("SuitabilityCacheId");
 
@@ -557,7 +617,11 @@ namespace SafeHouse.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreationDate");
+
                     b.Property<Guid?>("DailyEntryId");
+
+                    b.Property<DateTime>("LastModificationDate");
 
                     b.Property<int>("Number");
 

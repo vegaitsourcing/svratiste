@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SafeHouse.Data.Entities;
+using System;
+using System.Linq;
 
 namespace SafeHouse.Data
 {
@@ -60,6 +62,30 @@ namespace SafeHouse.Data
             modelBuilder.Entity<SuitabilityItem>().ToTable("SuitabilityItem");
             modelBuilder.Entity<SuitabilityCache>().ToTable("SuitabilityCache");
             modelBuilder.Entity<Workshop>().ToTable("Workshop");
+        }
+
+        public override int SaveChanges()
+        {
+            AddTimestamps();
+            return base.SaveChanges();
+        }
+
+        private void AddTimestamps()
+        {
+            var entities = ChangeTracker
+                .Entries()
+                .Where(x => x.Entity is BaseEntity 
+                && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((BaseEntity)entity.Entity).CreationDate = DateTime.UtcNow;
+                }
+
+                ((BaseEntity)entity.Entity).LastModificationDate = DateTime.UtcNow;
+            }
         }
     }
 }

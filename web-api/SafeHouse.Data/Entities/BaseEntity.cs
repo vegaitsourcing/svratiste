@@ -10,6 +10,10 @@ namespace SafeHouse.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
+        public DateTime CreationDate { get; set; }
+
+        public DateTime LastModificationDate { get; set; }
+
         [Timestamp]
         public byte[] Version { get; set; }
     }
