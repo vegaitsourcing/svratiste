@@ -5,6 +5,8 @@ import * as DailyEntyActions from '../../actions/DailyEntryActions';
 import * as CardboardActions from '../../actions/CardboardActions';
 import * as EnumerationActions from '../../actions/EnumerationActions';
 
+import * as DailyEntryService from '../../services/DailyEntryService';
+
 import EnumerationStore from '../../stores/EnumerationStore';
 
 class AddDailyEntry extends Component {
@@ -27,20 +29,25 @@ class AddDailyEntry extends Component {
             mediationSpeaking: 0,
             mediationSpeakingDescription: '',
             lifeSkills: 0,
+            schoolAcivities: 0,
             workshops: [],
-            psihosocialSupport: '',
-            parentsContact: '',
+            psihosocialSupport: false,
+            parentsContact: false,
             medicalInterventions: 0,
+            arrival: '',
             pageNumber: props.pageNumber,
 
             // enumerations
             mediationWritingsEnum: [],
             mediationSpeakingsEnum: [],
             lifeSkillsEnum: [],
-            workshopTypesEnum: []
+            workshopTypesEnum: [],
+            schoolActivitiesEnum: [],
+            medicalInterventionsEnum: []
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleInputChangeWorkshop = this.handleInputChangeWorkshop.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.onClose = this.onClose.bind(this);
         this.onSave = this.onSave.bind(this);
@@ -51,6 +58,10 @@ class AddDailyEntry extends Component {
         this.handleLifeSkillsChange = this.handleLifeSkillsChange.bind(this);
         this.getWorkshopTypes = this.getWorkshopTypes.bind(this);
         this.handleWorkshopTypesChange = this.handleWorkshopTypesChange.bind(this);
+        this.getSchoolActivities = this.getSchoolActivities.bind(this);
+        this.handleSchoolActivitiesChange = this.handleSchoolActivitiesChange.bind(this);
+        this.handleMedicalInterventionsChange = this.handleMedicalInterventionsChange.bind(this);
+        this.getMedicalInterventions = this.getMedicalInterventions.bind(this);
     }
 
     componentWillMount() {
@@ -58,6 +69,8 @@ class AddDailyEntry extends Component {
         EnumerationStore.on("fetched_mediation_speakings", this.getMediationSpeakings);
         EnumerationStore.on("fetched_life_skills", this.getLifeSkills);
         EnumerationStore.on("fetched_workshop_types", this.getWorkshopTypes);
+        EnumerationStore.on("fetched_school_activities", this.getSchoolActivities);
+        EnumerationStore.on("fetched_medical_intervetions", this.getMedicalInterventions);
     }
 
     componentWillUnmount() {
@@ -65,6 +78,8 @@ class AddDailyEntry extends Component {
         EnumerationStore.removeListener("fetched_mediation_speakings", this.getMediationSpeakings);
         EnumerationStore.removeListener("fetched_life_skills", this.getLifeSkills);
         EnumerationStore.removeListener("fetched_workshop_types", this.getWorkshopTypes);
+        EnumerationStore.removeListener("fetched_school_activities", this.getSchoolActivities);
+        EnumerationStore.removeListener("fetched_medical_intervetions", this.getMedicalInterventions);
     }
 
     componentDidMount() {
@@ -77,6 +92,8 @@ class AddDailyEntry extends Component {
         EnumerationActions.getMediationSpeakings();
         EnumerationActions.getLifeSkills();
         EnumerationActions.getWorkshopTypes();
+        EnumerationActions.getSchoolActivities();
+        EnumerationActions.getMedicalInterventions();
     }
 
     getMediationWritings() {
@@ -103,6 +120,18 @@ class AddDailyEntry extends Component {
         });
     }
 
+    getSchoolActivities() {
+        this.setState({
+            schoolActivitiesEnum: EnumerationStore.getSchoolActivities()
+        });
+    }
+
+    getMedicalInterventions() {
+        this.setState({
+            medicalInterventionsEnum: EnumerationStore.getMedicalIntervetions()
+        });
+    }
+
     handleCheckboxChange(event) {
         const { target } = event;
         const { name, checked } = target;
@@ -117,11 +146,36 @@ class AddDailyEntry extends Component {
         this.setState({ [name]: value });
     }
 
+    handleInputChangeWorkshop(item, event) {
+        const { target } = event;
+        const { name, value } = target;
+
+        const newWorkshops = DailyEntryService.correctWorkshop(this.state.workshops, item.WorkshopType, name, value);
+
+        this.setState({
+            workshops: newWorkshops
+        });
+    }
+
     handleLifeSkillsChange(items) {
-        let lifeSkills = items.reduce(function(prev, cur) {
+        let lifeSkills = items.reduce(function (prev, cur) {
             return prev + cur.value;
         }, 0);
         this.setState({ lifeSkills });
+    }
+
+    handleSchoolActivitiesChange(items) {
+        let schoolAcivities = items.reduce(function (prev, cur) {
+            return prev + cur.value;
+        }, 0);
+        this.setState({ schoolAcivities });
+    }
+
+    handleMedicalInterventionsChange(items) {
+        let medicalInterventions = items.reduce(function (prev, cur) {
+            return prev + cur.value;
+        }, 0);
+        this.setState({ medicalInterventions });
     }
 
     handleWorkshopTypesChange(items) {
@@ -130,7 +184,7 @@ class AddDailyEntry extends Component {
             let currentIndex = oldWorkshops.find(ws => ws.WorkshopType == workshop.value);
 
             return {
-                WorkshopType: workshop.value, 
+                WorkshopType: workshop.value,
                 Number: currentIndex ? currentIndex.Number : 0,
                 label: workshop.name
             }
@@ -266,7 +320,7 @@ class AddDailyEntry extends Component {
                         <tr>
                             <td className="info">Životne veštine:</td>
                             <td>
-                                <Select 
+                                <Select
                                     options={this.state.lifeSkillsEnum}
                                     onChange={this.handleLifeSkillsChange}
                                     isMulti />
@@ -275,17 +329,30 @@ class AddDailyEntry extends Component {
                         <tr>
                             <td className="info">Tip radionice:</td>
                             <td>
-                            <Select 
-                                options={this.state.workshopTypesEnum}
-                                onChange={this.handleWorkshopTypesChange}
-                                isMulti />
-                            
-                            {this.state.workshops.map((workshop, index) => (
-                                <div key={index}>
-                                    <label>{workshop.label}</label>
-                                    <input type="text" />
-                                </div>
-                            ))}
+                                <Select
+                                    options={this.state.workshopTypesEnum}
+                                    onChange={this.handleWorkshopTypesChange}
+                                    isMulti />
+
+                                {this.state.workshops.map((workshop, index) => (
+                                    <div key={index}>
+                                        <label>{workshop.label}</label>
+                                        <input
+                                            type="text"
+                                            name="Number"
+                                            onChange={(e) => this.handleInputChangeWorkshop(workshop, e)}
+                                            value={workshop.Number} />
+                                    </div>
+                                ))}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="info">Školske radionice:</td>
+                            <td>
+                                <Select
+                                    options={this.state.schoolActivitiesEnum}
+                                    onChange={this.handleSchoolActivitiesChange}
+                                    isMulti />
                             </td>
                         </tr>
                         <tr>
@@ -297,24 +364,28 @@ class AddDailyEntry extends Component {
                         </tr>
                         <tr>
                             <td className="info">Kontakt sa roditeljima:</td>
-                            <td><input type="text"
+                            <td><input type="checkbox"
                                 name="parentsContact"
                                 defaultChecked={this.state.parentsContact}
                                 onChange={this.handleInputChange} /></td>
                         </tr>
                         <tr>
-                            <td className="info">Usmeno Obraćanje:</td>
+                            <td className="info">Medicinske intervencije:</td>
                             <td>
-                                <select className="combobox"
-                                    name="medicalInterventions"
+                                <Select
+                                    options={this.state.medicalInterventionsEnum}
+                                    onChange={this.handleMedicalInterventionsChange}
+                                    isMulti />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="info">Dolazak:</td>
+                            <td>
+                                <input
+                                    type="date" name="arrival"
+                                    value={this.state.arrival}
                                     onChange={this.handleInputChange}
-                                    value={this.state.medicalInterventions}
-                                    required>
-                                    <option></option>
-                                    <option value="1">Intervencija u svratištu</option>
-                                    <option value="2">Savetovanje</option>
-                                    <option value="4">Lekovi</option>
-                                </select>
+                                    required />
                             </td>
                         </tr>
                     </tbody>

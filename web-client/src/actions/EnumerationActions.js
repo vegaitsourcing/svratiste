@@ -76,3 +76,40 @@ export function getWorkshopTypes() {
             }
         });
 }
+
+export function getSchoolActivities() {
+    axios.get(web_api_url + '/Enumerations/SchoolActivities',
+        {
+            headers: { Authorization: "Bearer " + authToken.getToken() }
+        }).then((response) => {
+            dispatcher.dispatch({
+                type: "FETCHED_SCHOOL_ACTIVITIES",
+                payload: response.data
+            });
+        }).catch(error => {
+            if (error.response.status === 401) {
+                dispatcher.dispatch({
+                    type: "UNAUTHORIZED"
+                });
+            }
+        });
+}
+
+export function getMedicalInterventions() {
+    axios.get(web_api_url + '/Enumerations/MedicalInterventions',
+        {
+            headers: { Authorization: "Bearer " + authToken.getToken() }
+        }).then((response) => {
+            dispatcher.dispatch({
+                type: "FETCHED_MEDICAL_INTERVETIONS",
+                payload: response.data
+            });
+        }).catch(error => {
+            console.log(error);
+            if (error.response.status === 401) {
+                dispatcher.dispatch({
+                    type: "UNAUTHORIZED"
+                });
+            }
+        });
+}

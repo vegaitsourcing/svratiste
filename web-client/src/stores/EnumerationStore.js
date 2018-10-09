@@ -11,6 +11,8 @@ class EnumerationStore extends EventEmitter {
         this.mediationSpeakings = [];
         this.lifeSkills = [];
         this.workshopTypes = [];
+        this.schoolActivities = [];
+        this.medicalIntervetions = [];
 
         this.changeStructure = this.changeStructure.bind(this);
     }
@@ -29,6 +31,14 @@ class EnumerationStore extends EventEmitter {
 
     getWorkshopTypes() {
         return this.workshopTypes;
+    }
+
+    getSchoolActivities() {
+        return this.schoolActivities;
+    }
+
+    getMedicalIntervetions() {
+        return this.medicalIntervetions;
     }
 
     changeStructure(data) {
@@ -58,6 +68,14 @@ class EnumerationStore extends EventEmitter {
             case "FETCHED_WORKSHOP_TYPES":
                 this.workshopTypes = this.changeStructure(action.payload);
                 this.emit("fetched_workshop_types");
+                break;
+            case "FETCHED_SCHOOL_ACTIVITIES":
+                this.schoolActivities = this.changeStructure(action.payload);
+                this.emit("fetched_school_activities");
+                break;
+            case "FETCHED_MEDICAL_INTERVETIONS":
+                this.medicalIntervetions = this.changeStructure(action.payload);
+                this.emit("fetched_medical_intervetions");
                 break;
             default:
         }
