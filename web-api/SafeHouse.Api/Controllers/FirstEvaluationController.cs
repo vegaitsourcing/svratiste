@@ -8,7 +8,6 @@ using System;
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/FirstEvaluation")]
     public class FirstEvaluationController : BaseController
     {
         private readonly IFirstEvaluationService _firstEvaluationService;
@@ -21,14 +20,16 @@ namespace SafeHouse.Api.Controllers
         }
 
         // Pass Carton Id into this one!
-        [HttpGet("{id}")]
-        public FirstEvaluation Get(Guid id)
+        [HttpGet]
+        [Route("api/FirstEvaluation/{id}")]
+		public FirstEvaluation Get(Guid id)
         {
             return _firstEvaluationService.GetByCartonId(id);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]CreateFirstEvaluationModel newValue)
+        [Route("api/FirstEvaluation")]
+		public IActionResult Create([FromBody]CreateFirstEvaluationModel newValue)
         {
             try
             {

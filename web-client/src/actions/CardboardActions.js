@@ -6,6 +6,27 @@ import { web_api_url } from '../constants';
 import * as authToken from '../authToken';
 
 
+export function getCartonById(id) {
+    console.log(id);
+    /*
+    axios.get(web_api_url + '/Carton/' + id,
+        {
+            headers: { Authorization: "Bearer " + authToken.getToken() }
+        }).then((response) => {
+            dispatcher.dispatch({
+                type: "FETCHED_CARTON",
+                payload: response.data
+            });
+        }).catch(error => {
+            if (error.response.status === 401) {
+                dispatcher.dispatch({
+                    type: "UNAUTHORIZED"
+                });
+            }
+        });
+        */
+}
+
 export function getCartons(page) {
     axios.get(web_api_url + '/Carton/' + page,
         {
