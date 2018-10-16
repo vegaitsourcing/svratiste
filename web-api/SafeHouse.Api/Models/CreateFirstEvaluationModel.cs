@@ -51,9 +51,9 @@ namespace SafeHouse.Api.Models
 
         public string Other { get; set; }
 
-        public DateTime StartedEvaluation { get; set; }
+        public DateTime? StartedEvaluation { get; set; }
 
-        public DateTime FinishedEvaluation { get; set; }
+        public DateTime? FinishedEvaluation { get; set; }
 
         public string EvaluationDoneBy { get; set; }
 
@@ -74,7 +74,6 @@ namespace SafeHouse.Api.Models
                 EvaluationDoneBy = EvaluationDoneBy,
                 EvaluationRevisedBy = EvaluationRevisedBy,
                 Expectations = Expectations,
-                FinishedEvaluation =FinishedEvaluation,
                 GuardiansName = GuardiansName,
                 HealthCard = HealthCard,
                 Id = Id,
@@ -89,6 +88,7 @@ namespace SafeHouse.Api.Models
                 PriorityNeeds = PriorityNeeds,
                 SchoolAndGrade = SchoolAndGrade,
                 ServiceStart = ServiceStart,
+                FinishedEvaluation = FinishedEvaluation,
                 StartedEvaluation = StartedEvaluation,
                 Suitability = Suitability,
                 VerbalComunicationAbility = VerbalComunicationAbility,

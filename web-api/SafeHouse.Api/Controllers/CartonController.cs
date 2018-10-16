@@ -33,6 +33,13 @@ namespace SafeHouse.Api.Controllers
             return _cartonService.GetPageNumber();
         }
 
+        [HttpGet]
+        [Route("api/Carton/{id}")]
+        public CartonDto Get(Guid id)
+        {
+            return _cartonService.Get(id);
+        }
+
         [HttpPost]
         [Route("api/Carton")]
         public IActionResult Create([FromBody] CartonDto carton)

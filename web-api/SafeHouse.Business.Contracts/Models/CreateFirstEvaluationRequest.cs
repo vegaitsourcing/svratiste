@@ -50,9 +50,9 @@ namespace SafeHouse.Business.Contracts.Models
 
         public string Other { get; set; }
 
-        public DateTime StartedEvaluation { get; set; }
+        public DateTime? StartedEvaluation { get; set; }
 
-        public DateTime FinishedEvaluation { get; set; }
+        public DateTime? FinishedEvaluation { get; set; }
 
         public string EvaluationDoneBy { get; set; }
 
