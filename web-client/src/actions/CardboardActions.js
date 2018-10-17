@@ -7,8 +7,6 @@ import * as authToken from '../authToken';
 
 
 export function getCartonById(id) {
-    console.log(id);
-    /*
     axios.get(web_api_url + '/Carton/' + id,
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
@@ -24,7 +22,6 @@ export function getCartonById(id) {
                 });
             }
         });
-        */
 }
 
 export function getCartons(page) {

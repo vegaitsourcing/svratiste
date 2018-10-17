@@ -40,12 +40,30 @@ class Evaluation extends Component {
     }
 
     getCarton() {
+        const { firstName, lastName, addressStreetName, addressStreetNumber, dateOfBirth } = CardboardStore.getCarton();
         this.setState({
+            FirstName: firstName,
+            LastName: lastName,
+            AddressStreetName: addressStreetName,
+            AddressStreetNumber: addressStreetNumber,
+            DateOfBirth: this.formatDate(dateOfBirth)
         });
     }
 
     onTabClick(tab) {
         this.setState({ activeTab: tab });
+    }
+
+    formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+    
+        return [year, month, day].join('-');
     }
 
     render() {
