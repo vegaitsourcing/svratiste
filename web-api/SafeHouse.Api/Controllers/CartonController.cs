@@ -20,8 +20,8 @@ namespace SafeHouse.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/Carton/{pageNumber}")]
-        public IEnumerable<CartonDto> Get(int pageNumber)
+        [Route("api/Carton/GetByPageNumber/{pageNumber}")]
+        public IEnumerable<CartonDto> GetByPageNumber(int pageNumber)
         {
             return _cartonService.Get(pageNumber);
         }
