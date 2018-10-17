@@ -25,7 +25,7 @@ export function getCartonById(id) {
 }
 
 export function getCartons(page) {
-    axios.get(web_api_url + '/Carton/' + page,
+    axios.get(web_api_url + '/Carton/GetByPageNumber/' + page,
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
         }).then((response) => {
