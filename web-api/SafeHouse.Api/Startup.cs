@@ -31,7 +31,7 @@ namespace SafeHouse.Api
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "./../../web-client/SafeHouseClient/src";
+                configuration.RootPath = "./../../web-client/src";
             });
 
             services.AddCors(o => o.AddPolicy("SafeHouseCorsPolicy", builder =>
@@ -71,7 +71,7 @@ namespace SafeHouse.Api
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "./../../web-client/SafeHouseClient";
+                spa.Options.SourcePath = "./../../web-client";
 
                 if (env.IsDevelopment())
                 {
