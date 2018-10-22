@@ -11,9 +11,9 @@ namespace SafeHouse.Business
 {
     public class FirstEvaluationService : IFirstEvaluationService
     {
-        private readonly SafeHouseContext _dbContext;
+        private readonly SafeHouseDbContext _dbContext;
 
-        public FirstEvaluationService(SafeHouseContext context)
+        public FirstEvaluationService(SafeHouseDbContext context)
         {
             _dbContext = context;
         }

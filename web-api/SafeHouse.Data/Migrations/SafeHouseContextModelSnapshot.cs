@@ -8,7 +8,7 @@ using SafeHouse.Data;
 
 namespace SafeHouse.Data.Migrations
 {
-    [DbContext(typeof(SafeHouseContext))]
+    [DbContext(typeof(SafeHouseDbContext))]
     partial class SafeHouseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

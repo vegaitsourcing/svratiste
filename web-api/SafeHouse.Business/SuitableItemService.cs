@@ -8,9 +8,9 @@ namespace SafeHouse.Business
 {
     public class SuitableItemService : ISuitableItemService
     {
-        private readonly SafeHouseContext _dbContext;
+        private readonly SafeHouseDbContext _dbContext;
 
-        public SuitableItemService(SafeHouseContext dbContext)
+        public SuitableItemService(SafeHouseDbContext dbContext)
         {
             _dbContext = dbContext;
         }

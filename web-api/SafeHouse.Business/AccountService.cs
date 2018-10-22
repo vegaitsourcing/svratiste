@@ -10,18 +10,18 @@ namespace SafeHouse.Business
 {
     public class AccountService : IAccountService
     {
-        private readonly SafeHouseContext _dbContex;
+        private readonly SafeHouseDbContext _dbContext;
         private readonly HashingHelper _hashingHelper;
 
-        public AccountService(SafeHouseContext context, HashingHelper hashingHelper)
+        public AccountService(SafeHouseDbContext context, HashingHelper hashingHelper)
         {
-            _dbContex = context;
+            _dbContext = context;
             _hashingHelper = hashingHelper;
         }
 
         public Guid? GetUserIdIfCredentialsAreValid(CheckCredentialsRequest request)
         {
-            var user = _dbContex.SafeHouseUsers.FirstOrDefault(u => u.Username == request.Username);
+            var user = _dbContext.SafeHouseUsers.FirstOrDefault(u => u.Username == request.Username);
 
             return user == null ? null : (CheckIfPasswordIsCorrect(user.Password, request.Password) ? user.Id : (Guid?)null);
         }

@@ -12,18 +12,18 @@ namespace SafeHouse.Business
 {
     public class DailyEntryService : IDailyEntryService
     {
-        private readonly SafeHouseContext _dbContex;
+        private readonly SafeHouseDbContext _dbContext;
         private readonly IDailyEntryMapper _mapper;
 
-        public DailyEntryService(SafeHouseContext dbContext, IDailyEntryMapper mapper)
+        public DailyEntryService(SafeHouseDbContext dbContext, IDailyEntryMapper mapper)
         {
-            _dbContex = dbContext;
+            _dbContext = dbContext;
             _mapper = mapper;
         }
 
         public void Add(DailyEntryDto dailyEntryDto)
         {
-            var carton = _dbContex.Cartons.Find(dailyEntryDto.CartonId);
+            var carton = _dbContext.Cartons.Find(dailyEntryDto.CartonId);
             var dailyEntry = _mapper.ToEntity(dailyEntryDto, carton);
 
             AddWorkshopsToEntity(dailyEntryDto.Workshops, dailyEntry);
@@ -31,7 +31,7 @@ namespace SafeHouse.Business
             AddLifeSkillsToEntity(dailyEntryDto.LifeSkills, dailyEntry);
             PerformPostDailyEntryAdditionActions(carton);
 
-            _dbContex.SaveChanges();
+            _dbContext.SaveChanges();
         }
 
         private void AddLifeSkillsToEntity(LifeSkillEnum lifeSkills, DailyEntry dailyEntry)
@@ -42,11 +42,11 @@ namespace SafeHouse.Business
                 {
                     if ((lifeSkills & lifeSkill) != 0)
                     {
-                        _dbContex.LifeSkillDailyEntries
+                        _dbContext.LifeSkillDailyEntries
                             .Add(new LifeSkillDailyEntry
                             {
                                 DailyEntry = dailyEntry,
-                                LifeSkill = _dbContex.LifeSkills
+                                LifeSkill = _dbContext.LifeSkills
                                 .Where(ls => ls.LifeSkillType == lifeSkill)
                                 .Single()
                             });
@@ -63,7 +63,7 @@ namespace SafeHouse.Business
                 {
                     if ((schoolAcivities & schoolActivity) != 0)
                     {
-                        _dbContex.SchoolActivities.Add(new SchoolActivity { DailyEntry = dailyEntry, Type = schoolActivity });
+                        _dbContext.SchoolActivities.Add(new SchoolActivity { DailyEntry = dailyEntry, Type = schoolActivity });
                     }
                 }
             }
@@ -71,11 +71,11 @@ namespace SafeHouse.Business
 
         private void AddWorkshopsToEntity(ICollection<WorkshopDto> workshops, DailyEntry dailyEntry)
         {
-            _dbContex.DailyEntries.Add(dailyEntry);
+            _dbContext.DailyEntries.Add(dailyEntry);
 
             foreach (var workshop in workshops)
             {
-                _dbContex.Workshops.Add(new Workshop
+                _dbContext.Workshops.Add(new Workshop
                 {
                     DailyEntry = dailyEntry,
                     Number = workshop.Number,

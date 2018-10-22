@@ -12,22 +12,22 @@ namespace SafeHouse.Business
 {
     public class CartonService : ICartonService
     {
-        private readonly SafeHouseContext _dbContex;
+        private readonly SafeHouseDbContext _dbContext;
         private readonly ICartonMapper _cartonMapper;
         private readonly IConfiguration _configuration;
 
         private int PageSize => _configuration.GetValue<int>(Constants.PageSize);
 
-        public CartonService(SafeHouseContext context, ICartonMapper cartonMapper, IConfiguration configuration)
+        public CartonService(SafeHouseDbContext context, ICartonMapper cartonMapper, IConfiguration configuration)
         {
-            _dbContex = context;
+            _dbContext = context;
             _cartonMapper = cartonMapper;
             _configuration = configuration;
         }
 
         public IEnumerable<CartonDto> Get(int? page)
         {
-            return _dbContex.Cartons
+            return _dbContext.Cartons
                 .Skip(((page ?? 1) - 1) * PageSize)
                 .Take(PageSize)
                 .Select(m => _cartonMapper.ToDto(m));
@@ -35,14 +35,14 @@ namespace SafeHouse.Business
 
         public CartonDto Get(Guid id)
         {
-            var entity = _dbContex.Cartons.Find(id);
+            var entity = _dbContext.Cartons.Find(id);
 
             return entity != null ? _cartonMapper.ToDto(entity) : null;
         }
 
         public int GetPageNumber()
         {
-            var itemsCount = _dbContex.Cartons.Count();
+            var itemsCount = _dbContext.Cartons.Count();
             var numberOfPages = itemsCount / PageSize;
 
             return IsDivideableByPageSize(itemsCount) ? numberOfPages : numberOfPages + 1;
@@ -50,20 +50,20 @@ namespace SafeHouse.Business
 
         public void Add(CartonDto carton)
         {
-            _dbContex.Cartons.Add(_cartonMapper.ToEntity(carton));
-            _dbContex.SaveChanges();
+            _dbContext.Cartons.Add(_cartonMapper.ToEntity(carton));
+            _dbContext.SaveChanges();
         }
 
         public void Update(CartonDto cartonNewValues)
         {
-            var carton = _dbContex.Cartons.Find(cartonNewValues.Id);
+            var carton = _dbContext.Cartons.Find(cartonNewValues.Id);
             if (carton == null)
             {
                 return;
             }
 
-            _dbContex.Entry(carton).CurrentValues.SetValues(_cartonMapper.ToEntity(cartonNewValues));
-            _dbContex.SaveChanges();
+            _dbContext.Entry(carton).CurrentValues.SetValues(_cartonMapper.ToEntity(cartonNewValues));
+            _dbContext.SaveChanges();
         }
 
         private bool IsDivideableByPageSize(int itemsCount) => itemsCount % PageSize == 0;

@@ -10,9 +10,9 @@ namespace SafeHouse.Business
 {
     public class EvaluationService : IEvaluationService
     {
-        private readonly SafeHouseContext _dbContext;
+        private readonly SafeHouseDbContext _dbContext;
 
-        public EvaluationService(SafeHouseContext context)
+        public EvaluationService(SafeHouseDbContext context)
         {
             _dbContext = context;
         }

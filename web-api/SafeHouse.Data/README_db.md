@@ -1,3 +1,7 @@
+Create new database in local instance of SQL Server
+---------------
+`CREATE DATABASE SafeHouse;`
+
 Add new migration
 ---------------
 `> cd .\SafeHouse.Data`

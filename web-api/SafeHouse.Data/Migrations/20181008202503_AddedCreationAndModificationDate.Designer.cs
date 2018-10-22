@@ -9,7 +9,7 @@ using SafeHouse.Data;
 
 namespace SafeHouse.Data.Migrations
 {
-    [DbContext(typeof(SafeHouseContext))]
+    [DbContext(typeof(SafeHouseDbContext))]
     [Migration("20181008202503_AddedCreationAndModificationDate")]
     partial class AddedCreationAndModificationDate
     {

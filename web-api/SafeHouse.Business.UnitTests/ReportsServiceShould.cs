@@ -17,12 +17,12 @@ namespace SafeHouse.Business.UnitTests
         [Fact]
         public void ReturnEmptyDataIfNoDailyEntriesFound()
         {
-            var options = new DbContextOptionsBuilder<SafeHouseContext>()
+            var options = new DbContextOptionsBuilder<SafeHouseDbContext>()
                 .UseInMemoryDatabase(databaseName: "InMemory")
                 .Options;
 
             // Run the test against one instance of the context
-            using(var context = new SafeHouseContext(options))
+            using(var context = new SafeHouseDbContext(options))
             {
                 var service = new ReportService(context);
                 ReportDataDto data = service.GetReportData(new ReportRequestDto { });
