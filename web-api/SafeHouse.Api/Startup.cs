@@ -22,9 +22,7 @@ namespace SafeHouse.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration.GetConnectionString("DefaultConnection");
-
-            services.AddDataServices(connection)
+            services.AddDataServices(Configuration.GetConnectionString("DefaultConnection"))
                 .AddBusinessServices();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -45,7 +43,7 @@ namespace SafeHouse.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SafeHouseContext db, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SafeHouseDbContext db, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {

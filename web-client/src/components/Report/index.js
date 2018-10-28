@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 
 import * as ReportActions from '../../actions/ReportActions';
 import ReportStore from '../../stores/ReportStore';

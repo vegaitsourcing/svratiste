@@ -12,9 +12,9 @@ namespace SafeHouse.Business
 {
     public class ReportService : IReportService
     {
-        private readonly SafeHouseContext _dbContext;
+        private readonly SafeHouseDbContext _dbContext;
 
-        public ReportService(SafeHouseContext context)
+        public ReportService(SafeHouseDbContext context)
         {
             _dbContext = context;
         }

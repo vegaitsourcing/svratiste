@@ -9,9 +9,9 @@ namespace SafeHouse.Business
 {
     public class IndividualPlanService : IIndividualPlanService
     {
-        private readonly SafeHouseContext _dbContext;
+        private readonly SafeHouseDbContext _dbContext;
 
-        public IndividualPlanService(SafeHouseContext context)
+        public IndividualPlanService(SafeHouseDbContext context)
         {
             _dbContext = context;
         }

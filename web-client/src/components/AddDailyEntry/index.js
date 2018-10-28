@@ -181,7 +181,7 @@ class AddDailyEntry extends Component {
     handleWorkshopTypesChange(items) {
         let oldWorkshops = this.state.workshops;
         let selectedWorkshops = items.map((workshop) => {
-            let currentIndex = oldWorkshops.find(ws => ws.WorkshopType == workshop.value);
+            let currentIndex = oldWorkshops.find(ws => ws.WorkshopType === workshop.value);
 
             return {
                 WorkshopType: workshop.value,

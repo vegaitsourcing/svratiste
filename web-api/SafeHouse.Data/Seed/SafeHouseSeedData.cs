@@ -8,7 +8,7 @@ namespace SafeHouse.Api
 {
     public static class SafeHouseSeedData
     {
-        public static void EnsureSeedData(this SafeHouseContext db)
+        public static void EnsureSeedData(this SafeHouseDbContext db)
         {
             if (!db.SuitabilityCaches.Any())
             {

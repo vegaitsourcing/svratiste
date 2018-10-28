@@ -30,8 +30,10 @@ namespace SafeHouse.Infrastructure
 
         public static IServiceCollection AddDataServices(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<SafeHouseContext>(options =>
-                options.UseSqlServer(connectionString, x => x.MigrationsAssembly("SafeHouse.Data")));
+            services.AddDbContext<SafeHouseDbContext>(options =>
+                options.UseSqlServer(
+                    connectionString,
+                    optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Data")));
             return services;
         }
     }

@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace SafeHouse.Data
 {
-    public class SafeHouseContext : DbContext
+    public class SafeHouseDbContext : DbContext
     {
-        public SafeHouseContext() : base()
+        public SafeHouseDbContext() : base()
         {
         }
 
-        public SafeHouseContext(DbContextOptions<SafeHouseContext> options) : base(options) { }
+        public SafeHouseDbContext(DbContextOptions<SafeHouseDbContext> options) : base(options) { }
 
         public virtual DbSet<SafeHouseUser> SafeHouseUsers { get; set; }
 
