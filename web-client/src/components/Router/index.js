@@ -7,6 +7,8 @@ import Cardboard from "../../views/Cardboard";
 import Reports from "../../views/Reports";
 import Evaluation from "../../views/Evaluation";
 
+import FirstEvaluationPrint from "../PrintViews/FirstEvaluation"
+
 const AppRouter = () => {
     return (
         <Switch>
@@ -18,6 +20,9 @@ const AppRouter = () => {
 
             {/* Evaluation */}
             <Route exact path="/evaluation/:id" component={Evaluation} />
+
+            {/* Print Firts Evaluation */}
+            <Route exact path="/first-evaluation/print/:id" component={FirstEvaluationPrint} />
 
             {/* Login */}
             <Route exact path="/login" component={Login} />
