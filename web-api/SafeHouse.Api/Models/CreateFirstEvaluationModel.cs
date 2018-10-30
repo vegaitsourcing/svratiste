@@ -1,4 +1,5 @@
 ﻿using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Data.Enums;
 using System;
 
 namespace SafeHouse.Api.Models
@@ -15,7 +16,7 @@ namespace SafeHouse.Api.Models
 
         public string GuardiansName { get; set; }
 
-        public string LivingSpace { get; set; }
+        public LivingSpaceEnum LivingSpace { get; set; }
 
         public string SchoolAndGrade { get; set; }
 
@@ -33,7 +34,7 @@ namespace SafeHouse.Api.Models
 
         public string DirectedToName { get; set; }
 
-        public string IndividualMovementAbility { get; set; }
+        public IndividualMovementAbilityEnum IndividualMovementAbility { get; set; }
 
         public string VerbalComunicationAbility { get; set; }
 

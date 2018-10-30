@@ -20,11 +20,10 @@ namespace SafeHouse.Api.Controllers
             _logger = logger;
         }
 
-        // Pass Carton Id into this one!
         [HttpGet("{id}")]
         public IndividualServicePlan Get(Guid id)
         {
-            return _individualPlanService.Get(id);
+            return _individualPlanService.GetByCartonId(id);
         }
 
         [HttpPost]

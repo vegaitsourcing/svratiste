@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Exceptions;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data;
 using SafeHouse.Data.Entities;
@@ -32,15 +33,30 @@ namespace SafeHouse.Business
             }
             else
             {
-                AddFirstEvaluation(evaluation);
+                AddFirstEvaluationIfDoesntExist(evaluation);
             }
         }
 
-        private void AddFirstEvaluation(CreateEvaluationRequest evaluation)
+        private void AddFirstEvaluationIfDoesntExist(CreateEvaluationRequest evaluation)
         {
             var carton = _dbContext.Cartons.Find(evaluation.CartonId);
 
-            var newEvaluation = new Evaluation
+            if(!_dbContext.Evaluations.Any(e => e.Carton.Id == evaluation.CartonId))
+            {
+                var newEvaluation = CreateEvaluationEntity(evaluation, carton); 
+
+                _dbContext.Evaluations.Add(newEvaluation);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new EvaluationExistsException($"Evaluation for carton with id {evaluation.CartonId} was created earlier.");
+            }
+        }
+
+        private Evaluation CreateEvaluationEntity(CreateEvaluationRequest evaluation, Carton carton)
+        {
+            return new Evaluation
             {
                 AdvicedLevelOfSupport = evaluation.AdvicedLevelOfSupport,
                 Age = evaluation.Age,
@@ -69,9 +85,6 @@ namespace SafeHouse.Business
                 SurroundRisks = evaluation.SurroundRisks,
                 SurroundStrenghts = evaluation.SurroundStrenghts,
             };
-
-            _dbContext.Evaluations.Add(newEvaluation);
-            _dbContext.SaveChanges();
         }
 
         private void UpdateFirstEvaluation(CreateEvaluationRequest evaluation)

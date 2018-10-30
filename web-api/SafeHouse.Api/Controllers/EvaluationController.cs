@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Exceptions;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data.Entities;
 
@@ -20,7 +21,6 @@ namespace SafeHouse.Api.Controllers
             _logger = logger;
         }
 
-        // Pass Carton Id into this one!
         [HttpGet("{id}")]
         public Evaluation Get(Guid id)
         {
@@ -35,9 +35,16 @@ namespace SafeHouse.Api.Controllers
                 _evaluationService.AddOrUpdate(model);
                 return HandleSuccessResult();
             }
+            catch(EvaluationExistsException ex)
+            {
+                _logger.LogError(ex.StackTrace);
+                _logger.LogError(ex.Message);
+                return HandleErrorResult(ex.Message);
+            }
             catch (Exception e)
             {
                 _logger.LogError("Error occured while adding new entity.", e);
+                _logger.LogError(e.StackTrace);
                 return HandleErrorResult();
             }
         }

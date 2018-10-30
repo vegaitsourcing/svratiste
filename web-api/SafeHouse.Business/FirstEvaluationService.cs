@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Exceptions;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data;
 using SafeHouse.Data.Entities;
@@ -36,17 +37,34 @@ namespace SafeHouse.Business
             }
             else
             {
-                AddFirstEvaluation(evaluation);
+                AddFirstEvaluationIfDoesntExist(evaluation);
             }
         }
 
-        private void AddFirstEvaluation(CreateFirstEvaluationRequest evaluation)
+        private void AddFirstEvaluationIfDoesntExist(CreateFirstEvaluationRequest evaluation)
         {
             var carton = _dbContext.Cartons.Find(evaluation.CartonId);
-            var suitabilityItems = new List<SuitabilityItem>();
-            if (evaluation.Suitability != null)
+            if (!_dbContext.FirstEvaluations.Any(fe => fe.Carton.Id == evaluation.CartonId))
             {
-                foreach (var ev in evaluation.Suitability.SuitabilityItems)
+                var suitabilityItems = PopulateSuitabilityItems(evaluation.Suitability).ToList();
+                var newEvaluation = CreateFirstEvaluation(evaluation, carton, suitabilityItems);
+
+                _dbContext.FirstEvaluations.Add(newEvaluation);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new FirstEvaluationExistsException($"First evaluation for carton with id {evaluation.CartonId} was created earlier.");
+            }
+        }
+
+        private IEnumerable<SuitabilityItem> PopulateSuitabilityItems(SuitabilityDto suitability)
+        {
+            var suitabilityItems = new List<SuitabilityItem>();
+
+            if (suitability != null)
+            {
+                foreach (var ev in suitability.SuitabilityItems)
                 {
                     suitabilityItems.Add(new SuitabilityItem
                     {
@@ -56,7 +74,12 @@ namespace SafeHouse.Business
                 }
             }
 
-            var newEvaluation = new FirstEvaluation
+            return suitabilityItems;
+        }
+
+        private FirstEvaluation CreateFirstEvaluation(CreateFirstEvaluationRequest evaluation, Carton carton, List<SuitabilityItem> suitabilityItems)
+        {
+            return new FirstEvaluation
             {
                 Attitude = evaluation.Attitude,
                 Capability = evaluation.Capability,
@@ -90,9 +113,6 @@ namespace SafeHouse.Business
                     SuitabilityItems = suitabilityItems
                 } : null
             };
-
-            _dbContext.FirstEvaluations.Add(newEvaluation);
-            _dbContext.SaveChanges();
         }
 
         private void UpdateFirstEvaluation(CreateFirstEvaluationRequest evaluation)

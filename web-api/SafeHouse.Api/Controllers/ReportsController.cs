@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using SafeHouse.Api.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using SafeHouse.Business.Contracts;
 using SafeHouse.Business.Contracts.Models;
-using SafeHouse.Data.Entities;
 
 namespace SafeHouse.Api.Controllers
 {

@@ -16,7 +16,7 @@ namespace SafeHouse.Business
             _dbContext = context;
         }
 
-        public IndividualServicePlan Get(Guid id)
+        public IndividualServicePlan GetByCartonId(Guid id)
         {
             return _dbContext.IndividualServicePlans.Include("Carton").First(x => x.Carton.Id == id);
         }
