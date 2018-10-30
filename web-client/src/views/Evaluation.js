@@ -93,7 +93,7 @@ class Evaluation extends Component {
                                         dateofBirth={DateOfBirth} />
                                 </div>
                             </div>}
-                            {(activeTab === 2) && <div className="tab">
+                            {(activeTab === 2) && <div className="tab show">
                                 <div className="tab-content">
                                     <EvaluationComponent />
                                 </div>
