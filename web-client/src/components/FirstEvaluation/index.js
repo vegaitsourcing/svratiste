@@ -47,6 +47,7 @@ class FirstEvaluation extends Component {
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
 
         this.onSave = this.onSave.bind(this);
+        this.onPrint = this.onPrint.bind(this);
     }
 
     componentWillMount() {
@@ -66,6 +67,10 @@ class FirstEvaluation extends Component {
 
     onSave() {
         EvaluationActions.createFirstEvaluation(this.state);
+    }
+
+    onPrint() {
+        window.open('/first-evaluation/print/' + this.state.cartonId, '_blank');
     }
 
     getEvaluation() {
@@ -313,7 +318,7 @@ class FirstEvaluation extends Component {
                     <button type="button" onClick={this.onSave} className="btn btn-custom">Save</button>
                 </div>
                 <div className="buttons">
-                    <button type="button" className="btn color-primary">Print</button>
+                    <button type="button" onClick={this.onPrint} className="btn color-primary">Print</button>
                     <button type="button" onClick={this.onSave} className="btn color-primary">Save</button>
                 </div>
             </div>

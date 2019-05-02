@@ -1,4 +1,5 @@
 ﻿using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Exceptions;
 using SafeHouse.Business.Contracts.Mappers;
 using SafeHouse.Business.Contracts.Models;
 using SafeHouse.Data;
@@ -24,14 +25,26 @@ namespace SafeHouse.Business
         public void Add(DailyEntryDto dailyEntryDto)
         {
             var carton = _dbContext.Cartons.Find(dailyEntryDto.CartonId);
-            var dailyEntry = _mapper.ToEntity(dailyEntryDto, carton);
+            if(!CheckIfDailyEntryExists(dailyEntryDto.CartonId))
+            {
+                var dailyEntry = _mapper.ToEntity(dailyEntryDto, carton);
 
-            AddWorkshopsToEntity(dailyEntryDto.Workshops, dailyEntry);
-            AddSchoolActivitiesToEntity(dailyEntryDto.SchoolAcivities, dailyEntry);
-            AddLifeSkillsToEntity(dailyEntryDto.LifeSkills, dailyEntry);
-            PerformPostDailyEntryAdditionActions(carton);
+                AddWorkshopsToEntity(dailyEntryDto.Workshops, dailyEntry);
+                AddSchoolActivitiesToEntity(dailyEntryDto.SchoolAcivities, dailyEntry);
+                AddLifeSkillsToEntity(dailyEntryDto.LifeSkills, dailyEntry);
+                PerformPostDailyEntryAdditionActions(carton);
 
-            _dbContext.SaveChanges();
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new DailyEntryExistsException($"Daily entry for day: {DateTime.Today} and Carton: {dailyEntryDto.CartonId} was created earlier.");
+            }
+        }
+
+        private bool CheckIfDailyEntryExists(Guid cartonId)
+        {
+            return _dbContext.DailyEntries.Any(de => de.Date == DateTime.Today && de.Carton.Id == cartonId);
         }
 
         private void AddLifeSkillsToEntity(LifeSkillEnum lifeSkills, DailyEntry dailyEntry)

@@ -288,23 +288,21 @@ namespace SafeHouse.Data.Migrations
                     b.Property<string>("Expectations")
                         .HasMaxLength(512);
 
-                    b.Property<DateTime>("FinishedEvaluation");
+                    b.Property<DateTime?>("FinishedEvaluation");
 
                     b.Property<string>("GuardiansName")
                         .HasMaxLength(512);
 
                     b.Property<bool>("HealthCard");
 
-                    b.Property<string>("IndividualMovementAbility")
-                        .HasMaxLength(512);
+                    b.Property<int>("IndividualMovementAbility");
 
                     b.Property<string>("Languages")
                         .HasMaxLength(256);
 
                     b.Property<DateTime>("LastModificationDate");
 
-                    b.Property<string>("LivingSpace")
-                        .HasMaxLength(128);
+                    b.Property<int>("LivingSpace");
 
                     b.Property<bool>("OnTheWaitingList");
 
@@ -328,7 +326,7 @@ namespace SafeHouse.Data.Migrations
 
                     b.Property<DateTime>("ServiceStart");
 
-                    b.Property<DateTime>("StartedEvaluation");
+                    b.Property<DateTime?>("StartedEvaluation");
 
                     b.Property<Guid?>("SuitabilityId");
 

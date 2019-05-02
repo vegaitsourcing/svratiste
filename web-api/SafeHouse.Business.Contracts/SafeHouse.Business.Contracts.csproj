@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SafeHouse.Data\SafeHouse.Data.csproj" />
   </ItemGroup>
 

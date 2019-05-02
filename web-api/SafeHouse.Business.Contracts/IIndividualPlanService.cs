@@ -5,7 +5,7 @@ namespace SafeHouse.Business.Contracts
 {
     public interface IIndividualPlanService
     {
-        IndividualServicePlan Get(Guid id);
+        IndividualServicePlan GetByCartonId(Guid id);
 
         void Add(IndividualServicePlan plan);
     }

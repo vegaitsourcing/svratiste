@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SafeHouse.Data.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SafeHouse.Data.Entities
@@ -15,9 +16,8 @@ namespace SafeHouse.Data.Entities
 
         [MaxLength(512)]
         public string GuardiansName { get; set; }
-
-        [MaxLength(128)]
-        public string LivingSpace { get; set; }
+        
+        public LivingSpaceEnum LivingSpace { get; set; }
 
         [MaxLength(512)]
         public string SchoolAndGrade { get; set; }
@@ -40,10 +40,8 @@ namespace SafeHouse.Data.Entities
 
         [MaxLength(512)]
         public string DirectedToName { get; set; }
-
-        //Procena Sposobnosti
-        [MaxLength(512)]
-        public string IndividualMovementAbility { get; set; }
+        
+        public IndividualMovementAbilityEnum IndividualMovementAbility { get; set; }
 
         [MaxLength(512)]
         public string VerbalComunicationAbility { get; set; }

@@ -1,5 +1,7 @@
-
 import React, { Component } from 'react';
+
+import EvaluationStore from '../../stores/EvaluationStore';
+
 
 class EvaluationComponent extends Component {
     constructor(props) {
@@ -7,6 +9,35 @@ class EvaluationComponent extends Component {
 
         this.state = {
         };
+
+        this.redirectToLogin = this.redirectToLogin.bind(this);
+
+        this.onSave = this.onSave.bind(this);
+        this.onPrint = this.onPrint.bind(this);
+    }
+
+    componentWillMount() {
+        EvaluationStore.on("unauthorized", this.redirectToLogin);
+    }
+
+    componentDidMount() {
+    }
+
+    componentWillUnmount() {
+        EvaluationStore.removeListener("unauthorized", this.redirectToLogin);
+    }
+    
+    redirectToLogin() {
+        localStorage.clear();
+        this.props.history.push('/login');
+    }
+
+    onSave() {
+        console.log('Save');
+    }
+
+    onPrint() {
+        console.log('Print');
     }
 
     render(){
@@ -67,11 +98,11 @@ class EvaluationComponent extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    <button type="button" className="btn btn-custom">Save</button>
+                    <button type="button" onClick={this.onSave} className="btn btn-custom">Save</button>
                 </div>
                 <div className="buttons">
-                    <button type="button" className="btn color-primary">Print</button>
-                    <button type="button" className="btn color-primary">Save</button>
+                    <button type="button" onClick={this.onPrint} className="btn color-primary">Print</button>
+                    <button type="button" onClick={this.onSave} className="btn color-primary">Save</button>
                 </div>
                 </div>                
         );

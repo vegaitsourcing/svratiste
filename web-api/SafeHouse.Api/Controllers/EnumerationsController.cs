@@ -46,6 +46,18 @@ namespace SafeHouse.Api.Controllers
             return EnumToNameValueList<WorkshopType>();
         }
 
+        [HttpGet("IndividualMovementAbilities")]
+        public ICollection<NameValueModel> GetIndividualMovementAbilities()
+        {
+            return EnumToNameValueList<IndividualMovementAbilityEnum>();
+        }
+
+        [HttpGet("LivingSpaces")]
+        public ICollection<NameValueModel> GetLivingSpaces()
+        {
+            return EnumToNameValueList<LivingSpaceEnum>();
+        }
+
         private ICollection<NameValueModel> EnumToNameValueList<T>()
         {
             var result = new List<NameValueModel> { };

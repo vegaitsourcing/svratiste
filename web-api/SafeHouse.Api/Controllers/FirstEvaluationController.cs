@@ -2,12 +2,14 @@
 using Microsoft.Extensions.Logging;
 using SafeHouse.Api.Models;
 using SafeHouse.Business.Contracts;
+using SafeHouse.Business.Contracts.Exceptions;
 using SafeHouse.Data.Entities;
 using System;
 
 namespace SafeHouse.Api.Controllers
 {
     [Produces("application/json")]
+    [Route("api/FirstEvaluation")]
     public class FirstEvaluationController : BaseController
     {
         private readonly IFirstEvaluationService _firstEvaluationService;
@@ -19,27 +21,32 @@ namespace SafeHouse.Api.Controllers
             _logger = logger;
         }
 
-        // Pass Carton Id into this one!
         [HttpGet]
-        [Route("api/FirstEvaluation/{id}")]
+        [Route("{id}")]
 		public FirstEvaluation Get(Guid id)
         {
             return _firstEvaluationService.GetByCartonId(id);
         }
 
         [HttpPost]
-        [Route("api/FirstEvaluation")]
-		public IActionResult Create([FromBody]CreateFirstEvaluationModel newValue)
+		public IActionResult Create([FromBody]CreateFirstEvaluationModel firstEvaluation)
         {
             try
             {
-                _firstEvaluationService.AddOrUpdate(newValue.ToCreateFirstEvaluationRequest());
+                _firstEvaluationService.AddOrUpdate(firstEvaluation.ToCreateFirstEvaluationRequest());
 
                 return HandleSuccessResult();
             }
+            catch (FirstEvaluationExistsException ex)
+            {
+                _logger.LogError(ex.StackTrace);
+                _logger.LogError(ex.Message);
+                return HandleErrorResult(ex.Message);
+            }
             catch (Exception e)
             {
-                _logger.LogError("Error occured while creating new record.", e);
+                _logger.LogError("Error occured while adding new entity.", e);
+                _logger.LogError(e.StackTrace);
                 return HandleErrorResult();
             }
         }

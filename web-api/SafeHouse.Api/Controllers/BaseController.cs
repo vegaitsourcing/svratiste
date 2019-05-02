@@ -15,12 +15,19 @@ namespace SafeHouse.Api.Controllers
 
         protected virtual IActionResult HandleSuccessResult()
         {
-            return Ok(new { Status = true });
+            return Ok(new
+            {
+                Status = true
+            });
         }
 
         protected virtual IActionResult HandleErrorResult(string message = "An error occured")
         {
-            return Ok(new { Status = false, Message = message });
+            return Ok(new
+            {
+                Status = false,
+                Message = message
+            });
         }
     }
 }

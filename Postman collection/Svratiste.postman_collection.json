@@ -53,7 +53,7 @@
 				{
 					"name": "Get Cartons for Page",
 					"request": {
-						"url": "{{url}}/api/Carton/{{pageNumber}}",
+						"url": "{{url}}/api/Carton/GetByPageNumber/{{pageNumber}}",
 						"method": "GET",
 						"header": [
 							{
@@ -86,7 +86,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"FirstName\":\"John3\",\n\t\"LastName\":\"Dove3\",\n\t\"Nickname\":\"JD3\",\n\t\"Gender\":\"Female\",\n\t\"DateOfBirth\":\"10/23/1995\",\n\t\"NumberOfVisits\":1,\n\t\"AddressStreetName\":\"Novosadskog Sajma\",\n\t\"AddressStreetNumber\":\"13\",\n\t\"FathersName\":\"Theo3\",\n\t\"MothersName\":\"Rea3\",\n\t\"InitialEvaluationDone\": \"True\",\n\t\"EvaluationDone\":\"False\",\n\t\"IndividualPlanDone\":\"True\",\n\t\"IndividualPlanRevised\":\"False\",\n}"
+							"raw": "{\n\t\"FirstName\":\"John31\",\n\t\"LastName\":\"Dove3\",\n\t\"Nickname\":\"JD3\",\n\t\"Gender\":\"Female\",\n\t\"DateOfBirth\":\"10/23/1995\",\n\t\"NumberOfVisits\":1,\n\t\"AddressStreetName\":\"Novosadskog Sajma\",\n\t\"AddressStreetNumber\":\"13\",\n\t\"FathersName\":\"Theo3\",\n\t\"MothersName\":\"Rea3\",\n\t\"InitialEvaluationDone\": \"True\",\n\t\"EvaluationDone\":\"False\",\n\t\"IndividualPlanDone\":\"True\",\n\t\"IndividualPlanRevised\":\"False\",\n}"
 						},
 						"description": ""
 					},
@@ -289,8 +289,171 @@
 						"description": ""
 					},
 					"response": []
+				},
+				{
+					"name": "Individual Movement Abilities",
+					"request": {
+						"url": "{{url}}/api/Enumerations/IndividualMovementAbilities",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Living Spaces",
+					"request": {
+						"url": "{{url}}/api/Enumerations/LivingSpaces",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "Evaluation",
+			"description": "",
+			"item": [
+				{
+					"name": " Create Evaluation",
+					"request": {
+						"url": "{{url}}/api/Evaluation",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"CartonId\":\"56811108-35ee-4129-5cd1-08d62af3392d\",\n\t\"Age\": 18,\n\t\"FamilyMembers\":\"FamilyMembers\",\n\t\"SchoolStatus\":\"SchoolStatus\",\n\t\"CaseLeader\":\"CaseLeader\",\n\t\"DedicatedWorker\":\"DedicatedWorker\",\n\t\"OtherMembers\":\"OtherMembers\",\n\t\"BasicPhysicalNeeds\":\"BasicPhysicalNeeds\",\n\t\"PsyhoSocialNeeds\":\"PsyhoSocialNeeds\",\n\t\"EducationalNeeds\":\"EducationalNeeds\",\n\t\"OtherNeeds\":\"OtherNeeds\",\n\t\"DominantEmotions\":\"DominantEmotions\",\n\t\"DominantBehaviors\":\"DominantBehaviors\",\n\t\"SurroundStrenghts\":\"SurroundStrenghts\",\n\t\"FamilyStrenghts\":\"FamilyStrenghts\",\n\t\"PersonalStrenghts\":\"PersonalStrenghts\",\n\t\"OtherStrenghts\":\"OtherStrenghts\",\n\t\"SurroundRisks\":\"SurroundRisks\",\n\t\"FamilyRisks\":\"FamilyRisks\",\n\t\"BehaviorRisks\":\"BehaviorRisks\",\n\t\"OtherRisks\":\"OtherRisks\",\n\t\"Capabilities\":\"Capabilities\",\n\t\"CulturalSpecifics\":\"CulturalSpecifics\",\n\t\"AdvicedLevelOfSupport\":\"AdvicedLevelOfSupport\",\n\t\"EvaluationDoneBy\":\"EvaluationDoneBy\",\n\t\"Date\":\"10-10-2018\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Evaluation By Carton Id",
+					"request": {
+						"url": "{{url}}/api/Evaluation/56811108-35ee-4129-5cd1-08d62af3392d",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "First Evaluation",
+			"description": "",
+			"item": [
+				{
+					"name": "Create First Evaluation",
+					"request": {
+						"url": "{{url}}/api/FirstEvaluation",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"CartonId\":\"56811108-35ee-4129-5cd1-08d62af3392d\",\n\t\"OtherChildernName\":\"OtherChildernName\",\n\t\"OtherMembersName\":\"OtherMembersName\",\n\t\"GuardiansName\":\"GuardiansName\",\n\t\"LivingSpace\": 1,\n\t\"SchoolAndGrade\":\"SchoolAndGrade\",\n\t\"Languages\":\"Languages\",\n\t\"HealthCard\":\"true\",\n\t\"CaseLeaderName\":\"CaseLeaderName\",\n\t\"Capability\":\"true\",\n\t\"OnTheWaitingList\":\"false\",\n\t\"ServiceStart\":\"10-10-2018\",\n\t\"DirectedToName\":\"DirectedToName\",\n\t\"IndividualMovementAbility\": 0,\n\t\"VerbalComunicationAbility\":\"VerbalComunicationAbility\",\n\t\"PhysicalDescription\":\"PhysicalDescription\",\n\t\"DiagnosedDisease\":\"DiagnosedDisease\",\n\t\"PriorityNeeds\":\"PriorityNeeds\",\n\t\"Attitude\":\"Attitude\",\n\t\"Expectations\":\"Expectations\",\n\t\"DirectedFromName\":\"DirectedFromName\",\n\t\"Other\":\"Other\",\n\t\"StartedEvaluation\":\"10-10-2018\",\n\t\"FinishedEvaluation\":\"10-10-2018\",\n\t\"EvaluationDoneBy\":\"EvaluationDoneBy\",\n\t\"EvaluationRevisedBy\":\"EvaluationRevisedBy\",\n\t\"Suitability\": {\n\t\t\"Description\":\"SuitabilityDescription\",\n\t\t\"SuitabilityItems\": [{\n\t\t\t\"Description\":\"Description\",\n\t\t\t\"SuitabilityCache\": \n\t\t\t{\n\t\t\t\t\"Id\":\"70c24e56-4baf-44e8-edf6-08d6295acdbe\"\t\n\t\t\t}\n\t\t\t\n\t\t},\n\t\t{\n\t\t\t\"Description\":\"Description\",\n\t\t\t\"SuitabilityCache\": \n\t\t\t{\n\t\t\t\t\"Id\":\"e9e1123e-4164-420d-edf5-08d6295acdbe\"\t\n\t\t\t}\n\t\t}]\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get First Evaluation By Carton Id",
+					"request": {
+						"url": "{{url}}/api/FirstEvaluation/56811108-35ee-4129-5cd1-08d62af3392d",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Suitability",
+			"description": "",
+			"item": [
+				{
+					"name": "All Suitability Cache Items",
+					"request": {
+						"url": "{{url}}/api/suitableItem",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Individual Plan",
+			"description": "",
+			"item": []
 		}
 	]
 }

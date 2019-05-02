@@ -17,7 +17,7 @@ namespace SafeHouse.Business.Mappers
             return new DailyEntry()
             {
                 Carton = carton,
-                Date = DateTime.Now,
+                Date = DateTime.Today,
                 Meal = meal,
                 Bath = dto.Bath,
                 LiecesRemoval = dto.LiecesRemoval,
