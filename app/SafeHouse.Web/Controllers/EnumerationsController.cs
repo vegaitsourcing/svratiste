@@ -1,73 +1,72 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using SafeHouse.Core.Entities.Enums;
+using SafeHouse.Web.Models;
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using SafeHouse.Api.Models;
-using SafeHouse.Data.Enums;
+using System.Linq;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [Route("api/Enumerations")]
     [ApiController]
     public class EnumerationsController : BaseController
     {
         [HttpGet("LifeSkills")]
-        public ICollection<NameValueModel> GetLifeSkills()
+        public IEnumerable<NameValueModel> GetLifeSkills()
         {
-            return EnumToNameValueList<LifeSkillEnum>();
+            return GetEnumToNameValuePairs<LifeSkill>();
         }
 
         [HttpGet("MediationSpeakings")]
-        public ICollection<NameValueModel> GetMediationSpeakings()
+        public IEnumerable<NameValueModel> GetMediationSpeakings()
         {
-            return EnumToNameValueList<MediationSpeakingEnum>();
+            return GetEnumToNameValuePairs<MediationSpeaking>();
         }
 
         [HttpGet("MediationWritings")]
-        public ICollection<NameValueModel> GetMediationWritings()
+        public IEnumerable<NameValueModel> GetMediationWritings()
         {
-            return EnumToNameValueList<MediationWritingEnum>();
+            return GetEnumToNameValuePairs<MediationWriting>();
         }
 
         [HttpGet("MedicalInterventions")]
-        public ICollection<NameValueModel> GetMedicalInterventions()
+        public IEnumerable<NameValueModel> GetMedicalInterventions()
         {
-            return EnumToNameValueList<MedicalInterventionsEnum>();
+            return GetEnumToNameValuePairs<MedicalInterventions>();
         }
 
         [HttpGet("SchoolActivities")]
-        public ICollection<NameValueModel> GetSchoolActivities()
+        public IEnumerable<NameValueModel> GetSchoolActivities()
         {
-            return EnumToNameValueList<SchoolActivityEnum>();
+            return GetEnumToNameValuePairs<SchoolActivity>();
         }
 
         [HttpGet("WorkshopTypes")]
-        public ICollection<NameValueModel> GetWorkshopTypes()
+        public IEnumerable<NameValueModel> GetWorkshopTypes()
         {
-            return EnumToNameValueList<WorkshopType>();
+            return GetEnumToNameValuePairs<WorkshopType>();
         }
 
         [HttpGet("IndividualMovementAbilities")]
-        public ICollection<NameValueModel> GetIndividualMovementAbilities()
+        public IEnumerable<NameValueModel> GetIndividualMovementAbilities()
         {
-            return EnumToNameValueList<IndividualMovementAbilityEnum>();
+            return GetEnumToNameValuePairs<IndividualMovementAbility>();
         }
 
         [HttpGet("LivingSpaces")]
-        public ICollection<NameValueModel> GetLivingSpaces()
+        public IEnumerable<NameValueModel> GetLivingSpaces()
         {
-            return EnumToNameValueList<LivingSpaceEnum>();
+            return GetEnumToNameValuePairs<LivingSpace>();
         }
 
-        private ICollection<NameValueModel> EnumToNameValueList<T>()
+        private IEnumerable<NameValueModel> GetEnumToNameValuePairs<T>()
         {
-            var result = new List<NameValueModel> { };
-
-            foreach (var type in Enum.GetValues(typeof(T)))
-            {
-                result.Add(new NameValueModel { Value = (int)type, Name = ((T)type).ToString() });
-            }
-
-            return result;
+            return Enum.GetNames(typeof(T))
+                .Select(name => new NameValueModel
+                {
+                    Name = name,
+                    Value = (int)Enum.Parse(typeof(T), name)
+                });
         }
     }
 }

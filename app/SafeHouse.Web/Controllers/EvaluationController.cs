@@ -1,12 +1,12 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Business.Contracts.Exceptions;
-using SafeHouse.Business.Contracts.Models;
-using SafeHouse.Data.Entities;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Entities;
+using SafeHouse.Core.Models;
+using System;
+using SafeHouse.Core.Abstractions.Exceptions;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
     [Route("api/Evaluation")]
@@ -32,10 +32,11 @@ namespace SafeHouse.Api.Controllers
         {
             try
             {
-                _evaluationService.AddOrUpdate(model);
+                // TODO: add or update
+                _evaluationService.AddFirstEvaluation(model);
                 return HandleSuccessResult();
             }
-            catch(EvaluationExistsException ex)
+            catch (EvaluationExistsException ex)
             {
                 _logger.LogError(ex.StackTrace);
                 _logger.LogError(ex.Message);

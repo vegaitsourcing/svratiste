@@ -1,14 +1,14 @@
-using Microsoft.Extensions.Configuration;
-using SafeHouse.Core.Entities;
-using SafeHouse.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 using SafeHouse.Core.Abstractions;
-using SafeHouse.Core.Abstractions.Data;
 using SafeHouse.Core.Abstractions.Mappers;
+using SafeHouse.Core.Abstractions.Persistence;
+using SafeHouse.Core.Entities;
+using SafeHouse.Core.Models;
 
-namespace SafeHouse.Core
+namespace SafeHouse.Core.UseCases
 {
     public class CartonService : ICartonService
     {
@@ -48,6 +48,11 @@ namespace SafeHouse.Core
         public void Update(CartonDto cartonNewValues)
         {
             //
+        }
+
+        public int GetPageNumber()
+        {
+            throw new NotImplementedException();
         }
     }
 }

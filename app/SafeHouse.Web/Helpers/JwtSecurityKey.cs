@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace SafeHouse.Api.Helpers
+namespace SafeHouse.Web.Helpers
 {
     public static class JwtSecurityKey
     {

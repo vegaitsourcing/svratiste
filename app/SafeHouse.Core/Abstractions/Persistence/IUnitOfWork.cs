@@ -1,4 +1,4 @@
-﻿namespace SafeHouse.Core.Abstractions.Data
+﻿namespace SafeHouse.Core.Abstractions.Persistence
 {
     public interface IUnitOfWork
     {

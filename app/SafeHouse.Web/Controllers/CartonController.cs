@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Models;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
     public class CartonController : BaseController

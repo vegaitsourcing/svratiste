@@ -1,12 +1,12 @@
-﻿using SafeHouse.Core.Abstractions;
-using SafeHouse.Core.Abstractions.Data;
+﻿using System;
+using System.Linq;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Abstractions.Persistence;
 using SafeHouse.Core.Entities;
 using SafeHouse.Core.Helpers;
 using SafeHouse.Core.Models;
-using System;
-using System.Linq;
 
-namespace SafeHouse.Core
+namespace SafeHouse.Core.UseCases
 {
     public class AccountService : IAccountService
     {

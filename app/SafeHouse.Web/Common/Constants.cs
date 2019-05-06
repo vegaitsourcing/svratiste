@@ -1,4 +1,4 @@
-﻿namespace SafeHouse.Api.Common
+﻿namespace SafeHouse.Web.Common
 {
     public static class Constants
     {

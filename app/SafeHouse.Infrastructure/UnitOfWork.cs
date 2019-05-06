@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using SafeHouse.Core.Abstractions.Data;
 using SafeHouse.Infrastructure.Data;
 using System.Data;
+using SafeHouse.Core.Abstractions.Persistence;
 
 namespace SafeHouse.Infrastructure
 {

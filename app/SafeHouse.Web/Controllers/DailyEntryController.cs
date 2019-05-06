@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Business.Contracts.Exceptions;
-using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Abstractions.Exceptions;
+using SafeHouse.Core.Models;
 using System;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
     public class DailyEntryController : BaseController

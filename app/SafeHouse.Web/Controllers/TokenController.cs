@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using SafeHouse.Api.Helpers;
-using SafeHouse.Api.Models;
-using SafeHouse.Business.Contracts;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Web.Helpers;
+using SafeHouse.Web.Models;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [EnableCors("SafeHouseCorsPolicy")]
     [Produces("application/json")]
@@ -31,7 +31,7 @@ namespace SafeHouse.Api.Controllers
                 return BadRequest();
             }
 
-            var userId = _accountService.GetUserIdIfCredentialsAreValid(model.ToCheckCredentialsRequest());
+            var userId = _accountService.GetUserIdForCredentials(model.ToCheckCredentialsRequest());
 
             if (!userId.HasValue)
             {
@@ -49,6 +49,5 @@ namespace SafeHouse.Api.Controllers
 
             return Ok(new { Token = token.Value });
         }
-
     }
 }

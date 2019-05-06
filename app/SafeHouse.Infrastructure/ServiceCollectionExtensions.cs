@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Core;
 using SafeHouse.Core.Abstractions;
 using SafeHouse.Core.Helpers;
+using SafeHouse.Core.UseCases;
 using SafeHouse.Infrastructure.Data;
 using SafeHouse.Infrastructure.Mappers;
 
@@ -10,7 +11,7 @@ namespace SafeHouse.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddBusinessServices(this IServiceCollection services)
+        public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICartonService, CartonService>();

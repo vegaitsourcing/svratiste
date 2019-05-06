@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SafeHouse.Core.Entities;
 using SafeHouse.Core.Models;
+using SafeHouse.Core.UseCases;
 using SafeHouse.Infrastructure;
 using SafeHouse.Infrastructure.Data;
 using Xunit;

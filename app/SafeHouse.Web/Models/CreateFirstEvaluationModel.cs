@@ -1,8 +1,8 @@
-﻿using SafeHouse.Business.Contracts.Models;
-using SafeHouse.Data.Enums;
+﻿using SafeHouse.Core.Entities.Enums;
+using SafeHouse.Core.Models;
 using System;
 
-namespace SafeHouse.Api.Models
+namespace SafeHouse.Web.Models
 {
     public class CreateFirstEvaluationModel
     {
@@ -10,13 +10,13 @@ namespace SafeHouse.Api.Models
 
         public Guid CartonId { get; set; }
 
-        public string OtherChildernName { get; set; }
+        public string OtherChildrenName { get; set; }
 
         public string OtherMembersName { get; set; }
 
         public string GuardiansName { get; set; }
 
-        public LivingSpaceEnum LivingSpace { get; set; }
+        public LivingSpace LivingSpace { get; set; }
 
         public string SchoolAndGrade { get; set; }
 
@@ -34,9 +34,9 @@ namespace SafeHouse.Api.Models
 
         public string DirectedToName { get; set; }
 
-        public IndividualMovementAbilityEnum IndividualMovementAbility { get; set; }
+        public IndividualMovementAbility IndividualMovementAbility { get; set; }
 
-        public string VerbalComunicationAbility { get; set; }
+        public string VerbalCommunicationAbility { get; set; }
 
         public string PhysicalDescription { get; set; }
 
@@ -83,16 +83,16 @@ namespace SafeHouse.Api.Models
                 LivingSpace = LivingSpace,
                 OnTheWaitingList = OnTheWaitingList,
                 Other = Other,
-                OtherChildernName = OtherChildernName,
+                OtherChildrenName = OtherChildrenName,
                 OtherMembersName = OtherMembersName,
-                PhysicalDescription = PhysicalDescription, 
+                PhysicalDescription = PhysicalDescription,
                 PriorityNeeds = PriorityNeeds,
                 SchoolAndGrade = SchoolAndGrade,
                 ServiceStart = ServiceStart,
                 FinishedEvaluation = FinishedEvaluation,
                 StartedEvaluation = StartedEvaluation,
                 Suitability = Suitability,
-                VerbalComunicationAbility = VerbalComunicationAbility,
+                VerbalComunicationAbility = VerbalCommunicationAbility,
                 CartonId = CartonId
             };
         }

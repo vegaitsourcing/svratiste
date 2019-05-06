@@ -1,7 +1,7 @@
-﻿using SafeHouse.Business.Contracts.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using SafeHouse.Core.Models;
 
-namespace SafeHouse.Api.Models
+namespace SafeHouse.Web.Models
 {
     public class LoginCredentialsModel
     {

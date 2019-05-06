@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SafeHouse.Api.Models;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Business.Contracts.Exceptions;
-using SafeHouse.Data.Entities;
-using System;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Abstractions.Exceptions;
+using SafeHouse.Core.Entities;
+using SafeHouse.Web.Models;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
     [Route("api/FirstEvaluation")]

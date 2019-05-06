@@ -1,15 +1,17 @@
-﻿using SafeHouse.Core.Abstractions;
-using SafeHouse.Core.Abstractions.Data;
-using SafeHouse.Core.Abstractions.Mappers;
-using SafeHouse.Core.Entities;
-using SafeHouse.Core.Exceptions;
-using SafeHouse.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Abstractions.Exceptions;
+using SafeHouse.Core.Abstractions.Mappers;
+using SafeHouse.Core.Abstractions.Persistence;
+using SafeHouse.Core.Entities;
+using SafeHouse.Core.Models;
 using Enums = SafeHouse.Core.Entities.Enums;
+using LifeSkill = SafeHouse.Core.Entities.LifeSkill;
+using SchoolActivity = SafeHouse.Core.Entities.SchoolActivity;
 
-namespace SafeHouse.Core
+namespace SafeHouse.Core.UseCases
 {
     public class DailyEntryService : IDailyEntryService
     {

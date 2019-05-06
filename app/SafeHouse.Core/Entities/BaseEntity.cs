@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using SafeHouse.Core.Abstractions.Data;
+using SafeHouse.Core.Abstractions.Persistence;
 
 namespace SafeHouse.Core.Entities
 {

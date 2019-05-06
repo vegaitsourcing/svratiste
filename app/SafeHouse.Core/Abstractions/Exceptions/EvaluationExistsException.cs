@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SafeHouse.Core.Exceptions
+namespace SafeHouse.Core.Abstractions.Exceptions
 {
     public class EvaluationExistsException : Exception
     {

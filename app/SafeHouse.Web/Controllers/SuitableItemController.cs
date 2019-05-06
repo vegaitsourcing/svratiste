@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Business.Contracts.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Models;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
     [Route("api/suitableItem")]

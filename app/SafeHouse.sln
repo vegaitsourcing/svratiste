@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeHouse.Web", "SafeHouse.Web\SafeHouse.Web.csproj", "{940F8581-CB1C-47A6-9CB9-401F1FAD80A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeHouse.Core", "SafeHouse.Core\SafeHouse.Core.csproj", "{157FC28F-D09F-412C-918E-73A210142870}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeHouse.Core", "SafeHouse.Core\SafeHouse.Core.csproj", "{157FC28F-D09F-412C-918E-73A210142870}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeHouse.Infrastructure", "SafeHouse.Infrastructure\SafeHouse.Infrastructure.csproj", "{74650D9F-8E09-4CBB-AD46-B2E12033676C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeHouse.Infrastructure", "SafeHouse.Infrastructure\SafeHouse.Infrastructure.csproj", "{74650D9F-8E09-4CBB-AD46-B2E12033676C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeHouse.Core.Tests", "SafeHouse.Core.Tests\SafeHouse.Core.Tests.csproj", "{25A9A2EA-9A3C-4F56-9BB4-219C3390C635}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeHouse.Core.Tests", "SafeHouse.Core.Tests\SafeHouse.Core.Tests.csproj", "{25A9A2EA-9A3C-4F56-9BB4-219C3390C635}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SafeHouse.Core.Models;
+using System;
 using System.Collections.Generic;
-using SafeHouse.Core.Models;
 
 namespace SafeHouse.Core.Abstractions
 {
@@ -13,5 +13,7 @@ namespace SafeHouse.Core.Abstractions
         void Add(CartonDto carton);
 
         void Update(CartonDto cartonNewValues);
+
+        int GetPageNumber();
     }
 }

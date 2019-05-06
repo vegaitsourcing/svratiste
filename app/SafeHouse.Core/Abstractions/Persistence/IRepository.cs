@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace SafeHouse.Core.Abstractions.Data
+namespace SafeHouse.Core.Abstractions.Persistence
 {
     public interface IRepository<TEntity> where TEntity : IDomainEntity
     {

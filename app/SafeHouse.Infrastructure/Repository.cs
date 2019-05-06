@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SafeHouse.Core.Abstractions.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using SafeHouse.Core.Abstractions.Persistence;
 
 namespace SafeHouse.Infrastructure
 {

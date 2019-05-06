@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Data.Entities;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Entities;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
     [Route("api/IndividualPlan")]

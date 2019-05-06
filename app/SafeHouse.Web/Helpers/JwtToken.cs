@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace SafeHouse.Api.Helpers
+namespace SafeHouse.Web.Helpers
 {
     public sealed class JwtToken
     {

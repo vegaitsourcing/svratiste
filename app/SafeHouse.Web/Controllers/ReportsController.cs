@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SafeHouse.Business.Contracts;
-using SafeHouse.Business.Contracts.Models;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Models;
 
-namespace SafeHouse.Api.Controllers
+namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
     [Route("api/reports")]
@@ -18,7 +18,7 @@ namespace SafeHouse.Api.Controllers
         [HttpPost]
         public IActionResult FindReportData([FromBody] ReportRequestDto request)
         {
-            ReportDataDto reportData = _reportService.GetReportData(request);
+            ReportDataDto reportData = _reportService.GetReport(request);
             return Ok(reportData);
         }
     }
