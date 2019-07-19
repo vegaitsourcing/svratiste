@@ -31,11 +31,13 @@ namespace SafeHouse.Infrastructure.Data.Seed
 
             if (!db.SafeHouseUsers.Any())
             {
+                // Username: admin
+                // Password: admin
                 db.SafeHouseUsers.Add(new SafeHouseUser
                 {
                     CommonName = "SafeHouse Administrator",
                     Username = "admin",
-                    Password = "$2a$10$smR2P.jjOez5efnnaSle2uTlGJIzv2TLH9OTlR2b7aYICVARBOVga"
+                    Password = "$2y$12$vDDFGNGdrRy.eYRpYBJh4.TziOKDocvoo.nxD8WkWkhGMxCQapFGq"
                 });
             }
 

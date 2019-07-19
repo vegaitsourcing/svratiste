@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,6 +26,7 @@ namespace SafeHouse.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDataServices(Configuration.GetConnectionString("DefaultConnection"));
             services.AddDomainServices();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -44,19 +44,10 @@ namespace SafeHouse.Web
             }));
 
             services.AddAuthorizationServices(Configuration);
-
-            if (Environment.IsDevelopment())
-            {
-                services.AddDbContext<SafeHouseDbContext>(options => options.UseInMemoryDatabase("test"));
-            }
-            else
-            {
-                services.AddDataServices(Configuration.GetConnectionString("DefaultConnection"));
-            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SafeHouseDbContext db, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -69,7 +60,7 @@ namespace SafeHouse.Web
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseAuthentication();
@@ -93,8 +84,6 @@ namespace SafeHouse.Web
             });
 
             loggerFactory.AddFile("Logs/safe-house-{Date}.txt");
-
-            db.EnsureSeedData();
         }
     }
 }

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
 using SafeHouse.Core.Abstractions;
 using SafeHouse.Core.Abstractions.Mappers;
 using SafeHouse.Core.Abstractions.Persistence;
+using SafeHouse.Core.Common;
 using SafeHouse.Core.Entities;
 using SafeHouse.Core.Models;
 
@@ -14,23 +14,19 @@ namespace SafeHouse.Core.UseCases
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Carton> _cartonRepository;
-        private readonly IConfiguration _configuration;
         private readonly ICartonMapper _cartonMapper;
-        private int PageSize => _configuration.GetValue<int>("PageSize");
 
-        public CartonService(IUnitOfWork unitOfWork, IRepository<Carton> cartonRepository,
-            IConfiguration configuration, ICartonMapper cartonMapper)
+        public CartonService(IUnitOfWork unitOfWork, IRepository<Carton> cartonRepository, ICartonMapper cartonMapper)
         {
             _unitOfWork = unitOfWork;
             _cartonRepository = cartonRepository;
-            _configuration = configuration;
             _cartonMapper = cartonMapper;
         }
 
         public IEnumerable<CartonDto> Get(int page)
             => _cartonRepository.GetAll()
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize)
+                .Skip((page - 1) * Constants.PageSize)
+                .Take(Constants.PageSize)
                 .Select(c => _cartonMapper.ToDto(c));
 
         public CartonDto Get(Guid id)
@@ -52,7 +48,7 @@ namespace SafeHouse.Core.UseCases
 
         public int GetPageNumber()
         {
-            throw new NotImplementedException();
+           return _cartonRepository.GetAll().Count() / Constants.PageSize + 1;
         }
     }
 }

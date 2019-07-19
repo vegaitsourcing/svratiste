@@ -2,6 +2,6 @@
 {
     public static class Constants
     {
-        public const string PageSize = "PageSize";
+        public static readonly int PageSize = 10;
     }
 }

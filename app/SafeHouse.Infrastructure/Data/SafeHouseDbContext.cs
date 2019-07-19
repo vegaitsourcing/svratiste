@@ -46,6 +46,11 @@ namespace SafeHouse.Infrastructure.Data
         public SafeHouseDbContext(DbContextOptions<SafeHouseDbContext> options) : base(options)
         {
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer("Server=.;Database=VegaIT.SafeHouse.Development;persist security info=True;user id=svratiste.dev;password=e(NW#4Ysjc4F@5n");
+        }
 
         public override int SaveChanges()
         {

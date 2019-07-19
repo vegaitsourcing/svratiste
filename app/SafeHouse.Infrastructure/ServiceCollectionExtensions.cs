@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Core;
 using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Abstractions.Mappers;
+using SafeHouse.Core.Abstractions.Persistence;
 using SafeHouse.Core.Helpers;
 using SafeHouse.Core.UseCases;
 using SafeHouse.Infrastructure.Data;
@@ -21,19 +23,22 @@ namespace SafeHouse.Infrastructure
             //services.AddTransient<ISuitableItemService, SuitableItemService>();
             //services.AddTransient<IIndividualPlanService, IndividualPlanService>();
             //services.AddTransient<IDailyEntryService, DailyEntryService>();
-            services.AddSingleton<CartonMapper>();
-            services.AddSingleton<DailyEntryMapper>();
+            services.AddSingleton<ICartonMapper, CartonMapper>();
+            services.AddSingleton<IDailyEntryMapper, DailyEntryMapper>();
             services.AddSingleton<HashingHelper>();
             return services;
         }
 
         public static IServiceCollection AddDataServices(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<SafeHouseDbContext>(options =>
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient(typeof(UnitOfWork));
+            services.AddTransient<IRepository<Core.Entities.SafeHouseUser>, Repository<Core.Entities.SafeHouseUser>>();
+            services.AddTransient<IRepository<Core.Entities.Carton>, Repository<Core.Entities.Carton>>();
+            return services.AddDbContext<SafeHouseDbContext>(options =>
                 options.UseSqlServer(
                     connectionString,
-                    optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Data")));
-            return services;
+                    optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Infrastructure")));
         }
     }
 }
