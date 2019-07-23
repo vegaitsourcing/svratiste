@@ -6,7 +6,6 @@ import AppRouter from './components/Router';
 const App = () => {
     return (
         <div className="content">
-            <Header />
 
             <AppRouter />
         </div>
