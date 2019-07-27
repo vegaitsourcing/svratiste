@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using SafeHouse.Core.Abstractions.Persistence;
 
-namespace SafeHouse.Infrastructure
+namespace SafeHouse.Infrastructure.Data
 {
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDomainEntity

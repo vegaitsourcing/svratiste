@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SafeHouse.Infrastructure;
-using SafeHouse.Infrastructure.Data;
-using SafeHouse.Infrastructure.Data.Seed;
 using SafeHouse.Web.Extensions;
 
 namespace SafeHouse.Web

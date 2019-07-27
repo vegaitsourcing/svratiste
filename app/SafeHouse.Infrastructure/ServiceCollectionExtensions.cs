@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SafeHouse.Core;
 using SafeHouse.Core.Abstractions;
 using SafeHouse.Core.Abstractions.Mappers;
 using SafeHouse.Core.Abstractions.Persistence;
@@ -17,12 +16,12 @@ namespace SafeHouse.Infrastructure
         {
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICartonService, CartonService>();
-            //services.AddTransient<IReportService, ReportService>();
-            //services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
-            //services.AddTransient<IEvaluationService, EvaluationService>();
-            //services.AddTransient<ISuitableItemService, SuitableItemService>();
-            //services.AddTransient<IIndividualPlanService, IndividualPlanService>();
-            //services.AddTransient<IDailyEntryService, DailyEntryService>();
+            services.AddTransient<IReportService, ReportService>();
+            // services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
+            services.AddTransient<IEvaluationService, EvaluationService>();
+            // services.AddTransient<ISuitableItemService, SuitableItemService>();
+            // services.AddTransient<IIndividualPlanService, IndividualPlanService>();
+            services.AddTransient<IDailyEntryService, DailyEntryService>();
             services.AddSingleton<ICartonMapper, CartonMapper>();
             services.AddSingleton<IDailyEntryMapper, DailyEntryMapper>();
             services.AddSingleton<HashingHelper>();
@@ -35,6 +34,7 @@ namespace SafeHouse.Infrastructure
             services.AddTransient(typeof(UnitOfWork));
             services.AddTransient<IRepository<Core.Entities.SafeHouseUser>, Repository<Core.Entities.SafeHouseUser>>();
             services.AddTransient<IRepository<Core.Entities.Carton>, Repository<Core.Entities.Carton>>();
+            services.AddTransient<IRepository<Core.Entities.DailyEntry>, Repository<Core.Entities.DailyEntry>>();
             return services.AddDbContext<SafeHouseDbContext>(options =>
                 options.UseSqlServer(
                     connectionString,

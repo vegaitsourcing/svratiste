@@ -40,3 +40,9 @@ Clean all migrations
 `> dotnet ef database update 0`
 
 `> dotnet ef migrations remove -s ..\SafeHouse.Api\SafeHouse.Api.csproj`
+
+Running the web app
+---------------
+From Git bash:
+
+`> export ASPNETCORE_ENVIRONMENT=Development && dotnet run --project SafeHouse.Web`

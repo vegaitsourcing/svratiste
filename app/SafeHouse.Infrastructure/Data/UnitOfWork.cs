@@ -4,7 +4,7 @@ using SafeHouse.Infrastructure.Data;
 using System.Data;
 using SafeHouse.Core.Abstractions.Persistence;
 
-namespace SafeHouse.Infrastructure
+namespace SafeHouse.Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
