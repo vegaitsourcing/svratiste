@@ -46,6 +46,7 @@ input[type='submit'] {
 	&.login {
 		background-color: $primary;
 		display: block;
+		color: $white;
 		&.active {
 			display: none;
 		}

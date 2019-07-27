@@ -27,6 +27,9 @@
 	@if $filename == ico-arrow-down {
 	$char: '\E001';
 }
+	@if $filename == ico-user {
+	$char: '\E002';
+}
 
 @return $char;
 }
@@ -44,5 +47,8 @@
 
 .font-ico-arrow-down {
 	@include font(ico-arrow-down);
+}
+.font-ico-user {
+	@include font(ico-user);
 }
 
