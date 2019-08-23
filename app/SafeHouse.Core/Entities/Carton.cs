@@ -33,7 +33,15 @@ namespace SafeHouse.Core.Entities
         public string FathersName { get; set; }
 
         [MaxLength(32)]
+        public string FathersLastName { get; set; }
+
+        [MaxLength(32)]
         public string MothersName { get; set; }
+
+        [MaxLength(32)]
+        public string MothersLastName { get; set; }
+
+        public bool NotificationsEnabled { get; set; }
 
         public bool InitialEvaluationDone { get; set; }
 

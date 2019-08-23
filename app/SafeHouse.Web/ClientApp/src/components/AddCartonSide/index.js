@@ -16,7 +16,9 @@ class AddCartonSide extends Component {
             AddressStreetName: '',
             AddressStreetNumber: '',
             FathersName: '',
+            FathersLastName: '',
             MothersName: '',
+            MothersLastName: '',
             pageNumber: props.pageNumber
         };
 
@@ -36,7 +38,9 @@ class AddCartonSide extends Component {
             AddressStreetName: '',
             AddressStreetNumber: '',
             FathersName: '',
-            MothersName: ''
+            FathersLastName: '',
+            MothersName: '',
+            MothersLastName: ''
         });
     }
 
@@ -158,11 +162,31 @@ class AddCartonSide extends Component {
                                 </td>
                             </tr>
                             <tr>
+                                <td className="info">Prezime oca</td>
+                                <td>
+                                    <input 
+                                        name="FathersLastName" type="text"
+                                        value={this.state.FathersLastName}
+                                        onChange={this.handleInputChange}
+                                        required/>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td className="info">Ime majke</td>
                                 <td>
                                     <input 
                                         name="MothersName" type="text"
                                         value={this.state.MothersName}
+                                        onChange={this.handleInputChange}
+                                        required/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="info">Prezime majke</td>
+                                <td>
+                                    <input 
+                                        name="MothersLastName" type="text"
+                                        value={this.state.MothersLastName}
                                         onChange={this.handleInputChange}
                                         required/>
                                 </td>

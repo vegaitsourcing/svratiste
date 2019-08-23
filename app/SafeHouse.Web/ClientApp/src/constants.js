@@ -1,4 +1,4 @@
-const web_api_url = "http://localhost:5000/api";
+const web_api_url = "http://localhost:51025/api";
 
 
 export {

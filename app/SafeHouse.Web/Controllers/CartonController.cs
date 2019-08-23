@@ -42,7 +42,7 @@ namespace SafeHouse.Web.Controllers
 
         [HttpPost]
         [Route("api/Carton")]
-        public IActionResult Create([FromBody] CartonDto carton)
+        public IActionResult Create([FromBody]CartonDto carton)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace SafeHouse.Web.Controllers
 
         [HttpPut]
         [Route("api/Carton")]
-        public IActionResult Update([FromBody] CartonDto carton)
+        public IActionResult Update([FromBody]CartonDto carton)
         {
             try
             {
@@ -70,6 +70,23 @@ namespace SafeHouse.Web.Controllers
             catch (Exception e)
             {
                 _logger.LogError("Error occured while updating entity.", e);
+                return HandleErrorResult();
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Carton")]
+        public IActionResult Remove([FromBody]CartonDto carton)
+        {
+            try
+            {
+                _cartonService.Remove(carton);
+
+                return HandleSuccessResult();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error occured while deleting entity.", e);
                 return HandleErrorResult();
             }
         }

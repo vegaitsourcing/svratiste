@@ -20,12 +20,15 @@ namespace SafeHouse.Infrastructure.Mappers
                 AddressStreetName = entity.AddressStreetName,
                 AddressStreetNumber = entity.AddressStreetNumber,
                 FathersName = entity.FathersName,
+                FathersLastName = entity.FathersLastName,
                 MothersName = entity.MothersName,
+                MothersLastName = entity.MothersLastName,
+                NotificationsEnabled = entity.NotificationsEnabled,
                 InitialEvaluationDone = entity.InitialEvaluationDone,
                 EvaluationDone = entity.EvaluationDone,
                 IndividualPlanDone = entity.IndividualPlanDone,
-                IndividualPlanRevised = entity.IndividualPlanRevised,
-            };
+                IndividualPlanRevised = entity.IndividualPlanRevised
+    };
         }
 
         public Carton ToEntity(CartonDto dto)
@@ -42,12 +45,15 @@ namespace SafeHouse.Infrastructure.Mappers
                 AddressStreetName = dto.AddressStreetName,
                 AddressStreetNumber = dto.AddressStreetNumber,
                 FathersName = dto.FathersName,
+                FathersLastName = dto.FathersLastName,
                 MothersName = dto.MothersName,
+                MothersLastName = dto.MothersLastName,
+                NotificationsEnabled = dto.NotificationsEnabled,
                 InitialEvaluationDone = dto.InitialEvaluationDone,
                 EvaluationDone = dto.EvaluationDone,
                 IndividualPlanDone = dto.IndividualPlanDone,
                 IndividualPlanRevised = dto.IndividualPlanRevised
-            };
+    };
         }
     }
 }

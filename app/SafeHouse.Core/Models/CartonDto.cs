@@ -25,7 +25,13 @@ namespace SafeHouse.Core.Models
 
         public string FathersName { get; set; }
 
+        public string FathersLastName { get; set; }
+
         public string MothersName { get; set; }
+
+        public string MothersLastName { get; set; }
+
+        public bool NotificationsEnabled { get; set; }
 
         public bool InitialEvaluationDone { get; set; }
 

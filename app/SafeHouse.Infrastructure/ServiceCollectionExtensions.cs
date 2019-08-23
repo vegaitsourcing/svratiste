@@ -30,15 +30,23 @@ namespace SafeHouse.Infrastructure
 
         public static IServiceCollection AddDataServices(this IServiceCollection services, string connectionString)
         {
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient(typeof(UnitOfWork));
+            services.AddScoped<IUnitOfWork, UnitOfWork>(uow => CreateUow());
+            services.AddScoped(typeof(UnitOfWork));
+            // services.AddTransient<IRepository<Core.Entities.SafeHouseUser>, Repository<Core.Entities.SafeHouseUser>>(r => new Repository<Core.Entities.SafeHouseUser>(CreateUow()));
             services.AddTransient<IRepository<Core.Entities.SafeHouseUser>, Repository<Core.Entities.SafeHouseUser>>();
             services.AddTransient<IRepository<Core.Entities.Carton>, Repository<Core.Entities.Carton>>();
             services.AddTransient<IRepository<Core.Entities.DailyEntry>, Repository<Core.Entities.DailyEntry>>();
-            return services.AddDbContext<SafeHouseDbContext>(options =>
-                options.UseSqlServer(
-                    connectionString,
-                    optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Infrastructure")));
+            return services.AddDbContext<SafeHouseDbContext>(
+                options => options.UseSqlServer(connectionString, optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Infrastructure")),
+                ServiceLifetime.Scoped);
+        }
+
+        private static UnitOfWork CreateUow()
+        {
+            using (var dbContext = new SafeHouseDbContext())
+            {
+                return new UnitOfWork(dbContext);
+            }
         }
     }
 }

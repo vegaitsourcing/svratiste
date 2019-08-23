@@ -27,11 +27,11 @@ Add new migration
 ---------------
 `> cd .\SafeHouse.Data`
 
-`> dotnet ef migrations add <GiveSomeNameMigration> -s ..\SafeHouse.Api\SafeHouse.Api.csproj -o .\Migrations\`
+`> dotnet ef migrations add <GiveSomeNameMigration> -s ..\SafeHouse.Web\SafeHouse.Web.csproj -o .\Migrations\`
 
 Update db
 ---------------
-`> cd .\SafeHouse.Api`
+`> cd .\SafeHouse.Web`
 
 `> dotnet ef database update`
 
@@ -39,7 +39,7 @@ Clean all migrations
 ---------------
 `> dotnet ef database update 0`
 
-`> dotnet ef migrations remove -s ..\SafeHouse.Api\SafeHouse.Api.csproj`
+`> dotnet ef migrations remove -s ..\SafeHouse.Web\SafeHouse.Web.csproj`
 
 Running the web app
 ---------------

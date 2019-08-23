@@ -29,6 +29,7 @@ export function getCartons(page) {
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
         }).then((response) => {
+            console.log('-- carton I got: ', response.data[0]);
             dispatcher.dispatch({
                 type: "FETCHED_ALL_CARTONS",
                 payload: response.data
@@ -61,14 +62,16 @@ export function getCartonsPageCount() {
 }
 
 export function addCarton(carton) {
+
     axios.post(web_api_url + '/Carton', carton,
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
         }).then(() => {
-        getCartons(carton.pageNumber);
-        dispatcher.dispatch({
-            type: "HIDE_ADD_BAR"
-        });
+            getCartons(carton.pageNumber);
+            console.log('-- carton added');
+            dispatcher.dispatch({
+                type: "HIDE_ADD_BAR"
+            });
         }).catch(error => {
             if (error.response.status === 401) {
                 dispatcher.dispatch({
@@ -79,14 +82,34 @@ export function addCarton(carton) {
 }
 
 export function editCarton(carton) {
+    console.log('-- carton to store: ', carton);
     axios.put(web_api_url + '/Carton', carton,
         {
             headers: { Authorization: "Bearer " + authToken.getToken() }
         }).then(() => {
-        getCartons(carton.pageNumber);
-        dispatcher.dispatch({
-            type: "HIDE_EDIT_BAR"
+            getCartons(carton.pageNumber);
+            dispatcher.dispatch({
+                type: "HIDE_EDIT_BAR"
+            });
+        }).catch(error => {
+            if (error.response.status === 401) {
+                dispatcher.dispatch({
+                    type: "UNAUTHORIZED"
+                });
+            }
         });
+}
+
+export function deleteCarton(carton) {
+    console.log('-- carton to delete: ', carton);
+    axios.delete(web_api_url + '/Carton', carton,
+        {
+            headers: { Authorization: "Bearer " + authToken.getToken() }
+        }).then(() => {
+            getCartons(carton.pageNumber);
+            dispatcher.dispatch({
+                type: "HIDE_EDIT_BAR"
+            });
         }).catch(error => {
             if (error.response.status === 401) {
                 dispatcher.dispatch({

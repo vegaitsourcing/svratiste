@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using SafeHouse.Infrastructure.Data;
 using System.Data;
 using SafeHouse.Core.Abstractions.Persistence;
 
@@ -16,7 +15,7 @@ namespace SafeHouse.Infrastructure.Data
             DbContext = dbContext;
         }
 
-        public void BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        public void OpenTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             if (_dbContextTransaction == null)
                 _dbContextTransaction = DbContext.Database.BeginTransaction(isolationLevel);
@@ -24,7 +23,6 @@ namespace SafeHouse.Infrastructure.Data
 
         public void Commit()
         {
-            DbContext.SaveChanges();
             _dbContextTransaction.Commit();
         }
 

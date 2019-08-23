@@ -19,25 +19,24 @@ namespace SafeHouse.Infrastructure.Data
 
         public IEnumerable<TEntity> GetBy(Func<TEntity, bool> byProperty)
         {
-            _unitOfWork.BeginTransaction();
-            return _unitOfWork.DbContext.Set<TEntity>().Where(byProperty);
+            return _unitOfWork.DbContext.Set<TEntity>().Where(byProperty).ToArray();
         }
 
         public void Add(TEntity entity)
         {
-            _unitOfWork.BeginTransaction();
+            _unitOfWork.OpenTransaction();
             _unitOfWork.DbContext.Set<TEntity>().Add(entity);
         }
 
         public void Remove(TEntity entity)
         {
-            _unitOfWork.BeginTransaction();
+            _unitOfWork.OpenTransaction();
             _unitOfWork.DbContext.Set<TEntity>().Remove(entity);
         }
 
         public void Update(TEntity entity)
         {
-            _unitOfWork.BeginTransaction();
+            _unitOfWork.OpenTransaction();
             _unitOfWork.DbContext.Set<TEntity>().Update(entity);
         }
 
@@ -46,16 +45,14 @@ namespace SafeHouse.Infrastructure.Data
 
         public IEnumerable<TEntity> GetAll()
         {
-            _unitOfWork.BeginTransaction();
-            return _unitOfWork.DbContext.Set<TEntity>().AsEnumerable();
+            return _unitOfWork.DbContext.Set<TEntity>().ToArray();
         }
 
         public IEnumerable<TEntity> GetAllAndInclude(Expression<Func<TEntity, object>> withProperty)
-            => _unitOfWork.DbContext.Set<TEntity>().AsQueryable().Include(withProperty);
+            => _unitOfWork.DbContext.Set<TEntity>().AsQueryable().Include(withProperty).ToArray();
 
         public TEntity GetSingleBy(Func<TEntity, bool> byProperty)
         {
-            _unitOfWork.BeginTransaction();
             return _unitOfWork.DbContext
                 .Set<TEntity>()
                 .SingleOrDefault(byProperty);

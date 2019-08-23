@@ -35,15 +35,25 @@ namespace SafeHouse.Core.UseCases
             return _cartonMapper.ToDto(carton);
         }
 
-        public void Add(CartonDto carton)
+        public void Add(CartonDto cartonDto)
         {
-            _cartonRepository.Add(new Carton());
+            var carton = _cartonMapper.ToEntity(cartonDto);
+            _cartonRepository.Add(carton);
             _unitOfWork.Commit();
         }
 
-        public void Update(CartonDto cartonNewValues)
+        public void Update(CartonDto cartonDto)
         {
-            //
+            var carton = _cartonMapper.ToEntity(cartonDto);
+            _cartonRepository.Update(carton);
+            _unitOfWork.Commit();
+        }
+
+        public void Remove(CartonDto cartonDto)
+        {
+            var carton = _cartonMapper.ToEntity(cartonDto);
+            _cartonRepository.Remove(carton);
+            _unitOfWork.Commit();
         }
 
         public int GetPageNumber()
