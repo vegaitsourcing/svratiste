@@ -4,25 +4,24 @@ import dispatcher from '../dispatcher';
 
 
 class LoginStore extends EventEmitter {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
+		this.token = null;
+	}
 
-        this.token = null;
-    }
+	getToken() {
+		return localStorage.get('accessToken');
+	}
 
-    getToken() {
-        return localStorage.get('accessToken');
-    }
-
-    handleActions(action) {
-        switch(action.type) {
-            case "FETCHED_TOKEN":
-                localStorage.setItem('accessToken', action.payload.token);
-                this.emit("fetched_token");
-                break;
-            default:
-        }
-    }
+	handleActions(action) {
+		switch(action.type) {
+			case "FETCHED_TOKEN":
+				localStorage.setItem('accessToken', action.payload.token);
+				this.emit("fetched_token");
+				break;
+			default:
+		}
+	}
 }
 
 const loginStore = new LoginStore();

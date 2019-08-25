@@ -1,7 +1,0 @@
-@font-face {
-    font-family: 'svgicons';
-    src: local('svgicons'),
-      url('../../assets/fonts/svgicons.woff2') format('woff2'),
-      url('../../assets/fonts/svgicons.woff') format('woff'), /* Modern Browsers */
-      url('../../assets/fonts/svgicons.ttf') format('truetype') /* Safari, Android, iOS */
-  }

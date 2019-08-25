@@ -1,138 +1,92 @@
-import dispatcher from '../dispatcher';
-
 import axios from 'axios';
-import { web_api_url } from '../constants';
 
+import dispatcher from '../dispatcher';
+import { web_api_url } from '../components/common/constants';
 import * as authToken from '../authToken';
 
-
-export function getCartonById(id) {
-    axios.get(web_api_url + '/Carton/' + id,
-        {
-            headers: { Authorization: "Bearer " + authToken.getToken() }
-        }).then((response) => {
-            dispatcher.dispatch({
-                type: "FETCHED_CARTON",
-                payload: response.data
-            });
-        }).catch(error => {
-            if (error.response.status === 401) {
-                dispatcher.dispatch({
-                    type: "UNAUTHORIZED"
-                });
-            }
-        });
-}
-
 export function getCartons(page) {
-    axios.get(web_api_url + '/Carton/GetByPageNumber/' + page,
-        {
-            headers: { Authorization: "Bearer " + authToken.getToken() }
-        }).then((response) => {
-            console.log('-- carton I got: ', response.data[0]);
-            dispatcher.dispatch({
-                type: "FETCHED_ALL_CARTONS",
-                payload: response.data
-            });
-        }).catch(error => {
-            if (error.response.status === 401) {
-                dispatcher.dispatch({
-                    type: "UNAUTHORIZED"
-                });
-            }
-        });
+	axios.get(web_api_url + '/Carton/GetByPageNumber/' + page,
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then((response) => {
+			dispatcher.dispatch({
+				type: "FETCHED_ALL_CARTONS",
+				payload: response.data
+			});
+		}).catch(error => {
+			if (error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
 }
 
 export function getCartonsPageCount() {
-    axios.get(web_api_url + '/Carton/pageCount',
-        {
-            headers: { Authorization: "Bearer " + authToken.getToken() }
-        }).then((response) => {
-        dispatcher.dispatch({
-            type: "FETCHED_PAGES_COUNT",
-            payload: response.data
-        });
-        }).catch(error => {
-            if (error.response.status === 401) {
-                dispatcher.dispatch({
-                    type: "UNAUTHORIZED"
-                });
-            }
-        });
+	axios.get(web_api_url + '/Carton/pageCount',
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then((response) => {
+		dispatcher.dispatch({
+			type: "FETCHED_PAGES_COUNT",
+			payload: response.data
+		});
+		}).catch(error => {
+			if (error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
 }
-
+export function getCartonById(id) {
+	axios.get(web_api_url + '/Carton/' + id,
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then((response) => {
+			dispatcher.dispatch({
+				type: "FETCHED_CARTON",
+				payload: response.data
+			});
+		}).catch(error => {
+			if (error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
+}
 export function addCarton(carton) {
-
-    axios.post(web_api_url + '/Carton', carton,
-        {
-            headers: { Authorization: "Bearer " + authToken.getToken() }
-        }).then(() => {
-            getCartons(carton.pageNumber);
-            console.log('-- carton added');
-            dispatcher.dispatch({
-                type: "HIDE_ADD_BAR"
-            });
-        }).catch(error => {
-            if (error.response.status === 401) {
-                dispatcher.dispatch({
-                    type: "UNAUTHORIZED"
-                });
-            }
-        });
+	axios.post(web_api_url + '/Carton', carton,
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then(() => {
+		getCartons(carton.pageNumber);
+		dispatcher.dispatch({
+			type: "HIDE_ADD_BAR"
+		});
+		}).catch(error => {
+			if (error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
 }
-
 export function editCarton(carton) {
-    console.log('-- carton to store: ', carton);
-    axios.put(web_api_url + '/Carton', carton,
-        {
-            headers: { Authorization: "Bearer " + authToken.getToken() }
-        }).then(() => {
-            getCartons(carton.pageNumber);
-            dispatcher.dispatch({
-                type: "HIDE_EDIT_BAR"
-            });
-        }).catch(error => {
-            if (error.response.status === 401) {
-                dispatcher.dispatch({
-                    type: "UNAUTHORIZED"
-                });
-            }
-        });
-}
-
-export function deleteCarton(carton) {
-    console.log('-- carton to delete: ', carton);
-    axios.delete(web_api_url + '/Carton', carton,
-        {
-            headers: { Authorization: "Bearer " + authToken.getToken() }
-        }).then(() => {
-            getCartons(carton.pageNumber);
-            dispatcher.dispatch({
-                type: "HIDE_EDIT_BAR"
-            });
-        }).catch(error => {
-            if (error.response.status === 401) {
-                dispatcher.dispatch({
-                    type: "UNAUTHORIZED"
-                });
-            }
-        });
-}
-
-export function hideAddBar() {
-    dispatcher.dispatch({
-        type: "HIDE_ADD_BAR"
-    });
-}
-
-export function hideAddDailyEntryBar() {
-    dispatcher.dispatch({
-        type: "HIDE_ADD_DAILY_ENTRY_BAR"
-    });
-}
-
-export function hideEditBar() {
-    dispatcher.dispatch({
-        type: "HIDE_EDIT_BAR"
-    });
+	axios.put(web_api_url + '/Carton', carton,
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then(() => {
+		getCartons(carton.pageNumber);
+		dispatcher.dispatch({
+			type: "HIDE_EDIT_BAR"
+		});
+		}).catch(error => {
+			if (error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
 }
