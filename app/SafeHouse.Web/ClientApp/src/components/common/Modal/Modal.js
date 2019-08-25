@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Icon from '@material-ui/core/Icon';
 
-import Aux from '../../../hoc/Aux';
+import Aux from '../../../hoc/Hoc';
 import Colours from '../colours';
 import {FontWeight, Headings} from '../typography';
 const Backdrop = styled.div`

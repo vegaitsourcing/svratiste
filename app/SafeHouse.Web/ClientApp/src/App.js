@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Aux from './hoc/Aux';
+import Aux from './hoc/Hoc';
 import Login from './screens/Login';
 import NewCarton from './screens/NewCarton';
 import Record from './screens/Record';
