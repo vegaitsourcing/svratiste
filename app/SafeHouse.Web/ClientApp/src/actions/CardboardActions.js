@@ -14,7 +14,7 @@ export function getCartons(page) {
 				payload: response.data
 			});
 		}).catch(error => {
-			if (error.response.status === 401) {
+			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
 					type: "UNAUTHORIZED"
 				});
@@ -32,7 +32,7 @@ export function getCartonsPageCount() {
 			payload: response.data
 		});
 		}).catch(error => {
-			if (error.response.status === 401) {
+			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
 					type: "UNAUTHORIZED"
 				});
@@ -49,7 +49,7 @@ export function getCartonById(id) {
 				payload: response.data
 			});
 		}).catch(error => {
-			if (error.response.status === 401) {
+			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
 					type: "UNAUTHORIZED"
 				});
@@ -66,7 +66,7 @@ export function addCarton(carton) {
 			type: "HIDE_ADD_BAR"
 		});
 		}).catch(error => {
-			if (error.response.status === 401) {
+			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
 					type: "UNAUTHORIZED"
 				});
@@ -83,7 +83,7 @@ export function editCarton(carton) {
 			type: "HIDE_EDIT_BAR"
 		});
 		}).catch(error => {
-			if (error.response.status === 401) {
+			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
 					type: "UNAUTHORIZED"
 				});

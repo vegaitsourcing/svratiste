@@ -99,6 +99,6 @@ export const Constants = {
 		},
 	]
 };
-export const web_api_url = "http://localhost:5000/api";
+export const web_api_url = "http://localhost:51025/api";
 
 export default Constants;

@@ -184,15 +184,15 @@ class Login extends Component {
 		this.fetchEdToken = this.fetchEdToken.bind(this);
 	}
 
-	// componentWillMount() {
-	// 	if (authToken.getToken()) {
-	// 		this.props.history.push('/');
-	// 	}
-	// 	LoginStore.on("fetched_token", this.fetchEdToken);
-	// }
-	// componentWillUnmount() {
-	// 	LoginStore.removeListener("fetched_token", this.fetchEdToken);
-	// }
+	componentWillMount() {
+		if (authToken.getToken()) {
+			this.props.history.push('/');
+		}
+		LoginStore.on("fetched_token", this.fetchEdToken);
+	}
+	componentWillUnmount() {
+		LoginStore.removeListener("fetched_token", this.fetchEdToken);
+	}
 	fetchEdToken() {
 		this.props.history.push('/');
 	}

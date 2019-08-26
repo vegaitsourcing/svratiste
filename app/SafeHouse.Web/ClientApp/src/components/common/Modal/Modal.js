@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Icon from '@material-ui/core/Icon';
 
-import Aux from '../../../hoc/Hoc';
+import Auxiliary from '../../../hoc/Auxiliary';
 import Colours from '../colours';
 import {FontWeight, Headings} from '../typography';
 const Backdrop = styled.div`
@@ -97,7 +97,7 @@ class Modal extends Component {
 
 	render() {
 		return (
-			<Aux>
+			<Auxiliary>
 				<Backdrop show={this.props.show}>
 					<ModalWrapper show={this.props.show}>
 						{this.props.title && <ModalTitle>
@@ -110,7 +110,7 @@ class Modal extends Component {
 						</ModalContainer>
 					</ModalWrapper>
 				</Backdrop>
-			</Aux>
+			</Auxiliary>
 			);
 	}
 }

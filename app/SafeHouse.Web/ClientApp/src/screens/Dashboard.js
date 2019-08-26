@@ -5,29 +5,45 @@ import CardboardStore from '../stores/CardboardStore';
 
 import Layout from '../hoc/Layout';
 import Cartons from '../components/cartons/Cartons';
-import Constants from '../components/common/constants';
 
 class Dashboard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			catons: [],
+			cartons: [],
 			currentPage: 1,
 			totalPages: 1,
 		};
 	}
-	redirectToLogin = () => {
-		localStorage.clear();
-		this.props.history.push("/login");
+
+
+	componentWillMount() {
+		CardboardStore.on("fetched_cartons", this.getCartons.bind(this));
+		CardboardStore.on("fetched_pages_count", this.getNumOfPages);
+		CardboardStore.on("unauthorized", this.redirectToLogin);
 	}
-	
-	getCartons = () => {
+
+	componentDidMount() {
+		CardboardActions.getCartonsPageCount();
+		CardboardActions.getCartons(1);
+	}
+
+	componentWillUnmount() {
+		CardboardStore.removeListener("fetched_cartons", this.getCartons);
+		CardboardStore.removeListener("fetched_pages_count", this.getNumOfPages);
+		CardboardStore.removeListener("unauthorized", this.redirectToLogin);
+	}
+	getCartons() {
 		this.setState({
-			catons: CardboardStore.getAll()
+			cartons: CardboardStore.getCartons()
 		});
 	}
 	getNumOfPages = () => {
 		this.setState({ totalPages: CardboardStore.getNumOfPages() });
+	}
+	redirectToLogin = () => {
+		localStorage.clear();
+		this.props.history.push("/login");
 	}
 	onPreviousClick = () => {
 		let { currentPage } = this.state;
@@ -51,7 +67,7 @@ class Dashboard extends Component {
 		return (
 			<Layout name="Korisnici" showSearch>
 				<Cartons
-					cartons={Constants.cartons}
+					cartons={this.state.cartons}
 					title="Lista svih korisnika"
 					icon="assignment"
 					path="/users/"

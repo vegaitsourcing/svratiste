@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Aux from './hoc/Hoc';
+import Auxiliary from './hoc/Auxiliary';
 import Login from './screens/Login';
 import NewCarton from './screens/NewCarton';
 import Record from './screens/Record';
@@ -12,7 +12,7 @@ import Notifications from './screens/Notifications';
 
 const App = () => {
 	return (
-		<Aux>
+		<Auxiliary>
 			<Router>
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/add" component={NewCarton} />
@@ -22,7 +22,7 @@ const App = () => {
 				<Route exact path='/records/:id' component={Record} />
 				<Route exact path="/" component={Notifications} />
 			</Router>
-		</Aux>
+		</Auxiliary>
 	);
 }
 

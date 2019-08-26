@@ -42,4 +42,5 @@ class CardboardStore extends EventEmitter {
 
 const cardboardStore = new CardboardStore();
 dispatcher.register(cardboardStore.handleActions.bind(cardboardStore));
+
 export default cardboardStore;

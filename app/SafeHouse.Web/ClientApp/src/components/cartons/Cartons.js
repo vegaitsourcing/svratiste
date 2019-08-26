@@ -71,9 +71,9 @@ const cartons = ( props ) => (
 				{props.cartons.map((item, index) => (
 					<TR key={index} onClick={() => props.history.push(props.path + item.id)}>
 						<TD>{item.id}</TD>
-						<TD>{item.name}</TD>
-						<TD>{item.lastname}</TD>
-						<TD>{item.visits}</TD>
+						<TD>{item.firstName}</TD>
+						<TD>{item.lastName}</TD>
+						<TD>{item.numberOfVisits}</TD>
 					</TR>
 				))}
 			</tbody>
