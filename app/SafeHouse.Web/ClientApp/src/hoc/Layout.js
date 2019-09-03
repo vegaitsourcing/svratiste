@@ -73,6 +73,7 @@ const ListItem = styled.li`
 		background: transparent;
 		border: 0;
 		cursor: pointer;
+		outline: none;
 	}
 	span {
 		margin: 0 60px 0 20px;
