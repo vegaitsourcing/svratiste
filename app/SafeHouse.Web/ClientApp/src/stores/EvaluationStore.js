@@ -7,18 +7,18 @@ class EvaluationStore extends EventEmitter {
     constructor(props) {
         super(props);
 
-        this.firstEvaluation = {};
+        this.evaluation = {};
     }
 
-    getFirstEvaluation() {
-        return this.firstEvaluation;
+    getEvaluation() {
+        return this.evaluation;
     }
 
     handleActions(action) {
         switch (action.type) {
-            case "FETCHED_FIRST_EVALUATION":
-            this.firstEvaluation = action.payload;
-            this.emit("fetched_first_evaluation");
+            case "FETCHED_EVALUATION":
+            this.evaluation = action.payload;
+            this.emit("fetched_evaluation");
             break;
         case "UNAUTHORIZED":
             this.emit("unauthorized");

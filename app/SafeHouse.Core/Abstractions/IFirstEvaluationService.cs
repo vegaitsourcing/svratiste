@@ -6,8 +6,12 @@ namespace SafeHouse.Core.Abstractions
 {
     public interface IFirstEvaluationService
     {
-        FirstEvaluation GetByCartonId(Guid id);
+        FirstEvaluationDto GetByCartonId(Guid id);
 
-        void AddOrUpdate(CreateFirstEvaluationRequest evaluation);
+        void Add(FirstEvaluationDto firstEvaluation);
+
+        void Update(FirstEvaluationDto firstEvaluation);
+
+        void Remove(FirstEvaluationDto firstEvaluation);
     }
 }

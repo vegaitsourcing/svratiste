@@ -1,15 +1,17 @@
-﻿using SafeHouse.Core.Entities;
+﻿using System;
+using SafeHouse.Core.Entities;
 using SafeHouse.Core.Models;
-using System;
 
 namespace SafeHouse.Core.Abstractions
 {
     public interface IEvaluationService
     {
-        Evaluation GetByCartonId(Guid id);
+        EvaluationDto GetByCartonId(Guid id);
 
-        void AddFirstEvaluation(CreateEvaluationRequest evaluation);
+        void Add(EvaluationDto evaluation);
 
-        void UpdateFirstEvaluation(CreateEvaluationRequest evaluation);
+        void Update(EvaluationDto evaluation);
+
+        void Remove(EvaluationDto evaluation);
     }
 }

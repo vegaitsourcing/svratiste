@@ -10,6 +10,9 @@ import IndividualPlan from '../components/evaluation/IndividualPlan';
 import {input as CustomInput, label as CustomLabel, select as CustomSelect} from './common/Inputs/Inputs';
 import Constants from '../components/common/constants';
 
+import * as CardboardActions from '../actions/CardboardActions';
+import CardboardStore from '../stores/CardboardStore';
+
 const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -123,21 +126,70 @@ const DarkButton = styled(Button)`
 	background: ${Colours.stTropaz};
 `;
 class Carton extends Component {
+	constructor(props) {
+		super(props);
+		this.getCarton = this.getCarton.bind(this);
+	}
 	state = {
-		FirstName: '',
-		LastName: '',
-		Nickname: '',
-		Gender: '',
-		DateOfBirth: '',
-		AddressStreetName: '',
-		AddressStreetNumber: '',
-		FathersName: '',
-		MothersName: '',
+		carton: {
+			firstName: '',
+			lastName: '',
+			nickname: '',
+			gender: 0,
+			dateOfBirth: undefined,
+			addressStreetName: '',
+			addressStreetNumber: '',
+			fathersName: '',
+			fathersLastName: '',
+			mothersName: '',
+			mothersLastName: '',
+			evaluationDone: false,
+			individualPlanDone: false,
+			individualPlanRevised: false,
+			initialEvaluationDone: false,
+			notifications: 0,
+			notificationsEnabled: true,
+			numberOfVisits: 0
+		},
 		show: false,
+		newCarton: true,
 		componentNumber: ''
 	}
+    initState() {
+        this.setState({
+			carton: {
+				firstName: '',
+				lastName: '',
+				nickname: '',
+				gender: 0,
+				dateOfBirth: undefined,
+				addressStreetName: '',
+				addressStreetNumber: '',
+				fathersName: '',
+				fathersLastName: '',
+				mothersName: '',
+				mothersLastName: '',
+				evaluationDone: false,
+				individualPlanDone: false,
+				individualPlanRevised: false,
+				initialEvaluationDone: false,
+				notifications: 0,
+				notificationsEnabled: true,
+				numberOfVisits: 0
+			}
+		});
+    }
+	componentWillMount() {
+		CardboardStore.on("fetched_carton", this.getCarton);
+	}
 	componentDidMount() {
-
+		if(this.props.id) {
+			CardboardActions.getCartonById(this.props.id);
+			this.setState({newCarton: false});
+		}
+	}
+	componentWillUnmount() {
+		CardboardStore.removeListener("fetched_carton", this.getCarton);
 	}
 	showModal = (componentNumber) => {
 		this.setState({componentNumber: componentNumber, show: true});
@@ -146,51 +198,94 @@ class Carton extends Component {
 		this.setState({show: false});
 	}
 	onInputChange = (event) => {
-		const newState = {
-			...this.state,
-			[event.target.name] : event.target.value
+		const carton = this.state.carton;
+		carton[event.target.name] = event.target.value;
+		this.setState({carton});
+	}
+	onSave = () => {
+		const data = this.state.carton;
+
+		delete data.dateOfBirth;
+		delete data.individualPlanRevised;
+		delete data.notifications;
+		delete data.notificationsEnabled;
+		delete data.numberOfVisits;
+
+		if(this.props.id) {
+			console.log('-- edit data: ', data);
+			CardboardActions.editCarton(data);
+		} else {
+			delete data.id;
+			console.log('-- save data: ', data);
+			CardboardActions.addCarton(data);
 		}
-		console.log(newState);
-		this.setState(newState);
+        this.initState();
+    }
+	getCarton() {
+		const carton = CardboardStore.getCarton();
+		this.setState({carton});
 	}
 	render() {
+
+		let options;
+
+		if(!this.state.newCarton) {
+			options = <Container>
+				<ButtonWrapper>
+					<DarkButton onClick={() => this.showModal(1)}>Kreiraj Prijemnu Procenu</DarkButton>
+					<DarkButton onClick={() => this.showModal(2)}>Kreiraj Procenu</DarkButton>
+					<DarkButton onClick={() => this.showModal(3)}>Kreiraj Individualni Plan</DarkButton>
+				</ButtonWrapper>
+				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Prijemnu Procenu"><FirstEvaluation /></Modal>}
+				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Procenu"><Evaluation /></Modal>}
+				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Individualni Plan"><IndividualPlan /></Modal>}
+			</Container>
+		}
 		return (
 			<Container>
 				<InputWrapper>
 					<CustomLabel required title="Ime"/>
-					<CustomInput value={this.state.FirstName} inputName="FirstName" change={this.onInputChange}/>
+					<CustomInput value={this.state.carton.firstName} inputName="firstName" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel required title="Prezime"/>
-					<CustomInput value={this.state.LastName} inputName="LastName" change={this.onInputChange}/>
+					<CustomInput value={this.state.carton.lastName} inputName="lastName" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Ime oca"/>
-					<CustomInput value={this.state.FathersName} inputName="FathersName" change={this.onInputChange}/>
+					<CustomInput value={this.state.carton.fathersName} inputName="fathersName" change={this.onInputChange}/>
+				</InputWrapper>
+				<InputWrapper>
+					<CustomLabel title="Prezime oca"/>
+					<CustomInput value={this.state.carton.fathersLastName} inputName="fathersLastName" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Ime majke"/>
-					<CustomInput value={this.state.MothersName} inputName="MothersName" change={this.onInputChange}/>
+					<CustomInput value={this.state.carton.mothersName} inputName="mothersName" change={this.onInputChange}/>
+				</InputWrapper>
+				<InputWrapper>
+					<CustomLabel title="Prezime majke"/>
+					<CustomInput value={this.state.carton.mothersLastName} inputName="mothersLastName" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Nadimak"/>
-					<CustomInput value={this.state.Nickname} inputName="Nickname" change={this.onInputChange}/>
+					<CustomInput value={this.state.carton.nickname} inputName="nickname" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel required title="Pol"/>
-					<CustomSelect options={Constants.genderOptions} title="Izaberi pol..." value={this.state.Gender} inputName="Gender" change={this.onInputChange}/>
+					<CustomSelect options={Constants.genderOptions} title="Izaberi pol..." value={this.state.carton.gender} inputName="gender" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Adresa stanovanja"/>
-					<CustomInput value={this.state.AddressStreetName} inputName="AddressStreetName" change={this.onInputChange}/>
+					<CustomInput value={this.state.carton.addressStreetName} inputName="addressStreetName" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Broj ulice"/>
-					<CustomInput value={this.state.AddressStreetNumber} inputName="AddressStreetNumber" change={this.onInputChange}/>
+					<CustomInput value={this.state.carton.addressStreetNumber} inputName="addressStreetNumber" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel required title="Datum rodjenja"/>
-					<CustomInput inputType="date"/>
+					<CustomInput inputType="date" inputName="dateOfBirth"/>
 				</InputWrapper>
 				<InputWrapperWide>
 					<Hr />
@@ -205,15 +300,8 @@ class Carton extends Component {
 					<InputHidden type="checkbox" id="individualniPlan" name="individualniPlan"/>
 					<LabelCheckbox htmlFor="individualniPlan">Individualni plan</LabelCheckbox>
 				</InputWrapperWide>
-				<Button>Sačuvaj</Button>
-				<ButtonWrapper>
-					<DarkButton onClick={() => this.showModal(1)}>Kreiraj Prijemnu Procenu</DarkButton>
-					<DarkButton onClick={() => this.showModal(2)}>Kreiraj Procenu</DarkButton>
-					<DarkButton onClick={() => this.showModal(3)}>Kreiraj Individualni Plan</DarkButton>
-				</ButtonWrapper>
-				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Prijemnu Procenu"><FirstEvaluation /></Modal>}
-				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Procenu"><Evaluation /></Modal>}
-				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Individualni Plan"><IndividualPlan /></Modal>}
+				<Button onClick={this.onSave}>Sačuvaj</Button>
+				{options}
 			</Container>
 		);
 	}

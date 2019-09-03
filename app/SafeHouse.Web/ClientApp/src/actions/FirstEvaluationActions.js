@@ -6,13 +6,13 @@ import { web_api_url } from '../components/common/constants';
 import * as authToken from '../authToken';
 
 
-export function getEvaluationByCartonId(cartonId) {
-    axios.get(web_api_url + '/Evaluation/' + cartonId,
+export function getFirstEvaluationByCartonId(cartonId) {
+    axios.get(web_api_url + '/FirstEvaluation/' + cartonId,
     {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then((response) => {
     dispatcher.dispatch({
-        type: "FETCHED_EVALUATION",
+        type: "FETCHED_FIRST_EVALUATION",
         payload: response.data
     });
     }).catch(error => {
@@ -24,8 +24,8 @@ export function getEvaluationByCartonId(cartonId) {
     });
 }
 
-export function addEvaluation(evaluation) {
-    axios.post(web_api_url + '/Evaluation', evaluation,
+export function addFirstEvaluation(evaluation) {
+    axios.post(web_api_url + '/FirstEvaluation', evaluation,
     {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then(() => {
@@ -39,12 +39,12 @@ export function addEvaluation(evaluation) {
     });
 }
 
-export function editEvaluation(evaluation) {
-	axios.put(web_api_url + '/Evaluation', evaluation,
+export function editFirstEvaluation(evaluation) {
+	axios.put(web_api_url + '/FirstEvaluation', evaluation,
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
-            getEvaluationByCartonId(evaluation.cartonId);
+            getFirstEvaluationByCartonId(evaluation.cartonId);
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({

@@ -9,43 +9,71 @@ using SafeHouse.Core.Abstractions.Exceptions;
 namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Evaluation")]
     public class EvaluationController : BaseController
     {
         private readonly IEvaluationService _evaluationService;
         private readonly ILogger _logger;
 
-        public EvaluationController(IEvaluationService evaluationService, ILogger<Evaluation> logger)
+        public EvaluationController(IEvaluationService evaluationService, ILogger<EvaluationController> logger)
         {
             _evaluationService = evaluationService;
             _logger = logger;
         }
 
-        [HttpGet("{id}")]
-        public Evaluation Get(Guid id)
+        [HttpGet]
+        [Route("api/Evaluation/{id}")]
+        public EvaluationDto Get(Guid id)
         {
             return _evaluationService.GetByCartonId(id);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]CreateEvaluationRequest model)
+        [Route("api/Evaluation")]
+        public IActionResult Create([FromBody]EvaluationDto carton)
         {
             try
             {
-                // TODO: add or update
-                _evaluationService.AddFirstEvaluation(model);
+                _evaluationService.Add(carton);
+
                 return HandleSuccessResult();
-            }
-            catch (EvaluationExistsException ex)
-            {
-                _logger.LogError(ex.StackTrace);
-                _logger.LogError(ex.Message);
-                return HandleErrorResult(ex.Message);
             }
             catch (Exception e)
             {
                 _logger.LogError("Error occured while adding new entity.", e);
-                _logger.LogError(e.StackTrace);
+                return HandleErrorResult();
+            }
+        }
+
+        [HttpPut]
+        [Route("api/Evaluation")]
+        public IActionResult Update([FromBody]EvaluationDto carton)
+        {
+            try
+            {
+                _evaluationService.Update(carton);
+
+                return HandleSuccessResult();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error occured while updating entity.", e);
+                return HandleErrorResult();
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Evaluation")]
+        public IActionResult Remove([FromBody]EvaluationDto carton)
+        {
+            try
+            {
+                _evaluationService.Remove(carton);
+
+                return HandleSuccessResult();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error occured while deleting entity.", e);
                 return HandleErrorResult();
             }
         }

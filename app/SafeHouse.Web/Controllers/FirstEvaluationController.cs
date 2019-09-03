@@ -1,52 +1,79 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SafeHouse.Core.Abstractions;
-using SafeHouse.Core.Abstractions.Exceptions;
 using SafeHouse.Core.Entities;
-using SafeHouse.Web.Models;
+using SafeHouse.Core.Models;
+using System;
+using SafeHouse.Core.Abstractions.Exceptions;
 
 namespace SafeHouse.Web.Controllers
 {
     [Produces("application/json")]
-    [Route("api/FirstEvaluation")]
     public class FirstEvaluationController : BaseController
     {
         private readonly IFirstEvaluationService _firstEvaluationService;
         private readonly ILogger _logger;
 
-        public FirstEvaluationController(IFirstEvaluationService firstEvaluationService, ILogger<FirstEvaluation> logger)
+        public FirstEvaluationController(IFirstEvaluationService firstEvaluationService, ILogger<FirstEvaluationController> logger)
         {
             _firstEvaluationService = firstEvaluationService;
             _logger = logger;
         }
 
         [HttpGet]
-        [Route("{id}")]
-		public FirstEvaluation Get(Guid id)
+        [Route("api/FirstEvaluation/{id}")]
+        public FirstEvaluationDto Get(Guid id)
         {
             return _firstEvaluationService.GetByCartonId(id);
         }
 
         [HttpPost]
-		public IActionResult Create([FromBody]CreateFirstEvaluationModel firstEvaluation)
+        [Route("api/FirstEvaluation")]
+        public IActionResult Create([FromBody]FirstEvaluationDto carton)
         {
             try
             {
-                _firstEvaluationService.AddOrUpdate(firstEvaluation.ToCreateFirstEvaluationRequest());
+                _firstEvaluationService.Add(carton);
 
                 return HandleSuccessResult();
-            }
-            catch (FirstEvaluationExistsException ex)
-            {
-                _logger.LogError(ex.StackTrace);
-                _logger.LogError(ex.Message);
-                return HandleErrorResult(ex.Message);
             }
             catch (Exception e)
             {
                 _logger.LogError("Error occured while adding new entity.", e);
-                _logger.LogError(e.StackTrace);
+                return HandleErrorResult();
+            }
+        }
+
+        [HttpPut]
+        [Route("api/FirstEvaluation")]
+        public IActionResult Update([FromBody]FirstEvaluationDto carton)
+        {
+            try
+            {
+                _firstEvaluationService.Update(carton);
+
+                return HandleSuccessResult();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error occured while updating entity.", e);
+                return HandleErrorResult();
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/FirstEvaluation")]
+        public IActionResult Remove([FromBody]FirstEvaluationDto carton)
+        {
+            try
+            {
+                _firstEvaluationService.Remove(carton);
+
+                return HandleSuccessResult();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Error occured while deleting entity.", e);
                 return HandleErrorResult();
             }
         }

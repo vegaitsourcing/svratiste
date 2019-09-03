@@ -15,7 +15,7 @@ import ScreenSizes from '../components/common/mediaqueries';
 import decoration from '../assets/images/decoration.png';
 import Logo from '../assets/images/logo.png';
 import LogoWhite from '../assets/images/logowhite.png';
-import { keyframes } from 'emotion';
+import {keyframes} from 'emotion';
 
 const Content = styled.div`
 	display: flex;

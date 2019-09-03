@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using SafeHouse.Core.Abstractions;
-using SafeHouse.Core.Abstractions.Exceptions;
+using SafeHouse.Core.Abstractions.Mappers;
 using SafeHouse.Core.Abstractions.Persistence;
 using SafeHouse.Core.Entities;
 using SafeHouse.Core.Models;
@@ -13,99 +13,40 @@ namespace SafeHouse.Core.UseCases
         private readonly IRepository<Evaluation> _evaluationRepository;
         private readonly IRepository<Carton> _cartonRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEvaluationMapper _evaluationMapper;
 
-        public EvaluationService(IUnitOfWork unitOfWork, IRepository<Evaluation> evaluationRepository, IRepository<Carton> cartonRepository)
+        public EvaluationService(IUnitOfWork unitOfWork, IRepository<Evaluation> evaluationRepository, IRepository<Carton> cartonRepository, IEvaluationMapper evaluationMapper)
         {
             _unitOfWork = unitOfWork;
             _evaluationRepository = evaluationRepository;
             _cartonRepository = cartonRepository;
+            _evaluationMapper = evaluationMapper;
         }
 
-        public Evaluation GetByCartonId(Guid id)
-            => _evaluationRepository.Include(e => e.Carton)
-                .FirstOrDefault(x => x.Carton.Id == id);
-
-        public void AddFirstEvaluation(CreateEvaluationRequest evaluation)
+        public EvaluationDto GetByCartonId(Guid id)
         {
-            var carton = _cartonRepository.GetSingleBy(c => c.Id == evaluation.CartonId);
+            var evaluation = _evaluationRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            return _evaluationMapper.ToDto(evaluation);
+        }
 
-            if (_evaluationRepository.GetAll().Any(e => e.Carton.Id == evaluation.CartonId))
-                throw new EvaluationExistsException(
-                    $"Evaluation for carton with id {evaluation.CartonId} was created earlier.");
-
-            var newEvaluation = CreateEvaluationEntity(evaluation, carton);
-
-            _evaluationRepository.Add(newEvaluation);
+        public void Add(EvaluationDto evaluationDto)
+        {
+            var evaluation = _evaluationMapper.ToEntity(evaluationDto);
+            _evaluationRepository.Add(evaluation);
             _unitOfWork.Commit();
         }
 
-        private Evaluation CreateEvaluationEntity(CreateEvaluationRequest evaluation, Carton carton)
+        public void Update(EvaluationDto evaluationDto)
         {
-            return new Evaluation
-            {
-                AdvicedLevelOfSupport = evaluation.AdviceLevelOfSupport,
-                Age = evaluation.Age,
-                BasicPhysicalNeeds = evaluation.BasicPhysicalNeeds,
-                BehaviorRisks = evaluation.BehaviorRisks,
-                Capabilities = evaluation.Capabilities,
-                Carton = carton,
-                CaseLeader = evaluation.CaseLeader,
-                CulturalSpecifics = evaluation.CulturalSpecifics,
-                Date = evaluation.Date,
-                DominantBehaviors = evaluation.DominantBehaviors,
-                DedicatedWorker = evaluation.DedicatedWorker,
-                DominantEmotions = evaluation.DominantBehaviors,
-                EducationalNeeds = evaluation.EducationalNeeds,
-                EvaluationDoneBy = evaluation.EvaluationDoneBy,
-                FamilyMembers = evaluation.FamilyMembers,
-                FamilyRisks = evaluation.FamilyRisks,
-                FamilyStrenghts = evaluation.FamilyStrengths,
-                OtherMembers = evaluation.OtherMembers,
-                OtherNeeds = evaluation.OtherNeeds,
-                OtherRisks = evaluation.OtherRisks,
-                OtherStrenghts = evaluation.OtherStrengths,
-                PersonalStrenghts = evaluation.PersonalStrengths,
-                PsyhoSocialNeeds = evaluation.PsychoSocialNeeds,
-                SchoolStatus = evaluation.SchoolStatus,
-                SurroundRisks = evaluation.SurroundRisks,
-                SurroundStrenghts = evaluation.SurroundStrengths
-            };
+            var evaluation = _evaluationMapper.ToEntity(evaluationDto);
+            _evaluationRepository.Update(evaluation);
+            _unitOfWork.Commit();
         }
 
-        public void UpdateFirstEvaluation(CreateEvaluationRequest evaluation)
+        public void Remove(EvaluationDto evaluationDto)
         {
-            var existingEvaluation = _evaluationRepository.GetSingleBy(e => e.Id == evaluation.Id);
-
-            if (existingEvaluation != null)
-            {
-                existingEvaluation.AdvicedLevelOfSupport = evaluation.AdviceLevelOfSupport;
-                existingEvaluation.Age = evaluation.Age;
-                existingEvaluation.BasicPhysicalNeeds = evaluation.BasicPhysicalNeeds;
-                existingEvaluation.BehaviorRisks = evaluation.BehaviorRisks;
-                existingEvaluation.Capabilities = evaluation.Capabilities;
-                existingEvaluation.CaseLeader = evaluation.CaseLeader;
-                existingEvaluation.CulturalSpecifics = evaluation.CulturalSpecifics;
-                existingEvaluation.Date = evaluation.Date;
-                existingEvaluation.DominantBehaviors = evaluation.DominantBehaviors;
-                existingEvaluation.DedicatedWorker = evaluation.DedicatedWorker;
-                existingEvaluation.DominantEmotions = evaluation.DominantBehaviors;
-                existingEvaluation.EducationalNeeds = evaluation.EducationalNeeds;
-                existingEvaluation.EvaluationDoneBy = evaluation.EvaluationDoneBy;
-                existingEvaluation.FamilyMembers = evaluation.FamilyMembers;
-                existingEvaluation.FamilyRisks = evaluation.FamilyRisks;
-                existingEvaluation.FamilyStrenghts = evaluation.FamilyStrengths;
-                existingEvaluation.OtherMembers = evaluation.OtherMembers;
-                existingEvaluation.OtherNeeds = evaluation.OtherNeeds;
-                existingEvaluation.OtherRisks = evaluation.OtherRisks;
-                existingEvaluation.OtherStrenghts = evaluation.OtherStrengths;
-                existingEvaluation.PersonalStrenghts = evaluation.PersonalStrengths;
-                existingEvaluation.PsyhoSocialNeeds = evaluation.PsychoSocialNeeds;
-                existingEvaluation.SchoolStatus = evaluation.SchoolStatus;
-                existingEvaluation.SurroundRisks = evaluation.SurroundRisks;
-                existingEvaluation.SurroundStrenghts = evaluation.SurroundStrengths;
-            }
-
-            _evaluationRepository.Update(existingEvaluation);
+            var evaluation = _evaluationMapper.ToEntity(evaluationDto);
+            _evaluationRepository.Remove(evaluation);
             _unitOfWork.Commit();
         }
     }

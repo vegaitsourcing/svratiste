@@ -39,6 +39,7 @@ export function getCartonsPageCount() {
 			}
 		});
 }
+
 export function getCartonById(id) {
 	axios.get(web_api_url + '/Carton/' + id,
 		{
@@ -56,15 +57,16 @@ export function getCartonById(id) {
 			}
 		});
 }
+
 export function addCarton(carton) {
 	axios.post(web_api_url + '/Carton', carton,
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
-		getCartons(carton.pageNumber);
-		dispatcher.dispatch({
-			type: "HIDE_ADD_BAR"
-		});
+			getCartons(carton.pageNumber);
+			// dispatcher.dispatch({
+			// 	type: "HIDE_ADD_BAR"
+			// });
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
@@ -73,6 +75,7 @@ export function addCarton(carton) {
 			}
 		});
 }
+
 export function editCarton(carton) {
 	axios.put(web_api_url + '/Carton', carton,
 		{

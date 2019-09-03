@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import Colours from '../common/colours';
 import {input as CustomInput, label as CustomLabel, textarea as CustomTextarea} from '../common/Inputs/Inputs';
 
+import EvaluationStore from '../../stores/EvaluationStore';
+import * as EvaluationActions from '../../actions/EvaluationActions';
+
 const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -80,48 +83,92 @@ const Hr = styled.hr`
 	width: 80%;
 `;
 class Evaluation extends Component {
-	state = {
-		id: '',
-		cartonId: '',
-		age: '',
-		familyMembers : '',
-		schoolStatus: '',
-		caseLeader: '',
-		dedicatedWorker: '',
-		otherMembers: '',
-		basicPhysicalNeeds: '',
-		psyhoSocialNeeds: '',
-		educationalNeeds: '',
-		otherNeeds: '',
-		dominantEmotions: '',
-		dominantBehaviors: '',
-		surroundStrenghts: '',
-		familyStrenghts: '',
-		personalStrenghts: '',
-		otherStrenghts: '',
-		surroundRisks : '',
-		familyRisks: '',
-		behaviorRisks: '',
-		otherRisks: '',
-		capabilities: '',
-		culturalSpecifics: '',
-		advicedLevelOfSupport: '',
-		evaluationDoneBy: '',
-		date: ''
+	constructor(props) {
+		super(props);
 	}
-	onInputChange = (event) => {
-		const newState = {
-			...this.state,
-			[event.target.name] : event.target.value
+	state = {
+		evaluation: {
+			id: '',
+			cartonId: '',
+			age: '',
+			familyMembers : '',
+			schoolStatus: '',
+			caseLeader: '',
+			dedicatedWorker: '',
+			otherMembers: '',
+			basicPhysicalNeeds: '',
+			psyhoSocialNeeds: '',
+			educationalNeeds: '',
+			otherNeeds: '',
+			dominantEmotions: '',
+			dominantBehaviors: '',
+			surroundStrenghts: '',
+			familyStrenghts: '',
+			personalStrenghts: '',
+			otherStrenghts: '',
+			surroundRisks : '',
+			familyRisks: '',
+			behaviorRisks: '',
+			otherRisks: '',
+			capabilities: '',
+			culturalSpecifics: '',
+			advicedLevelOfSupport: '',
+			evaluationDoneBy: '',
+			date: ''
 		}
-		this.setState(newState);
-		console.log(this.state);
+	}
+    initState() {
+        this.setState({
+			evaluation: {
+				id: '',
+				cartonId: '',
+				age: '',
+				familyMembers : '',
+				schoolStatus: '',
+				caseLeader: '',
+				dedicatedWorker: '',
+				otherMembers: '',
+				basicPhysicalNeeds: '',
+				psyhoSocialNeeds: '',
+				educationalNeeds: '',
+				otherNeeds: '',
+				dominantEmotions: '',
+				dominantBehaviors: '',
+				surroundStrenghts: '',
+				familyStrenghts: '',
+				personalStrenghts: '',
+				otherStrenghts: '',
+				surroundRisks : '',
+				familyRisks: '',
+				behaviorRisks: '',
+				otherRisks: '',
+				capabilities: '',
+				culturalSpecifics: '',
+				advicedLevelOfSupport: '',
+				evaluationDoneBy: '',
+				date: ''
+			}
+		});
+    }
+	onInputChange = (event) => {
+		const evaluation = this.state.evaluation;
+		evaluation[event.target.name] = event.target.value;
+		this.setState({evaluation});
 	}
 	handleCheckboxChange = (event) => {
-		const { target } = event;
-		const { name, checked } = target;
+		const evaluation = this.state.evaluation;
+		evaluation[event.target.name] = event.target.value;
+		this.setState({evaluation});
+	}
+	onSave = () => {
+		const data = this.state.evaluation;
 
-		this.setState({ [name]: checked });
+        EvaluationActions.addEvaluation(data);
+        this.initState();
+    }
+	getEvaluation() {
+		const evaluation = EvaluationStore.getEvaluation();
+		this.setState({evaluation});
 	}
 	render() {
 		return (
@@ -148,7 +195,7 @@ class Evaluation extends Component {
 					<CustomInput value={this.state.dedicatedWorker} inputName="dedicatedWorker" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
-					<Hr />
+				<Hr />
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Imena, funkcija i kontakt drugih osoba uključenih u procenu:"/>
@@ -179,7 +226,7 @@ class Evaluation extends Component {
 					<CustomTextarea value={this.state.dominantBehaviors} inputName="dominantBehaviors" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
-					<Hr />
+				<Hr />
 				</InputWrapperWide>
 				<InputWrapper>
 					<CustomLabel title="Snage iz neposrednog okruženja:"/>
@@ -214,7 +261,7 @@ class Evaluation extends Component {
 					<CustomInput value={this.state.otherRisks} inputName="otherRisks" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
-					<Hr />
+				<Hr />
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Procena sposobnosti korisnika:"/>
@@ -225,7 +272,7 @@ class Evaluation extends Component {
 					<CustomTextarea value={this.state.culturalSpecifics} inputName="culturalSpecifics" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
-					<Hr />
+				<Hr />
 				</InputWrapperWide>
 				<InputWrapper>
 					<CustomLabel title="Preporučeni stepen podrške:"/>
@@ -240,7 +287,7 @@ class Evaluation extends Component {
 					<CustomInput inputType="date" value={this.state.date} inputName="date" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
-					<Button>Sačuvaj</Button>
+					<Button onClick={this.onSave}>Sačuvaj</Button>
 					<Button>Odštampaj</Button>
 				</InputWrapperWide>
 			</Container>

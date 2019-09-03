@@ -6,6 +6,9 @@ import { FontWeight} from '../common/typography';
 import {input as CustomInput, label as CustomLabel, select as CustomSelect} from '../common/Inputs/Inputs';
 import Constants from '../common/constants';
 
+import * as FirstEvaluationActions from '../../actions/FirstEvaluationActions';
+import FirstEvaluationStore from '../../stores/FirstEvaluationStore';
+
 const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -112,49 +115,94 @@ const Button = styled.button`
 	}
 `;
 class FirstEvaluation extends Component {
-	state = {
-		id: '',
-		cartonId: '',
-		otherChildrenName: '',
-		otherMembersName: '',
-		guardiansName: '',
-		livingSpace: '',
-		schoolAndGrade: '',
-		languages: '',
-		healthCard: false,
-		caseLeaderName: '',
-		capability: false,
-		onTheWaitingList: false,
-		serviceStart: '',
-		directedToName: '',
-		individualMovementAbility: '',
-		verbalComunicationAbility: '',
-		physicalDescription: '',
-		diagnosedDisease: '',
-		priorityNeeds: '',
-		attitude: '',
-		expectations: '',
-		directedFromName: '',
-		other: '',
-		startedEvaluation: '',
-		finishedEvaluation: '',
-		evaluationDoneBy: '',
-		evaluationRevisedBy: '',
-		suitabilityId: ''
+	constructor(props) {
+		super(props);
 	}
-	onInputChange = (event) => {
-		const newState = {
-			...this.state,
-			[event.target.name] : event.target.value
+	state = {
+		firstEvaluation: {
+			id: '',
+			cartonId: '',
+			otherChildrenName: '',
+			otherMembersName: '',
+			guardiansName: '',
+			livingSpace: '',
+			schoolAndGrade: '',
+			languages: '',
+			healthCard: false,
+			caseLeaderName: '',
+			capability: false,
+			onTheWaitingList: false,
+			serviceStart: '',
+			directedToName: '',
+			individualMovementAbility: '',
+			verbalComunicationAbility: '',
+			physicalDescription: '',
+			diagnosedDisease: '',
+			priorityNeeds: '',
+			attitude: '',
+			expectations: '',
+			directedFromName: '',
+			other: '',
+			startedEvaluation: '',
+			finishedEvaluation: '',
+			evaluationDoneBy: '',
+			evaluationRevisedBy: '',
+			suitabilityId: ''
 		}
-		this.setState(newState);
-		console.log(this.state);
+	}
+    initState() {
+        this.setState({
+			firstEvaluation: {
+				id: '',
+				cartonId: '',
+				otherChildrenName: '',
+				otherMembersName: '',
+				guardiansName: '',
+				livingSpace: '',
+				schoolAndGrade: '',
+				languages: '',
+				healthCard: false,
+				caseLeaderName: '',
+				capability: false,
+				onTheWaitingList: false,
+				serviceStart: '',
+				directedToName: '',
+				individualMovementAbility: '',
+				verbalComunicationAbility: '',
+				physicalDescription: '',
+				diagnosedDisease: '',
+				priorityNeeds: '',
+				attitude: '',
+				expectations: '',
+				directedFromName: '',
+				other: '',
+				startedEvaluation: '',
+				finishedEvaluation: '',
+				evaluationDoneBy: '',
+				evaluationRevisedBy: '',
+				suitabilityId: ''
+			}
+		});
+    }
+	onInputChange = (event) => {
+		const firstEvaluation = this.state.firstEvaluation;
+		firstEvaluation[event.target.name] = event.target.value;
+		this.setState({firstEvaluation});
 	}
 	handleCheckboxChange = (event) => {
-		const { target } = event;
-		const { name, checked } = target;
+		const firstEvaluation = this.state.firstEvaluation;
+		firstEvaluation[event.target.name] = event.target.value;
+		this.setState({firstEvaluation});
+	}
+	onSave = () => {
+		const data = this.state.firstEvaluation;
 
-		this.setState({ [name]: checked });
+        FirstEvaluationActions.addFirstEvaluation(data);
+        this.initState();
+    }
+	getFirstEvaluation() {
+		const firstEvaluation = FirstEvaluationStore.getFirstEvaluation();
+		this.setState({firstEvaluation});
 	}
 	render() {
 		return (
@@ -260,7 +308,7 @@ class FirstEvaluation extends Component {
 					<CustomInput value={this.state.evaluationRevisedBy} inputName="evaluationRevisedBy" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
-					<Button>Sačuvaj</Button>
+					<Button onClick={this.onSave}>Sačuvaj</Button>
 					<Button>Odštampaj</Button>
 				</InputWrapperWide>
 			</Container>
