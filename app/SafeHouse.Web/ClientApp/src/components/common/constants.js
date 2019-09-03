@@ -97,7 +97,19 @@ export const Constants = {
 			name: "Drugo",
 			value: 3
 		},
-	]
+	],
+	reports : {
+		users: '5',
+		visits: '15',
+		meals: '15',
+		hygiene: '5',
+		clothes: '7',
+		intervention: '2',
+		education: '3',
+		school: '1',
+		parents: '0',
+		medicalhelp: '1'
+	}
 };
 export const web_api_url = "http://localhost:5000/api";
 
