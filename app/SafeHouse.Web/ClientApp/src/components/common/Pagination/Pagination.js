@@ -21,7 +21,7 @@ const Button= styled.button`
 	font-family: ${Headings.font};
 	color: ${Colours.doveGray};
 	background: ${Colours.white};
-	border: 1px solid ${Colours.doveGray};
+	border: 1px solid ${Colours.alto};
 	cursor: pointer;
 	&:hover {
 		color: ${Colours.lochmara};
