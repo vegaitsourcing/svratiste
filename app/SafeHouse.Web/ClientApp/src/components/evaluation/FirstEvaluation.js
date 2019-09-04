@@ -199,7 +199,10 @@ class FirstEvaluation extends Component {
 
         FirstEvaluationActions.addFirstEvaluation(data);
         this.initState();
-    }
+	}
+	onDelete = () => {
+		//ToDo
+	}
 	getFirstEvaluation() {
 		const firstEvaluation = FirstEvaluationStore.getFirstEvaluation();
 		this.setState({firstEvaluation});
@@ -309,6 +312,7 @@ class FirstEvaluation extends Component {
 				</InputWrapper>
 				<InputWrapperWide>
 					<Button onClick={this.onSave}>Sačuvaj</Button>
+					<Button onClick={this.onDelete}>Obriši</Button>
 					<Button>Odštampaj</Button>
 				</InputWrapperWide>
 			</Container>

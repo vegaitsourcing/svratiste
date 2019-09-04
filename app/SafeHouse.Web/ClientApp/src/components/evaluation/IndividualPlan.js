@@ -170,6 +170,9 @@ class IndividualPlan extends Component {
 		const involvedPersons = this.state.involvedPersons.concat([{name: '', jobTitle: ''}])
 		this.setState({involvedPersons})
 	}
+	onSave = () => {
+		//ToDo
+	}
 	render() {
 		return (
 			<Container>
@@ -238,6 +241,7 @@ class IndividualPlan extends Component {
 				</InputWrapper>
 				<InputWrapperWide>
 					<Button>Sačuvaj</Button>
+					<Button onClick={this.onDelete}>Obriši</Button>
 					<Button>Odštampaj</Button>
 				</InputWrapperWide>
 			</Container>

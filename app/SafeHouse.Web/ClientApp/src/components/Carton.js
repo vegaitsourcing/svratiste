@@ -220,7 +220,10 @@ class Carton extends Component {
 			CardboardActions.addCarton(data);
 		}
         this.initState();
-    }
+	}
+	onDelete = () => {
+		//ToDO
+	}
 	getCarton() {
 		const carton = CardboardStore.getCarton();
 		this.setState({carton});
@@ -301,6 +304,7 @@ class Carton extends Component {
 					<LabelCheckbox htmlFor="individualniPlan">Individualni plan</LabelCheckbox>
 				</InputWrapperWide>
 				<Button onClick={this.onSave}>Sačuvaj</Button>
+				<Button onClick={this.onDelete}>Obriši</Button>
 				{options}
 			</Container>
 		);

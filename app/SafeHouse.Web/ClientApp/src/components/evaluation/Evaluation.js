@@ -165,7 +165,10 @@ class Evaluation extends Component {
 
         EvaluationActions.addEvaluation(data);
         this.initState();
-    }
+	}
+	onDelete = () => {
+		//ToDO
+	}
 	getEvaluation() {
 		const evaluation = EvaluationStore.getEvaluation();
 		this.setState({evaluation});
@@ -288,6 +291,7 @@ class Evaluation extends Component {
 				</InputWrapper>
 				<InputWrapperWide>
 					<Button onClick={this.onSave}>Sačuvaj</Button>
+					<Button onClick={this.onDelete}>Obriši</Button>
 					<Button>Odštampaj</Button>
 				</InputWrapperWide>
 			</Container>

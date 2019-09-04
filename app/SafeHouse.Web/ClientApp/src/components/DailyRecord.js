@@ -178,6 +178,9 @@ class DailyRecord extends Component {
 		}, 0);
 		this.setState({[state]: values})
 	}
+	onDelete = () => {
+		//ToDo
+	}
 	render() {
 		return (
 			<Container>
@@ -244,6 +247,7 @@ class DailyRecord extends Component {
 					</InputWrapper>
 				</Div>
 				<Button>Sačuvaj</Button>
+				<Button onClick={this.onDelete}>Obriši</Button>
 				<ButtonWrapper>
 					<DarkButton onClick={() => this.showModal(1)}>Otkazi   </DarkButton>
 				</ButtonWrapper>
