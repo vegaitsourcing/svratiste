@@ -3,6 +3,8 @@ import { NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from '@material-ui/core/Icon';
 
+import LoginStore from '../stores/LoginStore';
+
 import Colours from '../components/common/colours';
 import Constants from '../components/common/constants';
 import { FontWeight, Headings } from '../components/common/typography';
@@ -58,6 +60,20 @@ const ListItem = styled.li`
 		text-decoration: none;
 		display: flex;
 		align-items: center;
+	}
+	button {
+		color: ${Colours.white};
+		font-size: 13px;
+		font-weight: ${FontWeight.light};
+		font-family: ${Headings.font};
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		padding-left: 0;
+		background: transparent;
+		border: 0;
+		cursor: pointer;
+		outline: none;
 	}
 	span {
 		margin: 0 60px 0 20px;
@@ -157,6 +173,9 @@ class Dashboard extends Component {
 		const params =  event.target.value;
 		this.setState({searchParams: params});
 	}
+	handleClick = () => {
+		console.log('izlogovan');
+	}
 	render() {
 		return (
 			<Wrapper>
@@ -192,6 +211,11 @@ class Dashboard extends Component {
 									</NavLink>
 								</ListItem>
 							))}
+							<ListItem>
+								<button onClick={this.handleClick}>
+									<Icon>power_settings_new</Icon>Izloguj se
+								</button>
+							</ListItem>
 						</List>
 					</NavigationWrapper>
 				</Sidebar>

@@ -8,7 +8,7 @@ import Record from './screens/Record';
 import Records from './screens/Records';
 import Dashboard from './screens/Dashboard';
 import Notifications from './screens/Notifications';
-
+import Reports from './screens/Reports';
 
 const App = () => {
 	return (
@@ -20,6 +20,7 @@ const App = () => {
 				<Route exact path='/users/:id' component={NewCarton} />
 				<Route exact path='/records' component={Records} />
 				<Route exact path='/records/:id' component={Record} />
+				<Route exact path='/reports' component={Reports} />
 				<Route exact path="/" component={Notifications} />
 			</Router>
 		</Auxiliary>
