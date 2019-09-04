@@ -225,6 +225,7 @@ class DailyRecord extends Component {
 					<Hr />
 					<LabelLarge title="Nabavka obuće i odeće i obezbeđivanje uslova za njihovo održavanje:"/>
 					<InputHidden type="checkbox" id="clothes" name="clothes" checked={this.state.clothes} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="clothes">Odeća i obuća</LabelCheckbox>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<Hr />
