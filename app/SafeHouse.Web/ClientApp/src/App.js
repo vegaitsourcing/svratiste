@@ -9,7 +9,7 @@ import Records from './screens/Records';
 import Dashboard from './screens/Dashboard';
 import Notifications from './screens/Notifications';
 import Reports from './screens/Reports';
-
+import FirstEvaluationPrint from './components/evaluation/FirstEvaluationPrint';
 const App = () => {
 	return (
 		<Auxiliary>
@@ -21,6 +21,7 @@ const App = () => {
 				<Route exact path='/records' component={Records} />
 				<Route exact path='/records/:id' component={Record} />
 				<Route exact path='/reports' component={Reports} />
+				<Route exact path='/first-evaluation/print/:id' component={FirstEvaluationPrint} />
 				<Route exact path="/" component={Notifications} />
 			</Router>
 		</Auxiliary>
