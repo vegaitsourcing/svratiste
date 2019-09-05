@@ -177,32 +177,15 @@ class Evaluation extends Component {
 		return (
 			<Container>
 				<InputWrapper>
-					<CustomLabel title="Uzrast:"/>
-					<CustomInput value={this.state.age} inputName="age" change={this.onInputChange}/> 
-					{/* CHECK */}
-				</InputWrapper>
-				<InputWrapper>
-					<CustomLabel title="Članovi domaćinstva:"/>
-					<CustomInput value={this.state.familyMembers} inputName="familyMembers" change={this.onInputChange}/>
-				</InputWrapper>
-				<InputWrapper>
-					<CustomLabel title="Školski status:"/>
-					<CustomInput value={this.state.schoolStatus} inputName="schoolStatus" change={this.onInputChange}/>
-				</InputWrapper>
-				<InputWrapper>
-					<CustomLabel title="Voditelj slučaja:"/>
-					<CustomInput value={this.state.caseLeader} inputName="caseLeader" change={this.onInputChange}/>
-				</InputWrapper>
-				<InputWrapper>
 					<CustomLabel title="Zadužen stručni radnik/saradnik u usluzi:"/>
 					<CustomInput value={this.state.dedicatedWorker} inputName="dedicatedWorker" change={this.onInputChange}/>
 				</InputWrapper>
+				<InputWrapper>
+					<CustomLabel title="Imena, funkcija i kontakt drugih osoba uključenih u procenu:"/>
+					<CustomInput value={this.state.otherMembers} inputName="otherMembers" change={this.onInputChange}/>
+				</InputWrapper>
 				<InputWrapperWide>
 				<Hr />
-				</InputWrapperWide>
-				<InputWrapperWide>
-					<CustomLabel title="Imena, funkcija i kontakt drugih osoba uključenih u procenu:"/>
-					<CustomTextarea value={this.state.otherMembers} inputName="otherMembers" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Osnovne fizičke potrebe:"/>
