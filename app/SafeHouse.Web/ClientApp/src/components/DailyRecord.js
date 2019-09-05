@@ -178,6 +178,9 @@ class DailyRecord extends Component {
 		}, 0);
 		this.setState({[state]: values})
 	}
+	onDelete = () => {
+		//ToDo
+	}
 	render() {
 		return (
 			<Container>
@@ -222,6 +225,7 @@ class DailyRecord extends Component {
 					<Hr />
 					<LabelLarge title="Nabavka obuće i odeće i obezbeđivanje uslova za njihovo održavanje:"/>
 					<InputHidden type="checkbox" id="clothes" name="clothes" checked={this.state.clothes} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="clothes">Odeća i obuća</LabelCheckbox>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<Hr />
@@ -244,6 +248,7 @@ class DailyRecord extends Component {
 					</InputWrapper>
 				</Div>
 				<Button>Sačuvaj</Button>
+				<Button onClick={this.onDelete}>Obriši</Button>
 				<ButtonWrapper>
 					<DarkButton onClick={() => this.showModal(1)}>Otkazi   </DarkButton>
 				</ButtonWrapper>

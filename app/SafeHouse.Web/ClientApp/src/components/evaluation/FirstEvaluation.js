@@ -180,7 +180,18 @@ class FirstEvaluation extends Component {
 				finishedEvaluation: '',
 				evaluationDoneBy: '',
 				evaluationRevisedBy: '',
-				suitabilityId: ''
+				suitabilityId: '',
+				sleepOnStreet: false,
+				//novo
+				dumpsterDiving: false,
+				recycling: false,
+				begging: false,
+				sellsOnStreet: false,
+				prostituting: false,
+				extremelyPoor: false,
+				helpingFamilyOnStreet: false,
+				otherSuitability: '',
+				explanation: ''
 			}
 		});
     }
@@ -199,7 +210,10 @@ class FirstEvaluation extends Component {
 
         FirstEvaluationActions.addFirstEvaluation(data);
         this.initState();
-    }
+	}
+	onDelete = () => {
+		//ToDo
+	}
 	getFirstEvaluation() {
 		const firstEvaluation = FirstEvaluationStore.getFirstEvaluation();
 		this.setState({firstEvaluation});
@@ -238,6 +252,44 @@ class FirstEvaluation extends Component {
 				<InputWrapper>
 					<CustomLabel title="Voditelj slučaja:"/>
 					<CustomInput value={this.state.caseLeaderName} inputName="caseLeaderName" change={this.onInputChange}/>
+				</InputWrapper>
+				
+				<InputWrapper>
+					<InputHidden type="checkbox" id="sleepOnStreet" name="sleepOnStreet" checked={this.state.sleepOnStreet} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="sleepOnStreet">Spava na ulici</LabelCheckbox>
+				</InputWrapper>
+				<InputWrapper>
+					<InputHidden type="checkbox" id="dumpsterDiving" name="dumpsterDiving" checked={this.state.dumpsterDiving} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="dumpsterDiving">Hranu pronalazi u kontejnerima</LabelCheckbox>
+				</InputWrapper>
+				<InputWrapper>
+					<InputHidden type="checkbox" id="begging" name="begging" checked={this.state.begging} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="begging">Prosi</LabelCheckbox>
+				</InputWrapper>
+				<InputWrapper>
+					<InputHidden type="checkbox" id="prostituting" name="prostituting" checked={this.state.prostituting} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="prostituting">Prodaje seksualne usluge</LabelCheckbox>
+				</InputWrapper>
+				<InputWrapper>
+					<InputHidden type="checkbox" id="sellsOnStreet" name="sellsOnStreet" checked={this.state.sellsOnStreet} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="sellsOnStreet">Prodaje na pijaci/ulici</LabelCheckbox>
+				</InputWrapper>
+				<InputWrapper>
+					<InputHidden type="checkbox" id="helpingFamilyOnStreet" name="helpingFamilyOnStreet" checked={this.state.helpingFamilyOnStreet} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="helpingFamilyOnStreet">Pomaže porodici u radu na ulici</LabelCheckbox>
+				</InputWrapper>
+				<InputWrapper>
+					<InputHidden type="checkbox" id="extremelyPoor" name="extremelyPoor" checked={this.state.extremelyPoor} onChange={this.handleCheckboxChange}/>
+					<LabelCheckbox htmlFor="extremelyPoor">Ekstremno siromašna porodica, postoji rizik za dete</LabelCheckbox>
+				</InputWrapper>
+				<InputWrapper />
+				<InputWrapper>
+					<CustomLabel title="Drugo:"/>
+					<CustomInput value={this.state.otherSuitability} inputName="otherSuitability" change={this.onInputChange}/>
+				</InputWrapper>
+				<InputWrapper>
+					<CustomLabel title="Obrazloženje nepodobnosti korisnika:"/>
+					<CustomInput value={this.state.explanation} inputName="explanation" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<InputHidden type="checkbox" id="capability" name="capability" checked={this.state.capability} onChange={this.handleCheckboxChange}/>
@@ -309,6 +361,7 @@ class FirstEvaluation extends Component {
 				</InputWrapper>
 				<InputWrapperWide>
 					<Button onClick={this.onSave}>Sačuvaj</Button>
+					<Button onClick={this.onDelete}>Obriši</Button>
 					<Button>Odštampaj</Button>
 				</InputWrapperWide>
 			</Container>

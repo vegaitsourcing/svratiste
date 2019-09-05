@@ -9,6 +9,9 @@ import Records from './screens/Records';
 import Dashboard from './screens/Dashboard';
 import Notifications from './screens/Notifications';
 import Reports from './screens/Reports';
+import FirstEvaluationPrint from './components/evaluation/FirstEvaluationPrint';
+import EvaluationPrint from './components/evaluation/EvaluationPrint';
+import IndividualPlanPrint from './components/evaluation/IndividualPlanPrint';
 
 const App = () => {
 	return (
@@ -21,6 +24,9 @@ const App = () => {
 				<Route exact path='/records' component={Records} />
 				<Route exact path='/records/:id' component={Record} />
 				<Route exact path='/reports' component={Reports} />
+				<Route exact path='/first-evaluation/print/:id' component={FirstEvaluationPrint} />
+				<Route exact path='/evaluation/print/:id' component={EvaluationPrint} />
+				<Route exact path='/individual-plan/print/:id' component={IndividualPlanPrint} />
 				<Route exact path="/" component={Notifications} />
 			</Router>
 		</Auxiliary>

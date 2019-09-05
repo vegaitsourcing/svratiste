@@ -79,6 +79,11 @@ const Hr = styled.hr`
 	border-top: 1px solid rgba(0,0,0,.1);
 	margin: 10px 0 20px;
 `;
+const ButtonContainer = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: auto;
+`;
 const Button = styled.button`
 	background: ${Colours.lochmara};
 	margin-left: 0;
@@ -220,7 +225,10 @@ class Carton extends Component {
 			CardboardActions.addCarton(data);
 		}
         this.initState();
-    }
+	}
+	onDelete = () => {
+		//ToDO
+	}
 	getCarton() {
 		const carton = CardboardStore.getCarton();
 		this.setState({carton});
@@ -230,7 +238,7 @@ class Carton extends Component {
 		let options;
 
 		if(!this.state.newCarton) {
-			options = <Container>
+			options = <ButtonContainer>
 				<ButtonWrapper>
 					<DarkButton onClick={() => this.showModal(1)}>Kreiraj Prijemnu Procenu</DarkButton>
 					<DarkButton onClick={() => this.showModal(2)}>Kreiraj Procenu</DarkButton>
@@ -239,7 +247,7 @@ class Carton extends Component {
 				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Prijemnu Procenu"><FirstEvaluation /></Modal>}
 				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Procenu"><Evaluation /></Modal>}
 				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Individualni Plan"><IndividualPlan /></Modal>}
-			</Container>
+			</ButtonContainer>
 		}
 		return (
 			<Container>
@@ -301,6 +309,7 @@ class Carton extends Component {
 					<LabelCheckbox htmlFor="individualniPlan">Individualni plan</LabelCheckbox>
 				</InputWrapperWide>
 				<Button onClick={this.onSave}>Sačuvaj</Button>
+				<Button onClick={this.onDelete}>Obriši</Button>
 				{options}
 			</Container>
 		);

@@ -30,6 +30,9 @@ const Sidebar = styled.div`
 	background: url('${smalldeco}') bottom left no-repeat,linear-gradient(to bottom,#143d4e 0%,#17264e 100%);
 	box-sizing: border-box;
 	padding: 10px;
+	@media print {
+		visibility: hidden;
+	}
 `;
 const LogoWrapper = styled.div`
 	display: flex;
@@ -109,6 +112,9 @@ const Header = styled.div`
 		bottom: -2px;
 		left: 0;
 		background: ${Colours.alto};
+	}
+	@media print {
+		visibility: hidden;
 	}
 `;
 const Shape = styled.img`
