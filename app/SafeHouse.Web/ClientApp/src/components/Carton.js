@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import Colours from '../components/common/colours';
 import { FontWeight, Body, Headings } from '../components/common/typography';
@@ -295,7 +296,7 @@ class Carton extends Component {
 	}
 	showDailyRecord = (id) => {
 		console.log(id);
-		//ToDo
+		this.props.history.push('/records/' + id);
 	}
 	render() {
 
@@ -406,4 +407,4 @@ class Carton extends Component {
 		);
 	}
 }
-export default Carton;
+export default withRouter(Carton);
