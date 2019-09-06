@@ -12,6 +12,6 @@ namespace SafeHouse.Core.Abstractions
 
         void Update(FirstEvaluationDto firstEvaluation);
 
-        void Remove(FirstEvaluationDto firstEvaluation);
+        void Remove(Guid id);
     }
 }

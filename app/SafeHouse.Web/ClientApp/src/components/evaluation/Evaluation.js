@@ -76,6 +76,15 @@ const Button = styled.button`
 		}
 	}
 `;
+const ButtonWrapper = styled.div`
+	display: inline-flex;
+	margin-left: auto;
+`;
+const ButtonContainer = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: auto;
+`;
 const Hr = styled.hr`
 	border: 0;
 	border-top: 1px solid ${Colours.lochmara};
@@ -86,6 +95,7 @@ class Evaluation extends Component {
 	constructor(props) {
 		super(props);
 	}
+
 	state = {
 		evaluation: {
 			id: '',
@@ -115,8 +125,10 @@ class Evaluation extends Component {
 			advicedLevelOfSupport: '',
 			evaluationDoneBy: '',
 			date: ''
-		}
+		},
+		newEvaluation: true
 	}
+
     initState() {
         this.setState({
 			evaluation: {
@@ -150,30 +162,56 @@ class Evaluation extends Component {
 			}
 		});
     }
+
+	componentDidMount() {
+		if(this.props.evaluation === {}) {
+			this.setState({newEvaluation: false});
+		}
+	}
+	
 	onInputChange = (event) => {
 		const evaluation = this.state.evaluation;
 		evaluation[event.target.name] = event.target.value;
 		this.setState({evaluation});
 	}
+
 	handleCheckboxChange = (event) => {
 		const evaluation = this.state.evaluation;
 		evaluation[event.target.name] = event.target.value;
 		this.setState({evaluation});
 	}
+
 	onSave = () => {
 		const data = this.state.evaluation;
 
-        EvaluationActions.addEvaluation(data);
+		if (this.state.newEvaluation) {
+			delete data.id;
+			console.log('-- save data: ', data);
+			EvaluationActions.addEvaluation(data);
+		} else {
+			console.log('-- edit data: ', data);
+			EvaluationActions.editEvaluation(data);
+		}
+		
         this.initState();
 	}
+
 	onDelete = () => {
-		//ToDO
+		EvaluationActions.deleteEvaluation(this.state.evaluation.id);
+		this.initState();
 	}
-	getEvaluation() {
-		const evaluation = EvaluationStore.getEvaluation();
-		this.setState({evaluation});
-	}
+	
 	render() {
+		let options;
+
+		if(!this.state.newCarton) {
+			options = <span>
+				<ButtonWrapper>
+					<Button onClick={this.onDelete}>Obriši</Button>
+					<Button>Odštampaj</Button>
+				</ButtonWrapper>
+			</span>
+		}
 		return (
 			<Container>
 				<InputWrapper>
@@ -273,9 +311,10 @@ class Evaluation extends Component {
 					<CustomInput inputType="date" value={this.state.date} inputName="date" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
-					<Button onClick={this.onSave}>Sačuvaj</Button>
-					<Button onClick={this.onDelete}>Obriši</Button>
-					<Button>Odštampaj</Button>
+					<ButtonContainer>
+						<Button onClick={this.onSave}>Sačuvaj</Button>
+						{options}
+					</ButtonContainer>
 				</InputWrapperWide>
 			</Container>
 		 );

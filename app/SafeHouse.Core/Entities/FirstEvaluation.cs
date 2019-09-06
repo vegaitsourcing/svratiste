@@ -9,42 +9,62 @@ namespace SafeHouse.Core.Entities
         public Carton Carton { get; set; }
 
         [MaxLength(512)]
+        public string GuardiansName { get; set; }
+
+        [MaxLength(512)]
         public string OtherChildrenName { get; set; }
 
         [MaxLength(512)]
         public string OtherMembersName { get; set; }
 
-        [MaxLength(512)]
-        public string GuardiansName { get; set; }
-
-        public LivingSpace LivingSpace { get; set; }
+        public int LivingSpace { get; set; }
 
         [MaxLength(512)]
         public string SchoolAndGrade { get; set; }
 
-        [MaxLength(256)]
+        [MaxLength(512)]
         public string Languages { get; set; }
 
-        public bool HealthCard { get; set; }
+        [MaxLength(512)]
+        public string HealthCard { get; set; }
 
-        [MaxLength(256)]
+        [MaxLength(512)]
         public string CaseLeaderName { get; set; }
 
-        public Suitability Suitability { get; set; }
+        public bool SleepOnStreet { get; set; }
+
+        public bool DumpsterDiving { get; set; }
+
+        public bool Begging { get; set; }
+
+        public bool Prostituting { get; set; }
+
+        public bool SellsOnStreet { get; set; }
+
+        public bool HelpingFamilyOnStreet { get; set; }
+
+        public bool ExtremelyPoor { get; set; }
+
+        [MaxLength(512)]
+        public string OtherSuitability { get; set; }
+
+        [MaxLength(512)]
+        public string Explanation { get; set; }
 
         public bool Capability { get; set; }
 
         public bool OnTheWaitingList { get; set; }
 
-        public DateTime ServiceStart { get; set; }
+        public DateTime? ServiceStart { get; set; }
 
         [MaxLength(512)]
         public string DirectedToName { get; set; }
 
-        public IndividualMovementAbility IndividualMovementAbility { get; set; }
+        [MaxLength(512)]
+        public string IndividualMovementAbility { get; set; }
 
         [MaxLength(512)]
-        public string VerbalCommunicationAbility { get; set; }
+        public string VerbalComunicationAbility { get; set; }
 
         [MaxLength(512)]
         public string PhysicalDescription { get; set; }
@@ -71,10 +91,10 @@ namespace SafeHouse.Core.Entities
 
         public DateTime? FinishedEvaluation { get; set; }
 
-        [MaxLength(256)]
+        [MaxLength(512)]
         public string EvaluationDoneBy { get; set; }
 
-        [MaxLength(256)]
+        [MaxLength(512)]
         public string EvaluationRevisedBy { get; set; }
     }
 }

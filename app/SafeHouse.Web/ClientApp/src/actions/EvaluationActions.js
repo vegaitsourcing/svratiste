@@ -53,3 +53,18 @@ export function editEvaluation(evaluation) {
 			}
 		});
 }
+
+export function deleteEvaluation(id) {
+	axios.delete(web_api_url + '/Evaluation/' + id,
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then((response) => {
+			// Done
+		}).catch(error => {
+			if (error.response && error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
+}

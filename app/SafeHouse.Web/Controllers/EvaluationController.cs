@@ -63,11 +63,11 @@ namespace SafeHouse.Web.Controllers
 
         [HttpDelete]
         [Route("api/Evaluation")]
-        public IActionResult Remove([FromBody]EvaluationDto carton)
+        public IActionResult Remove(Guid id)
         {
             try
             {
-                _evaluationService.Remove(carton);
+                _evaluationService.Remove(id);
 
                 return HandleSuccessResult();
             }

@@ -114,10 +114,20 @@ const Button = styled.button`
 		}
 	}
 `;
+const ButtonWrapper = styled.div`
+	display: inline-flex;
+	margin-left: auto;
+`;
+const ButtonContainer = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: auto;
+`;
 class FirstEvaluation extends Component {
 	constructor(props) {
 		super(props);
 	}
+
 	state = {
 		firstEvaluation: {
 			id: '',
@@ -147,9 +157,21 @@ class FirstEvaluation extends Component {
 			finishedEvaluation: '',
 			evaluationDoneBy: '',
 			evaluationRevisedBy: '',
-			suitabilityId: ''
-		}
+			suitabilityId: '',
+			sleepOnStreet: false,
+			dumpsterDiving: false,
+			recycling: false,
+			begging: false,
+			sellsOnStreet: false,
+			prostituting: false,
+			extremelyPoor: false,
+			helpingFamilyOnStreet: false,
+			otherSuitability: '',
+			explanation: ''
+		},
+		newFirstEvaluation: true
 	}
+
     initState() {
         this.setState({
 			firstEvaluation: {
@@ -182,7 +204,6 @@ class FirstEvaluation extends Component {
 				evaluationRevisedBy: '',
 				suitabilityId: '',
 				sleepOnStreet: false,
-				//novo
 				dumpsterDiving: false,
 				recycling: false,
 				begging: false,
@@ -194,31 +215,57 @@ class FirstEvaluation extends Component {
 				explanation: ''
 			}
 		});
-    }
+	}
+
+	componentDidMount() {
+		if(this.props.firstEvaluation === {}) {
+			this.setState({newFirstEvaluation: false});
+		}
+	}
+	
 	onInputChange = (event) => {
 		const firstEvaluation = this.state.firstEvaluation;
 		firstEvaluation[event.target.name] = event.target.value;
 		this.setState({firstEvaluation});
 	}
+
 	handleCheckboxChange = (event) => {
 		const firstEvaluation = this.state.firstEvaluation;
 		firstEvaluation[event.target.name] = event.target.value;
 		this.setState({firstEvaluation});
 	}
+
 	onSave = () => {
 		const data = this.state.firstEvaluation;
 
-        FirstEvaluationActions.addFirstEvaluation(data);
+		if (this.state.newFirstEvaluation) {
+			delete data.id;
+			console.log('-- save data: ', data);
+			FirstEvaluationActions.addFirstEvaluation(data);
+		} else {
+			console.log('-- edit data: ', data);
+			FirstEvaluationActions.editFirstEvaluation(data);
+		}
+		
         this.initState();
 	}
+	
 	onDelete = () => {
-		//ToDo
+		FirstEvaluationActions.deleteFirstEvaluation(this.state.firstEvaluation.id);
+		this.initState();
 	}
-	getFirstEvaluation() {
-		const firstEvaluation = FirstEvaluationStore.getFirstEvaluation();
-		this.setState({firstEvaluation});
-	}
+
 	render() {
+		let options;
+
+		if(!this.state.newCarton) {
+			options = <span>
+				<ButtonWrapper>
+					<Button onClick={this.onDelete}>Obriši</Button>
+					<Button>Odštampaj</Button>
+				</ButtonWrapper>
+			</span>
+		}
 		return (
 			<Container>
 				<InputWrapper>
@@ -253,7 +300,6 @@ class FirstEvaluation extends Component {
 					<CustomLabel title="Voditelj slučaja:"/>
 					<CustomInput value={this.state.caseLeaderName} inputName="caseLeaderName" change={this.onInputChange}/>
 				</InputWrapper>
-				
 				<InputWrapper>
 					<InputHidden type="checkbox" id="sleepOnStreet" name="sleepOnStreet" checked={this.state.sleepOnStreet} onChange={this.handleCheckboxChange}/>
 					<LabelCheckbox htmlFor="sleepOnStreet">Spava na ulici</LabelCheckbox>
@@ -360,9 +406,10 @@ class FirstEvaluation extends Component {
 					<CustomInput value={this.state.evaluationRevisedBy} inputName="evaluationRevisedBy" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
-					<Button onClick={this.onSave}>Sačuvaj</Button>
-					<Button onClick={this.onDelete}>Obriši</Button>
-					<Button>Odštampaj</Button>
+					<ButtonContainer>
+						<Button onClick={this.onSave}>Sačuvaj</Button>
+						{options}
+					</ButtonContainer>
 				</InputWrapperWide>
 			</Container>
 		 );

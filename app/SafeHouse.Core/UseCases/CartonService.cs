@@ -29,6 +29,11 @@ namespace SafeHouse.Core.UseCases
                 .Take(Constants.PageSize)
                 .Select(c => _cartonMapper.ToDto(c));
 
+        public IEnumerable<CartonDto> GetOverEighteen()
+            => _cartonRepository.GetAll()
+                .Where(c => new DateTime((DateTime.Now - c.DateOfBirth).Ticks).Year >= 18)
+                .Select(c => _cartonMapper.ToDto(c));
+
         public CartonDto Get(Guid id)
         {
             var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);

@@ -13,41 +13,40 @@ namespace SafeHouse.Core.UseCases
         private readonly IRepository<FirstEvaluation> _firstEvaluationRepository;
         private readonly IRepository<Carton> _cartonRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IFirstEvaluationMapper _firstRvaluationMapper;
+        private readonly IFirstEvaluationMapper _firstEvaluationMapper;
 
         public FirstEvaluationService(IUnitOfWork unitOfWork, IRepository<FirstEvaluation> firstEvaluationRepository, IRepository<Carton> cartonRepository, IFirstEvaluationMapper firstRvaluationMapper)
         {
             _unitOfWork = unitOfWork;
             _firstEvaluationRepository = firstEvaluationRepository;
             _cartonRepository = cartonRepository;
-            _firstRvaluationMapper = firstRvaluationMapper;
+            _firstEvaluationMapper = firstRvaluationMapper;
         }
 
         public FirstEvaluationDto GetByCartonId(Guid id)
         {
             var firstEvaluation = _firstEvaluationRepository.GetAll().FirstOrDefault(c => c.Id == id);
-            return _firstRvaluationMapper.ToDto(firstEvaluation);
+            return _firstEvaluationMapper.ToDto(firstEvaluation);
         }
 
         public void Add(FirstEvaluationDto evaluationDto)
         {
-            var firstEvaluation = _firstRvaluationMapper.ToEntity(evaluationDto);
+            var firstEvaluation = _firstEvaluationMapper.ToEntity(evaluationDto);
             _firstEvaluationRepository.Add(firstEvaluation);
             _unitOfWork.Commit();
         }
 
         public void Update(FirstEvaluationDto evaluationDto)
         {
-            var firstEvaluation = _firstRvaluationMapper.ToEntity(evaluationDto);
+            var firstEvaluation = _firstEvaluationMapper.ToEntity(evaluationDto);
             _firstEvaluationRepository.Update(firstEvaluation);
             _unitOfWork.Commit();
         }
 
-        public void Remove(FirstEvaluationDto evaluationDto)
+        public void Remove(Guid id)
         {
-            var firstEvaluation = _firstRvaluationMapper.ToEntity(evaluationDto);
+            var firstEvaluation = _firstEvaluationRepository.GetAll().FirstOrDefault(e => e.Id == id);
             _firstEvaluationRepository.Remove(firstEvaluation);
-            _unitOfWork.Commit();
         }
     }
 }

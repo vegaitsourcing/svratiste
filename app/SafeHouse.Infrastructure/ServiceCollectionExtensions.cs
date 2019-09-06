@@ -16,13 +16,15 @@ namespace SafeHouse.Infrastructure
         {
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICartonService, CartonService>();
-            services.AddTransient<IReportService, ReportService>();
-            // services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
+            services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
             services.AddTransient<IEvaluationService, EvaluationService>();
+            services.AddTransient<IReportService, ReportService>();
             // services.AddTransient<ISuitableItemService, SuitableItemService>();
             // services.AddTransient<IIndividualPlanService, IndividualPlanService>();
             services.AddTransient<IDailyEntryService, DailyEntryService>();
             services.AddSingleton<ICartonMapper, CartonMapper>();
+            services.AddSingleton<IFirstEvaluationMapper, FirstEvaluationMapper>();
+            services.AddSingleton<IEvaluationMapper, EvaluationMapper>();
             services.AddSingleton<IDailyEntryMapper, DailyEntryMapper>();
             services.AddSingleton<HashingHelper>();
             return services;
@@ -35,6 +37,8 @@ namespace SafeHouse.Infrastructure
             // services.AddTransient<IRepository<Core.Entities.SafeHouseUser>, Repository<Core.Entities.SafeHouseUser>>(r => new Repository<Core.Entities.SafeHouseUser>(CreateUow()));
             services.AddTransient<IRepository<Core.Entities.SafeHouseUser>, Repository<Core.Entities.SafeHouseUser>>();
             services.AddTransient<IRepository<Core.Entities.Carton>, Repository<Core.Entities.Carton>>();
+            services.AddTransient<IRepository<Core.Entities.FirstEvaluation>, Repository<Core.Entities.FirstEvaluation>>();
+            services.AddTransient<IRepository<Core.Entities.Evaluation>, Repository<Core.Entities.Evaluation>>();
             services.AddTransient<IRepository<Core.Entities.DailyEntry>, Repository<Core.Entities.DailyEntry>>();
             return services.AddDbContext<SafeHouseDbContext>(
                 options => options.UseSqlServer(connectionString, optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Infrastructure")),

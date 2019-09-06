@@ -8,6 +8,8 @@ namespace SafeHouse.Core.Abstractions
     {
         IEnumerable<CartonDto> Get(int page);
 
+        IEnumerable<CartonDto> GetOverEighteen();
+
         CartonDto Get(Guid id);
 
         void Add(CartonDto carton);

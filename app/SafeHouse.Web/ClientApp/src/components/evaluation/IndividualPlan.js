@@ -131,7 +131,8 @@ class IndividualPlan extends Component {
 				name: '',
 				jobTitle: ''
 			}
-		]
+		],
+		newIndividual: true
 	}
 	onInputChange = (event) => {
 		const newState = {

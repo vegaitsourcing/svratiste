@@ -27,6 +27,13 @@ namespace SafeHouse.Web.Controllers
         }
 
         [HttpGet]
+        [Route("api/Carton/GetOverEighteen")]
+        public IEnumerable<CartonDto> GetOverEighteen()
+        {
+            return _cartonService.GetOverEighteen();
+        }
+
+        [HttpGet]
         [Route("api/Carton/pageCount")]
         public int GetPageCount()
         {

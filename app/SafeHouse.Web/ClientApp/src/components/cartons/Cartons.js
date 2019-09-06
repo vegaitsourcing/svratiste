@@ -61,21 +61,21 @@ const cartons = ( props ) => (
 		<Table width="100%" border="0">
 			<thead>
 				<TR>
-					<TH>ID</TH>
 					<TH>Ime</TH>
 					<TH>Prezime</TH>
 					<TH>Broj poseta</TH>
 				</TR>
 			</thead>
 			<tbody>
-				{props.cartons.map((item, index) => (
-					<TR key={index} onClick={() => props.history.push(props.path + item.id)}>
-						<TD>{item.id}</TD>
-						<TD>{item.firstName}</TD>
-						<TD>{item.lastName}</TD>
-						<TD>{item.numberOfVisits}</TD>
-					</TR>
-				))}
+				{ 
+					props.cartons.map((item, index) => (
+						<TR key={index} onClick={() => props.history.push(props.path + item.id)}>
+							<TD>{item.firstName}</TD>
+							<TD>{item.lastName}</TD>
+							<TD>{item.numberOfVisits}</TD>
+						</TR>
+					))
+				}
 			</tbody>
 		</Table>
 		{props.showPagination && <PaginationWrapper>

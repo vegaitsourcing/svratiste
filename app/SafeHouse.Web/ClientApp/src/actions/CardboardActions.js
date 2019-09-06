@@ -22,6 +22,24 @@ export function getCartons(page) {
 		});
 }
 
+export function getCartonsOverEighteen() {
+	axios.get(web_api_url + '/Carton/GetOverEighteen',
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then((response) => {
+			dispatcher.dispatch({
+				type: "FETCHED_CARTONS_OVER_EIGHTEEN",
+				payload: response.data
+			});
+		}).catch(error => {
+			if (error.response && error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
+}
+
 export function getCartonsPageCount() {
 	axios.get(web_api_url + '/Carton/pageCount',
 		{
@@ -85,6 +103,21 @@ export function editCarton(carton) {
 		dispatcher.dispatch({
 			type: "HIDE_EDIT_BAR"
 		});
+		}).catch(error => {
+			if (error.response && error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
+}
+
+export function deleteCarton(id) {
+	axios.delete(web_api_url + '/Carton/' + id,
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then((response) => {
+			// Done
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({

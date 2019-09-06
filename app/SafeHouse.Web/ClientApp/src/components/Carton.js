@@ -11,7 +11,14 @@ import {input as CustomInput, label as CustomLabel, select as CustomSelect} from
 import Constants from '../components/common/constants';
 
 import * as CardboardActions from '../actions/CardboardActions';
+import * as FirstEvaluationActions from '../actions/FirstEvaluationActions';
+import * as EvaluationActions from '../actions/EvaluationActions';
+import * as IndividualPlanActions from '../actions/IndividualPlanActions';
+
 import CardboardStore from '../stores/CardboardStore';
+import FirstEvaluationStore from '../stores/FirstEvaluationStore';
+import EvaluationStore from '../stores/EvaluationStore';
+import IndividualPlanStore from '../stores/IndividualPlanStore';
 
 const Container = styled.div`
 	display: flex;
@@ -135,6 +142,7 @@ class Carton extends Component {
 		super(props);
 		this.getCarton = this.getCarton.bind(this);
 	}
+
 	state = {
 		carton: {
 			firstName: '',
@@ -156,10 +164,14 @@ class Carton extends Component {
 			notificationsEnabled: true,
 			numberOfVisits: 0
 		},
+		firstEvaluation: undefined,
+		evaluation: undefined,
+		individualPlan: undefined,
 		show: false,
 		newCarton: true,
 		componentNumber: ''
 	}
+
     initState() {
         this.setState({
 			carton: {
@@ -183,30 +195,53 @@ class Carton extends Component {
 				numberOfVisits: 0
 			}
 		});
-    }
+	}
+	
 	componentWillMount() {
 		CardboardStore.on("fetched_carton", this.getCarton);
+		FirstEvaluationStore.on("fetched_first_evaluation", this.getFirstEvaluation);
+		EvaluationStore.on("fetched_evaluation", this.getEvaluation);
+		IndividualPlanStore.on("fetched_individual_plan", this.getIndividualPlan);
 	}
+
 	componentDidMount() {
 		if(this.props.id) {
 			CardboardActions.getCartonById(this.props.id);
+			FirstEvaluationActions.getFirstEvaluationByCartonId(this.props.id);
+			EvaluationActions.getEvaluationByCartonId(this.props.id);
+			IndividualPlanActions.getIndividualPlanByCartonId(this.props.id);
 			this.setState({newCarton: false});
 		}
 	}
+
 	componentWillUnmount() {
 		CardboardStore.removeListener("fetched_carton", this.getCarton);
+		FirstEvaluationStore.removeListener("fetched_first_evaluation", this.getFirstEvaluation);
+		EvaluationStore.removeListener("fetched_evaluation", this.getEvaluation);
+		IndividualPlanStore.removeListener("fetched_individual_plan", this.getIndividualPlan);
 	}
+
 	showModal = (componentNumber) => {
 		this.setState({componentNumber: componentNumber, show: true});
 	}
+
 	hideModal = () => {
 		this.setState({show: false});
 	}
+
 	onInputChange = (event) => {
 		const carton = this.state.carton;
 		carton[event.target.name] = event.target.value;
 		this.setState({carton});
 	}
+
+	onCheckboxChange = (event) => {
+		const carton = this.state.carton;
+		carton[event.currentTarget.name] = !carton[event.currentTarget.name];
+		this.setState({carton});
+		console.log('-2- ', this.state.carton);
+	}
+
 	onSave = () => {
 		const data = this.state.carton;
 
@@ -216,7 +251,7 @@ class Carton extends Component {
 		delete data.notificationsEnabled;
 		delete data.numberOfVisits;
 
-		if(this.props.id) {
+		if(data.id) {
 			console.log('-- edit data: ', data);
 			CardboardActions.editCarton(data);
 		} else {
@@ -224,30 +259,50 @@ class Carton extends Component {
 			console.log('-- save data: ', data);
 			CardboardActions.addCarton(data);
 		}
+
         this.initState();
 	}
+
 	onDelete = () => {
-		//ToDO
+		CardboardActions.deleteCarton(this.props.id);
+		this.initState();
 	}
+
 	getCarton() {
 		const carton = CardboardStore.getCarton();
 		this.setState({carton});
 	}
-	render() {
 
+	getFirstEvaluation() {
+		const firstEvaluation = FirstEvaluationStore.getFirstEvaluation();
+		this.setState({firstEvaluation});
+	}
+
+	getEvaluation() {
+		const evaluation = EvaluationStore.getEvaluation();
+		this.setState({evaluation});
+	}
+
+	getIndividualPlan() {
+		const individualPlan = IndividualPlanStore.getIndividualPlan();
+		this.setState({individualPlan});
+	}
+
+	render() {
 		let options;
 
 		if(!this.state.newCarton) {
-			options = <ButtonContainer>
+			options = <span>
 				<ButtonWrapper>
+					<Button onClick={this.onDelete}>Obriši</Button>
 					<DarkButton onClick={() => this.showModal(1)}>Kreiraj Prijemnu Procenu</DarkButton>
 					<DarkButton onClick={() => this.showModal(2)}>Kreiraj Procenu</DarkButton>
 					<DarkButton onClick={() => this.showModal(3)}>Kreiraj Individualni Plan</DarkButton>
 				</ButtonWrapper>
-				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Prijemnu Procenu"><FirstEvaluation /></Modal>}
-				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Procenu"><Evaluation /></Modal>}
-				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Individualni Plan"><IndividualPlan /></Modal>}
-			</ButtonContainer>
+				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Prijemnu Procenu"><FirstEvaluation firstEvaluation={this.state.firstEvaluation} /></Modal>}
+				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Procenu"><Evaluation evaluation={this.state.evaluation} /></Modal>}
+				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Individualni Plan"><IndividualPlan individualPlan={this.state.individualPlan} /></Modal>}
+			</span>
 		}
 		return (
 			<Container>
@@ -297,20 +352,21 @@ class Carton extends Component {
 				</InputWrapper>
 				<InputWrapperWide>
 					<Hr />
-					<InputHidden type="checkbox" id="prijemnaprocena" name="prijemnaprocena"/>
+					<InputHidden type="checkbox" id="prijemnaprocena" name="initialEvaluationDone" checked={this.state.initialEvaluationDone} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="prijemnaprocena">Prijemna procena</LabelCheckbox>
 				</InputWrapperWide>
 				<InputWrapperWide>
-					<InputHidden type="checkbox" id="procena" name="procena"/>
+					<InputHidden type="checkbox" id="procena" name="evaluationDone" checked={this.state.evaluationDone} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="procena">Procena</LabelCheckbox>
 				</InputWrapperWide>
-				<InputWrapperWide>
-					<InputHidden type="checkbox" id="individualniPlan" name="individualniPlan"/>
-					<LabelCheckbox htmlFor="individualniPlan">Individualni plan</LabelCheckbox>
-				</InputWrapperWide>
-				<Button onClick={this.onSave}>Sačuvaj</Button>
-				<Button onClick={this.onDelete}>Obriši</Button>
-				{options}
+				<InputWrapper>
+					<InputHidden type="checkbox" id="individualniPlan" name="individualPlanDone" checked={this.state.individualPlanDone} onChange={this.onCheckboxChange}/>
+					<LabelCheckbox htmlFor="individualniPlan">Postoje kapaciteti usluge da zadovolji potrebe korisnika</LabelCheckbox>
+				</InputWrapper>
+				<ButtonContainer>
+					<Button onClick={this.onSave}>Sačuvaj</Button>
+					{options}
+				</ButtonContainer>
 			</Container>
 		);
 	}

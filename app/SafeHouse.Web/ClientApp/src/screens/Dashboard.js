@@ -16,7 +16,6 @@ class Dashboard extends Component {
 		};
 	}
 
-
 	componentWillMount() {
 		CardboardStore.on("fetched_cartons", this.getCartons.bind(this));
 		CardboardStore.on("fetched_pages_count", this.getNumOfPages);
@@ -33,18 +32,22 @@ class Dashboard extends Component {
 		CardboardStore.removeListener("fetched_pages_count", this.getNumOfPages);
 		CardboardStore.removeListener("unauthorized", this.redirectToLogin);
 	}
+
 	getCartons() {
 		this.setState({
 			cartons: CardboardStore.getCartons()
 		});
 	}
+
 	getNumOfPages = () => {
 		this.setState({ totalPages: CardboardStore.getNumOfPages() });
 	}
+
 	redirectToLogin = () => {
 		localStorage.clear();
 		this.props.history.push("/login");
 	}
+
 	onPreviousClick = () => {
 		let { currentPage } = this.state;
 		if (currentPage > 1) {
@@ -52,10 +55,12 @@ class Dashboard extends Component {
 		}
 		CardboardActions.getCartons(currentPage);
 	}
+
 	onPageClick = (page) => {
 		this.setState({ currentPage: page });
 		CardboardActions.getCartons(page);
 	}
+
 	onNextClick = () => {
 		let { currentPage, totalPages } = this.state;
 		if (currentPage < totalPages) {
@@ -63,6 +68,7 @@ class Dashboard extends Component {
 		}
 		CardboardActions.getCartons(currentPage);
 	}
+	
 	render() {
 		return (
 			<Layout name="Korisnici" showSearch>

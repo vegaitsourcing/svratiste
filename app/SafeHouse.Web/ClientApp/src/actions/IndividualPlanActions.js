@@ -6,13 +6,13 @@ import { web_api_url } from '../components/common/constants';
 import * as authToken from '../authToken';
 
 
-export function getFirstEvaluationByCartonId(cartonId) {
-    axios.get(web_api_url + '/FirstEvaluation/' + cartonId,
+export function getIndividualPlanByCartonId(cartonId) {
+    axios.get(web_api_url + '/IndividualPlan/' + cartonId,
     {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then((response) => {
     dispatcher.dispatch({
-        type: "FETCHED_FIRST_EVALUATION",
+        type: "FETCHED_INDIVIDUAL_PLAN",
         payload: response.data
     });
     }).catch(error => {
@@ -24,8 +24,8 @@ export function getFirstEvaluationByCartonId(cartonId) {
     });
 }
 
-export function addFirstEvaluation(evaluation) {
-    axios.post(web_api_url + '/FirstEvaluation', evaluation,
+export function addIndividualPlan(individualPlan) {
+    axios.post(web_api_url + '/IndividualPlan', individualPlan,
     {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then(() => {
@@ -39,27 +39,12 @@ export function addFirstEvaluation(evaluation) {
     });
 }
 
-export function editFirstEvaluation(evaluation) {
-	axios.put(web_api_url + '/FirstEvaluation', evaluation,
+export function editIndividualPlan(individualPlan) {
+	axios.put(web_api_url + '/IndividualPlan', individualPlan,
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
-            getFirstEvaluationByCartonId(evaluation.cartonId);
-		}).catch(error => {
-			if (error.response && error.response.status === 401) {
-				dispatcher.dispatch({
-					type: "UNAUTHORIZED"
-				});
-			}
-		});
-}
-
-export function deleteFirstEvaluation(id) {
-	axios.delete(web_api_url + '/FirstEvaluation/' + id,
-		{
-			headers: { Authorization: "Bearer " + authToken.getToken() }
-		}).then((response) => {
-			// Done
+            getIndividualPlanByCartonId(individualPlan.cartonId);
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
