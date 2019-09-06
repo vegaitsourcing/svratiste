@@ -154,6 +154,9 @@ class DailyRecord extends Component {
 		creativeWorkshop: 0,
 		// pageNumber: props.pageNumber,
 
+		startTime: '',
+		endTIme: '',
+
 		// enumerations
 		mediationWritingsEnum: [
 			{ value: 1, label: 'Centar za socijalni rad' },
@@ -383,6 +386,16 @@ class DailyRecord extends Component {
 							options={this.state.medicalInterventionsEnum}
 							onChange={(value) => this.multiSelectChange(value, "medicalInterventions")}
 							isMulti />
+					</InputWrapper>
+				</Div>
+				<Div>
+					<InputWrapper>
+						<CustomLabel title="Vreme dolaska" />
+						<CustomInput value={this.state.startTime} inputName="startTime" change={this.onInputChange} inputType={"time"}/>
+					</InputWrapper>
+					<InputWrapper>
+						<CustomLabel title="Vreme odlaska" />
+						<CustomInput value={this.state.endTIme} inputName="endTIme" change={this.onInputChange} inputType={"time"}/>
 					</InputWrapper>
 				</Div>
 				<Button>Sačuvaj</Button>
