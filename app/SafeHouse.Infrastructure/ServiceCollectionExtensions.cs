@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SafeHouse.Core.Abstractions;
 using SafeHouse.Core.Abstractions.Mappers;
 using SafeHouse.Core.Abstractions.Persistence;
+using SafeHouse.Core.Entities;
 using SafeHouse.Core.Helpers;
 using SafeHouse.Core.UseCases;
 using SafeHouse.Infrastructure.Data;
@@ -12,45 +13,32 @@ namespace SafeHouse.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddDomainServices(this IServiceCollection services)
+        public static void AddDomainServices(this IServiceCollection services)
         {
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICartonService, CartonService>();
             services.AddTransient<IFirstEvaluationService, FirstEvaluationService>();
             services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<IReportService, ReportService>();
-            // services.AddTransient<ISuitableItemService, SuitableItemService>();
-            // services.AddTransient<IIndividualPlanService, IndividualPlanService>();
             services.AddTransient<IDailyEntryService, DailyEntryService>();
             services.AddSingleton<ICartonMapper, CartonMapper>();
             services.AddSingleton<IFirstEvaluationMapper, FirstEvaluationMapper>();
             services.AddSingleton<IEvaluationMapper, EvaluationMapper>();
             services.AddSingleton<IDailyEntryMapper, DailyEntryMapper>();
             services.AddSingleton<HashingHelper>();
-            return services;
         }
 
-        public static IServiceCollection AddDataServices(this IServiceCollection services, string connectionString)
+        public static void AddDataServices(this IServiceCollection services, string connectionString)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>(uow => CreateUow());
-            services.AddScoped(typeof(UnitOfWork));
-            // services.AddTransient<IRepository<Core.Entities.SafeHouseUser>, Repository<Core.Entities.SafeHouseUser>>(r => new Repository<Core.Entities.SafeHouseUser>(CreateUow()));
-            services.AddTransient<IRepository<Core.Entities.SafeHouseUser>, Repository<Core.Entities.SafeHouseUser>>();
-            services.AddTransient<IRepository<Core.Entities.Carton>, Repository<Core.Entities.Carton>>();
-            services.AddTransient<IRepository<Core.Entities.FirstEvaluation>, Repository<Core.Entities.FirstEvaluation>>();
-            services.AddTransient<IRepository<Core.Entities.Evaluation>, Repository<Core.Entities.Evaluation>>();
-            services.AddTransient<IRepository<Core.Entities.DailyEntry>, Repository<Core.Entities.DailyEntry>>();
-            return services.AddDbContext<SafeHouseDbContext>(
-                options => options.UseSqlServer(connectionString, optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Infrastructure")),
-                ServiceLifetime.Scoped);
-        }
-
-        private static UnitOfWork CreateUow()
-        {
-            using (var dbContext = new SafeHouseDbContext())
-            {
-                return new UnitOfWork(dbContext);
-            }
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IRepository<SafeHouseUser>, Repository<SafeHouseUser>>();
+            services.AddTransient<IRepository<Carton>, Repository<Carton>>();
+            services.AddTransient<IRepository<FirstEvaluation>, Repository<FirstEvaluation>>();
+            services.AddTransient<IRepository<Evaluation>, Repository<Evaluation>>();
+            services.AddTransient<IRepository<DailyEntry>, Repository<DailyEntry>>();
+            services.AddDbContext<SafeHouseDbContext>(
+                options => options.UseSqlServer(connectionString,
+                    optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Infrastructure")));
         }
     }
 }

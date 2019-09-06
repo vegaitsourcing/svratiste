@@ -12,6 +12,7 @@ namespace SafeHouse.Core.UseCases
 {
     public class CartonService : ICartonService
     {
+        private const int LegalAge = 18;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Carton> _cartonRepository;
         private readonly ICartonMapper _cartonMapper;
@@ -31,7 +32,7 @@ namespace SafeHouse.Core.UseCases
 
         public IEnumerable<CartonDto> GetOverEighteen()
             => _cartonRepository.GetAll()
-                .Where(c => new DateTime((DateTime.Now - c.DateOfBirth).Ticks).Year >= 18)
+                .Where(c => new DateTime((DateTime.Now - c.DateOfBirth).Ticks).Year >= LegalAge)
                 .Select(c => _cartonMapper.ToDto(c));
 
         public CartonDto Get(Guid id)

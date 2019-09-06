@@ -25,9 +25,9 @@ Migration of data to chosen database
 
 Add new migration
 ---------------
-`> cd .\SafeHouse.Data`
+`> cd .\SafeHouse.Web`
 
-`> dotnet ef migrations add <GiveSomeNameMigration> -s ..\SafeHouse.Web\SafeHouse.Web.csproj -o .\Migrations\`
+`> dotnet ef migrations add <SomeMeaningfulMigrationName> --project ..\SafeHouse.Infrastructure`
 
 Update db
 ---------------

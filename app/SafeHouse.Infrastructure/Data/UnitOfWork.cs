@@ -1,34 +1,53 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
 using SafeHouse.Core.Abstractions.Persistence;
 
 namespace SafeHouse.Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private readonly SafeHouseDbContext _dbContext;
         private IDbContextTransaction _dbContextTransaction;
-        public SafeHouseDbContext DbContext { get; }
 
         public UnitOfWork(SafeHouseDbContext dbContext)
         {
-            DbContext = dbContext;
+            _dbContext = dbContext;
         }
 
-        public void OpenTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        public void RegisterAmended(object entity)
         {
-            if (_dbContextTransaction == null)
-                _dbContextTransaction = DbContext.Database.BeginTransaction(isolationLevel);
+            OpenTransaction();
+            _dbContext.Update(entity);
+        }
+
+        public void RegisterNew(object entity)
+        {
+            OpenTransaction();
+            _dbContext.Add(entity);
         }
 
         public void Commit()
         {
+            _dbContext.SaveChanges();
             _dbContextTransaction.Commit();
         }
 
         public void Rollback()
         {
             _dbContextTransaction.Rollback();
+        }
+
+        public void RegisterDeleted(object entity)
+        {
+            OpenTransaction();
+            _dbContext.Remove(entity);
+        }
+
+        private void OpenTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        {
+            if (_dbContextTransaction == null)
+                _dbContextTransaction = _dbContext.Database.BeginTransaction(isolationLevel);
         }
     }
 }

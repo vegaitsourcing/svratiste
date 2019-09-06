@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using SafeHouse.Core.Abstractions.Persistence;
 
 namespace SafeHouse.Infrastructure.Data
@@ -10,52 +10,53 @@ namespace SafeHouse.Infrastructure.Data
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDomainEntity
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly SafeHouseDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public Repository(UnitOfWork unitOfWork)
+        public Repository(IUnitOfWork unitOfWork, SafeHouseDbContext dbContext)
         {
             _unitOfWork = unitOfWork;
+            _dbContext = dbContext;
         }
 
         public IEnumerable<TEntity> GetBy(Func<TEntity, bool> byProperty)
         {
-            return _unitOfWork.DbContext.Set<TEntity>().Where(byProperty).ToArray();
+            return _dbContext.Set<TEntity>().Where(byProperty).ToArray();
         }
 
         public void Add(TEntity entity)
         {
-            _unitOfWork.OpenTransaction();
-            _unitOfWork.DbContext.Set<TEntity>().Add(entity);
+            _unitOfWork.RegisterNew(entity);
         }
 
         public void Remove(TEntity entity)
         {
-            _unitOfWork.OpenTransaction();
-            _unitOfWork.DbContext.Set<TEntity>().Remove(entity);
+            _unitOfWork.RegisterDeleted(entity);
         }
 
         public void Update(TEntity entity)
         {
-            _unitOfWork.OpenTransaction();
-            _unitOfWork.DbContext.Set<TEntity>().Update(entity);
+            _unitOfWork.RegisterAmended(entity);
         }
 
         public IQueryable<TEntity> Include(Expression<Func<TEntity, object>> withProperty)
-            => _unitOfWork.DbContext.Set<TEntity>().Include(withProperty);
+        {
+            return _dbContext.Set<TEntity>().Include(withProperty);
+        }
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _unitOfWork.DbContext.Set<TEntity>().ToArray();
+            return _dbContext.Set<TEntity>().ToArray();
         }
 
         public IEnumerable<TEntity> GetAllAndInclude(Expression<Func<TEntity, object>> withProperty)
-            => _unitOfWork.DbContext.Set<TEntity>().AsQueryable().Include(withProperty).ToArray();
+        {
+            return _dbContext.Set<TEntity>().AsQueryable().Include(withProperty).ToArray();
+        }
 
         public TEntity GetSingleBy(Func<TEntity, bool> byProperty)
         {
-            return _unitOfWork.DbContext
-                .Set<TEntity>()
-                .SingleOrDefault(byProperty);
+            return _dbContext.Set<TEntity>().SingleOrDefault(byProperty);
         }
     }
 }

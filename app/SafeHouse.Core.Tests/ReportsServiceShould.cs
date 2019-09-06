@@ -10,10 +10,6 @@ namespace SafeHouse.Core.Tests
 {
     public class ReportsServiceShould
     {
-        public ReportsServiceShould()
-        {
-        }
-
         [Fact]
         public void ReturnEmptyDataIfNoDailyEntriesFound()
         {
@@ -22,9 +18,9 @@ namespace SafeHouse.Core.Tests
                 .Options;
 
             // Run the test against one instance of the context
-            using (var context = new SafeHouseDbContext(options))
+            using (var dbContext = new SafeHouseDbContext(options))
             {
-                var dailyEntryRepository = new Repository<DailyEntry>(new UnitOfWork(context));
+                var dailyEntryRepository = new Repository<DailyEntry>(new UnitOfWork(dbContext), dbContext);
 
                 var service = new ReportService(dailyEntryRepository);
                 ReportDataDto data = service.GetReport(new ReportRequestDto());

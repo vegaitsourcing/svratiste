@@ -15,7 +15,7 @@ namespace SafeHouse.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -67,6 +67,9 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.Property<bool>("EvaluationDone");
 
+                    b.Property<string>("FathersLastName")
+                        .HasMaxLength(32);
+
                     b.Property<string>("FathersName")
                         .HasMaxLength(32);
 
@@ -88,11 +91,16 @@ namespace SafeHouse.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(32);
 
+                    b.Property<string>("MothersLastName")
+                        .HasMaxLength(32);
+
                     b.Property<string>("MothersName")
                         .HasMaxLength(32);
 
                     b.Property<string>("Nickname")
                         .HasMaxLength(32);
+
+                    b.Property<bool>("NotificationsEnabled");
 
                     b.Property<int>("NumberOfVisits");
 
@@ -164,7 +172,7 @@ namespace SafeHouse.Infrastructure.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AdvicedLevelOfSupport")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<int>("Age");
 
@@ -172,15 +180,12 @@ namespace SafeHouse.Infrastructure.Migrations
                         .HasMaxLength(512);
 
                     b.Property<string>("BehaviorRisks")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<string>("Capabilities")
                         .HasMaxLength(512);
 
                     b.Property<Guid?>("CartonId");
-
-                    b.Property<string>("CaseLeader")
-                        .HasMaxLength(32);
 
                     b.Property<DateTime>("CreationDate");
 
@@ -190,7 +195,7 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("DedicatedWorker")
-                        .HasMaxLength(32);
+                        .HasMaxLength(256);
 
                     b.Property<string>("DominantBehaviors")
                         .HasMaxLength(512);
@@ -202,33 +207,33 @@ namespace SafeHouse.Infrastructure.Migrations
                         .HasMaxLength(512);
 
                     b.Property<string>("EvaluationDoneBy")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<string>("FamilyMembers")
                         .HasMaxLength(32);
 
                     b.Property<string>("FamilyRisks")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<string>("FamilyStrenghts")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<DateTime>("LastModificationDate");
 
                     b.Property<string>("OtherMembers")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<string>("OtherNeeds")
                         .HasMaxLength(512);
 
                     b.Property<string>("OtherRisks")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<string>("OtherStrenghts")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<string>("PersonalStrenghts")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<string>("PsyhoSocialNeeds")
                         .HasMaxLength(512);
@@ -237,10 +242,10 @@ namespace SafeHouse.Infrastructure.Migrations
                         .HasMaxLength(32);
 
                     b.Property<string>("SurroundRisks")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<string>("SurroundStrenghts")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -261,12 +266,14 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.Property<string>("Attitude")
                         .HasMaxLength(512);
 
+                    b.Property<bool>("Begging");
+
                     b.Property<bool>("Capability");
 
                     b.Property<Guid?>("CartonId");
 
                     b.Property<string>("CaseLeaderName")
-                        .HasMaxLength(256);
+                        .HasMaxLength(512);
 
                     b.Property<DateTime>("CreationDate");
 
@@ -279,26 +286,37 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.Property<string>("DirectedToName")
                         .HasMaxLength(512);
 
+                    b.Property<bool>("DumpsterDiving");
+
                     b.Property<string>("EvaluationDoneBy")
-                        .HasMaxLength(256);
+                        .HasMaxLength(512);
 
                     b.Property<string>("EvaluationRevisedBy")
-                        .HasMaxLength(256);
+                        .HasMaxLength(512);
 
                     b.Property<string>("Expectations")
                         .HasMaxLength(512);
+
+                    b.Property<string>("Explanation")
+                        .HasMaxLength(512);
+
+                    b.Property<bool>("ExtremelyPoor");
 
                     b.Property<DateTime?>("FinishedEvaluation");
 
                     b.Property<string>("GuardiansName")
                         .HasMaxLength(512);
 
-                    b.Property<bool>("HealthCard");
+                    b.Property<string>("HealthCard")
+                        .HasMaxLength(512);
 
-                    b.Property<int>("IndividualMovementAbility");
+                    b.Property<bool>("HelpingFamilyOnStreet");
+
+                    b.Property<string>("IndividualMovementAbility")
+                        .HasMaxLength(512);
 
                     b.Property<string>("Languages")
-                        .HasMaxLength(256);
+                        .HasMaxLength(512);
 
                     b.Property<DateTime>("LastModificationDate");
 
@@ -315,22 +333,29 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.Property<string>("OtherMembersName")
                         .HasMaxLength(512);
 
+                    b.Property<string>("OtherSuitability")
+                        .HasMaxLength(512);
+
                     b.Property<string>("PhysicalDescription")
                         .HasMaxLength(512);
 
                     b.Property<string>("PriorityNeeds")
                         .HasMaxLength(512);
 
+                    b.Property<bool>("Prostituting");
+
                     b.Property<string>("SchoolAndGrade")
                         .HasMaxLength(512);
 
-                    b.Property<DateTime>("ServiceStart");
+                    b.Property<bool>("SellsOnStreet");
+
+                    b.Property<DateTime?>("ServiceStart");
+
+                    b.Property<bool>("SleepOnStreet");
 
                     b.Property<DateTime?>("StartedEvaluation");
 
-                    b.Property<Guid?>("SuitabilityId");
-
-                    b.Property<string>("VerbalCommunicationAbility")
+                    b.Property<string>("VerbalComunicationAbility")
                         .HasMaxLength(512);
 
                     b.Property<byte[]>("Version")
@@ -340,8 +365,6 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CartonId");
-
-                    b.HasIndex("SuitabilityId");
 
                     b.ToTable("FirstEvaluations");
                 });
@@ -662,10 +685,6 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.HasOne("SafeHouse.Core.Entities.Carton", "Carton")
                         .WithMany()
                         .HasForeignKey("CartonId");
-
-                    b.HasOne("SafeHouse.Core.Entities.Suitability", "Suitability")
-                        .WithMany()
-                        .HasForeignKey("SuitabilityId");
                 });
 
             modelBuilder.Entity("SafeHouse.Core.Entities.GoalAndResult", b =>
