@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import * as CardboardActions from '../actions/CardboardActions';
 import CardboardStore from '../stores/CardboardStore';
+import LoginStore from '../stores/LoginStore';
 
 import Layout from '../hoc/Layout';
 import Cartons from '../components/cartons/Cartons';
@@ -20,6 +21,7 @@ class Dashboard extends Component {
 		CardboardStore.on("fetched_cartons", this.getCartons.bind(this));
 		CardboardStore.on("fetched_pages_count", this.getNumOfPages);
 		CardboardStore.on("unauthorized", this.redirectToLogin);
+		LoginStore.on("unauthorized", this.redirectToLogin);
 	}
 
 	componentDidMount() {
@@ -31,6 +33,7 @@ class Dashboard extends Component {
 		CardboardStore.removeListener("fetched_cartons", this.getCartons);
 		CardboardStore.removeListener("fetched_pages_count", this.getNumOfPages);
 		CardboardStore.removeListener("unauthorized", this.redirectToLogin);
+		LoginStore.removeListener("unauthorized", this.redirectToLogin);
 	}
 
 	getCartons() {

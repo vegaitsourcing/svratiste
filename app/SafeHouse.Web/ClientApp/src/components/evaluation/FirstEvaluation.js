@@ -130,44 +130,42 @@ class FirstEvaluation extends Component {
 
 	state = {
 		firstEvaluation: {
-			id: '',
-			cartonId: '',
-			otherChildrenName: '',
-			otherMembersName: '',
-			guardiansName: '',
-			livingSpace: '',
-			schoolAndGrade: '',
-			languages: '',
-			healthCard: false,
-			caseLeaderName: '',
-			capability: false,
+			id: "",
+			cartonId: "",
+			guardiansName: "",
+			otherChildrenName: "",
+			otherMembersName: "",
+			livingSpace: undefined,
+			schoolAndGrade: "",
+			languages: "",
+			healthCard: "",
+			caseLeaderName: "",
+			sleepOnStreet: undefined,
+			dumpsterDiving: undefined,
+			begging: undefined,
+			prostituting: undefined,
+			sellsOnStreet: undefined,
+			helpingFamilyOnStreet: undefined,
+			extremelyPoor: undefined,
+			otherSuitability: "",
+			explanation: "",
+			capability: undefined,
 			onTheWaitingList: false,
-			serviceStart: '',
-			directedToName: '',
-			individualMovementAbility: '',
-			verbalComunicationAbility: '',
-			physicalDescription: '',
-			diagnosedDisease: '',
-			priorityNeeds: '',
-			attitude: '',
-			expectations: '',
-			directedFromName: '',
-			other: '',
-			startedEvaluation: '',
-			finishedEvaluation: '',
-			evaluationDoneBy: '',
-			evaluationRevisedBy: '',
-			suitabilityId: '',
-			sleepOnStreet: false,
-			dumpsterDiving: false,
-			recycling: false,
-			begging: false,
-			sellsOnStreet: false,
-			prostituting: false,
-			extremelyPoor: false,
-			helpingFamilyOnStreet: false,
-			otherSuitability: '',
-			explanation: ''
+			serviceStart: "",
+			directedToName: "",
+			individualMovementAbility: "",
+			verbalComunicationAbility: "",
+			physicalDescription: "",
+			diagnosedDisease: "",
+			priorityNeeds: "",
+			attitude: "",
+			expectations: "",
+			directedFromName: "",
+			other: "",
+			startedEvaluation: "",
+			finishedEvaluation: "",
+			evaluationDoneBy: "",
+			evaluationRevisedBy: ""
 		},
 		newFirstEvaluation: true
 	}
@@ -175,63 +173,63 @@ class FirstEvaluation extends Component {
     initState() {
         this.setState({
 			firstEvaluation: {
-				id: '',
-				cartonId: '',
-				otherChildrenName: '',
-				otherMembersName: '',
-				guardiansName: '',
-				livingSpace: '',
-				schoolAndGrade: '',
-				languages: '',
-				healthCard: false,
-				caseLeaderName: '',
-				capability: false,
+				id: "",
+				cartonId: "",
+				guardiansName: "",
+				otherChildrenName: "",
+				otherMembersName: "",
+				livingSpace: undefined,
+				schoolAndGrade: "",
+				languages: "",
+				healthCard: "",
+				caseLeaderName: "",
+				sleepOnStreet: undefined,
+				dumpsterDiving: undefined,
+				begging: undefined,
+				prostituting: undefined,
+				sellsOnStreet: undefined,
+				helpingFamilyOnStreet: undefined,
+				extremelyPoor: undefined,
+				otherSuitability: "",
+				explanation: "",
+				capability: undefined,
 				onTheWaitingList: false,
-				serviceStart: '',
-				directedToName: '',
-				individualMovementAbility: '',
-				verbalComunicationAbility: '',
-				physicalDescription: '',
-				diagnosedDisease: '',
-				priorityNeeds: '',
-				attitude: '',
-				expectations: '',
-				directedFromName: '',
-				other: '',
-				startedEvaluation: '',
-				finishedEvaluation: '',
-				evaluationDoneBy: '',
-				evaluationRevisedBy: '',
-				suitabilityId: '',
-				sleepOnStreet: false,
-				dumpsterDiving: false,
-				recycling: false,
-				begging: false,
-				sellsOnStreet: false,
-				prostituting: false,
-				extremelyPoor: false,
-				helpingFamilyOnStreet: false,
-				otherSuitability: '',
-				explanation: ''
+				serviceStart: "",
+				directedToName: "",
+				individualMovementAbility: "",
+				verbalComunicationAbility: "",
+				physicalDescription: "",
+				diagnosedDisease: "",
+				priorityNeeds: "",
+				attitude: "",
+				expectations: "",
+				directedFromName: "",
+				other: "",
+				startedEvaluation: "",
+				finishedEvaluation: "",
+				evaluationDoneBy: "",
+				evaluationRevisedBy: ""
 			}
 		});
 	}
 
 	componentDidMount() {
-		if(this.props.firstEvaluation === {}) {
-			this.setState({newFirstEvaluation: false});
+		if(this.props.firstEvaluation === undefined) {
+			this.setState({newFirstEvaluation: true});
+		} else {
+			this.setState({firstEvaluation: this.props.firstEvaluation});
 		}
 	}
-	
+
 	onInputChange = (event) => {
 		const firstEvaluation = this.state.firstEvaluation;
 		firstEvaluation[event.target.name] = event.target.value;
 		this.setState({firstEvaluation});
 	}
 
-	handleCheckboxChange = (event) => {
+	onCheckboxChange = (event) => {
 		const firstEvaluation = this.state.firstEvaluation;
-		firstEvaluation[event.target.name] = event.target.value;
+		firstEvaluation[event.currentTarget.name] = !firstEvaluation[event.currentTarget.name];
 		this.setState({firstEvaluation});
 	}
 
@@ -240,10 +238,9 @@ class FirstEvaluation extends Component {
 
 		if (this.state.newFirstEvaluation) {
 			delete data.id;
-			console.log('-- save data: ', data);
+			data.cartonId = this.props.cartonId;
 			FirstEvaluationActions.addFirstEvaluation(data);
 		} else {
-			console.log('-- edit data: ', data);
 			FirstEvaluationActions.editFirstEvaluation(data);
 		}
 		
@@ -251,7 +248,7 @@ class FirstEvaluation extends Component {
 	}
 	
 	onDelete = () => {
-		FirstEvaluationActions.deleteFirstEvaluation(this.state.firstEvaluation.id);
+		FirstEvaluationActions.deleteFirstEvaluation(this.state.firstEvaluation.cartonId);
 		this.initState();
 	}
 
@@ -293,7 +290,7 @@ class FirstEvaluation extends Component {
 					<CustomInput value={this.state.languages} inputName="languages" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="healthCard" name="healthCard" checked={this.state.healthCard} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="healthCard" name="healthCard" checked={this.state.healthCard} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="healthCard">Zdravstvena knjižica</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>
@@ -301,31 +298,31 @@ class FirstEvaluation extends Component {
 					<CustomInput value={this.state.caseLeaderName} inputName="caseLeaderName" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="sleepOnStreet" name="sleepOnStreet" checked={this.state.sleepOnStreet} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="sleepOnStreet" name="sleepOnStreet" checked={this.state.sleepOnStreet} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="sleepOnStreet">Spava na ulici</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="dumpsterDiving" name="dumpsterDiving" checked={this.state.dumpsterDiving} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="dumpsterDiving" name="dumpsterDiving" checked={this.state.dumpsterDiving} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="dumpsterDiving">Hranu pronalazi u kontejnerima</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="begging" name="begging" checked={this.state.begging} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="begging" name="begging" checked={this.state.begging} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="begging">Prosi</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="prostituting" name="prostituting" checked={this.state.prostituting} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="prostituting" name="prostituting" checked={this.state.prostituting} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="prostituting">Prodaje seksualne usluge</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="sellsOnStreet" name="sellsOnStreet" checked={this.state.sellsOnStreet} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="sellsOnStreet" name="sellsOnStreet" checked={this.state.sellsOnStreet} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="sellsOnStreet">Prodaje na pijaci/ulici</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="helpingFamilyOnStreet" name="helpingFamilyOnStreet" checked={this.state.helpingFamilyOnStreet} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="helpingFamilyOnStreet" name="helpingFamilyOnStreet" checked={this.state.helpingFamilyOnStreet} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="helpingFamilyOnStreet">Pomaže porodici u radu na ulici</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="extremelyPoor" name="extremelyPoor" checked={this.state.extremelyPoor} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="extremelyPoor" name="extremelyPoor" checked={this.state.extremelyPoor} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="extremelyPoor">Ekstremno siromašna porodica, postoji rizik za dete</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper />
@@ -338,11 +335,11 @@ class FirstEvaluation extends Component {
 					<CustomInput value={this.state.explanation} inputName="explanation" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="capability" name="capability" checked={this.state.capability} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="capability" name="capability" checked={this.state.capability} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="capability">Postoje kapaciteti usluge da zadovolji potrebe korisnika</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="onTheWaitingList" name="onTheWaitingList" checked={this.state.onTheWaitingList} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="onTheWaitingList" name="onTheWaitingList" checked={this.state.onTheWaitingList} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="onTheWaitingList">Na listi čekanja</LabelCheckbox>
 				</InputWrapper>
 				<InputWrapper>

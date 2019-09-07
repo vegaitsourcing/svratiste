@@ -8,6 +8,8 @@ import Colours from '../components/common/colours';
 import {FontWeight, Body, Headings} from '../components/common/typography';
 import {input as CustomInput, label as CustomLabel} from '../components/common/Inputs/Inputs';
 
+import LoginStore from '../stores/LoginStore';
+
 const FilterWrapper = styled.div`
 	display: flex;
 	flex-wrap: nowrap;
@@ -70,17 +72,32 @@ class Reports extends Component {
 			users: [{id: 1, name: 'Ana', lastname: 'Ivanpovic'}, {id: 2, name: 'Ana', lastname: 'Ivanpovic'}]
 		};
 	}
+
+	componentWillMount() {
+		LoginStore.on("unauthorized", this.redirectToLogin);
+	}
+
+	componentWillUnmount() {
+		LoginStore.removeListener("unauthorized", this.redirectToLogin);
+	}
+
+	redirectToLogin = () => {
+		localStorage.clear();
+		this.props.history.push("/login");
+	}
+
 	onInputChange = (event) => {
 		const newState = {
 			...this.state,
 			[event.target.name] : event.target.value
 		}
-		console.log(newState);
 		this.setState(newState);
 	}
+
 	showReports = () => {
 		//get reports for selected person
 	}
+	
 	render() {
 		return (
 			<Layout name="Izveštaji">

@@ -98,33 +98,32 @@ class Evaluation extends Component {
 
 	state = {
 		evaluation: {
-			id: '',
-			cartonId: '',
-			age: '',
-			familyMembers : '',
-			schoolStatus: '',
-			caseLeader: '',
-			dedicatedWorker: '',
-			otherMembers: '',
-			basicPhysicalNeeds: '',
-			psyhoSocialNeeds: '',
-			educationalNeeds: '',
-			otherNeeds: '',
-			dominantEmotions: '',
-			dominantBehaviors: '',
-			surroundStrenghts: '',
-			familyStrenghts: '',
-			personalStrenghts: '',
-			otherStrenghts: '',
-			surroundRisks : '',
-			familyRisks: '',
-			behaviorRisks: '',
-			otherRisks: '',
-			capabilities: '',
-			culturalSpecifics: '',
-			advicedLevelOfSupport: '',
-			evaluationDoneBy: '',
-			date: ''
+			id: "",
+			cartonId: "",
+			age: undefined,
+			dedicatedWorker: "",
+			familyMembers: "",
+			otherMembers: "",
+			basicPhysicalNeeds: "",
+			psyhoSocialNeeds: "",
+			schoolStatus: "",
+			educationalNeeds: "",
+			otherNeeds: "",
+			dominantEmotions: "",
+			dominantBehaviors: "",
+			surroundStrenghts: "",
+			familyStrenghts: "",
+			personalStrenghts: "",
+			otherStrenghts: "",
+			surroundRisks: "",
+			familyRisks: "",
+			behaviorRisks: "",
+			otherRisks: "",
+			capabilities: "",
+			culturalSpecifics: "",
+			advicedLevelOfSupport: "",
+			evaluationDoneBy: "",
+			date: ""
 		},
 		newEvaluation: true
 	}
@@ -132,50 +131,49 @@ class Evaluation extends Component {
     initState() {
         this.setState({
 			evaluation: {
-				id: '',
-				cartonId: '',
-				age: '',
-				familyMembers : '',
-				schoolStatus: '',
-				caseLeader: '',
-				dedicatedWorker: '',
-				otherMembers: '',
-				basicPhysicalNeeds: '',
-				psyhoSocialNeeds: '',
-				educationalNeeds: '',
-				otherNeeds: '',
-				dominantEmotions: '',
-				dominantBehaviors: '',
-				surroundStrenghts: '',
-				familyStrenghts: '',
-				personalStrenghts: '',
-				otherStrenghts: '',
-				surroundRisks : '',
-				familyRisks: '',
-				behaviorRisks: '',
-				otherRisks: '',
-				capabilities: '',
-				culturalSpecifics: '',
-				advicedLevelOfSupport: '',
-				evaluationDoneBy: '',
-				date: ''
+				id: "",
+				cartonId: "",
+				age: undefined,
+				dedicatedWorker: "",
+				familyMembers: "",
+				otherMembers: "",
+				basicPhysicalNeeds: "",
+				psyhoSocialNeeds: "",
+				schoolStatus: "",
+				educationalNeeds: "",
+				otherNeeds: "",
+				dominantEmotions: "",
+				dominantBehaviors: "",
+				surroundStrenghts: "",
+				familyStrenghts: "",
+				personalStrenghts: "",
+				otherStrenghts: "",
+				surroundRisks: "",
+				familyRisks: "",
+				behaviorRisks: "",
+				otherRisks: "",
+				capabilities: "",
+				culturalSpecifics: "",
+				advicedLevelOfSupport: "",
+				evaluationDoneBy: "",
+				date: ""
 			}
 		});
-    }
-
-	componentDidMount() {
-		if(this.props.evaluation === {}) {
-			this.setState({newEvaluation: false});
-		}
 	}
 	
-	onInputChange = (event) => {
-		const evaluation = this.state.evaluation;
-		evaluation[event.target.name] = event.target.value;
-		this.setState({evaluation});
+
+
+
+
+	componentDidMount() {
+		if(this.props.evaluation === undefined) {
+			this.setState({newEvaluation: true});
+		} else {
+			this.setState({evaluation: this.props.evaluation});
+		}
 	}
 
-	handleCheckboxChange = (event) => {
+	onInputChange = (event) => {
 		const evaluation = this.state.evaluation;
 		evaluation[event.target.name] = event.target.value;
 		this.setState({evaluation});
@@ -186,18 +184,17 @@ class Evaluation extends Component {
 
 		if (this.state.newEvaluation) {
 			delete data.id;
-			console.log('-- save data: ', data);
+			data.cartonId = this.props.cartonId;
 			EvaluationActions.addEvaluation(data);
 		} else {
-			console.log('-- edit data: ', data);
 			EvaluationActions.editEvaluation(data);
 		}
 		
         this.initState();
 	}
-
+	
 	onDelete = () => {
-		EvaluationActions.deleteEvaluation(this.state.evaluation.id);
+		EvaluationActions.deleteEvaluation(this.state.evaluation.cartonId);
 		this.initState();
 	}
 	

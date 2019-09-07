@@ -3,6 +3,7 @@ import { NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from '@material-ui/core/Icon';
 
+import dispatcher from '../dispatcher';
 import LoginStore from '../stores/LoginStore';
 
 import Colours from '../components/common/colours';
@@ -172,16 +173,25 @@ const Search = styled.button`
 	height: 30px;
 `;
 class Dashboard extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	state = {
 		searchParams: ''
 	}
+
 	onInputChange = (event) => {
 		const params =  event.target.value;
 		this.setState({searchParams: params});
 	}
+
 	handleClick = () => {
-		console.log('izlogovan');
+		dispatcher.dispatch({
+			type: "UNAUTHORIZED"
+		});
 	}
+
 	render() {
 		return (
 			<Wrapper>

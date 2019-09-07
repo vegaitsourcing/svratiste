@@ -19,6 +19,9 @@ class LoginStore extends EventEmitter {
 				localStorage.setItem('accessToken', action.payload.token);
 				this.emit("fetched_token");
 				break;
+			case "UNAUTHORIZED":
+				this.emit("unauthorized");
+				break;
 			default:
 		}
 	}

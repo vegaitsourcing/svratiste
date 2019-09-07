@@ -29,11 +29,11 @@ namespace SafeHouse.Web.Controllers
 
         [HttpPost]
         [Route("api/FirstEvaluation")]
-        public IActionResult Create([FromBody]FirstEvaluationDto carton)
+        public IActionResult Create([FromBody]FirstEvaluationDto firstEvaluation)
         {
             try
             {
-                _firstEvaluationService.Add(carton);
+                _firstEvaluationService.Add(firstEvaluation);
 
                 return HandleSuccessResult();
             }
@@ -46,11 +46,11 @@ namespace SafeHouse.Web.Controllers
 
         [HttpPut]
         [Route("api/FirstEvaluation")]
-        public IActionResult Update([FromBody]FirstEvaluationDto carton)
+        public IActionResult Update([FromBody]FirstEvaluationDto firstEvaluation)
         {
             try
             {
-                _firstEvaluationService.Update(carton);
+                _firstEvaluationService.Update(firstEvaluation);
 
                 return HandleSuccessResult();
             }

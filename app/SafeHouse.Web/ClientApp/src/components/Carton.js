@@ -239,24 +239,20 @@ class Carton extends Component {
 		const carton = this.state.carton;
 		carton[event.currentTarget.name] = !carton[event.currentTarget.name];
 		this.setState({carton});
-		console.log('-2- ', this.state.carton);
 	}
 
 	onSave = () => {
 		const data = this.state.carton;
 
-		delete data.dateOfBirth;
 		delete data.individualPlanRevised;
 		delete data.notifications;
 		delete data.notificationsEnabled;
 		delete data.numberOfVisits;
 
 		if(data.id) {
-			console.log('-- edit data: ', data);
 			CardboardActions.editCarton(data);
 		} else {
 			delete data.id;
-			console.log('-- save data: ', data);
 			CardboardActions.addCarton(data);
 		}
 
@@ -270,6 +266,7 @@ class Carton extends Component {
 
 	getCarton() {
 		const carton = CardboardStore.getCarton();
+		carton.dateOfBirth = new Date(carton.dateOfBirth).toISOString().slice(0,10);
 		this.setState({carton});
 	}
 
@@ -289,19 +286,22 @@ class Carton extends Component {
 	}
 
 	render() {
+		let firstEvaluationTitle = this.state.firstEvaluation !== undefined ? "Prva procena" : "Kreiraj prvu procenu";
+		let evaluationTitle = this.state.evaluation !== undefined ? "Procena" : "Kreiraj Procenu";
+		let individualPlanTitle = this.state.individualPlan !== undefined ? "Individualni plan" : "Kreiraj individualni Plan";
 		let options;
 
 		if(!this.state.newCarton) {
 			options = <span>
 				<ButtonWrapper>
 					<Button onClick={this.onDelete}>Obriši</Button>
-					<DarkButton onClick={() => this.showModal(1)}>Kreiraj Prijemnu Procenu</DarkButton>
-					<DarkButton onClick={() => this.showModal(2)}>Kreiraj Procenu</DarkButton>
-					<DarkButton onClick={() => this.showModal(3)}>Kreiraj Individualni Plan</DarkButton>
+					<DarkButton onClick={() => this.showModal(1)}>{firstEvaluationTitle}</DarkButton>
+					<DarkButton onClick={() => this.showModal(2)}>{evaluationTitle}</DarkButton>
+					<DarkButton onClick={() => this.showModal(3)}>{individualPlanTitle}</DarkButton>
 				</ButtonWrapper>
-				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Prijemnu Procenu"><FirstEvaluation firstEvaluation={this.state.firstEvaluation} /></Modal>}
-				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Procenu"><Evaluation evaluation={this.state.evaluation} /></Modal>}
-				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title="Kreiraj Individualni Plan"><IndividualPlan individualPlan={this.state.individualPlan} /></Modal>}
+				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={firstEvaluationTitle}><FirstEvaluation firstEvaluation={this.state.firstEvaluation} cartonId={this.props.id} /></Modal>}
+				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={evaluationTitle}><Evaluation evaluation={this.state.evaluation} cartonId={this.props.id} /></Modal>}
+				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={individualPlanTitle}><IndividualPlan individualPlan={this.state.individualPlan} cartonId={this.props.id} /></Modal>}
 			</span>
 		}
 		return (
@@ -348,19 +348,19 @@ class Carton extends Component {
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel required title="Datum rodjenja"/>
-					<CustomInput inputType="date" inputName="dateOfBirth"/>
+					<CustomInput inputType="date" inputName="dateOfBirth" value={this.state.carton.dateOfBirth} change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
 					<Hr />
-					<InputHidden type="checkbox" id="prijemnaprocena" name="initialEvaluationDone" checked={this.state.initialEvaluationDone} onChange={this.onCheckboxChange}/>
+					<InputHidden type="checkbox" id="prijemnaprocena" name="initialEvaluationDone" checked={this.state.carton.initialEvaluationDone} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="prijemnaprocena">Prijemna procena</LabelCheckbox>
 				</InputWrapperWide>
 				<InputWrapperWide>
-					<InputHidden type="checkbox" id="procena" name="evaluationDone" checked={this.state.evaluationDone} onChange={this.onCheckboxChange}/>
+					<InputHidden type="checkbox" id="procena" name="evaluationDone" checked={this.state.carton.evaluationDone} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="procena">Procena</LabelCheckbox>
 				</InputWrapperWide>
 				<InputWrapper>
-					<InputHidden type="checkbox" id="individualniPlan" name="individualPlanDone" checked={this.state.individualPlanDone} onChange={this.onCheckboxChange}/>
+					<InputHidden type="checkbox" id="individualniPlan" name="individualPlanDone" checked={this.state.carton.individualPlanDone} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="individualniPlan">Postoje kapaciteti usluge da zadovolji potrebe korisnika</LabelCheckbox>
 				</InputWrapper>
 				<ButtonContainer>

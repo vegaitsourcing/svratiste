@@ -171,8 +171,6 @@ class DailyRecord extends Component {
 		this.setState({ [name]: checked });
 	}
 	multiSelectChange(value, state) {
-		console.log(value);
-		console.log(state);
 		let values = value.reduce(function (prev, cur) {
 			return prev + cur.value;
 		}, 0);

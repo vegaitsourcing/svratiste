@@ -8,6 +8,7 @@ import Colours from '../components/common/colours';
 
 import * as CardboardActions from '../actions/CardboardActions';
 import CardboardStore from '../stores/CardboardStore';
+import LoginStore from '../stores/LoginStore';
 
 const Wrapper = styled.div`
 	display: flex;
@@ -36,6 +37,7 @@ class Notifications extends Component {
 	componentWillMount() {
 		CardboardStore.on("fetched_cartons_over_eighteen", this.getCartonsOverEighteen.bind(this));
 		CardboardStore.on("unauthorized", this.redirectToLogin);
+		LoginStore.on("unauthorized", this.redirectToLogin);
 	}
 
 	componentDidMount() {
@@ -45,6 +47,7 @@ class Notifications extends Component {
 	componentWillUnmount() {
 		CardboardStore.removeListener("fetched_cartons_over_eighteen", this.getCartonsOverEighteen);
 		CardboardStore.removeListener("unauthorized", this.redirectToLogin);
+		LoginStore.removeListener("unauthorized", this.redirectToLogin);
 	}
 
 	getCartonsOverEighteen() {

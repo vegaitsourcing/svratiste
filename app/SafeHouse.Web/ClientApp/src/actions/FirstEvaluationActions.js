@@ -4,6 +4,7 @@ import axios from 'axios';
 import { web_api_url } from '../components/common/constants';
 
 import * as authToken from '../authToken';
+import FirstEvaluation from '../components/evaluation/FirstEvaluation';
 
 
 export function getFirstEvaluationByCartonId(cartonId) {
@@ -24,8 +25,8 @@ export function getFirstEvaluationByCartonId(cartonId) {
     });
 }
 
-export function addFirstEvaluation(evaluation) {
-    axios.post(web_api_url + '/FirstEvaluation', evaluation,
+export function addFirstEvaluation(firstEvaluation) {
+    axios.post(web_api_url + '/FirstEvaluation', firstEvaluation,
     {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then(() => {
@@ -39,12 +40,12 @@ export function addFirstEvaluation(evaluation) {
     });
 }
 
-export function editFirstEvaluation(evaluation) {
-	axios.put(web_api_url + '/FirstEvaluation', evaluation,
+export function editFirstEvaluation(firstEvaluation) {
+	axios.put(web_api_url + '/FirstEvaluation', firstEvaluation,
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
-            getFirstEvaluationByCartonId(evaluation.cartonId);
+            getFirstEvaluationByCartonId(firstEvaluation.cartonId);
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
