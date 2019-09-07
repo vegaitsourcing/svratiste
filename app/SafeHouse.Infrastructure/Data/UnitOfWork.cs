@@ -18,7 +18,8 @@ namespace SafeHouse.Infrastructure.Data
         public void RegisterAmended(object entity)
         {
             OpenTransaction();
-            _dbContext.Update(entity);
+            _dbContext.Attach(entity);
+            //_dbContext.Update(entity);
         }
 
         public void RegisterNew(object entity)

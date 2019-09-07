@@ -21,6 +21,7 @@ namespace SafeHouse.Infrastructure
             services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IDailyEntryService, DailyEntryService>();
+            // services.AddTransient<IIndividualPlanService, IndividualPlanService>();
             services.AddSingleton<ICartonMapper, CartonMapper>();
             services.AddSingleton<IFirstEvaluationMapper, FirstEvaluationMapper>();
             services.AddSingleton<IEvaluationMapper, EvaluationMapper>();
@@ -31,11 +32,11 @@ namespace SafeHouse.Infrastructure
         public static void AddDataServices(this IServiceCollection services, string connectionString)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IRepository<SafeHouseUser>, Repository<SafeHouseUser>>();
-            services.AddTransient<IRepository<Carton>, Repository<Carton>>();
-            services.AddTransient<IRepository<FirstEvaluation>, Repository<FirstEvaluation>>();
-            services.AddTransient<IRepository<Evaluation>, Repository<Evaluation>>();
-            services.AddTransient<IRepository<DailyEntry>, Repository<DailyEntry>>();
+            services.AddScoped<IRepository<SafeHouseUser>, Repository<SafeHouseUser>>();
+            services.AddScoped<IRepository<Carton>, Repository<Carton>>();
+            services.AddScoped<IRepository<FirstEvaluation>, Repository<FirstEvaluation>>();
+            services.AddScoped<IRepository<Evaluation>, Repository<Evaluation>>();
+            services.AddScoped<IRepository<DailyEntry>, Repository<DailyEntry>>();
             services.AddDbContext<SafeHouseDbContext>(
                 options => options.UseSqlServer(connectionString,
                     optionsAction => optionsAction.MigrationsAssembly("SafeHouse.Infrastructure")));

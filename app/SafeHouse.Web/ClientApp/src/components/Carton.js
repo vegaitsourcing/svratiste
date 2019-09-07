@@ -199,26 +199,26 @@ class Carton extends Component {
 	
 	componentWillMount() {
 		CardboardStore.on("fetched_carton", this.getCarton);
-		FirstEvaluationStore.on("fetched_first_evaluation", this.getFirstEvaluation);
-		EvaluationStore.on("fetched_evaluation", this.getEvaluation);
-		IndividualPlanStore.on("fetched_individual_plan", this.getIndividualPlan);
+		// FirstEvaluationStore.on("fetched_first_evaluation", this.getFirstEvaluation);
+		// EvaluationStore.on("fetched_evaluation", this.getEvaluation);
+		// IndividualPlanStore.on("fetched_individual_plan", this.getIndividualPlan);
 	}
 
 	componentDidMount() {
 		if(this.props.id) {
 			CardboardActions.getCartonById(this.props.id);
-			FirstEvaluationActions.getFirstEvaluationByCartonId(this.props.id);
-			EvaluationActions.getEvaluationByCartonId(this.props.id);
-			IndividualPlanActions.getIndividualPlanByCartonId(this.props.id);
+			// FirstEvaluationActions.getFirstEvaluationByCartonId(this.props.id);
+			// EvaluationActions.getEvaluationByCartonId(this.props.id);
+			// IndividualPlanActions.getIndividualPlanByCartonId(this.props.id);
 			this.setState({newCarton: false});
 		}
 	}
 
 	componentWillUnmount() {
 		CardboardStore.removeListener("fetched_carton", this.getCarton);
-		FirstEvaluationStore.removeListener("fetched_first_evaluation", this.getFirstEvaluation);
-		EvaluationStore.removeListener("fetched_evaluation", this.getEvaluation);
-		IndividualPlanStore.removeListener("fetched_individual_plan", this.getIndividualPlan);
+		// FirstEvaluationStore.removeListener("fetched_first_evaluation", this.getFirstEvaluation);
+		// EvaluationStore.removeListener("fetched_evaluation", this.getEvaluation);
+		// IndividualPlanStore.removeListener("fetched_individual_plan", this.getIndividualPlan);
 	}
 
 	showModal = (componentNumber) => {

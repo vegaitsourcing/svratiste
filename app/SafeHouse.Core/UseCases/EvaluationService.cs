@@ -25,7 +25,7 @@ namespace SafeHouse.Core.UseCases
 
         public EvaluationDto GetByCartonId(Guid id)
         {
-            var evaluation = _evaluationRepository.GetAll().FirstOrDefault(e => e.Id == id);
+            var evaluation = _evaluationRepository.GetSingleBy(e => e.Id == id);
             return _evaluationMapper.ToDto(evaluation);
         }
 
@@ -45,7 +45,7 @@ namespace SafeHouse.Core.UseCases
 
         public void Remove(Guid id)
         {
-            var evaluation = _evaluationRepository.GetAll().FirstOrDefault(e => e.Id == id);
+            var evaluation = _evaluationRepository.GetSingleBy(e => e.Id == id);
             _evaluationRepository.Remove(evaluation);
         }
     }
