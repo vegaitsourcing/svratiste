@@ -18,7 +18,8 @@ export const Colours = {
 	stTropaz: '#245588',
 	apricot: '#ee826b',
 	ghost: '#cad1d7',
-	baliHai: '#8898aa'
+	baliHai: '#8898aa',
+	martinique: '#32325D'
 };
 
 export default Colours;

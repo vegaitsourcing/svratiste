@@ -147,22 +147,82 @@ class DailyRecord extends Component {
 		schoolAcivities: 0,
 		workshops: [],
 		psihosocialSupport: false,
-		parentsContact: false,
+		parentsContact: 0,
 		medicalInterventions: 0,
 		arrival: '',
+		educationWorkshop: 0,
+		creativeWorkshop: 0,
 		// pageNumber: props.pageNumber,
 
+		startTime: '',
+		endTIme: '',
+
 		// enumerations
-		mediationWritingsEnum: [{ value: 'chocolate', label: 'Chocolate' },
-		{ value: 'strawberry', label: 'Strawberry' },
-		{ value: 'vanilla', label: 'Vanilla' }],
-		mediationSpeakingsEnum: [{ value: 'chocolate', label: 'Chocolate' },
-		{ value: 'strawberry', label: 'Strawberry' },
-		{ value: 'vanilla', label: 'Vanilla' }],
-		lifeSkillsEnum: [],
+		mediationWritingsEnum: [
+			{ value: 1, label: 'Centar za socijalni rad' },
+			{ value: 2, label: 'Obrazovanje' },
+			{ value: 3, label: 'Udruženja građana'},
+			{ value: 4, label: 'Zdravstvene ustanove'},
+			{ value: 5, label: 'Policija'},
+			{ value: 6, label: 'Ostalo'},
+		],
+		mediationSpeakingsEnum: [
+			{ value: 1, label: 'Centar za socijalni rad' },
+			{ value: 2, label: 'Obrazovanje' },
+			{ value: 3, label: 'Udruženja građana' },
+			{ value: 4, label: 'Zdravstvene ustanove' },
+			{ value: 5, label: 'Policija' },
+			{ value: 6, label: 'Ostalo' }
+		],
+		lifeSkillsEnum: [
+			{ value: 1, label: 'Veština donošenj odluka'},
+			{ value: 2, label: 'Vetina rešavanja problema'},
+			{ value: 3, label: 'Asertivna komunikacija'},
+			{ value: 4, label: 'Kako reći "Ne"'},
+			{ value: 5, label: 'Svest o sebi'},
+			{ value: 6, label: 'Prepoznavanje i upravljanje emocijama'},
+			{ value: 7, label: 'Empatija'},
+			{ value: 8, label: 'Suopčavanje sa stresom'},
+			{ value: 9, label: 'Održavanje lične higijene'},
+			{ value: 10, label: 'Održavanje higijene odeće i obuće'},
+			{ value: 11, label: 'Zdravlje (prevencija i lečenje)'},
+			{ value: 12, label: 'Lična bezbednost i snalaženje u kriznim situacijama'},
+			{ value: 13, label: 'Vođenje brige o ličnim finansijama'},
+			{ value: 14, label: 'Održavanje higijene mesta boravka'},
+			{ value: 15, label: 'Upotreba kućnih aparata'},
+			{ value: 16, label: 'Priprema i serviranje obroka'},
+			{ value: 17, label: 'Ponašanje za stolom'},
+			{ value: 18, label: 'Nabavljanje namirnica'},
+			{ value: 19, label: 'Briga o zdravlju tokom trudnoće'},
+			{ value: 20, label: 'Fizička nega novorođenčeta i deteta'},
+			{ value: 21, label: 'Iskazivanje ljubavi prema detetu'},
+			{ value: 22, label: 'Zaštita deteta'},
+			{ value: 23, label: 'Stimulisanje deteta'},
+			{ value: 24, label: 'Ishodovanje ličnih dokumenata'},
+			{ value: 25, label: 'Upotreba sata, orjentacija u vremenu i planiranje vremena'},
+			{ value: 26, label: 'Saobraćajni propisi i znaci'},
+			{ value: 27, label: 'Korišćenje resursa zajednice'},
+			{ value: 28, label: 'Snalaženje u prostoru'},
+			{ value: 29, label: 'Upotreba sredstava informisanja'},
+			{ value: 30, label: 'Aktivno traženje posla'},
+			{ value: 31, label: 'Ostalo'},
+		],
 		workshopTypesEnum: [],
-		schoolActivitiesEnum: [],
-		medicalInterventionsEnum: []
+		schoolActivitiesEnum: [
+			{ value: 1, label: 'Domaći zadaci'},
+			{ value: 2, label: 'Vežbanje'},
+			{ value: 3, label: 'Učenje školskog gradiva'},
+			{ value: 4, label: 'Specifične intervencije za razvoj kognitivnih funkcija'},
+		],
+		parentsContactEnum: [
+			{ value: 1, label: 'Telefonski kontakt'},
+			{ value: 2, label: 'Lični kontakt'},
+		],
+		medicalInterventionsEnum: [
+			{ value: 1, label: 'Intervencija u svratištu'},
+			{ value: 2, label: 'Savetovanje'},
+			{ value: 3, label: 'Lekovi'}
+		]
 	};
 	handleCheckboxChange = (event) => {
 		const { target } = event;
@@ -175,6 +235,13 @@ class DailyRecord extends Component {
 			return prev + cur.value;
 		}, 0);
 		this.setState({[state]: values})
+	}
+	onInputChange = (event) => {
+		const newState = {
+			...this.state,
+			[event.target.name] : event.target.value
+		}
+		this.setState(newState);
 	}
 	onDelete = () => {
 		//ToDo
@@ -243,6 +310,92 @@ class DailyRecord extends Component {
 							options={this.state.mediationWritingsEnum}
 							onChange={(value) => this.multiSelectChange(value, "mediationWriting")}
 							isMulti />
+					</InputWrapper>
+				</Div>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Edukacija i podrška korisnicima u sticanju osnovnih životnih veština"/>
+				</InputWrapperWide>
+				<Div>
+					<InputWrapper>
+						<CustomLabel title="Grupno učenje životnih veština" />
+						<Select
+							options={this.state.lifeSkillsEnum}
+							onChange={(value) => this.multiSelectChange(value, "lifeSkills")}
+							isMulti />
+					</InputWrapper>
+					<InputWrapper>
+						<CustomLabel title="Individualno učenje životnih veština" />
+						<Select
+							options={this.state.lifeSkillsEnum}
+							onChange={(value) => this.multiSelectChange(value, "lifeSkills")}
+							isMulti />
+					</InputWrapper>
+					<InputWrapper>
+						<CustomLabel title="Radionice" />
+						<CustomLabel title="Edukativna radionica" />
+						<CustomInput value={this.state.educationWorkshop} inputName="educationWorkshop" change={this.onInputChange} inputType={"number"}/>
+					</InputWrapper>
+					<InputWrapper>
+						<CustomLabel title="&nbsp;" />
+						<CustomLabel title="Kreativna radionica" />
+						<CustomInput value={this.state.creativeWorkshop} inputName="creativeWorkshop" change={this.onInputChange} inputType={"number"}/>
+					</InputWrapper>
+				</Div>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Pružanje psihosocijalne podrške"/>
+				</InputWrapperWide>
+				<Div>
+					<InputWrapper>
+						<InputHidden type="checkbox" id="psihosocialSupport" name="psihosocialSupport" checked={this.state.psihosocialSupport} onChange={this.handleCheckboxChange}/>
+						<LabelCheckbox htmlFor="psihosocialSupport">Pružanje psihosocijalne podrške</LabelCheckbox>
+					</InputWrapper>
+				</Div>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Pružanje podrške u obavljanju školski obaveza"/>
+				</InputWrapperWide>
+				<Div>
+					<InputWrapper>
+						<Select
+							options={this.state.schoolActivitiesEnum}
+							onChange={(value) => this.multiSelectChange(value, "schoolActivities")}
+							isMulti />
+					</InputWrapper>
+				</Div>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Kontakti sa roditeljima"/>
+				</InputWrapperWide>
+				<Div>
+					<InputWrapper>
+						<Select
+							options={this.state.parentsContactEnum}
+							onChange={(value) => this.multiSelectChange(value, "parentsContact")}
+							isMulti />
+					</InputWrapper>
+				</Div>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Pružanje medicinskih intervencija i savetovanja"/>
+				</InputWrapperWide>
+				<Div>
+					<InputWrapper>
+						<Select
+							options={this.state.medicalInterventionsEnum}
+							onChange={(value) => this.multiSelectChange(value, "medicalInterventions")}
+							isMulti />
+					</InputWrapper>
+				</Div>
+				<Div>
+					<InputWrapper>
+						<CustomLabel title="Vreme dolaska" />
+						<CustomInput value={this.state.startTime} inputName="startTime" change={this.onInputChange} inputType={"time"}/>
+					</InputWrapper>
+					<InputWrapper>
+						<CustomLabel title="Vreme odlaska" />
+						<CustomInput value={this.state.endTIme} inputName="endTIme" change={this.onInputChange} inputType={"time"}/>
 					</InputWrapper>
 				</Div>
 				<Button>Sačuvaj</Button>

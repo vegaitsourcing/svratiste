@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import Colours from '../components/common/colours';
-import { FontWeight } from '../components/common/typography';
+import { FontWeight, Body, Headings } from '../components/common/typography';
 import Modal from '../components/common/Modal/Modal';
 import FirstEvaluation from '../components/evaluation/FirstEvaluation';
 import Evaluation from '../components/evaluation/Evaluation';
@@ -81,6 +82,11 @@ const LabelCheckbox = styled.label`
 		top: 0;
 	}
 `;
+const H2 = styled.h2`
+	font-size: 15px;
+	color: ${Colours.martinique};
+	text-align: center;
+`;
 const Hr = styled.hr`
 	border: 0;
 	border-top: 1px solid rgba(0,0,0,.1);
@@ -130,6 +136,47 @@ const Button = styled.button`
 		}
 	}
 `;
+const Table = styled.table`
+	border-spacing: 0;
+	font-size: 14px;
+	font-family: ${Body.font};
+	line-height: 1.5;
+	color: ${Colours.baliHai};
+	background-color: ${Colours.white};
+	background-clip: padding-box;
+	border-radius: .370rem;
+	box-shadow: 0 1px 3px rgba(49, 49, 92, 0.15), 0 1px 0 rgba(0,0,0, 0.03);
+	border: 0;
+	transition: box-shadow .15s ease;
+	box-sizing: border-box;
+	outline: none;
+	border-bottom: 2px solid ${Colours.lochmara};
+`;
+const TH = styled.th`
+	font-size: 14px;
+	font-weight: ${FontWeight.normal};
+	font-family: ${Headings.font};
+	color: #333;
+	padding: 12px 0;
+	vertical-align: middle;
+`;
+const TD = styled.td`
+	font-size: 14px;
+	font-weight: ${FontWeight.light};
+	font-family: ${Headings.font};
+	color: #333;
+	padding: 14px 0;
+	border-top: 1px solid #ddd;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	&:hover {
+		color: #0580c6;
+	}
+`;
+const TR = styled.tr`
+	border-bottom: 1px solid #ddd;
+`;
 const ButtonWrapper = styled.div`
 	display: inline-flex;
 	margin-left: auto;
@@ -169,7 +216,21 @@ class Carton extends Component {
 		individualPlan: undefined,
 		show: false,
 		newCarton: true,
-		componentNumber: ''
+		componentNumber: '',
+		dailyRecords: [
+			{
+				id: '1',
+				date: '19.1.2019',
+				startTime: '07:00',
+				endTime: '14:00'
+			},
+			{
+				id: '2',
+				date: '20.1.2019',
+				startTime: '10:00',
+				endTime: '10:50'
+			}
+		]
 	}
 
     initState() {
@@ -284,13 +345,18 @@ class Carton extends Component {
 		const individualPlan = IndividualPlanStore.getIndividualPlan();
 		this.setState({individualPlan});
 	}
+	
+	showDailyRecord = (id) => {
+		console.log(id);
+		this.props.history.push('/records/' + id);
+	}
 
 	render() {
 		let firstEvaluationTitle = this.state.firstEvaluation !== undefined ? "Prva procena" : "Kreiraj prvu procenu";
 		let evaluationTitle = this.state.evaluation !== undefined ? "Procena" : "Kreiraj Procenu";
 		let individualPlanTitle = this.state.individualPlan !== undefined ? "Individualni plan" : "Kreiraj individualni Plan";
 		let options;
-
+		let dailyRecords;
 		if(!this.state.newCarton) {
 			options = <span>
 				<ButtonWrapper>
@@ -299,10 +365,35 @@ class Carton extends Component {
 					<DarkButton onClick={() => this.showModal(2)}>{evaluationTitle}</DarkButton>
 					<DarkButton onClick={() => this.showModal(3)}>{individualPlanTitle}</DarkButton>
 				</ButtonWrapper>
-				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={firstEvaluationTitle}><FirstEvaluation firstEvaluation={this.state.firstEvaluation} cartonId={this.props.id} /></Modal>}
-				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={evaluationTitle}><Evaluation evaluation={this.state.evaluation} cartonId={this.props.id} /></Modal>}
-				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={individualPlanTitle}><IndividualPlan individualPlan={this.state.individualPlan} cartonId={this.props.id} /></Modal>}
-			</span>
+			</span>;
+			if(this.state.dailyRecords !== undefined) {
+				dailyRecords = <><InputWrapperWide>
+					<Hr />
+					<H2>Dnevna evidencija</H2>
+					</InputWrapperWide>
+					<InputWrapperWide>
+						<Table width="100%" border="0">
+							<thead>
+								<TR>
+									<TH>Redni broj</TH>
+									<TH>Datum kreiranja</TH>
+									<TH>Dolazak</TH>
+									<TH>Odlazak</TH>
+								</TR>
+							</thead>
+							<tbody>
+								{this.state.dailyRecords.map((item, index) => (
+									<TR key={item.id} onClick={() => this.showDailyRecord(item.id)}>
+										<TD>{index}</TD>
+										<TD>{item.date}</TD>
+										<TD>{item.startTime}</TD>
+										<TD>{item.endTime}</TD>
+									</TR>
+								))}
+							</tbody>
+						</Table>
+					</InputWrapperWide></>
+			}
 		}
 		return (
 			<Container>
@@ -350,6 +441,7 @@ class Carton extends Component {
 					<CustomLabel required title="Datum rodjenja"/>
 					<CustomInput inputType="date" inputName="dateOfBirth" value={this.state.carton.dateOfBirth} change={this.onInputChange}/>
 				</InputWrapper>
+				{dailyRecords}
 				<InputWrapperWide>
 					<Hr />
 					<InputHidden type="checkbox" id="prijemnaprocena" name="initialEvaluationDone" checked={this.state.carton.initialEvaluationDone} onChange={this.onCheckboxChange}/>
@@ -371,4 +463,4 @@ class Carton extends Component {
 		);
 	}
 }
-export default Carton;
+export default withRouter(Carton);
