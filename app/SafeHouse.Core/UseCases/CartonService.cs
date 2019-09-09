@@ -12,7 +12,7 @@ namespace SafeHouse.Core.UseCases
 {
     public class CartonService : ICartonService
     {
-        private const int LegalAge = 18;
+        private const int LegalAge = 12;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Carton> _cartonRepository;
         private readonly ICartonMapper _cartonMapper;
@@ -33,6 +33,11 @@ namespace SafeHouse.Core.UseCases
         public IEnumerable<CartonDto> GetOverEighteen()
             => _cartonRepository.GetAll()
                 .Where(c => new DateTime((DateTime.Now - c.DateOfBirth).Ticks).Year >= LegalAge)
+                .Select(c => _cartonMapper.ToDto(c));
+
+        public IEnumerable<CartonDto> GetReadyForInitialEvaluation()
+            => _cartonRepository.GetAll()
+                .Where(c => c.NumberOfVisits > 10 && c.InitialEvaluationDone == false)
                 .Select(c => _cartonMapper.ToDto(c));
 
         public CartonDto Get(Guid id)
@@ -57,10 +62,9 @@ namespace SafeHouse.Core.UseCases
             _unitOfWork.Commit();
         }
 
-        public void Remove(CartonDto cartonDto)
+        public void Remove(Guid id)
         {
-            var carton = _cartonRepository.GetSingleBy(c => c.Id == cartonDto.Id);
-            _cartonMapper.ApplyToEntity(ref carton, cartonDto);
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
 
             _cartonRepository.Remove(carton);
             _unitOfWork.Commit();

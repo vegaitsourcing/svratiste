@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import Layout from '../hoc/Layout';
 import Cartons from '../components/cartons/Cartons';
-import Constants from '../components/common/constants';
 import Colours from '../components/common/colours';
 
 import * as CardboardActions from '../actions/CardboardActions';
@@ -27,25 +26,26 @@ class Notifications extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			makeInitialEvaluation: [],
-			makeIndividualPlan: [],
-			reviseIndividualPlan: [],
+			readyForInitialEvaluation: [],
 			overEighteen: [],
 		};
 	}
 
 	componentWillMount() {
 		CardboardStore.on("fetched_cartons_over_eighteen", this.getCartonsOverEighteen.bind(this));
+		CardboardStore.on("fetched_cartons_ready_for_initial_evaluation", this.getCartonsReadyForInitialEvaluation.bind(this));
 		CardboardStore.on("unauthorized", this.redirectToLogin);
 		LoginStore.on("unauthorized", this.redirectToLogin);
 	}
 
 	componentDidMount() {
 		CardboardActions.getCartonsOverEighteen();
+		CardboardActions.getCartonsReadyForInitialEvaluation();
 	}
 
 	componentWillUnmount() {
 		CardboardStore.removeListener("fetched_cartons_over_eighteen", this.getCartonsOverEighteen);
+		CardboardStore.removeListener("fetched_cartons_ready_for_initial_evaluation", this.getCartonsReadyForInitialEvaluation);
 		CardboardStore.removeListener("unauthorized", this.redirectToLogin);
 		LoginStore.removeListener("unauthorized", this.redirectToLogin);
 	}
@@ -53,6 +53,12 @@ class Notifications extends Component {
 	getCartonsOverEighteen() {
 		this.setState({
 			overEighteen: CardboardStore.getCartonsOverEighteen()
+		});
+	}
+
+	getCartonsReadyForInitialEvaluation() {
+		this.setState({
+			readyForInitialEvaluation: CardboardStore.getCartonsReadyForInitialEvaluation()
 		});
 	}
 
@@ -65,9 +71,7 @@ class Notifications extends Component {
 		return (
 			<Layout name="Notifikacije">
 				<Wrapper>
-					<Cartons cartons={this.state.makeInitialEvaluation} title="Uraditi prijemnu procenu" icon="assignment" path="/users/" />
-					<Cartons cartons={this.state.makeIndividualPlan} title="Uraditi individualni plan" icon="done" path="/users/" />
-					<Cartons cartons={this.state.reviseIndividualPlan} title="Revidirati individualni plan" icon="assignment_late" path="/users/"/>
+					<Cartons cartons={this.state.readyForInitialEvaluation} title="Uraditi prijemnu procenu" icon="assignment" path="/users/" />
 					<Cartons cartons={this.state.overEighteen} title="Korisnici koji su napunili 18 godina" icon="cake" path="/users/" />
 				</Wrapper>
 			</Layout>

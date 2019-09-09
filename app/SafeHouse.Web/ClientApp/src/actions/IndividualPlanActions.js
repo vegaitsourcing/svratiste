@@ -16,7 +16,7 @@ export function getIndividualPlanByCartonId(cartonId) {
         payload: response.data
     });
     }).catch(error => {
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
             dispatcher.dispatch({
                 type: "UNAUTHORIZED"
             });
@@ -29,9 +29,9 @@ export function addIndividualPlan(individualPlan) {
     {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then(() => {
-        console.log("DOBAR");
+        getIndividualPlanByCartonId(individualPlan.cartonId);
     }).catch(error => {
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
             dispatcher.dispatch({
                 type: "UNAUTHORIZED"
             });
@@ -45,6 +45,21 @@ export function editIndividualPlan(individualPlan) {
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
             getIndividualPlanByCartonId(individualPlan.cartonId);
+		}).catch(error => {
+			if (error.response && error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
+}
+
+export function deleteIndividualPlan(id) {
+	axios.delete(web_api_url + '/IndividualPlan/' + id,
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then((response) => {
+			// Done
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Icon from '@material-ui/core/Icon';
 
 import dispatcher from '../dispatcher';
-import LoginStore from '../stores/LoginStore';
 
 import Colours from '../components/common/colours';
 import Constants from '../components/common/constants';

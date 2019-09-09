@@ -7,6 +7,8 @@ namespace SafeHouse.Core.Abstractions
     {
         DailyEntryDto GetByCartonId(Guid id);
 
+        DailyEntryDto GetByCartonIdForToday(Guid id);
+
         void Add(DailyEntryDto dailyEntry);
 
         void Update(DailyEntryDto dailyEntry);

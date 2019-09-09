@@ -5,18 +5,17 @@ import { web_api_url } from '../components/common/constants';
 
 import * as authToken from '../authToken';
 
-
 export function getEvaluationByCartonId(cartonId) {
     axios.get(web_api_url + '/Evaluation/' + cartonId,
     {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then((response) => {
-    dispatcher.dispatch({
-        type: "FETCHED_EVALUATION",
-        payload: response.data
-    });
+        dispatcher.dispatch({
+            type: "FETCHED_EVALUATION",
+            payload: response.data
+        });
     }).catch(error => {
-        if (error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
             dispatcher.dispatch({
                 type: "UNAUTHORIZED"
             });
@@ -29,7 +28,7 @@ export function addEvaluation(evaluation) {
     {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then(() => {
-        console.log("DOBAR");
+        getEvaluationByCartonId(evaluation.cartonId);
     }).catch(error => {
         if (error.response.status === 401) {
             dispatcher.dispatch({

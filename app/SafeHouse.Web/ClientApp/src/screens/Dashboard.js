@@ -74,7 +74,8 @@ class Dashboard extends Component {
 	
 	render() {
 		return (
-			<Layout name="Korisnici" showSearch>
+			<Layout name="Korisnici">
+			{/* <Layout name="Korisnici" showSearch> */}
 				<Cartons
 					cartons={this.state.cartons}
 					title="Lista svih korisnika"

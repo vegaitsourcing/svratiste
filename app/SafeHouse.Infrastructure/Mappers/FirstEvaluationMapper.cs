@@ -6,12 +6,52 @@ namespace SafeHouse.Infrastructure.Mappers
 {
     public class FirstEvaluationMapper : IFirstEvaluationMapper
     {
+        public void ApplyToEntity(ref FirstEvaluation firstEvaluation, FirstEvaluationDto firstEvaluationDto, Carton carton)
+        {
+            firstEvaluation.Id = firstEvaluationDto.Id;
+            firstEvaluation.Carton = carton;
+            firstEvaluation.GuardiansName = firstEvaluationDto.GuardiansName;
+            firstEvaluation.OtherChildrenName = firstEvaluationDto.OtherChildrenName;
+            firstEvaluation.OtherMembersName = firstEvaluationDto.OtherMembersName;
+            firstEvaluation.LivingSpace = firstEvaluationDto.LivingSpace;
+            firstEvaluation.SchoolAndGrade = firstEvaluationDto.SchoolAndGrade;
+            firstEvaluation.Languages = firstEvaluationDto.Languages;
+            firstEvaluation.HealthCard = firstEvaluationDto.HealthCard;
+            firstEvaluation.CaseLeaderName = firstEvaluationDto.CaseLeaderName;
+            firstEvaluation.SleepOnStreet = firstEvaluationDto.SleepOnStreet;
+            firstEvaluation.DumpsterDiving = firstEvaluationDto.DumpsterDiving;
+            firstEvaluation.Begging = firstEvaluationDto.Begging;
+            firstEvaluation.Prostituting = firstEvaluationDto.Prostituting;
+            firstEvaluation.SellsOnStreet = firstEvaluationDto.SellsOnStreet;
+            firstEvaluation.HelpingFamilyOnStreet = firstEvaluationDto.HelpingFamilyOnStreet;
+            firstEvaluation.ExtremelyPoor = firstEvaluationDto.ExtremelyPoor;
+            firstEvaluation.OtherSuitability = firstEvaluationDto.OtherSuitability;
+            firstEvaluation.Explanation = firstEvaluationDto.Explanation;
+            firstEvaluation.Capability = firstEvaluationDto.Capability;
+            firstEvaluation.OnTheWaitingList = firstEvaluationDto.OnTheWaitingList;
+            firstEvaluation.ServiceStart = firstEvaluationDto.ServiceStart;
+            firstEvaluation.DirectedToName = firstEvaluationDto.DirectedToName;
+            firstEvaluation.IndividualMovementAbility = firstEvaluationDto.IndividualMovementAbility;
+            firstEvaluation.VerbalComunicationAbility = firstEvaluationDto.VerbalComunicationAbility;
+            firstEvaluation.PhysicalDescription = firstEvaluationDto.PhysicalDescription;
+            firstEvaluation.DiagnosedDisease = firstEvaluationDto.DiagnosedDisease;
+            firstEvaluation.PriorityNeeds = firstEvaluationDto.PriorityNeeds;
+            firstEvaluation.Attitude = firstEvaluationDto.Attitude;
+            firstEvaluation.Expectations = firstEvaluationDto.Expectations;
+            firstEvaluation.DirectedFromName = firstEvaluationDto.DirectedFromName;
+            firstEvaluation.Other = firstEvaluationDto.Other;
+            firstEvaluation.StartedEvaluation = firstEvaluationDto.StartedEvaluation;
+            firstEvaluation.FinishedEvaluation = firstEvaluationDto.FinishedEvaluation;
+            firstEvaluation.EvaluationDoneBy = firstEvaluationDto.EvaluationDoneBy;
+            firstEvaluation.EvaluationRevisedBy = firstEvaluationDto.EvaluationRevisedBy;
+        }
+
         public FirstEvaluationDto ToDto(FirstEvaluation entity)
         {
             return new FirstEvaluationDto
             {
                 Id = entity.Id,
-                // CartonId = entity.Carton,
+                CartonId = entity.Carton.Id,
                 GuardiansName = entity.GuardiansName,
                 OtherChildrenName = entity.OtherChildrenName,
                 OtherMembersName = entity.OtherMembersName,
@@ -49,12 +89,12 @@ namespace SafeHouse.Infrastructure.Mappers
             };
         }
 
-        public FirstEvaluation ToEntity(FirstEvaluationDto dto)
+        public FirstEvaluation ToEntity(FirstEvaluationDto dto, Carton carton)
         {
             return new FirstEvaluation
             {
                 Id = dto.Id,
-                // CartonId = dto.Carton,
+                Carton = carton,
                 GuardiansName = dto.GuardiansName,
                 OtherChildrenName = dto.OtherChildrenName,
                 OtherMembersName = dto.OtherMembersName,

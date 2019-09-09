@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Colours from '../common/colours';
 import {input as CustomInput, label as CustomLabel, textarea as CustomTextarea} from '../common/Inputs/Inputs';
 
-import EvaluationStore from '../../stores/EvaluationStore';
 import * as EvaluationActions from '../../actions/EvaluationActions';
 
 const Container = styled.div`
@@ -92,15 +91,11 @@ const Hr = styled.hr`
 	width: 80%;
 `;
 class Evaluation extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	state = {
 		evaluation: {
 			id: "",
 			cartonId: "",
-			age: undefined,
+			age: 0,
 			dedicatedWorker: "",
 			familyMembers: "",
 			otherMembers: "",
@@ -125,7 +120,7 @@ class Evaluation extends Component {
 			evaluationDoneBy: "",
 			date: ""
 		},
-		newEvaluation: true
+		newEvaluation: false
 	}
 
     initState() {
@@ -161,12 +156,8 @@ class Evaluation extends Component {
 		});
 	}
 	
-
-
-
-
 	componentDidMount() {
-		if(this.props.evaluation === undefined) {
+		if(this.props.evaluation === undefined || this.props.evaluation === "") {
 			this.setState({newEvaluation: true});
 		} else {
 			this.setState({evaluation: this.props.evaluation});
@@ -190,12 +181,13 @@ class Evaluation extends Component {
 			EvaluationActions.editEvaluation(data);
 		}
 		
-        this.initState();
+		this.props.modalClosed();
 	}
 	
 	onDelete = () => {
 		EvaluationActions.deleteEvaluation(this.state.evaluation.cartonId);
 		this.initState();
+		this.props.modalClosed();
 	}
 	
 	render() {
@@ -205,7 +197,7 @@ class Evaluation extends Component {
 			options = <span>
 				<ButtonWrapper>
 					<Button onClick={this.onDelete}>Obriši</Button>
-					<Button>Odštampaj</Button>
+					{/* <Button>Odštampaj</Button> */}
 				</ButtonWrapper>
 			</span>
 		}
@@ -213,99 +205,99 @@ class Evaluation extends Component {
 			<Container>
 				<InputWrapper>
 					<CustomLabel title="Zadužen stručni radnik/saradnik u usluzi:"/>
-					<CustomInput value={this.state.dedicatedWorker} inputName="dedicatedWorker" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.dedicatedWorker} inputName="dedicatedWorker" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Imena, funkcija i kontakt drugih osoba uključenih u procenu:"/>
-					<CustomInput value={this.state.otherMembers} inputName="otherMembers" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.otherMembers} inputName="otherMembers" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
 				<Hr />
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Osnovne fizičke potrebe:"/>
-					<CustomTextarea value={this.state.basicPhysicalNeeds} inputName=".basicPhysicalNeeds" change={this.onInputChange}/>
+					<CustomTextarea value={this.state.evaluation.basicPhysicalNeeds} inputName="basicPhysicalNeeds" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Psihološke i socijalne potrebe:"/>
-					<CustomTextarea value={this.state.psyhoSocialNeeds} inputName="psyhoSocialNeeds" change={this.onInputChange}/>
+					<CustomTextarea value={this.state.evaluation.psyhoSocialNeeds} inputName="psyhoSocialNeeds" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Edukativne potrebe:"/>
-					<CustomTextarea value={this.state.educationalNeeds} inputName="educationalNeeds" change={this.onInputChange}/>
+					<CustomTextarea value={this.state.evaluation.educationalNeeds} inputName="educationalNeeds" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Druge potrebe:"/>
-					<CustomTextarea value={this.state.otherNeeds} inputName="otherNeeds" change={this.onInputChange}/>
+					<CustomTextarea value={this.state.evaluation.otherNeeds} inputName="otherNeeds" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Dominantne emocije:"/>
-					<CustomTextarea value={this.state.dominantEmotions} inputName="dominantEmotions" change={this.onInputChange}/>
+					<CustomTextarea value={this.state.evaluation.dominantEmotions} inputName="dominantEmotions" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Dominantna ponašanja:"/>
-					<CustomTextarea value={this.state.dominantBehaviors} inputName="dominantBehaviors" change={this.onInputChange}/>
+					<CustomTextarea value={this.state.evaluation.dominantBehaviors} inputName="dominantBehaviors" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 				<Hr />
 				</InputWrapperWide>
 				<InputWrapper>
 					<CustomLabel title="Snage iz neposrednog okruženja:"/>
-					<CustomInput value={this.state.surroundStrenghts} inputName="surroundStrenghts" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.surroundStrenghts} inputName="surroundStrenghts" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Snage iz porodičnih odnosa:"/>
-					<CustomInput value={this.state.familyStrenghts} inputName="familyStrenghts" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.familyStrenghts} inputName="familyStrenghts" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Snage iz ličnosti korisnika:"/>
-					<CustomInput value={this.state.personalStrenghts} inputName="personalStrenghts" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.personalStrenghts} inputName="personalStrenghts" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Druge snage:"/>
-					<CustomInput value={this.state.otherStrenghts} inputName="otherStrenghts" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.otherStrenghts} inputName="otherStrenghts" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Rizici vezani za sredinske faktore:"/>
-					<CustomInput value={this.state.surroundRisks} inputName="surroundRisks" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.surroundRisks} inputName="surroundRisks" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Rizici vezani za porodične odnose:"/>
-					<CustomInput value={this.state.familyRisks} inputName="familyRisks" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.familyRisks} inputName="familyRisks" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Rizici vezani za ponašanja korisnika:"/>
-					<CustomInput value={this.state.behaviorRisks} inputName="behaviorRisks" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.behaviorRisks} inputName="behaviorRisks" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Drugi rizici:"/>
-					<CustomInput value={this.state.otherRisks} inputName="otherRisks" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.otherRisks} inputName="otherRisks" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
 				<Hr />
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Procena sposobnosti korisnika:"/>
-					<CustomTextarea value={this.state.capabilities} inputName="capabilities" change={this.onInputChange}/>
+					<CustomTextarea value={this.state.evaluation.capabilities} inputName="capabilities" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<CustomLabel title="Kulturološke i druge posebnosti korisnika:"/>
-					<CustomTextarea value={this.state.culturalSpecifics} inputName="culturalSpecifics" change={this.onInputChange}/>
+					<CustomTextarea value={this.state.evaluation.culturalSpecifics} inputName="culturalSpecifics" change={this.onInputChange}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 				<Hr />
 				</InputWrapperWide>
 				<InputWrapper>
 					<CustomLabel title="Preporučeni stepen podrške:"/>
-					<CustomInput value={this.state.advicedLevelOfSupport} inputName="advicedLevelOfSupport" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.advicedLevelOfSupport} inputName="advicedLevelOfSupport" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Procenu uradio:"/>
-					<CustomInput value={this.state.evaluationDoneBy} inputName="evaluationDoneBy" change={this.onInputChange}/>
+					<CustomInput value={this.state.evaluation.evaluationDoneBy} inputName="evaluationDoneBy" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Datum:"/>
-					<CustomInput inputType="date" value={this.state.date} inputName="date" change={this.onInputChange}/>
+					<CustomInput inputType="date" value={this.state.evaluation.date} inputName="date" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapperWide>
 					<ButtonContainer>

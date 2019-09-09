@@ -23,7 +23,7 @@ namespace SafeHouse.Infrastructure.Data
 
         public virtual DbSet<IncludedPerson> IncludedPersons { get; set; }
 
-        public virtual DbSet<IndividualServicePlan> IndividualServicePlans { get; set; }
+        public virtual DbSet<IndividualPlan> IndividualPlans { get; set; }
 
         public virtual DbSet<LifeSkillDailyEntry> LifeSkillDailyEntries { get; set; }
 

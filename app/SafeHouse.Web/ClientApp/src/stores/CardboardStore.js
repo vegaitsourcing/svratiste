@@ -8,6 +8,7 @@ class CardboardStore extends EventEmitter {
 		this.carton = {};
 		this.cartons = [];
 		this.cartonsOverEighteen = [];
+		this.readyForInitialEvaluation = [];
 		this.totalPages = 1;
 	}
 	getCarton() {
@@ -18,6 +19,9 @@ class CardboardStore extends EventEmitter {
 	}
 	getCartonsOverEighteen() {
 		return this.cartonsOverEighteen;
+	}
+	getCartonsReadyForInitialEvaluation() {
+		return this.readyForInitialEvaluation;
 	}
 	getNumOfPages() {
 		return this.totalPages;
@@ -35,6 +39,10 @@ class CardboardStore extends EventEmitter {
 			case "FETCHED_CARTONS_OVER_EIGHTEEN":
 				this.cartonsOverEighteen = action.payload;
 				this.emit("fetched_cartons_over_eighteen");
+				break;
+			case "FETCHED_CARTONS_READY_FOR_INITIAL_EVALUATION":
+				this.readyForInitialEvaluation = action.payload;
+				this.emit("fetched_cartons_ready_for_initial_evaluation");
 				break;
 			case "FETCHED_PAGES_COUNT":
 				this.totalPages = action.payload;

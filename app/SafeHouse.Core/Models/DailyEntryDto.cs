@@ -7,7 +7,7 @@ namespace SafeHouse.Core.Models
     public class DailyEntryDto
     {
         public Guid Id { get; set; }
-        public string CartonId { get; set; }
+        public Guid CartonId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Gender { get; set; }
@@ -31,6 +31,5 @@ namespace SafeHouse.Core.Models
         public int CreativeWorkshop { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTIme { get; set; }
-
     }
 }

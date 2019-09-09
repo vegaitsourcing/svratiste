@@ -26,11 +26,11 @@ export const Constants = {
 			path: 'records',
 			icon: 'format_list_numbered'
 		},
-		{
-			name: 'Izvestaji',
-			path: 'reports',
-			icon: 'check_box'
-		},
+		// {
+		// 	name: 'Izvestaji',
+		// 	path: 'reports',
+		// 	icon: 'check_box'
+		// },
 	],
 	cartons: [
 		{

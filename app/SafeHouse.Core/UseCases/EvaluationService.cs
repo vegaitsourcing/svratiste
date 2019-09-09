@@ -25,20 +25,32 @@ namespace SafeHouse.Core.UseCases
 
         public EvaluationDto GetByCartonId(Guid id)
         {
-            var evaluation = _evaluationRepository.GetSingleBy(e => e.Id == id);
-            return _evaluationMapper.ToDto(evaluation);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            var evaluation = _evaluationRepository.GetSingleBy(e => e.Carton == carton);
+            if(evaluation != null)
+            {
+                return _evaluationMapper.ToDto(evaluation);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void Add(EvaluationDto evaluationDto)
         {
-            var evaluation = _evaluationMapper.ToEntity(evaluationDto);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == evaluationDto.CartonId);
+            var evaluation = _evaluationMapper.ToEntity(evaluationDto, carton);
             _evaluationRepository.Add(evaluation);
             _unitOfWork.Commit();
         }
 
         public void Update(EvaluationDto evaluationDto)
         {
-            var evaluation = _evaluationMapper.ToEntity(evaluationDto);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == evaluationDto.CartonId);
+            var evaluation = _evaluationMapper.ToEntity(evaluationDto, carton);
+            _evaluationMapper.ApplyToEntity(ref evaluation, evaluationDto, carton);
+
             _evaluationRepository.Update(evaluation);
             _unitOfWork.Commit();
         }

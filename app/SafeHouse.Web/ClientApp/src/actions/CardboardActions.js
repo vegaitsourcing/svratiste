@@ -40,6 +40,24 @@ export function getCartonsOverEighteen() {
 		});
 }
 
+export function getCartonsReadyForInitialEvaluation() {
+	axios.get(web_api_url + '/Carton/GetReadyForInitialEvaluation',
+		{
+			headers: { Authorization: "Bearer " + authToken.getToken() }
+		}).then((response) => {
+			dispatcher.dispatch({
+				type: "FETCHED_CARTONS_READY_FOR_INITIAL_EVALUATION",
+				payload: response.data
+			});
+		}).catch(error => {
+			if (error.response && error.response.status === 401) {
+				dispatcher.dispatch({
+					type: "UNAUTHORIZED"
+				});
+			}
+		});
+}
+
 export function getCartonsPageCount() {
 	axios.get(web_api_url + '/Carton/pageCount',
 		{
@@ -82,9 +100,6 @@ export function addCarton(carton) {
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
 			getCartons(carton.pageNumber);
-			// dispatcher.dispatch({
-			// 	type: "HIDE_ADD_BAR"
-			// });
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({

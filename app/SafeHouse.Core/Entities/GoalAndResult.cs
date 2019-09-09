@@ -10,6 +10,6 @@ namespace SafeHouse.Core.Entities
         [MaxLength(100)]
         public string Result { get; set; }
 
-        public IndividualServicePlan IndividualServicePlan { get; set; }
+        // public IndividualServicePlan IndividualServicePlan { get; set; }
     }
 }

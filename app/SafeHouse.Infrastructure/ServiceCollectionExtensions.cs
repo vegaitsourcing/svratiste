@@ -21,11 +21,12 @@ namespace SafeHouse.Infrastructure
             services.AddTransient<IEvaluationService, EvaluationService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IDailyEntryService, DailyEntryService>();
-            // services.AddTransient<IIndividualPlanService, IndividualPlanService>();
+            services.AddTransient<IIndividualPlanService, IndividualPlanService>();
             services.AddSingleton<ICartonMapper, CartonMapper>();
             services.AddSingleton<IFirstEvaluationMapper, FirstEvaluationMapper>();
             services.AddSingleton<IEvaluationMapper, EvaluationMapper>();
             services.AddSingleton<IDailyEntryMapper, DailyEntryMapper>();
+            services.AddSingleton<IIndividualPlanMapper, IndividualPlanMapper>();
             services.AddSingleton<HashingHelper>();
         }
 
@@ -36,6 +37,7 @@ namespace SafeHouse.Infrastructure
             services.AddScoped<IRepository<Carton>, Repository<Carton>>();
             services.AddScoped<IRepository<FirstEvaluation>, Repository<FirstEvaluation>>();
             services.AddScoped<IRepository<Evaluation>, Repository<Evaluation>>();
+            services.AddScoped<IRepository<IndividualPlan>, Repository<IndividualPlan>>();
             services.AddScoped<IRepository<DailyEntry>, Repository<DailyEntry>>();
             services.AddDbContext<SafeHouseDbContext>(
                 options => options.UseSqlServer(connectionString,

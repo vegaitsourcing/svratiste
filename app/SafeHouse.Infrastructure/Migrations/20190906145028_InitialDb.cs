@@ -107,25 +107,33 @@ namespace SafeHouse.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    CreationDate = table.Column<DateTime>(nullable: false),
-                    LastModificationDate = table.Column<DateTime>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: true),
+                    LastModificationDate = table.Column<DateTime>(nullable: true),
                     Version = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    CartonId = table.Column<Guid>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Stay = table.Column<bool>(nullable: false),
-                    Meal = table.Column<int>(nullable: false),
-                    Bath = table.Column<bool>(nullable: false),
-                    LiecesRemoval = table.Column<bool>(nullable: false),
-                    Clothing = table.Column<int>(nullable: false),
-                    MediationWriting = table.Column<int>(nullable: false),
-                    MediationWritingDescription = table.Column<string>(maxLength: 512, nullable: true),
-                    MediationSpeaking = table.Column<int>(nullable: false),
+                    CartonId = table.Column<Guid>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Gender = table.Column<int>(nullable: true),
+                    Stay = table.Column<bool>(nullable: true),
+                    Breakfast = table.Column<bool>(nullable: true),
+                    Lunch = table.Column<bool>(nullable: true),
+                    Bath = table.Column<bool>(nullable: true),
+                    LiecesRemoval = table.Column<bool>(nullable: true),
+                    Clothes = table.Column<int>(nullable: true),
+                    MediationWriting = table.Column<int>(nullable: true),
+                    MediationWritingDescription = table.Column<string>(nullable: true),
+                    MediationSpeaking = table.Column<int>(nullable: true),
                     MediationSpeakingDescription = table.Column<string>(nullable: true),
-                    PsychosocialSupport = table.Column<bool>(nullable: false),
-                    ParentsContact = table.Column<string>(nullable: true),
-                    MedicalInterventions = table.Column<int>(nullable: false),
-                    Arrival = table.Column<DateTime>(nullable: false),
-                    Departure = table.Column<DateTime>(nullable: false)
+                    LifeSkills = table.Column<int>(nullable: true),
+                    SchoolAcivities = table.Column<int>(nullable: true),
+                    PsihosocialSupport = table.Column<bool>(nullable: true),
+                    ParentsContact = table.Column<int>(nullable: true),
+                    MedicalInterventions = table.Column<int>(nullable: true),
+                    Arrival = table.Column<string>(nullable: true),
+                    EducationWorkshop = table.Column<int>(nullable: true),
+                    CreativeWorkshop = table.Column<int>(nullable: true),
+                    StartTime = table.Column<DateTime>(nullable: true),
+                    EndTIme = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -239,7 +247,7 @@ namespace SafeHouse.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IndividualServicePlans",
+                name: "IndividualPlans",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -247,16 +255,17 @@ namespace SafeHouse.Infrastructure.Migrations
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     Version = table.Column<byte[]>(rowVersion: true, nullable: true),
                     CartonId = table.Column<Guid>(nullable: true),
-                    Age = table.Column<string>(maxLength: 8, nullable: true),
-                    DedicatedWorker = table.Column<string>(maxLength: 32, nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    TimeLimitForNextAppointment = table.Column<DateTime>(nullable: false)
+                    GoalsAndResults = table.Column<string>(maxLength: 1024, nullable: true),
+                    ActivitiesAndDue = table.Column<string>(maxLength: 1024, nullable: true),
+                    InvolvedPersons = table.Column<string>(maxLength: 1024, nullable: true),
+                    Date = table.Column<DateTime>(nullable: true),
+                    Due = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IndividualServicePlans", x => x.Id);
+                    table.PrimaryKey("PK_IndividualPlans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IndividualServicePlans_Cartons_CartonId",
+                        name: "FK_IndividualPlans_Cartons_CartonId",
                         column: x => x.CartonId,
                         principalTable: "Cartons",
                         principalColumn: "Id",
@@ -376,15 +385,15 @@ namespace SafeHouse.Infrastructure.Migrations
                     Activity = table.Column<string>(maxLength: 512, nullable: true),
                     ResponsiblePerson = table.Column<string>(maxLength: 32, nullable: true),
                     TimeLimit = table.Column<string>(maxLength: 32, nullable: true),
-                    IndividualServicePlanId = table.Column<Guid>(nullable: true)
+                    IndividualPlanId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActivityDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActivityDetails_IndividualServicePlans_IndividualServicePlanId",
-                        column: x => x.IndividualServicePlanId,
-                        principalTable: "IndividualServicePlans",
+                        name: "FK_ActivityDetails_IndividualPlans_IndividualePlanId",
+                        column: x => x.IndividualPlanId,
+                        principalTable: "IndividualPlans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -399,15 +408,15 @@ namespace SafeHouse.Infrastructure.Migrations
                     Version = table.Column<byte[]>(rowVersion: true, nullable: true),
                     Goal = table.Column<string>(maxLength: 100, nullable: true),
                     Result = table.Column<string>(maxLength: 100, nullable: true),
-                    IndividualServicePlanId = table.Column<Guid>(nullable: true)
+                    IndividualPlanId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GoalAndResults", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GoalAndResults_IndividualServicePlans_IndividualServicePlanId",
-                        column: x => x.IndividualServicePlanId,
-                        principalTable: "IndividualServicePlans",
+                        name: "FK_GoalAndResults_IndividualPlans_IndividualPlanId",
+                        column: x => x.IndividualPlanId,
+                        principalTable: "IndividualPlans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -423,23 +432,23 @@ namespace SafeHouse.Infrastructure.Migrations
                     FirstName = table.Column<string>(maxLength: 32, nullable: true),
                     LastName = table.Column<string>(maxLength: 32, nullable: true),
                     Function = table.Column<string>(maxLength: 32, nullable: true),
-                    IndividualServicePlanId = table.Column<Guid>(nullable: true)
+                    IndividualPlanId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_IncludedPersons", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IncludedPersons_IndividualServicePlans_IndividualServicePlanId",
-                        column: x => x.IndividualServicePlanId,
-                        principalTable: "IndividualServicePlans",
+                        name: "FK_IncludedPersons_IndividuaPlans_IndividualPlanId",
+                        column: x => x.IndividualPlanId,
+                        principalTable: "IndividualPlans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActivityDetails_IndividualServicePlanId",
+                name: "IX_ActivityDetails_IndividualPlanId",
                 table: "ActivityDetails",
-                column: "IndividualServicePlanId");
+                column: "IndividualPlanId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DailyEntries_CartonId",
@@ -457,18 +466,18 @@ namespace SafeHouse.Infrastructure.Migrations
                 column: "CartonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GoalAndResults_IndividualServicePlanId",
+                name: "IX_GoalAndResults_IndividualPlanId",
                 table: "GoalAndResults",
-                column: "IndividualServicePlanId");
+                column: "IndividualPlanId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IncludedPersons_IndividualServicePlanId",
+                name: "IX_IncludedPersons_IndividualPlanId",
                 table: "IncludedPersons",
-                column: "IndividualServicePlanId");
+                column: "IndividualPlanId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IndividualServicePlans_CartonId",
-                table: "IndividualServicePlans",
+                name: "IX_IndividualPlans_CartonId",
+                table: "IndividualPlans",
                 column: "CartonId");
 
             migrationBuilder.CreateIndex(
@@ -535,7 +544,7 @@ namespace SafeHouse.Infrastructure.Migrations
                 name: "Workshops");
 
             migrationBuilder.DropTable(
-                name: "IndividualServicePlans");
+                name: "IndividualPlans");
 
             migrationBuilder.DropTable(
                 name: "LifeSkills");

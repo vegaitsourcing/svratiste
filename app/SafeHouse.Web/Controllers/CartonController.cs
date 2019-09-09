@@ -34,6 +34,13 @@ namespace SafeHouse.Web.Controllers
         }
 
         [HttpGet]
+        [Route("api/Carton/GetReadyForInitialEvaluation")]
+        public IEnumerable<CartonDto> GetReadyForInitialEvaluation()
+        {
+            return _cartonService.GetReadyForInitialEvaluation();
+        }
+
+        [HttpGet]
         [Route("api/Carton/pageCount")]
         public int GetPageCount()
         {
@@ -82,12 +89,12 @@ namespace SafeHouse.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("api/Carton")]
-        public IActionResult Remove([FromBody] CartonDto carton)
+        [Route("api/Carton/{id}")]
+        public IActionResult Remove(Guid id)
         {
             try
             {
-                _cartonService.Remove(carton);
+                _cartonService.Remove(id);
 
                 return HandleSuccessResult();
             }

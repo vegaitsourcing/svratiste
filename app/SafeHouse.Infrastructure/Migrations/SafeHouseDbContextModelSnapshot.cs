@@ -29,7 +29,7 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<Guid?>("IndividualServicePlanId");
+                    b.Property<Guid?>("IndividualPlanId");
 
                     b.Property<DateTime>("LastModificationDate");
 
@@ -45,7 +45,7 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IndividualServicePlanId");
+                    b.HasIndex("IndividualPlanId");
 
                     b.ToTable("ActivityDetails");
                 });
@@ -379,7 +379,7 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.Property<string>("Goal")
                         .HasMaxLength(100);
 
-                    b.Property<Guid?>("IndividualServicePlanId");
+                    b.Property<Guid?>("IndividualPlanId");
 
                     b.Property<DateTime>("LastModificationDate");
 
@@ -392,7 +392,7 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IndividualServicePlanId");
+                    b.HasIndex("IndividualPlanId");
 
                     b.ToTable("GoalAndResults");
                 });
@@ -410,7 +410,7 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.Property<string>("Function")
                         .HasMaxLength(32);
 
-                    b.Property<Guid?>("IndividualServicePlanId");
+                    b.Property<Guid?>("IndividualPlanId");
 
                     b.Property<DateTime>("LastModificationDate");
 
@@ -423,41 +423,29 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IndividualServicePlanId");
+                    b.HasIndex("IndividualPlanId");
 
                     b.ToTable("IncludedPersons");
                 });
 
-            modelBuilder.Entity("SafeHouse.Core.Entities.IndividualServicePlan", b =>
+            modelBuilder.Entity("SafeHouse.Core.Entities.IndividualPlan", b =>
                 {
+
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd();                    
+                    b.HasOne("SafeHouse.Core.Entities.Carton", "Carton")
+                        .WithMany()
+                        .HasForeignKey("CartonId");
+                    b.Property<string>("GoalsAndResults")
+                        .HasMaxLength(512);
 
-                    b.Property<string>("Age")
-                        .HasMaxLength(8);
+                    b.Property<string>("ActivitiesAndDue")
+                        .HasMaxLength(512);
 
-                    b.Property<Guid?>("CartonId");
-
-                    b.Property<DateTime>("CreationDate");
-
+                    b.Property<string>("InvolvedPersons")
+                        .HasMaxLength(512);
                     b.Property<DateTime>("Date");
-
-                    b.Property<string>("DedicatedWorker")
-                        .HasMaxLength(32);
-
-                    b.Property<DateTime>("LastModificationDate");
-
-                    b.Property<DateTime>("TimeLimitForNextAppointment");
-
-                    b.Property<byte[]>("Version")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartonId");
-
-                    b.ToTable("IndividualServicePlans");
+                    b.Property<DateTime>("CrDueeationDate");
                 });
 
             modelBuilder.Entity("SafeHouse.Core.Entities.LifeSkill", b =>
@@ -661,9 +649,9 @@ namespace SafeHouse.Infrastructure.Migrations
 
             modelBuilder.Entity("SafeHouse.Core.Entities.ActivityDetails", b =>
                 {
-                    b.HasOne("SafeHouse.Core.Entities.IndividualServicePlan", "IndividualServicePlan")
+                    b.HasOne("SafeHouse.Core.Entities.IndividualPlan", "IndividualPlan")
                         .WithMany()
-                        .HasForeignKey("IndividualServicePlanId");
+                        .HasForeignKey("IndividualPlanId");
                 });
 
             modelBuilder.Entity("SafeHouse.Core.Entities.DailyEntry", b =>
@@ -689,19 +677,19 @@ namespace SafeHouse.Infrastructure.Migrations
 
             modelBuilder.Entity("SafeHouse.Core.Entities.GoalAndResult", b =>
                 {
-                    b.HasOne("SafeHouse.Core.Entities.IndividualServicePlan", "IndividualServicePlan")
+                    b.HasOne("SafeHouse.Core.Entities.IndividualPlan", "IndividualPlan")
                         .WithMany()
-                        .HasForeignKey("IndividualServicePlanId");
+                        .HasForeignKey("IndividualPlanId");
                 });
 
             modelBuilder.Entity("SafeHouse.Core.Entities.IncludedPerson", b =>
                 {
-                    b.HasOne("SafeHouse.Core.Entities.IndividualServicePlan", "IndividualServicePlan")
+                    b.HasOne("SafeHouse.Core.Entities.IndividualPlan", "IndividualPlan")
                         .WithMany()
-                        .HasForeignKey("IndividualServicePlanId");
+                        .HasForeignKey("IndividualPlanId");
                 });
 
-            modelBuilder.Entity("SafeHouse.Core.Entities.IndividualServicePlan", b =>
+            modelBuilder.Entity("SafeHouse.Core.Entities.IndividualPlan", b =>
                 {
                     b.HasOne("SafeHouse.Core.Entities.Carton", "Carton")
                         .WithMany()

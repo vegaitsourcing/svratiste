@@ -188,6 +188,9 @@ class Carton extends Component {
 	constructor(props) {
 		super(props);
 		this.getCarton = this.getCarton.bind(this);
+		this.getFirstEvaluation = this.getFirstEvaluation.bind(this);
+		this.getEvaluation = this.getEvaluation.bind(this);
+		this.getIndividualPlan = this.getIndividualPlan.bind(this);
 	}
 
 	state = {
@@ -217,20 +220,7 @@ class Carton extends Component {
 		show: false,
 		newCarton: true,
 		componentNumber: '',
-		dailyRecords: [
-			{
-				id: '1',
-				date: '19.1.2019',
-				startTime: '07:00',
-				endTime: '14:00'
-			},
-			{
-				id: '2',
-				date: '20.1.2019',
-				startTime: '10:00',
-				endTime: '10:50'
-			}
-		]
+		dailyRecords: undefined
 	}
 
     initState() {
@@ -260,26 +250,26 @@ class Carton extends Component {
 	
 	componentWillMount() {
 		CardboardStore.on("fetched_carton", this.getCarton);
-		// FirstEvaluationStore.on("fetched_first_evaluation", this.getFirstEvaluation);
-		// EvaluationStore.on("fetched_evaluation", this.getEvaluation);
-		// IndividualPlanStore.on("fetched_individual_plan", this.getIndividualPlan);
+		FirstEvaluationStore.on("fetched_first_evaluation", this.getFirstEvaluation);
+		EvaluationStore.on("fetched_evaluation", this.getEvaluation);
+		IndividualPlanStore.on("fetched_individual_plan", this.getIndividualPlan);
 	}
 
 	componentDidMount() {
 		if(this.props.id) {
 			CardboardActions.getCartonById(this.props.id);
-			// FirstEvaluationActions.getFirstEvaluationByCartonId(this.props.id);
-			// EvaluationActions.getEvaluationByCartonId(this.props.id);
-			// IndividualPlanActions.getIndividualPlanByCartonId(this.props.id);
+			FirstEvaluationActions.getFirstEvaluationByCartonId(this.props.id);
+			EvaluationActions.getEvaluationByCartonId(this.props.id);
+			IndividualPlanActions.getIndividualPlanByCartonId(this.props.id);
 			this.setState({newCarton: false});
 		}
 	}
 
 	componentWillUnmount() {
 		CardboardStore.removeListener("fetched_carton", this.getCarton);
-		// FirstEvaluationStore.removeListener("fetched_first_evaluation", this.getFirstEvaluation);
-		// EvaluationStore.removeListener("fetched_evaluation", this.getEvaluation);
-		// IndividualPlanStore.removeListener("fetched_individual_plan", this.getIndividualPlan);
+		FirstEvaluationStore.removeListener("fetched_first_evaluation", this.getFirstEvaluation);
+		EvaluationStore.removeListener("fetched_evaluation", this.getEvaluation);
+		IndividualPlanStore.removeListener("fetched_individual_plan", this.getIndividualPlan);
 	}
 
 	showModal = (componentNumber) => {
@@ -347,14 +337,13 @@ class Carton extends Component {
 	}
 	
 	showDailyRecord = (id) => {
-		console.log(id);
 		this.props.history.push('/records/' + id);
 	}
 
 	render() {
-		let firstEvaluationTitle = this.state.firstEvaluation !== undefined ? "Prva procena" : "Kreiraj prvu procenu";
-		let evaluationTitle = this.state.evaluation !== undefined ? "Procena" : "Kreiraj Procenu";
-		let individualPlanTitle = this.state.individualPlan !== undefined ? "Individualni plan" : "Kreiraj individualni Plan";
+		let firstEvaluationTitle = this.state.firstEvaluation === undefined || this.state.firstEvaluation === "" ? "Kreiraj prvu procenu" : "Prva procena";
+		let evaluationTitle = this.state.evaluation === undefined || this.state.evaluation === "" ? "Kreiraj Procenu" : "Procena";
+		let individualPlanTitle = this.state.individualPlan === undefined || this.state.individualPlan === "" ? "Kreiraj individualni Plan" : "Individualni plan";
 		let options;
 		let dailyRecords;
 		if(!this.state.newCarton) {
@@ -365,9 +354,9 @@ class Carton extends Component {
 					<DarkButton onClick={() => this.showModal(2)}>{evaluationTitle}</DarkButton>
 					<DarkButton onClick={() => this.showModal(3)}>{individualPlanTitle}</DarkButton>
 				</ButtonWrapper>
-				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={firstEvaluationTitle}><FirstEvaluation firstEvaluation={this.state.firstEvaluation} cartonId={this.props.id} /></Modal>}
-				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={evaluationTitle}><Evaluation evaluation={this.state.evaluation} cartonId={this.props.id} /></Modal>}
-				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={individualPlanTitle}><IndividualPlan individualPlan={this.state.individualPlan} cartonId={this.props.id} /></Modal>}
+				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={firstEvaluationTitle}><FirstEvaluation modalClosed={() => this.hideModal()} firstEvaluation={this.state.firstEvaluation} cartonId={this.props.id} /></Modal>}
+				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={evaluationTitle}><Evaluation modalClosed={() => this.hideModal()} evaluation={this.state.evaluation} cartonId={this.props.id} /></Modal>}
+				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={individualPlanTitle}><IndividualPlan modalClosed={() => this.hideModal()} individualPlan={this.state.individualPlan} cartonId={this.props.id} /></Modal>}
 			</span>;
 			if(this.state.dailyRecords !== undefined) {
 				dailyRecords = <><InputWrapperWide>

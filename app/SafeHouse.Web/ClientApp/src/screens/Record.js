@@ -9,6 +9,7 @@ class Record extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			id: this.props.match.params.id
 		};
 	}
 
@@ -28,7 +29,7 @@ class Record extends Component {
 	render() {
 		return (
 			<Layout name="Dnevni unos">
-				<DailyRecord />
+				<DailyRecord cartonId={ this.state.id } />
 			</Layout>
 		);
 	}

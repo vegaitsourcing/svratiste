@@ -142,20 +142,46 @@ namespace SafeHouse.Core.UseCases
 
         public DailyEntryDto GetByCartonId(Guid id)
         {
-            var dailyEntry = _dailyEntryRepository.GetAll().FirstOrDefault(c => c.Id == id);
-            return _dailyEntryMapper.ToDto(dailyEntry);
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
+            var dailyEntry = _dailyEntryRepository.GetSingleBy(c => c.Carton == carton);
+            if(dailyEntry != null)
+            {
+                return _dailyEntryMapper.ToDto(dailyEntry);
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public DailyEntryDto GetByCartonIdForToday(Guid id)
+        {
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
+            var dailyEntry = _dailyEntryRepository.GetSingleBy(c => c.Carton == carton);
+            if (dailyEntry != null)
+            {
+                return _dailyEntryMapper.ToDto(dailyEntry);
+
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void Add(DailyEntryDto evaluationDto)
         {
-            var dailyEntry = _dailyEntryMapper.ToEntity(evaluationDto);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == evaluationDto.CartonId);
+            var dailyEntry = _dailyEntryMapper.ToEntity(evaluationDto, carton);
             _dailyEntryRepository.Add(dailyEntry);
             _unitOfWork.Commit();
         }
 
         public void Update(DailyEntryDto evaluationDto)
         {
-            var dailyEntry = _dailyEntryMapper.ToEntity(evaluationDto);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == evaluationDto.CartonId);
+            var dailyEntry = _dailyEntryMapper.ToEntity(evaluationDto, carton);
             _dailyEntryRepository.Update(dailyEntry);
             _unitOfWork.Commit();
         }

@@ -74,7 +74,8 @@ class Records extends Component {
 	
 	render() {
 		return (
-			<Layout name="Lista korisnika usluga" showSearch>
+			<Layout name="Lista korisnika usluga">
+			{/* <Layout name="Lista korisnika usluga" showSearch> */}
 				<Cartons cartons={this.state.cartons} title="Lista svih korisnika" icon="assignment" path="/records/" />
 			</Layout>
 		);

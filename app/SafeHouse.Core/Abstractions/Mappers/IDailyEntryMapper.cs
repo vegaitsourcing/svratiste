@@ -5,8 +5,8 @@ namespace SafeHouse.Core.Abstractions.Mappers
 {
     public interface IDailyEntryMapper
     {
-        // DailyEntry ToEntity(DailyEntryDto dto, Carton carton);
         DailyEntryDto ToDto(DailyEntry entity);
-        DailyEntry ToEntity(DailyEntryDto dto);
+
+        DailyEntry ToEntity(DailyEntryDto dto, Carton carton);
     }
 }

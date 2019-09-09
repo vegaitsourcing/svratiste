@@ -25,20 +25,32 @@ namespace SafeHouse.Core.UseCases
 
         public FirstEvaluationDto GetByCartonId(Guid id)
         {
-            var firstEvaluation = _firstEvaluationRepository.GetAll().FirstOrDefault(c => c.Id == id);
-            return _firstEvaluationMapper.ToDto(firstEvaluation);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            var firstEvaluation = _firstEvaluationRepository.GetSingleBy(e => e.Carton == carton);
+            if (firstEvaluation != null)
+            {
+                return _firstEvaluationMapper.ToDto(firstEvaluation);
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public void Add(FirstEvaluationDto evaluationDto)
+        public void Add(FirstEvaluationDto firstEvaluationDto)
         {
-            var firstEvaluation = _firstEvaluationMapper.ToEntity(evaluationDto);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == firstEvaluationDto.CartonId);
+            var firstEvaluation = _firstEvaluationMapper.ToEntity(firstEvaluationDto, carton);
             _firstEvaluationRepository.Add(firstEvaluation);
             _unitOfWork.Commit();
         }
 
-        public void Update(FirstEvaluationDto evaluationDto)
+        public void Update(FirstEvaluationDto firstEvaluationDto)
         {
-            var firstEvaluation = _firstEvaluationMapper.ToEntity(evaluationDto);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == firstEvaluationDto.CartonId);
+            var firstEvaluation = _firstEvaluationMapper.ToEntity(firstEvaluationDto, carton);
+            _firstEvaluationMapper.ApplyToEntity(ref firstEvaluation, firstEvaluationDto, carton);
+
             _firstEvaluationRepository.Update(firstEvaluation);
             _unitOfWork.Commit();
         }

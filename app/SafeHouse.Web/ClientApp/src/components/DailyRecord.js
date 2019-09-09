@@ -8,6 +8,8 @@ import {input as CustomInput, label as CustomLabel} from './common/Inputs/Inputs
 
 import * as DailyEntryActions from '../actions/DailyEntryActions';
 
+import  DailyEntryStore from '../stores/DailyEntryStore';
+
 const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -130,32 +132,39 @@ const Div = styled.div`
 	flex-wrap: wrap;
 `;
 class DailyRecord extends Component {
+	constructor(props) {
+		super(props);
+		this.getDailyEntry = this.getDailyEntry.bind(this);
+	}
+
 	state = {
-		id: '',
-		cartonId: '',
-		firstName: '',
-		lastName: '',
-		gender: '',
-		stay: false,
-		breakfast: false,
-		lunch: false,
-		bath: false,
-		liecesRemoval: false,
-		clothes: 0,
-		mediationWriting: 0,
-		mediationWritingDescription: '',
-		mediationSpeaking: 0,
-		mediationSpeakingDescription: '',
-		lifeSkills: 0,
-		schoolAcivities: 0,
-		psihosocialSupport: false,
-		parentsContact: 0,
-		medicalInterventions: 0,
-		arrival: '',
-		educationWorkshop: 0,
-		creativeWorkshop: 0,
-		startTime: '',
-		endTIme: '',
+		dailyEntry: {
+			id: '',
+			cartonId: '',
+			firstName: '',
+			lastName: '',
+			gender: 0,
+			stay: false,
+			breakfast: false,
+			lunch: false,
+			bath: false,
+			liecesRemoval: false,
+			clothes: 0,
+			mediationWriting: 0,
+			mediationWritingDescription: '',
+			mediationSpeaking: 0,
+			mediationSpeakingDescription: '',
+			lifeSkills: 0,
+			schoolAcivities: 0,
+			psihosocialSupport: false,
+			parentsContact: 0,
+			medicalInterventions: 0,
+			arrival: '',
+			educationWorkshop: 0,
+			creativeWorkshop: 0,
+			startTime: '',
+			endTIme: ''
+		},
 		// enumerations
 		mediationWritingsEnum: [
 			{ value: 1, label: 'Centar za socijalni rad' },
@@ -225,40 +234,46 @@ class DailyRecord extends Component {
 
     initState() {
         this.setState({
-			id: '',
-			cartonId: '',
-			firstName: '',
-			lastName: '',
-			gender: '',
-			stay: false,
-			breakfast: false,
-			lunch: false,
-			bath: false,
-			liecesRemoval: false,
-			clothes: 0,
-			mediationWriting: 0,
-			mediationWritingDescription: '',
-			mediationSpeaking: 0,
-			mediationSpeakingDescription: '',
-			lifeSkills: 0,
-			schoolAcivities: 0,
-			psihosocialSupport: false,
-			parentsContact: 0,
-			medicalInterventions: 0,
-			arrival: '',
-			educationWorkshop: 0,
-			creativeWorkshop: 0,
-			startTime: '',
-			endTIme: '',
+			dailyEntry: {
+				id: '',
+				cartonId: '',
+				firstName: '',
+				lastName: '',
+				gender: '',
+				stay: false,
+				breakfast: false,
+				lunch: false,
+				bath: false,
+				liecesRemoval: false,
+				clothes: 0,
+				mediationWriting: 0,
+				mediationWritingDescription: '',
+				mediationSpeaking: 0,
+				mediationSpeakingDescription: '',
+				lifeSkills: 0,
+				schoolAcivities: 0,
+				psihosocialSupport: false,
+				parentsContact: 0,
+				medicalInterventions: 0,
+				arrival: '',
+				educationWorkshop: 0,
+				creativeWorkshop: 0,
+				startTime: '',
+				endTIme: ''
+			},
 		});
+	}
+	
+	componentWillMount() {
+		DailyEntryStore.on("fetched_daily_entry", this.getDailyEntry);
 	}
 
 	componentDidMount() {
-		if(this.props.dailyEntry === undefined) {
-			this.setState({newDailyEntry: true});
-		} else {
-			this.setState({dailyEntry: this.props.dailyEntry});
-		}
+		DailyEntryActions.getDailyEntryByCartonId(this.props.cartonId);
+	}
+
+	componentWillUnmount() {
+		DailyEntryStore.removeListener("fetched_daily_record", this.getDailyEntry);
 	}
 
 	onInputChange = (event) => {
@@ -286,9 +301,14 @@ class DailyRecord extends Component {
 		
         this.initState();
 	}
+
+	getDailyEntry() {
+		const dailyEntry = DailyEntryStore.getDailyEntry();
+		this.setState({dailyEntry});
+	}
 	
 	onDelete = () => {
-		DailyEntryActions.deleteDailyEntry(this.state.dailyEntry.cartonId);
+		DailyEntryActions.deleteDailyEntry(this.props.cartonId);
 		this.initState();
 	}
 	
@@ -451,11 +471,8 @@ class DailyRecord extends Component {
 						<CustomInput value={this.state.endTIme} inputName="endTIme" change={this.onInputChange} inputType={"time"}/>
 					</InputWrapper>
 				</Div>
-				<Button>Sačuvaj</Button>
+				<Button onClick={this.onSave}>Sačuvaj</Button>
 				<Button onClick={this.onDelete}>Obriši</Button>
-				<ButtonWrapper>
-					<DarkButton onClick={() => this.showModal(1)}>Otkazi   </DarkButton>
-				</ButtonWrapper>
 			</Container>
 		);
 	}

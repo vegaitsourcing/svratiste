@@ -10,13 +10,15 @@ namespace SafeHouse.Core.Abstractions
 
         IEnumerable<CartonDto> GetOverEighteen();
 
+        IEnumerable<CartonDto> GetReadyForInitialEvaluation();
+
         CartonDto Get(Guid id);
 
         void Add(CartonDto carton);
 
         void Update(CartonDto cartonNewValues);
 
-        void Remove(CartonDto cartonNewValues);
+        void Remove(Guid id);
 
         int GetPagesCount();
     }

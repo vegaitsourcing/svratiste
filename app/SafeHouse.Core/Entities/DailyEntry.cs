@@ -6,7 +6,7 @@ namespace SafeHouse.Core.Entities
 {
     public class DailyEntry : BaseEntity
     {
-        public string CartonId { get; set; }
+        public Carton Carton { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Gender { get; set; }

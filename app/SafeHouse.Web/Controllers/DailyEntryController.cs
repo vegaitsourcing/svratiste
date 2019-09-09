@@ -27,6 +27,13 @@ namespace SafeHouse.Web.Controllers
             return _dailyEntryService.GetByCartonId(id);
         }
 
+        [HttpGet]
+        [Route("api/DailyEntry/{id}/Today")]
+        public DailyEntryDto GetForToday(Guid id)
+        {
+            return _dailyEntryService.GetByCartonIdForToday(id);
+        }
+
         [HttpPost]
         [Route("api/DailyEntry")]
         public IActionResult Create([FromBody]DailyEntryDto dailyEntry)
