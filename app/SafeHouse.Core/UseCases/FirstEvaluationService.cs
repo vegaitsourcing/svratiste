@@ -15,12 +15,12 @@ namespace SafeHouse.Core.UseCases
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFirstEvaluationMapper _firstEvaluationMapper;
 
-        public FirstEvaluationService(IUnitOfWork unitOfWork, IRepository<FirstEvaluation> firstEvaluationRepository, IRepository<Carton> cartonRepository, IFirstEvaluationMapper firstRvaluationMapper)
+        public FirstEvaluationService(IUnitOfWork unitOfWork, IRepository<FirstEvaluation> firstEvaluationRepository, IRepository<Carton> cartonRepository, IFirstEvaluationMapper firstEvaluationMapper)
         {
             _unitOfWork = unitOfWork;
             _firstEvaluationRepository = firstEvaluationRepository;
             _cartonRepository = cartonRepository;
-            _firstEvaluationMapper = firstRvaluationMapper;
+            _firstEvaluationMapper = firstEvaluationMapper;
         }
 
         public FirstEvaluationDto GetByCartonId(Guid id)

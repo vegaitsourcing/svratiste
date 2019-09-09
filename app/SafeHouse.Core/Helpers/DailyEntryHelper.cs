@@ -4,7 +4,7 @@ namespace SafeHouse.Core.Helpers
 {
     public class DailyEntryHelper
     {
-        public int CountGivenServices(DailyEntry entry)
+/*        public int CountGivenServices(DailyEntry entry)
         {
             int sum = 0;
             if (entry.Meal > 0) { sum++; }
@@ -13,6 +13,6 @@ namespace SafeHouse.Core.Helpers
             if (entry.Clothing > 0) { sum++; }
 
             return sum;
-        }
+        }*/
     }
 }

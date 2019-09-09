@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using SafeHouse.Core.Abstractions;
@@ -111,6 +111,59 @@ namespace SafeHouse.Core.UseCases
         {
             carton.NumberOfVisits++;
             _cartonRepository.Update(carton);
+        }
+    }
+}*/
+
+using System;
+using System.Linq;
+using SafeHouse.Core.Abstractions;
+using SafeHouse.Core.Abstractions.Mappers;
+using SafeHouse.Core.Abstractions.Persistence;
+using SafeHouse.Core.Entities;
+using SafeHouse.Core.Models;
+
+namespace SafeHouse.Core.UseCases
+{
+    public class DailyEntryService : IDailyEntryService
+    {
+        private readonly IRepository<DailyEntry> _dailyEntryRepository;
+        private readonly IRepository<Carton> _cartonRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IDailyEntryMapper _dailyEntryMapper;
+
+        public DailyEntryService(IUnitOfWork unitOfWork, IRepository<DailyEntry> dailyEntryRepository, IRepository<Carton> cartonRepository, IDailyEntryMapper dailyEntryMapper)
+        {
+            _unitOfWork = unitOfWork;
+            _dailyEntryRepository = dailyEntryRepository;
+            _cartonRepository = cartonRepository;
+            _dailyEntryMapper = dailyEntryMapper;
+        }
+
+        public DailyEntryDto GetByCartonId(Guid id)
+        {
+            var dailyEntry = _dailyEntryRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            return _dailyEntryMapper.ToDto(dailyEntry);
+        }
+
+        public void Add(DailyEntryDto evaluationDto)
+        {
+            var dailyEntry = _dailyEntryMapper.ToEntity(evaluationDto);
+            _dailyEntryRepository.Add(dailyEntry);
+            _unitOfWork.Commit();
+        }
+
+        public void Update(DailyEntryDto evaluationDto)
+        {
+            var dailyEntry = _dailyEntryMapper.ToEntity(evaluationDto);
+            _dailyEntryRepository.Update(dailyEntry);
+            _unitOfWork.Commit();
+        }
+
+        public void Remove(Guid id)
+        {
+            var dailyEntry = _dailyEntryRepository.GetAll().FirstOrDefault(e => e.Id == id);
+            _dailyEntryRepository.Remove(dailyEntry);
         }
     }
 }

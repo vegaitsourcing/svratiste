@@ -365,6 +365,9 @@ class Carton extends Component {
 					<DarkButton onClick={() => this.showModal(2)}>{evaluationTitle}</DarkButton>
 					<DarkButton onClick={() => this.showModal(3)}>{individualPlanTitle}</DarkButton>
 				</ButtonWrapper>
+				{(this.state.componentNumber === 1) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={firstEvaluationTitle}><FirstEvaluation firstEvaluation={this.state.firstEvaluation} cartonId={this.props.id} /></Modal>}
+				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={evaluationTitle}><Evaluation evaluation={this.state.evaluation} cartonId={this.props.id} /></Modal>}
+				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={individualPlanTitle}><IndividualPlan individualPlan={this.state.individualPlan} cartonId={this.props.id} /></Modal>}
 			</span>;
 			if(this.state.dailyRecords !== undefined) {
 				dailyRecords = <><InputWrapperWide>

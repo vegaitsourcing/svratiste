@@ -6,6 +6,8 @@ import Colours from '../components/common/colours';
 import { FontWeight } from '../components/common/typography';
 import {input as CustomInput, label as CustomLabel} from './common/Inputs/Inputs';
 
+import * as DailyEntryActions from '../actions/DailyEntryActions';
+
 const Container = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -129,6 +131,8 @@ const Div = styled.div`
 `;
 class DailyRecord extends Component {
 	state = {
+		id: '',
+		cartonId: '',
 		firstName: '',
 		lastName: '',
 		gender: '',
@@ -137,7 +141,6 @@ class DailyRecord extends Component {
 		lunch: false,
 		bath: false,
 		liecesRemoval: false,
-		cartonId: '',
 		clothes: 0,
 		mediationWriting: 0,
 		mediationWritingDescription: '',
@@ -145,18 +148,14 @@ class DailyRecord extends Component {
 		mediationSpeakingDescription: '',
 		lifeSkills: 0,
 		schoolAcivities: 0,
-		workshops: [],
 		psihosocialSupport: false,
 		parentsContact: 0,
 		medicalInterventions: 0,
 		arrival: '',
 		educationWorkshop: 0,
 		creativeWorkshop: 0,
-		// pageNumber: props.pageNumber,
-
 		startTime: '',
 		endTIme: '',
-
 		// enumerations
 		mediationWritingsEnum: [
 			{ value: 1, label: 'Centar za socijalni rad' },
@@ -207,7 +206,6 @@ class DailyRecord extends Component {
 			{ value: 30, label: 'Aktivno traženje posla'},
 			{ value: 31, label: 'Ostalo'},
 		],
-		workshopTypesEnum: [],
 		schoolActivitiesEnum: [
 			{ value: 1, label: 'Domaći zadaci'},
 			{ value: 2, label: 'Vežbanje'},
@@ -224,34 +222,89 @@ class DailyRecord extends Component {
 			{ value: 3, label: 'Lekovi'}
 		]
 	};
-	handleCheckboxChange = (event) => {
-		const { target } = event;
-		const { name, checked } = target;
 
-		this.setState({ [name]: checked });
+    initState() {
+        this.setState({
+			id: '',
+			cartonId: '',
+			firstName: '',
+			lastName: '',
+			gender: '',
+			stay: false,
+			breakfast: false,
+			lunch: false,
+			bath: false,
+			liecesRemoval: false,
+			clothes: 0,
+			mediationWriting: 0,
+			mediationWritingDescription: '',
+			mediationSpeaking: 0,
+			mediationSpeakingDescription: '',
+			lifeSkills: 0,
+			schoolAcivities: 0,
+			psihosocialSupport: false,
+			parentsContact: 0,
+			medicalInterventions: 0,
+			arrival: '',
+			educationWorkshop: 0,
+			creativeWorkshop: 0,
+			startTime: '',
+			endTIme: '',
+		});
 	}
+
+	componentDidMount() {
+		if(this.props.dailyEntry === undefined) {
+			this.setState({newDailyEntry: true});
+		} else {
+			this.setState({dailyEntry: this.props.dailyEntry});
+		}
+	}
+
+	onInputChange = (event) => {
+		const dailyEntry = this.state.dailyEntry;
+		dailyEntry[event.target.name] = event.target.value;
+		this.setState({dailyEntry});
+	}
+
+	onCheckboxChange = (event) => {
+		const dailyEntry = this.state.dailyEntry;
+		dailyEntry[event.currentTarget.name] = !dailyEntry[event.currentTarget.name];
+		this.setState({dailyEntry});
+	}
+
+	onSave = () => {
+		const data = this.state.dailyEntry;
+
+		if (this.state.newDailyEntry) {
+			delete data.id;
+			data.cartonId = this.props.cartonId;
+			DailyEntryActions.addDailyEntry(data);
+		} else {
+			DailyEntryActions.editDailyEntry(data);
+		}
+		
+        this.initState();
+	}
+	
+	onDelete = () => {
+		DailyEntryActions.deleteDailyEntry(this.state.dailyEntry.cartonId);
+		this.initState();
+	}
+	
 	multiSelectChange(value, state) {
 		let values = value.reduce(function (prev, cur) {
 			return prev + cur.value;
 		}, 0);
 		this.setState({[state]: values})
 	}
-	onInputChange = (event) => {
-		const newState = {
-			...this.state,
-			[event.target.name] : event.target.value
-		}
-		this.setState(newState);
-	}
-	onDelete = () => {
-		//ToDo
-	}
+	
 	render() {
 		return (
 			<Container>
 				<InputWrapperWide>
 					<LabelLarge title="Obezbeđenje boravka:"/>
-					<InputHidden type="checkbox" id="stay" name="stay" checked={this.state.stay} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="stay" name="stay" checked={this.state.stay} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="stay">Boravak</LabelCheckbox>
 					<Hr />
 				</InputWrapperWide>
@@ -260,15 +313,15 @@ class DailyRecord extends Component {
 				</InputWrapperWide>
 				<Div>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="breakfast" name="breakfast" checked={this.state.breakfast} onChange={this.handleCheckboxChange}/>
+						<InputHidden type="checkbox" id="breakfast" name="breakfast" checked={this.state.breakfast} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="breakfast">Doručak</LabelCheckbox>
 					</InputWrapper>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="lunch" name="lunch" checked={this.state.lunch} onChange={this.handleCheckboxChange}/>
+						<InputHidden type="checkbox" id="lunch" name="lunch" checked={this.state.lunch} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="lunch">Ručak</LabelCheckbox>
 					</InputWrapper>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="diner" name="diner" checked={this.state.diner} onChange={this.handleCheckboxChange}/>
+						<InputHidden type="checkbox" id="diner" name="diner" checked={this.state.diner} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="diner">Večera</LabelCheckbox>
 					</InputWrapper>
 				</Div>
@@ -278,18 +331,18 @@ class DailyRecord extends Component {
 				</InputWrapperWide>
 				<Div>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="bath" name="bath" checked={this.state.bath} onChange={this.handleCheckboxChange}/>
+						<InputHidden type="checkbox" id="bath" name="bath" checked={this.state.bath} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="bath">Kupanje</LabelCheckbox>
 					</InputWrapper>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="liecesRemoval" name="liecesRemoval" checked={this.state.liecesRemoval} onChange={this.handleCheckboxChange}/>
+						<InputHidden type="checkbox" id="liecesRemoval" name="liecesRemoval" checked={this.state.liecesRemoval} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="liecesRemoval">Devaširanje</LabelCheckbox>
 					</InputWrapper>
 				</Div>
 				<InputWrapperWide>
 					<Hr />
 					<LabelLarge title="Nabavka obuće i odeće i obezbeđivanje uslova za njihovo održavanje:"/>
-					<InputHidden type="checkbox" id="clothes" name="clothes" checked={this.state.clothes} onChange={this.handleCheckboxChange}/>
+					<InputHidden type="checkbox" id="clothes" name="clothes" checked={this.state.clothes} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="clothes">Odeća i obuća</LabelCheckbox>
 				</InputWrapperWide>
 				<InputWrapperWide>
@@ -348,7 +401,7 @@ class DailyRecord extends Component {
 				</InputWrapperWide>
 				<Div>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="psihosocialSupport" name="psihosocialSupport" checked={this.state.psihosocialSupport} onChange={this.handleCheckboxChange}/>
+						<InputHidden type="checkbox" id="psihosocialSupport" name="psihosocialSupport" checked={this.state.psihosocialSupport} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="psihosocialSupport">Pružanje psihosocijalne podrške</LabelCheckbox>
 					</InputWrapper>
 				</Div>
