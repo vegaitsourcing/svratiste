@@ -6,9 +6,9 @@ using SafeHouse.Infrastructure.Data.Seed;
 
 namespace SafeHouse.DbInitializer
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false)

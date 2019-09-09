@@ -37,7 +37,7 @@ namespace SafeHouse.Web.Controllers
         [Route("api/Carton/pageCount")]
         public int GetPageCount()
         {
-            return _cartonService.GetPageNumber();
+            return _cartonService.GetPagesCount();
         }
 
         [HttpGet]
@@ -49,7 +49,7 @@ namespace SafeHouse.Web.Controllers
 
         [HttpPost]
         [Route("api/Carton")]
-        public IActionResult Create([FromBody]CartonDto carton)
+        public IActionResult Create([FromBody] CartonDto carton)
         {
             try
             {
@@ -57,16 +57,16 @@ namespace SafeHouse.Web.Controllers
 
                 return HandleSuccessResult();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.LogError("Error occured while adding new entity.", e);
+                _logger.LogError(ex, "Error occured while adding new entity.");
                 return HandleErrorResult();
             }
         }
 
         [HttpPut]
         [Route("api/Carton")]
-        public IActionResult Update([FromBody]CartonDto carton)
+        public IActionResult Update([FromBody] CartonDto carton)
         {
             try
             {
@@ -74,16 +74,16 @@ namespace SafeHouse.Web.Controllers
 
                 return HandleSuccessResult();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.LogError("Error occured while updating entity.", e);
+                _logger.LogError(ex, "Error occured while updating entity.");
                 return HandleErrorResult();
             }
         }
 
         [HttpDelete]
         [Route("api/Carton")]
-        public IActionResult Remove([FromBody]CartonDto carton)
+        public IActionResult Remove([FromBody] CartonDto carton)
         {
             try
             {
@@ -91,9 +91,9 @@ namespace SafeHouse.Web.Controllers
 
                 return HandleSuccessResult();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.LogError("Error occured while deleting entity.", e);
+                _logger.LogError(ex, "Error occured while deleting entity.");
                 return HandleErrorResult();
             }
         }

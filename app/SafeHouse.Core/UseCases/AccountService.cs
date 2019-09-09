@@ -10,8 +10,8 @@ namespace SafeHouse.Core.UseCases
 {
     public class AccountService : IAccountService
     {
-        private readonly IRepository<SafeHouseUser> _userRepository;
         private readonly HashingHelper _hashingHelper;
+        private readonly IRepository<SafeHouseUser> _userRepository;
 
         public AccountService(IRepository<SafeHouseUser> userRepository, HashingHelper hashingHelper)
         {
@@ -20,13 +20,17 @@ namespace SafeHouse.Core.UseCases
         }
 
         public Guid? GetUserIdForCredentials(CheckCredentialsRequest request)
-            => _userRepository.GetBy(shu => shu.Username == request.Username)
-                .Where(shu => CheckIfPasswordIsCorrect(shu.Password, request.Password))
+        {
+            return _userRepository.GetBy(user => user.Username == request.Username)
+                .Where(user => IsValid(request.Password, user.Password))
                 .DefaultIfEmpty(new SafeHouseUser())
                 .First()
                 .Id;
+        }
 
-        private bool CheckIfPasswordIsCorrect(string userPassword, string enteredPassword)
-            => _hashingHelper.Verify(enteredPassword, userPassword);
+        private bool IsValid(string password, string hashedPassword)
+        {
+            return _hashingHelper.Verify(password, hashedPassword);
+        }
     }
 }

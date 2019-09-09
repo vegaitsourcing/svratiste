@@ -18,6 +18,6 @@ namespace SafeHouse.Core.Abstractions
 
         void Remove(CartonDto cartonNewValues);
 
-        int GetPageNumber();
+        int GetPagesCount();
     }
 }

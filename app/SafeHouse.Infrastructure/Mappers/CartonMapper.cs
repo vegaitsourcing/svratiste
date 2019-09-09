@@ -6,6 +6,27 @@ namespace SafeHouse.Infrastructure.Mappers
 {
     public class CartonMapper : ICartonMapper
     {
+        public void ApplyToEntity(ref Carton carton, CartonDto cartonDto)
+        {
+            carton.FirstName = cartonDto.FirstName;
+            carton.LastName = cartonDto.LastName;
+            carton.Nickname = cartonDto.Nickname;
+            carton.Gender = cartonDto.Gender;
+            carton.DateOfBirth = cartonDto.DateOfBirth;
+            carton.NumberOfVisits = cartonDto.NumberOfVisits;
+            carton.AddressStreetName = cartonDto.AddressStreetName;
+            carton.AddressStreetNumber = cartonDto.AddressStreetNumber;
+            carton.FathersName = cartonDto.FathersName;
+            carton.FathersLastName = cartonDto.FathersLastName;
+            carton.MothersName = cartonDto.MothersName;
+            carton.MothersLastName = cartonDto.MothersLastName;
+            carton.NotificationsEnabled = cartonDto.NotificationsEnabled;
+            carton.InitialEvaluationDone = cartonDto.InitialEvaluationDone;
+            carton.EvaluationDone = cartonDto.EvaluationDone;
+            carton.IndividualPlanDone = cartonDto.IndividualPlanDone;
+            carton.IndividualPlanRevised = cartonDto.IndividualPlanRevised;
+        }
+
         public CartonDto ToDto(Carton entity)
         {
             return new CartonDto
@@ -28,7 +49,7 @@ namespace SafeHouse.Infrastructure.Mappers
                 EvaluationDone = entity.EvaluationDone,
                 IndividualPlanDone = entity.IndividualPlanDone,
                 IndividualPlanRevised = entity.IndividualPlanRevised
-    };
+            };
         }
 
         public Carton ToEntity(CartonDto dto)
@@ -53,7 +74,7 @@ namespace SafeHouse.Infrastructure.Mappers
                 EvaluationDone = dto.EvaluationDone,
                 IndividualPlanDone = dto.IndividualPlanDone,
                 IndividualPlanRevised = dto.IndividualPlanRevised
-    };
+            };
         }
     }
 }

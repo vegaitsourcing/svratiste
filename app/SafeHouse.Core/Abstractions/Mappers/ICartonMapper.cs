@@ -7,5 +7,6 @@ namespace SafeHouse.Core.Abstractions.Mappers
     {
         CartonDto ToDto(Carton entity);
         Carton ToEntity(CartonDto dto);
+        void ApplyToEntity(ref Carton carton, CartonDto cartonDto);
     }
 }

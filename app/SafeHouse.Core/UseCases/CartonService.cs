@@ -50,21 +50,25 @@ namespace SafeHouse.Core.UseCases
 
         public void Update(CartonDto cartonDto)
         {
-            var carton = _cartonMapper.ToEntity(cartonDto);
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == cartonDto.Id);
+            _cartonMapper.ApplyToEntity(ref carton, cartonDto);
+            
             _cartonRepository.Update(carton);
             _unitOfWork.Commit();
         }
 
         public void Remove(CartonDto cartonDto)
         {
-            var carton = _cartonMapper.ToEntity(cartonDto);
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == cartonDto.Id);
+            _cartonMapper.ApplyToEntity(ref carton, cartonDto);
+
             _cartonRepository.Remove(carton);
             _unitOfWork.Commit();
         }
 
-        public int GetPageNumber()
+        public int GetPagesCount()
         {
-           return _cartonRepository.GetAll().Count() / Constants.PageSize + 1;
+            return _cartonRepository.GetAll().Count() / Constants.PageSize + 1;
         }
     }
 }
