@@ -141,8 +141,6 @@ class DailyRecord extends Component {
 		dailyEntry: {
 			id: '',
 			cartonId: '',
-			firstName: '',
-			lastName: '',
 			gender: 0,
 			stay: false,
 			breakfast: false,
@@ -155,16 +153,16 @@ class DailyRecord extends Component {
 			mediationSpeaking: 0,
 			mediationSpeakingDescription: '',
 			lifeSkills: 0,
-			schoolAcivities: 0,
+			schoolActivities: 0,
 			psihosocialSupport: false,
 			parentsContact: 0,
 			medicalInterventions: 0,
-			arrival: '',
 			educationWorkshop: 0,
 			creativeWorkshop: 0,
 			startTime: '',
 			endTIme: ''
 		},
+		newDailyEntry: true,
 		// enumerations
 		mediationWritingsEnum: [
 			{ value: 1, label: 'Centar za socijalni rad' },
@@ -237,8 +235,6 @@ class DailyRecord extends Component {
 			dailyEntry: {
 				id: '',
 				cartonId: '',
-				firstName: '',
-				lastName: '',
 				gender: '',
 				stay: false,
 				breakfast: false,
@@ -251,11 +247,10 @@ class DailyRecord extends Component {
 				mediationSpeaking: 0,
 				mediationSpeakingDescription: '',
 				lifeSkills: 0,
-				schoolAcivities: 0,
+				schoolActivities: 0,
 				psihosocialSupport: false,
 				parentsContact: 0,
 				medicalInterventions: 0,
-				arrival: '',
 				educationWorkshop: 0,
 				creativeWorkshop: 0,
 				startTime: '',
@@ -293,6 +288,8 @@ class DailyRecord extends Component {
 
 		if (this.state.newDailyEntry) {
 			delete data.id;
+			delete data.startTime;
+			delete data.endTIme;
 			data.cartonId = this.props.cartonId;
 			DailyEntryActions.addDailyEntry(data);
 		} else {
@@ -304,7 +301,10 @@ class DailyRecord extends Component {
 
 	getDailyEntry() {
 		const dailyEntry = DailyEntryStore.getDailyEntry();
-		this.setState({dailyEntry});
+		if(dailyEntry){
+			this.setState({dailyEntry});
+			this.setState({newDailyEntry: false});
+		}
 	}
 	
 	onDelete = () => {
@@ -313,10 +313,15 @@ class DailyRecord extends Component {
 	}
 	
 	multiSelectChange(value, state) {
-		let values = value.reduce(function (prev, cur) {
-			return prev + cur.value;
-		}, 0);
-		this.setState({[state]: values})
+		console.log('value', value);
+		console.log('state', state);
+		const dailyEntry = this.state.dailyEntry;
+		dailyEntry[state] = value.value;
+		// let values = value.reduce(function (prev, cur) {
+		// 	return prev + cur.value;
+		// }, 0);
+		console.log('dailyEntry: ', dailyEntry);
+		this.setState({dailyEntry})
 	}
 	
 	render() {
@@ -324,7 +329,7 @@ class DailyRecord extends Component {
 			<Container>
 				<InputWrapperWide>
 					<LabelLarge title="Obezbeđenje boravka:"/>
-					<InputHidden type="checkbox" id="stay" name="stay" checked={this.state.stay} onChange={this.onCheckboxChange}/>
+					<InputHidden type="checkbox" id="stay" name="stay" checked={this.state.dailyEntry.stay} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="stay">Boravak</LabelCheckbox>
 					<Hr />
 				</InputWrapperWide>
@@ -333,15 +338,15 @@ class DailyRecord extends Component {
 				</InputWrapperWide>
 				<Div>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="breakfast" name="breakfast" checked={this.state.breakfast} onChange={this.onCheckboxChange}/>
+						<InputHidden type="checkbox" id="breakfast" name="breakfast" checked={this.state.dailyEntry.breakfast} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="breakfast">Doručak</LabelCheckbox>
 					</InputWrapper>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="lunch" name="lunch" checked={this.state.lunch} onChange={this.onCheckboxChange}/>
+						<InputHidden type="checkbox" id="lunch" name="lunch" checked={this.state.dailyEntry.lunch} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="lunch">Ručak</LabelCheckbox>
 					</InputWrapper>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="diner" name="diner" checked={this.state.diner} onChange={this.onCheckboxChange}/>
+						<InputHidden type="checkbox" id="diner" name="diner" checked={this.state.dailyEntry.diner} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="diner">Večera</LabelCheckbox>
 					</InputWrapper>
 				</Div>
@@ -351,68 +356,63 @@ class DailyRecord extends Component {
 				</InputWrapperWide>
 				<Div>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="bath" name="bath" checked={this.state.bath} onChange={this.onCheckboxChange}/>
+						<InputHidden type="checkbox" id="bath" name="bath" checked={this.state.dailyEntry.bath} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="bath">Kupanje</LabelCheckbox>
 					</InputWrapper>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="liecesRemoval" name="liecesRemoval" checked={this.state.liecesRemoval} onChange={this.onCheckboxChange}/>
+						<InputHidden type="checkbox" id="liecesRemoval" name="liecesRemoval" checked={this.state.dailyEntry.liecesRemoval} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="liecesRemoval">Devaširanje</LabelCheckbox>
 					</InputWrapper>
 				</Div>
 				<InputWrapperWide>
 					<Hr />
 					<LabelLarge title="Nabavka obuće i odeće i obezbeđivanje uslova za njihovo održavanje:"/>
-					<InputHidden type="checkbox" id="clothes" name="clothes" checked={this.state.clothes} onChange={this.onCheckboxChange}/>
-					<LabelCheckbox htmlFor="clothes">Odeća i obuća</LabelCheckbox>
+					{/* <InputHidden type="checkbox" id="clothes" name="clothes" checked={this.state.dailyEntry.clothes} onChange={this.onCheckboxChange}/>
+					<LabelCheckbox htmlFor="clothes">Odeća i obuća</LabelCheckbox> */}
+					<CustomLabel title="Odeća i obuća" />
+					<CustomInput value={this.state.dailyEntry.clothes} id="clothes"  inputName="clothes" change={this.onInputChange} inputType={"number"}/>
 				</InputWrapperWide>
 				<InputWrapperWide>
 					<Hr />
 					<LabelLarge title="Posredovanje u obezbeđivanju dostupnosti usluga u zajednici"/>
 				</InputWrapperWide>
 				<Div>
-					<InputWrapper>
+					<InputWrapperWide>
 						<CustomLabel title="Usmeno" />
 						<Select
 							options={this.state.mediationSpeakingsEnum}
 							onChange={(value) => this.multiSelectChange(value, "mediationSpeaking")}
-							isMulti />
-					</InputWrapper>
-					<InputWrapper>
+							/>
+					</InputWrapperWide>
+					<InputWrapperWide>
 						<CustomLabel title="Pismeno" />
 						<Select
 							options={this.state.mediationWritingsEnum}
 							onChange={(value) => this.multiSelectChange(value, "mediationWriting")}
-							isMulti />
-					</InputWrapper>
+							/>
+					</InputWrapperWide>
 				</Div>
 				<InputWrapperWide>
 					<Hr />
 					<LabelLarge title="Edukacija i podrška korisnicima u sticanju osnovnih životnih veština"/>
 				</InputWrapperWide>
 				<Div>
-					<InputWrapper>
-						<CustomLabel title="Grupno učenje životnih veština" />
-						<Select
-							options={this.state.lifeSkillsEnum}
-							onChange={(value) => this.multiSelectChange(value, "lifeSkills")}
-							isMulti />
-					</InputWrapper>
-					<InputWrapper>
+					<InputWrapperWide>
 						<CustomLabel title="Individualno učenje životnih veština" />
 						<Select
 							options={this.state.lifeSkillsEnum}
 							onChange={(value) => this.multiSelectChange(value, "lifeSkills")}
-							isMulti />
-					</InputWrapper>
+							/>
+					</InputWrapperWide>
 					<InputWrapper>
 						<CustomLabel title="Radionice" />
 						<CustomLabel title="Edukativna radionica" />
-						<CustomInput value={this.state.educationWorkshop} inputName="educationWorkshop" change={this.onInputChange} inputType={"number"}/>
+						<CustomInput value={this.state.dailyEntry.educationWorkshop} inputName="educationWorkshop" change={this.onInputChange} inputType={"number"}/>
 					</InputWrapper>
 					<InputWrapper>
 						<CustomLabel title="&nbsp;" />
 						<CustomLabel title="Kreativna radionica" />
-						<CustomInput value={this.state.creativeWorkshop} inputName="creativeWorkshop" change={this.onInputChange} inputType={"number"}/>
+						<CustomInput value={this.state.dailyEntry.creativeWorkshop} inputName="creativeWorkshop" change={this.onInputChange} inputType={"number"}/>
 					</InputWrapper>
 				</Div>
 				<InputWrapperWide>
@@ -421,7 +421,7 @@ class DailyRecord extends Component {
 				</InputWrapperWide>
 				<Div>
 					<InputWrapper>
-						<InputHidden type="checkbox" id="psihosocialSupport" name="psihosocialSupport" checked={this.state.psihosocialSupport} onChange={this.onCheckboxChange}/>
+						<InputHidden type="checkbox" id="psihosocialSupport" name="psihosocialSupport" checked={this.state.dailyEntry.psihosocialSupport} onChange={this.onCheckboxChange}/>
 						<LabelCheckbox htmlFor="psihosocialSupport">Pružanje psihosocijalne podrške</LabelCheckbox>
 					</InputWrapper>
 				</Div>
@@ -430,49 +430,49 @@ class DailyRecord extends Component {
 					<LabelLarge title="Pružanje podrške u obavljanju školski obaveza"/>
 				</InputWrapperWide>
 				<Div>
-					<InputWrapper>
+					<InputWrapperWide>
 						<Select
 							options={this.state.schoolActivitiesEnum}
 							onChange={(value) => this.multiSelectChange(value, "schoolActivities")}
-							isMulti />
-					</InputWrapper>
+							/>
+					</InputWrapperWide>
 				</Div>
 				<InputWrapperWide>
 					<Hr />
 					<LabelLarge title="Kontakti sa roditeljima"/>
 				</InputWrapperWide>
 				<Div>
-					<InputWrapper>
+					<InputWrapperWide>
 						<Select
 							options={this.state.parentsContactEnum}
 							onChange={(value) => this.multiSelectChange(value, "parentsContact")}
-							isMulti />
-					</InputWrapper>
+							/>
+					</InputWrapperWide>
 				</Div>
 				<InputWrapperWide>
 					<Hr />
 					<LabelLarge title="Pružanje medicinskih intervencija i savetovanja"/>
 				</InputWrapperWide>
 				<Div>
-					<InputWrapper>
+					<InputWrapperWide>
 						<Select
 							options={this.state.medicalInterventionsEnum}
 							onChange={(value) => this.multiSelectChange(value, "medicalInterventions")}
-							isMulti />
-					</InputWrapper>
+							/>
+					</InputWrapperWide>
 				</Div>
 				<Div>
 					<InputWrapper>
 						<CustomLabel title="Vreme dolaska" />
-						<CustomInput value={this.state.startTime} inputName="startTime" change={this.onInputChange} inputType={"time"}/>
+						<CustomInput value={this.state.dailyEntry.startTime} inputName="startTime" change={this.onInputChange} inputType={"time"}/>
 					</InputWrapper>
 					<InputWrapper>
 						<CustomLabel title="Vreme odlaska" />
-						<CustomInput value={this.state.endTIme} inputName="endTIme" change={this.onInputChange} inputType={"time"}/>
+						<CustomInput value={this.state.dailyEntry.endTIme} inputName="endTIme" change={this.onInputChange} inputType={"time"}/>
 					</InputWrapper>
 				</Div>
 				<Button onClick={this.onSave}>Sačuvaj</Button>
-				<Button onClick={this.onDelete}>Obriši</Button>
+				{/* <Button onClick={this.onDelete}>Obriši</Button> */}
 			</Container>
 		);
 	}

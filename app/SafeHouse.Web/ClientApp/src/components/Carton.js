@@ -349,7 +349,7 @@ class Carton extends Component {
 		if(!this.state.newCarton) {
 			options = <span>
 				<ButtonWrapper>
-					<Button onClick={this.onDelete}>Obriši</Button>
+					{/* <Button onClick={this.onDelete}>Obriši</Button> */}
 					<DarkButton onClick={() => this.showModal(1)}>{firstEvaluationTitle}</DarkButton>
 					<DarkButton onClick={() => this.showModal(2)}>{evaluationTitle}</DarkButton>
 					<DarkButton onClick={() => this.showModal(3)}>{individualPlanTitle}</DarkButton>

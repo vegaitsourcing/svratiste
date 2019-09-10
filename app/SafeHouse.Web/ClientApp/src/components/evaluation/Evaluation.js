@@ -196,7 +196,7 @@ class Evaluation extends Component {
 		if(!this.state.newCarton) {
 			options = <span>
 				<ButtonWrapper>
-					<Button onClick={this.onDelete}>Obriši</Button>
+					{/* <Button onClick={this.onDelete}>Obriši</Button> */}
 					{/* <Button>Odštampaj</Button> */}
 				</ButtonWrapper>
 			</span>

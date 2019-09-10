@@ -7,8 +7,6 @@ namespace SafeHouse.Core.Entities
     public class DailyEntry : BaseEntity
     {
         public Carton Carton { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public int Gender { get; set; }
         public bool Stay { get; set; }
         public bool Breakfast { get; set; }
@@ -25,7 +23,7 @@ namespace SafeHouse.Core.Entities
         public bool PsihosocialSupport { get; set; }
         public int ParentsContact { get; set; }
         public int MedicalInterventions { get; set; }
-        public string Arrival { get; set; }
+        public DateTime Arrival { get; set; }
         public int EducationWorkshop { get; set; }
         public int CreativeWorkshop { get; set; }
         public DateTime StartTime { get; set; }

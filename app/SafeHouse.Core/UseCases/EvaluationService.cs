@@ -48,7 +48,7 @@ namespace SafeHouse.Core.UseCases
         public void Update(EvaluationDto evaluationDto)
         {
             var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == evaluationDto.CartonId);
-            var evaluation = _evaluationMapper.ToEntity(evaluationDto, carton);
+            var evaluation = _evaluationRepository.GetSingleBy(e => e.Id == evaluationDto.Id);
             _evaluationMapper.ApplyToEntity(ref evaluation, evaluationDto, carton);
 
             _evaluationRepository.Update(evaluation);

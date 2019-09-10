@@ -25,21 +25,15 @@ namespace SafeHouse.Core.UseCases
 
         public FirstEvaluationDto GetByCartonId(Guid id)
         {
-            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
             var firstEvaluation = _firstEvaluationRepository.GetSingleBy(e => e.Carton == carton);
-            if (firstEvaluation != null)
-            {
-                return _firstEvaluationMapper.ToDto(firstEvaluation);
-            }
-            else
-            {
-                return null;
-            }
+            if (firstEvaluation != null) return _firstEvaluationMapper.ToDto(firstEvaluation);
+            else return null;
         }
 
         public void Add(FirstEvaluationDto firstEvaluationDto)
         {
-            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == firstEvaluationDto.CartonId);
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == firstEvaluationDto.CartonId);
             var firstEvaluation = _firstEvaluationMapper.ToEntity(firstEvaluationDto, carton);
             _firstEvaluationRepository.Add(firstEvaluation);
             _unitOfWork.Commit();
@@ -47,8 +41,8 @@ namespace SafeHouse.Core.UseCases
 
         public void Update(FirstEvaluationDto firstEvaluationDto)
         {
-            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == firstEvaluationDto.CartonId);
-            var firstEvaluation = _firstEvaluationMapper.ToEntity(firstEvaluationDto, carton);
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == firstEvaluationDto.CartonId);
+            var firstEvaluation = _firstEvaluationRepository.GetSingleBy(e => e.Id == firstEvaluationDto.Id);
             _firstEvaluationMapper.ApplyToEntity(ref firstEvaluation, firstEvaluationDto, carton);
 
             _firstEvaluationRepository.Update(firstEvaluation);
@@ -57,7 +51,7 @@ namespace SafeHouse.Core.UseCases
 
         public void Remove(Guid id)
         {
-            var firstEvaluation = _firstEvaluationRepository.GetAll().FirstOrDefault(e => e.Id == id);
+            var firstEvaluation = _firstEvaluationRepository.GetSingleBy(e => e.Id == id);
             _firstEvaluationRepository.Remove(firstEvaluation);
         }
     }

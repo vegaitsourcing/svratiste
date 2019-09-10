@@ -6,14 +6,38 @@ namespace SafeHouse.Infrastructure.Mappers
 {
     public class DailyEntryMapper : IDailyEntryMapper
     {
+        public void ApplyToEntity(ref DailyEntry dailyEntry, DailyEntryDto dailyEntryDto, Carton carton)
+        {
+            dailyEntry.Id = dailyEntryDto.Id;
+            dailyEntry.Carton = carton;
+            dailyEntry.Gender = dailyEntryDto.Gender;
+            dailyEntry.Stay = dailyEntryDto.Stay;
+            dailyEntry.Breakfast = dailyEntryDto.Breakfast;
+            dailyEntry.Lunch = dailyEntryDto.Lunch;
+            dailyEntry.Bath = dailyEntryDto.Bath;
+            dailyEntry.LiecesRemoval = dailyEntryDto.LiecesRemoval;
+            dailyEntry.Clothes = dailyEntryDto.Clothes;
+            dailyEntry.MediationWriting = dailyEntryDto.MediationWriting;
+            dailyEntry.MediationWritingDescription = dailyEntryDto.MediationWritingDescription;
+            dailyEntry.MediationSpeaking = dailyEntryDto.MediationSpeaking;
+            dailyEntry.MediationSpeakingDescription = dailyEntryDto.MediationSpeakingDescription;
+            dailyEntry.LifeSkills = dailyEntryDto.LifeSkills;
+            dailyEntry.SchoolAcivities = dailyEntryDto.SchoolAcivities;
+            dailyEntry.PsihosocialSupport = dailyEntryDto.PsihosocialSupport;
+            dailyEntry.ParentsContact = dailyEntryDto.ParentsContact;
+            dailyEntry.MedicalInterventions = dailyEntryDto.MedicalInterventions;
+            dailyEntry.Arrival = dailyEntryDto.Arrival;
+            dailyEntry.EducationWorkshop = dailyEntryDto.EducationWorkshop;
+            dailyEntry.CreativeWorkshop = dailyEntryDto.CreativeWorkshop;
+            dailyEntry.StartTime = dailyEntryDto.StartTime;
+            dailyEntry.EndTIme = dailyEntryDto.EndTIme;
+        }
         public DailyEntryDto ToDto(DailyEntry entity)
         {
             return new DailyEntryDto
             {
                 Id = entity.Id,
                 CartonId = entity.Carton.Id,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
                 Gender = entity.Gender,
                 Stay = entity.Stay,
                 Breakfast = entity.Breakfast,
@@ -44,8 +68,6 @@ namespace SafeHouse.Infrastructure.Mappers
             {
                 Id = dto.Id,
                 Carton = carton,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
                 Gender = dto.Gender,
                 Stay = dto.Stay,
                 Breakfast = dto.Breakfast,

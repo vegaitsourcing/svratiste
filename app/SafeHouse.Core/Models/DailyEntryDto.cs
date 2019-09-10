@@ -8,8 +8,6 @@ namespace SafeHouse.Core.Models
     {
         public Guid Id { get; set; }
         public Guid CartonId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public int Gender { get; set; }
         public bool Stay { get; set; }
         public bool Breakfast { get; set; }
@@ -26,7 +24,7 @@ namespace SafeHouse.Core.Models
         public bool PsihosocialSupport { get; set; }
         public int ParentsContact { get; set; }
         public int MedicalInterventions { get; set; }
-        public string Arrival { get; set; }
+        public DateTime Arrival { get; set; }
         public int EducationWorkshop { get; set; }
         public int CreativeWorkshop { get; set; }
         public DateTime StartTime { get; set; }

@@ -151,7 +151,7 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.Property<int>("MedicalInterventions");
 
-                    b.Property<string>("ParentsContact");
+                    b.Property<int>("ParentsContact");
 
                     b.Property<bool>("PsychosocialSupport");
 

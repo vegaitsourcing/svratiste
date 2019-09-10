@@ -118,47 +118,59 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Arrival");
-
-                    b.Property<bool>("Bath");
-
-                    b.Property<Guid?>("CartonId");
-
-                    b.Property<int>("Clothing");
-
                     b.Property<DateTime>("CreationDate");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<DateTime>("Departure");
 
                     b.Property<DateTime>("LastModificationDate");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<Guid?>("CartonId");
+
+                    b.Property<int>("Gender");
+
+                    b.Property<bool>("Stay");
+
+                    b.Property<bool>("Breakfast");
+
+                    b.Property<bool>("Lunch");
+
+                    b.Property<bool>("Bath");
+
                     b.Property<bool>("LiecesRemoval");
 
-                    b.Property<int>("Meal");
-
-                    b.Property<int>("MediationSpeaking");
-
-                    b.Property<string>("MediationSpeakingDescription");
+                    b.Property<int>("Clothes");
 
                     b.Property<int>("MediationWriting");
 
                     b.Property<string>("MediationWritingDescription")
                         .HasMaxLength(512);
 
-                    b.Property<int>("MedicalInterventions");
+                    b.Property<int>("MediationSpeaking");
 
-                    b.Property<string>("ParentsContact");
+                    b.Property<string>("MediationSpeakingDescription");
+
+                    b.Property<int>("LifeSkills");
+
+                    b.Property<int>("SchoolAcivities");
 
                     b.Property<bool>("PsychosocialSupport");
 
-                    b.Property<bool>("Stay");
+                    b.Property<int>("ParentsContact");
 
-                    b.Property<byte[]>("Version")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<int>("MedicalInterventions");
 
+                    b.Property<DateTime>("Arrival");
+
+                    b.Property<int>("EducationWorkshop");
+
+                    b.Property<int>("CreativeWorkshop");
+
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<DateTime>("EndTIme");
+                    
                     b.HasKey("Id");
 
                     b.HasIndex("CartonId");

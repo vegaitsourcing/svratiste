@@ -111,8 +111,6 @@ namespace SafeHouse.Infrastructure.Migrations
                     LastModificationDate = table.Column<DateTime>(nullable: true),
                     Version = table.Column<byte[]>(rowVersion: true, nullable: true),
                     CartonId = table.Column<Guid>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
                     Gender = table.Column<int>(nullable: true),
                     Stay = table.Column<bool>(nullable: true),
                     Breakfast = table.Column<bool>(nullable: true),
@@ -129,12 +127,12 @@ namespace SafeHouse.Infrastructure.Migrations
                     PsihosocialSupport = table.Column<bool>(nullable: true),
                     ParentsContact = table.Column<int>(nullable: true),
                     MedicalInterventions = table.Column<int>(nullable: true),
-                    Arrival = table.Column<string>(nullable: true),
+                    Arrival = table.Column<DateTime>(nullable: true),
                     EducationWorkshop = table.Column<int>(nullable: true),
                     CreativeWorkshop = table.Column<int>(nullable: true),
                     StartTime = table.Column<DateTime>(nullable: true),
                     EndTIme = table.Column<DateTime>(nullable: true)
-                },
+    },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DailyEntries", x => x.Id);

@@ -144,44 +144,32 @@ namespace SafeHouse.Core.UseCases
         {
             var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
             var dailyEntry = _dailyEntryRepository.GetSingleBy(c => c.Carton == carton);
-            if(dailyEntry != null)
-            {
-                return _dailyEntryMapper.ToDto(dailyEntry);
-
-            }
-            else
-            {
-                return null;
-            }
+            if(dailyEntry != null) return _dailyEntryMapper.ToDto(dailyEntry);
+            else return null;
         }
 
         public DailyEntryDto GetByCartonIdForToday(Guid id)
         {
             var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
             var dailyEntry = _dailyEntryRepository.GetSingleBy(c => c.Carton == carton);
-            if (dailyEntry != null)
-            {
-                return _dailyEntryMapper.ToDto(dailyEntry);
-
-            }
-            else
-            {
-                return null;
-            }
+            if (dailyEntry != null) return _dailyEntryMapper.ToDto(dailyEntry);
+            else return null;
         }
 
-        public void Add(DailyEntryDto evaluationDto)
+        public void Add(DailyEntryDto dailyEntryDto)
         {
-            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == evaluationDto.CartonId);
-            var dailyEntry = _dailyEntryMapper.ToEntity(evaluationDto, carton);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == dailyEntryDto.CartonId);
+            var dailyEntry = _dailyEntryMapper.ToEntity(dailyEntryDto, carton);
             _dailyEntryRepository.Add(dailyEntry);
             _unitOfWork.Commit();
         }
 
-        public void Update(DailyEntryDto evaluationDto)
+        public void Update(DailyEntryDto dailyEntryDto)
         {
-            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == evaluationDto.CartonId);
-            var dailyEntry = _dailyEntryMapper.ToEntity(evaluationDto, carton);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == dailyEntryDto.CartonId);
+            var dailyEntry = _dailyEntryRepository.GetSingleBy(e => e.Id == dailyEntryDto.Id);
+            _dailyEntryMapper.ApplyToEntity(ref dailyEntry, dailyEntryDto, carton);
+
             _dailyEntryRepository.Update(dailyEntry);
             _unitOfWork.Commit();
         }

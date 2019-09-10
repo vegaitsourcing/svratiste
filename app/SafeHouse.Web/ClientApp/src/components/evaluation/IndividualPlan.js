@@ -298,7 +298,7 @@ class IndividualPlan extends Component {
 				</InputWrapper>
 				<InputWrapperWide>
 					<Button onClick={this.onSave}>Sačuvaj</Button>
-					<Button onClick={this.onDelete}>Obriši</Button>
+					{/* <Button onClick={this.onDelete}>Obriši</Button> */}
 					{/* <Button>Odštampaj</Button> */}
 				</InputWrapperWide>
 			</Container>

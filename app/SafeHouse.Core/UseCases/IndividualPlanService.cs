@@ -48,7 +48,7 @@ namespace SafeHouse.Core.UseCases
         public void Update(IndividualPlanDto individualPlanDto)
         {
             var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == individualPlanDto.CartonId);
-            var individualPlan = _individualPlanMapper.ToEntity(individualPlanDto, carton);
+            var individualPlan = _individualPlanRepository.GetSingleBy(e => e.Id == individualPlanDto.Id);
             _individualPlanMapper.ApplyToEntity(ref individualPlan, individualPlanDto, carton);
 
             _individualPlanRepository.Update(individualPlan);
