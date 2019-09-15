@@ -25,16 +25,10 @@ namespace SafeHouse.Core.UseCases
 
         public EvaluationDto GetByCartonId(Guid id)
         {
-            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);
-            var evaluation = _evaluationRepository.GetSingleBy(e => e.Carton == carton);
-            if(evaluation != null)
-            {
-                return _evaluationMapper.ToDto(evaluation);
-            }
-            else
-            {
-                return null;
-            }
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
+            var evaluation = _evaluationRepository.GetAll().OrderByDescending(c => c.CreationDate).FirstOrDefault(e => e.Carton == carton);
+            if(evaluation != null && carton.IsDeleted == false && evaluation.IsDeleted == false) return _evaluationMapper.ToDto(evaluation);
+            else return null;
         }
 
         public void Add(EvaluationDto evaluationDto)
@@ -48,17 +42,27 @@ namespace SafeHouse.Core.UseCases
         public void Update(EvaluationDto evaluationDto)
         {
             var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == evaluationDto.CartonId);
-            var evaluation = _evaluationRepository.GetSingleBy(e => e.Id == evaluationDto.Id);
-            _evaluationMapper.ApplyToEntity(ref evaluation, evaluationDto, carton);
+            var evaluation = _evaluationRepository.GetAll().OrderByDescending(e => e.CreationDate).FirstOrDefault(e => e.Id == evaluationDto.Id);
 
-            _evaluationRepository.Update(evaluation);
-            _unitOfWork.Commit();
+            if (evaluation != null && carton.IsDeleted == false && evaluation.IsDeleted == false)
+            {
+                _evaluationMapper.ApplyToEntity(ref evaluation, evaluationDto, carton);
+                _evaluationRepository.Update(evaluation);
+                _unitOfWork.Commit();
+            }
         }
 
         public void Remove(Guid id)
         {
-            var evaluation = _evaluationRepository.GetSingleBy(e => e.Id == id);
-            _evaluationRepository.Remove(evaluation);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            var evaluation = _evaluationRepository.GetAll().OrderByDescending(e => e.CreationDate).FirstOrDefault(e => e.Carton == carton);
+
+            if (evaluation != null && carton.IsDeleted == false && evaluation.IsDeleted == false)
+            {
+                _evaluationMapper.RemoveEntity(ref evaluation);
+                _evaluationRepository.Update(evaluation);
+                _unitOfWork.Commit();
+            }
         }
     }
 }

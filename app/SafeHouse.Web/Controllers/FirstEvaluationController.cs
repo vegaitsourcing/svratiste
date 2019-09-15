@@ -62,7 +62,7 @@ namespace SafeHouse.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("api/FirstEvaluation")]
+        [Route("api/FirstEvaluation/{id}")]
         public IActionResult Remove(Guid id)
         {
             try

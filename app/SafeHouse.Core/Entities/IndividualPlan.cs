@@ -16,5 +16,7 @@ namespace SafeHouse.Core.Entities
         public DateTime Date { get; set; }
 
         public DateTime Due { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

@@ -23,6 +23,9 @@ class FirstEvaluationStore extends EventEmitter {
         case "UNAUTHORIZED":
             this.emit("unauthorized");
             break;
+        case "RELOAD_PAGE":
+            this.emit("reload_page");
+            break;
         default:
         }
     }

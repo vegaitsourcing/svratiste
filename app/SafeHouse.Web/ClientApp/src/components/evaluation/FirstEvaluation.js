@@ -122,29 +122,37 @@ const ButtonContainer = styled.div`
 	flex-wrap: wrap;
 	margin-left: auto;
 `;
+const Hr = styled.hr`
+	border: 0;
+	border-top: 1px solid rgba(0,0,0,.1);
+	margin: 10px 0 20px;
+`;
+const LabelLarge = styled(CustomLabel)`
+	font-weight: ${FontWeight.medium};
+	margin: 30px 0 10px;
+`;
 class FirstEvaluation extends Component {
 	state = {
 		firstEvaluation: {
-			id: "",
 			cartonId: "",
 			guardiansName: "",
 			otherChildrenName: "",
 			otherMembersName: "",
-			livingSpace: undefined,
+			livingSpace: 0,
 			schoolAndGrade: "",
 			languages: "",
 			healthCard: "",
 			caseLeaderName: "",
-			sleepOnStreet: undefined,
-			dumpsterDiving: undefined,
-			begging: undefined,
-			prostituting: undefined,
-			sellsOnStreet: undefined,
-			helpingFamilyOnStreet: undefined,
-			extremelyPoor: undefined,
+			sleepOnStreet: false,
+			dumpsterDiving: false,
+			begging: false,
+			prostituting: false,
+			sellsOnStreet: false,
+			helpingFamilyOnStreet: false,
+			extremelyPoor: false,
 			otherSuitability: "",
 			explanation: "",
-			capability: undefined,
+			capability: true,
 			onTheWaitingList: false,
 			serviceStart: "",
 			directedToName: "",
@@ -168,26 +176,25 @@ class FirstEvaluation extends Component {
     initState() {
         this.setState({
 			firstEvaluation: {
-				id: "",
 				cartonId: "",
 				guardiansName: "",
 				otherChildrenName: "",
 				otherMembersName: "",
-				livingSpace: undefined,
+				livingSpace: 0,
 				schoolAndGrade: "",
 				languages: "",
 				healthCard: "",
 				caseLeaderName: "",
-				sleepOnStreet: undefined,
-				dumpsterDiving: undefined,
-				begging: undefined,
-				prostituting: undefined,
-				sellsOnStreet: undefined,
-				helpingFamilyOnStreet: undefined,
-				extremelyPoor: undefined,
+				sleepOnStreet: false,
+				dumpsterDiving: false,
+				begging: false,
+				prostituting: false,
+				sellsOnStreet: false,
+				helpingFamilyOnStreet: false,
+				extremelyPoor: false,
 				otherSuitability: "",
 				explanation: "",
-				capability: undefined,
+				capability: true,
 				onTheWaitingList: false,
 				serviceStart: "",
 				directedToName: "",
@@ -232,7 +239,6 @@ class FirstEvaluation extends Component {
 		const data = this.state.firstEvaluation;
 
 		if (this.state.newFirstEvaluation) {
-			delete data.id;
 			data.cartonId = this.props.cartonId;
 			FirstEvaluationActions.addFirstEvaluation(data);
 		} else {
@@ -243,7 +249,7 @@ class FirstEvaluation extends Component {
 	}
 	
 	onDelete = () => {
-		FirstEvaluationActions.deleteFirstEvaluation(this.state.firstEvaluation.cartonId);
+		FirstEvaluationActions.deleteFirstEvaluation(this.props.cartonId);
 		this.initState();
 		this.props.modalClosed();
 	}
@@ -251,11 +257,10 @@ class FirstEvaluation extends Component {
 	render() {
 		let options;
 
-		if(!this.state.newCarton) {
+		if(!this.state.newFirstEvaluation) {
 			options = <span>
 				<ButtonWrapper>
-					{/* <Button onClick={this.onDelete}>Obriši</Button> */}
-					{/* <Button>Odštampaj</Button> */}
+					<Button onClick={this.onDelete}>Obriši</Button>
 				</ButtonWrapper>
 			</span>
 		}
@@ -275,7 +280,7 @@ class FirstEvaluation extends Component {
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Živi u:"/>
-					<CustomSelect options={Constants.livingSpace} title="Izaberi..." value={this.state.firstEvaluation.livingSpace} inputName="livingSpace" change={this.onInputChange}/>
+					<CustomSelect options={Constants.livingSpace} value={this.state.firstEvaluation.livingSpace} inputName="livingSpace" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Škola i razred:"/>
@@ -293,6 +298,10 @@ class FirstEvaluation extends Component {
 					<CustomLabel title="Voditelj slučaja:"/>
 					<CustomInput value={this.state.firstEvaluation.caseLeaderName} inputName="caseLeaderName" change={this.onInputChange}/>
 				</InputWrapper>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Procena podobnosti korisnika:"/>
+				</InputWrapperWide>
 				<InputWrapper>
 					<InputHidden type="checkbox" id="sleepOnStreet" name="sleepOnStreet" checked={this.state.firstEvaluation.sleepOnStreet} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="sleepOnStreet">Spava na ulici</LabelCheckbox>
@@ -330,6 +339,10 @@ class FirstEvaluation extends Component {
 					<CustomLabel title="Obrazloženje nepodobnosti korisnika:"/>
 					<CustomInput value={this.state.firstEvaluation.explanation} inputName="explanation" change={this.onInputChange}/>
 				</InputWrapper>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Procena kapaciteta pružaoca usluge:"/>
+				</InputWrapperWide>
 				<InputWrapper>
 					<InputHidden type="checkbox" id="capability" name="capability" checked={this.state.firstEvaluation.capability} onChange={this.onCheckboxChange}/>
 					<LabelCheckbox htmlFor="capability">Postoje kapaciteti usluge da zadovolji potrebe korisnika</LabelCheckbox>
@@ -346,6 +359,10 @@ class FirstEvaluation extends Component {
 					<CustomLabel title="Kome je upućen:"/>
 					<CustomInput value={this.state.firstEvaluation.directedToName} inputName="directedToName" change={this.onInputChange}/>
 				</InputWrapper>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Procena sposobnosti i prioritetnih potreba korisnika:"/>
+				</InputWrapperWide>
 				<InputWrapper>
 					<CustomLabel title="Sposobnost samostalnog kretanja:"/>
 					<CustomInput value={this.state.firstEvaluation.individualMovementAbility} inputName="individualMovementAbility" change={this.onInputChange}/>
@@ -359,13 +376,17 @@ class FirstEvaluation extends Component {
 					<CustomInput value={this.state.firstEvaluation.physicalDescription} inputName="physicalDescription" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
-					<CustomLabel title="Dijagnostikofana bolest, alergija:"/>
+					<CustomLabel title="Dijagnostikovana bolest, alergija:"/>
 					<CustomInput value={this.state.firstEvaluation.diagnosedDisease} inputName="diagnosedDisease" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Prioritetne potrebe korisnika:"/>
 					<CustomInput value={this.state.firstEvaluation.priorityNeeds} inputName="priorityNeeds" change={this.onInputChange}/>
 				</InputWrapper>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Procena stava korisnika i drugih značajnih osobina:"/>
+				</InputWrapperWide>
 				<InputWrapper>
 					<CustomLabel title="Stav:"/>
 					<CustomInput value={this.state.firstEvaluation.attitude} inputName="attitude" change={this.onInputChange}/>
@@ -378,6 +399,10 @@ class FirstEvaluation extends Component {
 					<CustomLabel title="Upućen od strane:"/>
 					<CustomInput value={this.state.firstEvaluation.directedFromName} inputName="directedFromName" change={this.onInputChange}/>
 				</InputWrapper>
+				<InputWrapperWide>
+					<Hr />
+					<LabelLarge title="Ostalo:"/>
+				</InputWrapperWide>
 				<InputWrapper>
 					<CustomLabel title="Ostalo:"/>
 					<CustomInput value={this.state.firstEvaluation.other} inputName="other" change={this.onInputChange}/>

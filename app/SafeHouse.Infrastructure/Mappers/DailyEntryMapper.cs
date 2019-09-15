@@ -6,6 +6,11 @@ namespace SafeHouse.Infrastructure.Mappers
 {
     public class DailyEntryMapper : IDailyEntryMapper
     {
+/*        public void RemoveEntity(ref DailyEntry dailyEntry)
+        {
+            dailyEntry.IsDeleted = true;
+        }*/
+
         public void ApplyToEntity(ref DailyEntry dailyEntry, DailyEntryDto dailyEntryDto, Carton carton)
         {
             dailyEntry.Id = dailyEntryDto.Id;

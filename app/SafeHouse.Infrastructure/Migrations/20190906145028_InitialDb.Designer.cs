@@ -79,13 +79,13 @@ namespace SafeHouse.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(32);
 
-                    b.Property<int>("Gender");
+                    b.Property<int>("GenderOptions");
 
                     b.Property<bool>("IndividualPlanDone");
 
-                    b.Property<bool>("IndividualPlanRevised");
-
                     b.Property<bool>("InitialEvaluationDone");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime>("LastModificationDate");
 
@@ -101,10 +101,6 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.Property<string>("Nickname")
                         .HasMaxLength(32);
-
-                    b.Property<bool>("NotificationsEnabled");
-
-                    b.Property<int>("NumberOfVisits");
 
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
@@ -176,8 +172,6 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.Property<string>("AdvicedLevelOfSupport")
                         .HasMaxLength(256);
 
-                    b.Property<int>("Age");
-
                     b.Property<string>("BasicPhysicalNeeds")
                         .HasMaxLength(512);
 
@@ -219,6 +213,8 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.Property<string>("FamilyStrenghts")
                         .HasMaxLength(256);
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime>("LastModificationDate");
 
@@ -316,6 +312,8 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.Property<string>("IndividualMovementAbility")
                         .HasMaxLength(512);
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Languages")
                         .HasMaxLength(512);
@@ -430,22 +428,27 @@ namespace SafeHouse.Infrastructure.Migrations
                     b.ToTable("IncludedPersons");
                 });
 
-            modelBuilder.Entity("SafeHouse.Core.Entities.IndividualServicePlan", b =>
+            modelBuilder.Entity("SafeHouse.Core.Entities.IndividualPlan", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Age")
-                        .HasMaxLength(8);
 
                     b.Property<Guid?>("CartonId");
 
                     b.Property<DateTime>("CreationDate");
 
+                    b.Property<string>("GoalsAndResults")
+                        .HasMaxLength(512);
+
+                    b.Property<string>("ActivitiesAndDue")
+                        .HasMaxLength(512);
+
+                    b.Property<string>("InvolvedPersons")
+                        .HasMaxLength(512);
+
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("DedicatedWorker")
-                        .HasMaxLength(32);
+                    b.Property<DateTime>("Due");
 
                     b.Property<DateTime>("LastModificationDate");
 

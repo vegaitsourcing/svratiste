@@ -15,23 +15,21 @@ namespace SafeHouse.Infrastructure.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     Version = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    FirstName = table.Column<string>(maxLength: 32, nullable: false),
-                    LastName = table.Column<string>(maxLength: 32, nullable: false),
-                    Nickname = table.Column<string>(maxLength: 32, nullable: true),
-                    Gender = table.Column<int>(nullable: false),
-                    DateOfBirth = table.Column<DateTime>(nullable: false),
-                    NumberOfVisits = table.Column<int>(nullable: false),
-                    AddressStreetName = table.Column<string>(maxLength: 100, nullable: true),
-                    AddressStreetNumber = table.Column<string>(maxLength: 32, nullable: true),
+                    FirstName = table.Column<string>(maxLength: 32, nullable: true),
+                    LastName = table.Column<string>(maxLength: 32, nullable: true),
                     FathersName = table.Column<string>(maxLength: 32, nullable: true),
                     FathersLastName = table.Column<string>(maxLength: 32, nullable: true),
                     MothersName = table.Column<string>(maxLength: 32, nullable: true),
                     MothersLastName = table.Column<string>(maxLength: 32, nullable: true),
-                    NotificationsEnabled = table.Column<bool>(nullable: false),
-                    InitialEvaluationDone = table.Column<bool>(nullable: false),
-                    EvaluationDone = table.Column<bool>(nullable: false),
-                    IndividualPlanDone = table.Column<bool>(nullable: false),
-                    IndividualPlanRevised = table.Column<bool>(nullable: false)
+                    Nickname = table.Column<string>(maxLength: 32, nullable: true),
+                    GenderOptions = table.Column<int>(nullable: true),
+                    AddressStreetName = table.Column<string>(maxLength: 100, nullable: true),
+                    AddressStreetNumber = table.Column<string>(maxLength: 32, nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: true),
+                    InitialEvaluationDone = table.Column<bool>(nullable: true),
+                    EvaluationDone = table.Column<bool>(nullable: true),
+                    IndividualPlanDone = table.Column<bool>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -153,13 +151,10 @@ namespace SafeHouse.Infrastructure.Migrations
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     Version = table.Column<byte[]>(rowVersion: true, nullable: true),
                     CartonId = table.Column<Guid>(nullable: true),
-                    Age = table.Column<int>(nullable: false),
                     DedicatedWorker = table.Column<string>(maxLength: 256, nullable: true),
-                    FamilyMembers = table.Column<string>(maxLength: 32, nullable: true),
                     OtherMembers = table.Column<string>(maxLength: 256, nullable: true),
                     BasicPhysicalNeeds = table.Column<string>(maxLength: 512, nullable: true),
                     PsyhoSocialNeeds = table.Column<string>(maxLength: 512, nullable: true),
-                    SchoolStatus = table.Column<string>(maxLength: 32, nullable: true),
                     EducationalNeeds = table.Column<string>(maxLength: 512, nullable: true),
                     OtherNeeds = table.Column<string>(maxLength: 512, nullable: true),
                     DominantEmotions = table.Column<string>(maxLength: 512, nullable: true),
@@ -176,7 +171,8 @@ namespace SafeHouse.Infrastructure.Migrations
                     CulturalSpecifics = table.Column<string>(maxLength: 512, nullable: true),
                     AdvicedLevelOfSupport = table.Column<string>(maxLength: 256, nullable: true),
                     EvaluationDoneBy = table.Column<string>(maxLength: 256, nullable: true),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -201,22 +197,22 @@ namespace SafeHouse.Infrastructure.Migrations
                     GuardiansName = table.Column<string>(maxLength: 512, nullable: true),
                     OtherChildrenName = table.Column<string>(maxLength: 512, nullable: true),
                     OtherMembersName = table.Column<string>(maxLength: 512, nullable: true),
-                    LivingSpace = table.Column<int>(nullable: false),
+                    LivingSpace = table.Column<int>(nullable: true),
                     SchoolAndGrade = table.Column<string>(maxLength: 512, nullable: true),
                     Languages = table.Column<string>(maxLength: 512, nullable: true),
                     HealthCard = table.Column<string>(maxLength: 512, nullable: true),
                     CaseLeaderName = table.Column<string>(maxLength: 512, nullable: true),
-                    SleepOnStreet = table.Column<bool>(nullable: false),
-                    DumpsterDiving = table.Column<bool>(nullable: false),
-                    Begging = table.Column<bool>(nullable: false),
-                    Prostituting = table.Column<bool>(nullable: false),
-                    SellsOnStreet = table.Column<bool>(nullable: false),
-                    HelpingFamilyOnStreet = table.Column<bool>(nullable: false),
-                    ExtremelyPoor = table.Column<bool>(nullable: false),
+                    SleepOnStreet = table.Column<bool>(nullable: true),
+                    DumpsterDiving = table.Column<bool>(nullable: true),
+                    Begging = table.Column<bool>(nullable: true),
+                    Prostituting = table.Column<bool>(nullable: true),
+                    SellsOnStreet = table.Column<bool>(nullable: true),
+                    HelpingFamilyOnStreet = table.Column<bool>(nullable: true),
+                    ExtremelyPoor = table.Column<bool>(nullable: true),
                     OtherSuitability = table.Column<string>(maxLength: 512, nullable: true),
                     Explanation = table.Column<string>(maxLength: 512, nullable: true),
-                    Capability = table.Column<bool>(nullable: false),
-                    OnTheWaitingList = table.Column<bool>(nullable: false),
+                    Capability = table.Column<bool>(nullable: true),
+                    OnTheWaitingList = table.Column<bool>(nullable: true),
                     ServiceStart = table.Column<DateTime>(nullable: true),
                     DirectedToName = table.Column<string>(maxLength: 512, nullable: true),
                     IndividualMovementAbility = table.Column<string>(maxLength: 512, nullable: true),
@@ -231,7 +227,8 @@ namespace SafeHouse.Infrastructure.Migrations
                     StartedEvaluation = table.Column<DateTime>(nullable: true),
                     FinishedEvaluation = table.Column<DateTime>(nullable: true),
                     EvaluationDoneBy = table.Column<string>(maxLength: 512, nullable: true),
-                    EvaluationRevisedBy = table.Column<string>(maxLength: 512, nullable: true)
+                    EvaluationRevisedBy = table.Column<string>(maxLength: 512, nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -257,7 +254,8 @@ namespace SafeHouse.Infrastructure.Migrations
                     ActivitiesAndDue = table.Column<string>(maxLength: 1024, nullable: true),
                     InvolvedPersons = table.Column<string>(maxLength: 1024, nullable: true),
                     Date = table.Column<DateTime>(nullable: true),
-                    Due = table.Column<DateTime>(nullable: true)
+                    Due = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {

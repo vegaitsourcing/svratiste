@@ -11,18 +11,6 @@ namespace SafeHouse.Core.Models
 
         public string LastName { get; set; }
 
-        public string Nickname { get; set; }
-
-        public Gender Gender { get; set; }
-
-        public DateTime DateOfBirth { get; set; }
-
-        public int NumberOfVisits { get; set; }
-
-        public string AddressStreetName { get; set; }
-
-        public string AddressStreetNumber { get; set; }
-
         public string FathersName { get; set; }
 
         public string FathersLastName { get; set; }
@@ -31,7 +19,15 @@ namespace SafeHouse.Core.Models
 
         public string MothersLastName { get; set; }
 
-        public bool NotificationsEnabled { get; set; }
+        public string Nickname { get; set; }
+
+        public int GenderOptions { get; set; }
+
+        public string AddressStreetName { get; set; }
+
+        public string AddressStreetNumber { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
 
         public bool InitialEvaluationDone { get; set; }
 
@@ -39,8 +35,6 @@ namespace SafeHouse.Core.Models
 
         public bool IndividualPlanDone { get; set; }
 
-        public bool IndividualPlanRevised { get; set; }
-
-        public int Notifications { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

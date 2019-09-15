@@ -8,5 +8,6 @@ namespace SafeHouse.Core.Abstractions.Mappers
         FirstEvaluationDto ToDto(FirstEvaluation entity);
         FirstEvaluation ToEntity(FirstEvaluationDto dto, Carton carton);
         void ApplyToEntity(ref FirstEvaluation firstEvaluation, FirstEvaluationDto firstEvaluationDto, Carton carton);
+        void RemoveEntity(ref FirstEvaluation firstEvaluation);
     }
 }

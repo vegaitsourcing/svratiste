@@ -26,23 +26,28 @@ namespace SafeHouse.Core.UseCases
 
         public IEnumerable<CartonDto> Get(int page)
             => _cartonRepository.GetAll()
+                .Where(c => c.IsDeleted == false)
                 .Skip((page - 1) * Constants.PageSize)
                 .Take(Constants.PageSize)
                 .Select(c => _cartonMapper.ToDto(c));
 
         public IEnumerable<CartonDto> GetOverEighteen()
             => _cartonRepository.GetAll()
+                .Where(c => c.IsDeleted == false)
                 .Where(c => new DateTime((DateTime.Now - c.DateOfBirth).Ticks).Year >= LegalAge)
                 .Select(c => _cartonMapper.ToDto(c));
 
         public IEnumerable<CartonDto> GetReadyForInitialEvaluation()
             => _cartonRepository.GetAll()
-                .Where(c => c.NumberOfVisits > 10 && c.InitialEvaluationDone == false)
+                .Where(c => c.IsDeleted == false)
+                //.Where(c => c.NumberOfVisits > 10 && c.InitialEvaluationDone == false)
                 .Select(c => _cartonMapper.ToDto(c));
 
         public CartonDto Get(Guid id)
         {
-            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            var carton = _cartonRepository.GetAll()
+                .Where(c => c.IsDeleted == false)
+                .FirstOrDefault(c => c.Id == id);
             return _cartonMapper.ToDto(carton);
         }
 
@@ -65,8 +70,9 @@ namespace SafeHouse.Core.UseCases
         public void Remove(Guid id)
         {
             var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
+            _cartonMapper.RemoveEntity(ref carton);
 
-            _cartonRepository.Remove(carton);
+            _cartonRepository.Update(carton);
             _unitOfWork.Commit();
         }
 

@@ -18,5 +18,7 @@ namespace SafeHouse.Core.Models
         public DateTime Date { get; set; }
 
         public DateTime Due { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

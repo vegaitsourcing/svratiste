@@ -114,10 +114,10 @@ export function editCarton(carton) {
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
-		getCartons(carton.pageNumber);
-		dispatcher.dispatch({
-			type: "HIDE_EDIT_BAR"
-		});
+			getCartons(carton.pageNumber);
+			dispatcher.dispatch({
+				type: "RELOAD_PAGE"
+			});
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
@@ -132,7 +132,9 @@ export function deleteCarton(id) {
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then((response) => {
-			// Done
+			dispatcher.dispatch({
+				type: "RELOAD_PAGE"
+			});
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({

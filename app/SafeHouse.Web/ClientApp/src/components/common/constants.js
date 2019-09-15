@@ -1,7 +1,7 @@
 export const Constants = {
 	loginMessage: 'Unesite podatke kako biste se ulogovali',
-	loginTitle: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet',
-	loginDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi elit lectus, auctor eget velit quis, finibus consequat neque. Cras tempor dolor ut massa efficitur, eget luctus nisl scelerisque. Maecenas elementum varius felis vitae tincidunt',
+	loginTitle: '',
+	loginDescription: '',
 	loginUsername: 'Korisničko ime',
 	loginPassword: 'Lozinka',
 	loginButton: 'Prijavi se',
@@ -82,20 +82,24 @@ export const Constants = {
 	],
 	livingSpace: [
 		{
-			name: "Porodici",
+			name: "Nedefinisano",
 			value: 0
 		},
 		{
-			name: "Ustanovi",
+			name: "Porodici",
 			value: 1
 		},
 		{
-			name: "Vrsnjackoj grupi",
+			name: "Ustanovi",
 			value: 2
 		},
 		{
-			name: "Drugo",
+			name: "Vrsnjackoj grupi",
 			value: 3
+		},
+		{
+			name: "Drugo",
+			value: 4
 		},
 	],
 	reports : {

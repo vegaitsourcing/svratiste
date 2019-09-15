@@ -93,15 +93,11 @@ const Hr = styled.hr`
 class Evaluation extends Component {
 	state = {
 		evaluation: {
-			id: "",
 			cartonId: "",
-			age: 0,
 			dedicatedWorker: "",
-			familyMembers: "",
 			otherMembers: "",
 			basicPhysicalNeeds: "",
 			psyhoSocialNeeds: "",
-			schoolStatus: "",
 			educationalNeeds: "",
 			otherNeeds: "",
 			dominantEmotions: "",
@@ -118,7 +114,7 @@ class Evaluation extends Component {
 			culturalSpecifics: "",
 			advicedLevelOfSupport: "",
 			evaluationDoneBy: "",
-			date: ""
+			date: undefined
 		},
 		newEvaluation: false
 	}
@@ -126,15 +122,11 @@ class Evaluation extends Component {
     initState() {
         this.setState({
 			evaluation: {
-				id: "",
 				cartonId: "",
-				age: undefined,
 				dedicatedWorker: "",
-				familyMembers: "",
 				otherMembers: "",
 				basicPhysicalNeeds: "",
 				psyhoSocialNeeds: "",
-				schoolStatus: "",
 				educationalNeeds: "",
 				otherNeeds: "",
 				dominantEmotions: "",
@@ -174,7 +166,7 @@ class Evaluation extends Component {
 		const data = this.state.evaluation;
 
 		if (this.state.newEvaluation) {
-			delete data.id;
+			delete data.date;
 			data.cartonId = this.props.cartonId;
 			EvaluationActions.addEvaluation(data);
 		} else {
@@ -185,7 +177,7 @@ class Evaluation extends Component {
 	}
 	
 	onDelete = () => {
-		EvaluationActions.deleteEvaluation(this.state.evaluation.cartonId);
+		EvaluationActions.deleteEvaluation(this.props.cartonId);
 		this.initState();
 		this.props.modalClosed();
 	}
@@ -193,11 +185,10 @@ class Evaluation extends Component {
 	render() {
 		let options;
 
-		if(!this.state.newCarton) {
+		if(!this.state.newEvaluation) {
 			options = <span>
 				<ButtonWrapper>
-					{/* <Button onClick={this.onDelete}>Obriši</Button> */}
-					{/* <Button>Odštampaj</Button> */}
+					<Button onClick={this.onDelete}>Obriši</Button>
 				</ButtonWrapper>
 			</span>
 		}

@@ -6,17 +6,19 @@ namespace SafeHouse.Infrastructure.Mappers
 {
     public class EvaluationMapper : IEvaluationMapper
     {
+        public void RemoveEntity(ref Evaluation evaluation)
+        {
+            evaluation.IsDeleted = true;
+        }
+
         public void ApplyToEntity(ref Evaluation evaluation, EvaluationDto evaluationDto, Carton carton)
         {
             evaluation.Id = evaluationDto.Id;
             evaluation.Carton = carton;
-            evaluation.Age = evaluationDto.Age;
             evaluation.DedicatedWorker = evaluationDto.DedicatedWorker;
-            evaluation.FamilyMembers = evaluationDto.FamilyMembers;
             evaluation.OtherMembers = evaluationDto.OtherMembers;
             evaluation.BasicPhysicalNeeds = evaluationDto.BasicPhysicalNeeds;
             evaluation.PsyhoSocialNeeds = evaluationDto.PsyhoSocialNeeds;
-            evaluation.SchoolStatus = evaluationDto.SchoolStatus;
             evaluation.EducationalNeeds = evaluationDto.EducationalNeeds;
             evaluation.OtherNeeds = evaluationDto.OtherNeeds;
             evaluation.DominantEmotions = evaluationDto.DominantEmotions;
@@ -34,6 +36,7 @@ namespace SafeHouse.Infrastructure.Mappers
             evaluation.AdvicedLevelOfSupport = evaluationDto.AdvicedLevelOfSupport;
             evaluation.EvaluationDoneBy = evaluationDto.EvaluationDoneBy;
             evaluation.Date = evaluationDto.Date;
+            evaluation.IsDeleted = evaluationDto.IsDeleted;
         }
         public EvaluationDto ToDto(Evaluation entity)
         {
@@ -41,13 +44,10 @@ namespace SafeHouse.Infrastructure.Mappers
             {
                 Id = entity.Id,
                 CartonId = entity.Carton.Id,
-                Age = entity.Age,
                 DedicatedWorker = entity.DedicatedWorker,
-                FamilyMembers = entity.FamilyMembers,
                 OtherMembers = entity.OtherMembers,
                 BasicPhysicalNeeds = entity.BasicPhysicalNeeds,
                 PsyhoSocialNeeds = entity.PsyhoSocialNeeds,
-                SchoolStatus = entity.SchoolStatus,
                 EducationalNeeds = entity.EducationalNeeds,
                 OtherNeeds = entity.OtherNeeds,
                 DominantEmotions = entity.DominantEmotions,
@@ -64,7 +64,8 @@ namespace SafeHouse.Infrastructure.Mappers
                 CulturalSpecifics = entity.CulturalSpecifics,
                 AdvicedLevelOfSupport = entity.AdvicedLevelOfSupport,
                 EvaluationDoneBy = entity.EvaluationDoneBy,
-                Date = entity.Date
+                Date = entity.Date,
+                IsDeleted = entity.IsDeleted
             };
         }
 
@@ -74,13 +75,10 @@ namespace SafeHouse.Infrastructure.Mappers
             {
                 Id = dto.Id,
                 Carton = carton,
-                Age = dto.Age,
                 DedicatedWorker = dto.DedicatedWorker,
-                FamilyMembers = dto.FamilyMembers,
                 OtherMembers = dto.OtherMembers,
                 BasicPhysicalNeeds = dto.BasicPhysicalNeeds,
                 PsyhoSocialNeeds = dto.PsyhoSocialNeeds,
-                SchoolStatus = dto.SchoolStatus,
                 EducationalNeeds = dto.EducationalNeeds,
                 OtherNeeds = dto.OtherNeeds,
                 DominantEmotions = dto.DominantEmotions,
@@ -97,7 +95,8 @@ namespace SafeHouse.Infrastructure.Mappers
                 CulturalSpecifics = dto.CulturalSpecifics,
                 AdvicedLevelOfSupport = dto.AdvicedLevelOfSupport,
                 EvaluationDoneBy = dto.EvaluationDoneBy,
-                Date = dto.Date
+                Date = dto.Date,
+                IsDeleted = dto.IsDeleted
             };
         }
     }

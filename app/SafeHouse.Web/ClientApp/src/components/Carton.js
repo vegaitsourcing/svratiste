@@ -197,22 +197,18 @@ class Carton extends Component {
 		carton: {
 			firstName: '',
 			lastName: '',
-			nickname: '',
-			gender: 0,
-			dateOfBirth: undefined,
-			addressStreetName: '',
-			addressStreetNumber: '',
 			fathersName: '',
 			fathersLastName: '',
 			mothersName: '',
 			mothersLastName: '',
+			nickname: '',
+			genderOptions: 0,
+			addressStreetName: '',
+			addressStreetNumber: '',
+			dateOfBirth: undefined,
+			initialEvaluationDone: false,
 			evaluationDone: false,
 			individualPlanDone: false,
-			individualPlanRevised: false,
-			initialEvaluationDone: false,
-			notifications: 0,
-			notificationsEnabled: true,
-			numberOfVisits: 0
 		},
 		firstEvaluation: undefined,
 		evaluation: undefined,
@@ -228,22 +224,18 @@ class Carton extends Component {
 			carton: {
 				firstName: '',
 				lastName: '',
-				nickname: '',
-				gender: 0,
-				dateOfBirth: undefined,
-				addressStreetName: '',
-				addressStreetNumber: '',
 				fathersName: '',
 				fathersLastName: '',
 				mothersName: '',
 				mothersLastName: '',
-				evaluationDone: false,
-				individualPlanDone: false,
-				individualPlanRevised: false,
+				nickname: '',
+				GenderOptions: 0,
+				addressStreetName: '',
+				addressStreetNumber: '',
+				dateOfBirth: undefined,
 				initialEvaluationDone: false,
-				notifications: 0,
-				notificationsEnabled: true,
-				numberOfVisits: 0
+				evaluationDone: false,
+				individualPlanDone: false
 			}
 		});
 	}
@@ -253,6 +245,11 @@ class Carton extends Component {
 		FirstEvaluationStore.on("fetched_first_evaluation", this.getFirstEvaluation);
 		EvaluationStore.on("fetched_evaluation", this.getEvaluation);
 		IndividualPlanStore.on("fetched_individual_plan", this.getIndividualPlan);
+
+		CardboardStore.on("reload_page", this.reloadPage);
+		FirstEvaluationStore.on("reload_page", this.reloadPage);
+		EvaluationStore.on("reload_page", this.reloadPage);
+		IndividualPlanStore.on("reload_page", this.reloadPage);
 	}
 
 	componentDidMount() {
@@ -270,6 +267,11 @@ class Carton extends Component {
 		FirstEvaluationStore.removeListener("fetched_first_evaluation", this.getFirstEvaluation);
 		EvaluationStore.removeListener("fetched_evaluation", this.getEvaluation);
 		IndividualPlanStore.removeListener("fetched_individual_plan", this.getIndividualPlan);
+		
+		CardboardStore.removeListener("reload_page", this.reloadPage);
+		FirstEvaluationStore.removeListener("reload_page", this.reloadPage);
+		EvaluationStore.removeListener("reload_page", this.reloadPage);
+		IndividualPlanStore.removeListener("reload_page", this.reloadPage);
 	}
 
 	showModal = (componentNumber) => {
@@ -286,6 +288,12 @@ class Carton extends Component {
 		this.setState({carton});
 	}
 
+	onSelectChange = (event) => {
+		const carton = this.state.carton;
+		carton[event.currentTarget.name] = event.currentTarget.value;
+		this.setState({carton});
+	}
+
 	onCheckboxChange = (event) => {
 		const carton = this.state.carton;
 		carton[event.currentTarget.name] = !carton[event.currentTarget.name];
@@ -294,11 +302,6 @@ class Carton extends Component {
 
 	onSave = () => {
 		const data = this.state.carton;
-
-		delete data.individualPlanRevised;
-		delete data.notifications;
-		delete data.notificationsEnabled;
-		delete data.numberOfVisits;
 
 		if(data.id) {
 			CardboardActions.editCarton(data);
@@ -323,21 +326,30 @@ class Carton extends Component {
 
 	getFirstEvaluation() {
 		const firstEvaluation = FirstEvaluationStore.getFirstEvaluation();
+		firstEvaluation.startedEvaluation = new Date(firstEvaluation.startedEvaluation).toISOString().slice(0,10);
+		firstEvaluation.finishedEvaluation = new Date(firstEvaluation.finishedEvaluation).toISOString().slice(0,10);
 		this.setState({firstEvaluation});
 	}
 
 	getEvaluation() {
 		const evaluation = EvaluationStore.getEvaluation();
+		evaluation.date = new Date(evaluation.date).toISOString().slice(0,10);
 		this.setState({evaluation});
 	}
 
 	getIndividualPlan() {
 		const individualPlan = IndividualPlanStore.getIndividualPlan();
+		individualPlan.date = new Date(individualPlan.date).toISOString().slice(0,10);
+		individualPlan.due = new Date(individualPlan.due).toISOString().slice(0,10);
 		this.setState({individualPlan});
 	}
 	
 	showDailyRecord = (id) => {
 		this.props.history.push('/records/' + id);
+	}
+
+	reloadPage() {
+		window.location.reload();
 	}
 
 	render() {
@@ -349,7 +361,7 @@ class Carton extends Component {
 		if(!this.state.newCarton) {
 			options = <span>
 				<ButtonWrapper>
-					{/* <Button onClick={this.onDelete}>Obriši</Button> */}
+					<Button onClick={this.onDelete}>Obriši</Button>
 					<DarkButton onClick={() => this.showModal(1)}>{firstEvaluationTitle}</DarkButton>
 					<DarkButton onClick={() => this.showModal(2)}>{evaluationTitle}</DarkButton>
 					<DarkButton onClick={() => this.showModal(3)}>{individualPlanTitle}</DarkButton>
@@ -419,7 +431,7 @@ class Carton extends Component {
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel required title="Pol"/>
-					<CustomSelect options={Constants.genderOptions} title="Izaberi pol..." value={this.state.carton.gender} inputName="gender" change={this.onInputChange}/>
+					<CustomSelect options={Constants.genderOptions} title="Izaberi pol..." value={this.state.carton.genderOptions} inputName="genderOptions" change={this.onSelectChange}/>
 				</InputWrapper>
 				<InputWrapper>
 					<CustomLabel title="Adresa stanovanja"/>
@@ -430,7 +442,7 @@ class Carton extends Component {
 					<CustomInput value={this.state.carton.addressStreetNumber} inputName="addressStreetNumber" change={this.onInputChange}/>
 				</InputWrapper>
 				<InputWrapper>
-					<CustomLabel required title="Datum rodjenja"/>
+					<CustomLabel required title="Datum rođenja"/>
 					<CustomInput inputType="date" inputName="dateOfBirth" value={this.state.carton.dateOfBirth} change={this.onInputChange}/>
 				</InputWrapper>
 				{dailyRecords}
@@ -445,7 +457,7 @@ class Carton extends Component {
 				</InputWrapperWide>
 				<InputWrapper>
 					<InputHidden type="checkbox" id="individualniPlan" name="individualPlanDone" checked={this.state.carton.individualPlanDone} onChange={this.onCheckboxChange}/>
-					<LabelCheckbox htmlFor="individualniPlan">Postoje kapaciteti usluge da zadovolji potrebe korisnika</LabelCheckbox>
+					<LabelCheckbox htmlFor="individualniPlan">Individualni plan</LabelCheckbox>
 				</InputWrapper>
 				<ButtonContainer>
 					<Button onClick={this.onSave}>Sačuvaj</Button>

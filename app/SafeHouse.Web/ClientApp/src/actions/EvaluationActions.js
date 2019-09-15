@@ -29,6 +29,9 @@ export function addEvaluation(evaluation) {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then(() => {
         getEvaluationByCartonId(evaluation.cartonId);
+        dispatcher.dispatch({
+            type: "RELOAD_PAGE"
+        });
     }).catch(error => {
         if (error.response.status === 401) {
             dispatcher.dispatch({
@@ -44,6 +47,9 @@ export function editEvaluation(evaluation) {
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
             getEvaluationByCartonId(evaluation.cartonId);
+            dispatcher.dispatch({
+                type: "RELOAD_PAGE"
+            });
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
@@ -58,7 +64,9 @@ export function deleteEvaluation(id) {
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then((response) => {
-			// Done
+            dispatcher.dispatch({
+                type: "RELOAD_PAGE"
+            });
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({

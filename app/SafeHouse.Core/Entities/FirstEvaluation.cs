@@ -96,5 +96,7 @@ namespace SafeHouse.Core.Entities
 
         [MaxLength(512)]
         public string EvaluationRevisedBy { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

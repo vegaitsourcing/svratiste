@@ -58,6 +58,10 @@ const ButtonContainer = styled.div`
 	justify-content: flex-end;
 	padding-right: 15px;
 `;
+const ButtonWrapper = styled.div`
+	display: inline-flex;
+	margin-left: auto;
+`;
 const Div = styled.div`
 	width: 100%;
 	box-sizing: border-box;
@@ -112,13 +116,12 @@ const Hr = styled.hr`
 class IndividualPlan extends Component {
 	state = {
 		individualPlan: {
-			id: '',
 			cartonId: '',
-			date: '',
-			due: '',
 			goalsAndResults: "",
 			activitiesAndDue: "",
-			involvedPersons: ""
+			involvedPersons: "",
+			date: undefined,
+			due: undefined
 		},
 		newIndividualPlan: false
 	}
@@ -126,13 +129,12 @@ class IndividualPlan extends Component {
     initState() {
         this.setState({
 			individualPlan: {
-				id: '',
 				cartonId: '',
-				date: '',
-				due: '',
 				goalsAndResults: "",
 				activitiesAndDue: "",
-				involvedPersons: ""
+				involvedPersons: "",
+				date: undefined,
+				due: undefined
 			}
 		});
 	}
@@ -209,12 +211,9 @@ class IndividualPlan extends Component {
 		const data = this.state.individualPlan;
 
 		if (this.state.newIndividualPlan) {
-			console.log('-- add ind plan');
-			delete data.id;
 			data.cartonId = this.props.cartonId;
 			IndividualPlanActions.addIndividualPlan(data);
 		} else {
-			console.log('-- edit ind plan');
 			IndividualPlanActions.editIndividualPlan(data);
 		}
 
@@ -222,71 +221,38 @@ class IndividualPlan extends Component {
 	}
 	
 	onDelete = () => {
-		IndividualPlanActions.deleteIndividualPlan(this.state.individualPlan.cartonId);
+		IndividualPlanActions.deleteIndividualPlan(this.props.cartonId);
 		this.initState();
 		this.props.modalClosed();
 	}
 
 	render() {
+		let options;
+
+		if(!this.state.newIndividualPlan) {
+			options = <span>
+				<ButtonWrapper>
+					<Button onClick={this.onDelete}>Obriši</Button>
+				</ButtonWrapper>
+			</span>
+		}
 		return (
 			<Container>
 				<InputWrapperWide><CustomLabel title="Ciljevi i ishodi pružanja usluge:"/></InputWrapperWide>
 				<InputWrapper><CustomLabel title="Ciljevi:"/></InputWrapper>
 				<InputWrapper><CustomLabel title="Rezultati:"/></InputWrapper>
 				<InputWrapperWide><CustomTextarea value={this.state.individualPlan.goalsAndResults} inputName="goalsAndResults" change={this.onInputChange}/></InputWrapperWide>
-				{/* {this.state.individualPlan.goalsAndResults.map((item, index) => (
-					<Div key={index}>
-						<InputWrapper>
-							<CustomInput value={item.goals} inputName="goals" change={(e) => this.onArrayChange(e, index)}/>
-						</InputWrapper>
-						<InputWrapper>
-							<CustomInput value={item.results} inputName="results" change={(e) => this.onArrayChange(e, index)}/>
-						</InputWrapper>
-					</Div>
-				))} */}
-				{/* <ButtonContainer>
-					<Button onClick={this.addNewGoalsAndResultsField}>Dodaj novo polje</Button>
-				</ButtonContainer> */}
 				<Hr />
 				<InputWrapperWide><CustomLabel title="Aktivnosti, odgovorna osoba i vremenski okvir"/></InputWrapperWide>
 				<InputWrapperSlim><CustomLabel title="Aktivnosti:"/></InputWrapperSlim>
 				<InputWrapperSlim><CustomLabel title="Odgovorna osoba"/></InputWrapperSlim>
 				<InputWrapperSlim><CustomLabel title="Rok:"/></InputWrapperSlim>
 				<InputWrapperWide><CustomTextarea value={this.state.individualPlan.activitiesAndDue} inputName="activitiesAndDue" change={this.onInputChange}/></InputWrapperWide>
-				{/* {this.state.individualPlan.activitiesAndDue.map((item, index) => (
-					<Div key={index}>
-						<InputWrapperSlim>
-							<CustomInput value={item.activities} inputName="activities" change={(e) => this.onActivityChange(e, index)}/>
-						</InputWrapperSlim>
-						<InputWrapperSlim>
-							<CustomInput value={item.leadPerson} inputName="leadPerson" change={(e) => this.onActivityChange(e, index)}/>
-						</InputWrapperSlim>
-						<InputWrapperSlim>
-							<CustomInput value={item.due} inputName="due" change={(e) => this.onActivityChange(e, index)}/>
-						</InputWrapperSlim>
-					</Div>
-				))} */}
-				{/* <ButtonContainer>
-					<Button onClick={this.addNewActivityField}>Dodaj novo polje</Button>
-				</ButtonContainer> */}
 				<Hr />
 				<InputWrapperWide><CustomLabel title="Osobe koje su učestvovale u izradi individualnog plana usluge:"/></InputWrapperWide>
 				<InputWrapper><CustomLabel title="Ime i prezime:"/></InputWrapper>
 				<InputWrapper><CustomLabel title="Funkcija:"/></InputWrapper>
 				<InputWrapperWide><CustomTextarea value={this.state.individualPlan.involvedPersons} inputName="involvedPersons" change={this.onInputChange}/></InputWrapperWide>
-				{/* {this.state.individualPlan.involvedPersons.map((item, index) => (
-					<Div key={index}>
-						<InputWrapper>
-							<CustomInput value={item.name} inputName="name" change={(e) => this.onPersonsChange(e, index)}/>
-						</InputWrapper>
-						<InputWrapper>
-							<CustomInput value={item.jobTitle} inputName="jobTitle" change={(e) => this.onPersonsChange(e, index)}/>
-						</InputWrapper>
-					</Div>
-				))} */}
-				{/* <ButtonContainer>
-					<Button onClick={this.addNewPersonField}>Dodaj novo polje</Button>
-				</ButtonContainer> */}
 				<Hr />
 				<InputWrapper>
 					<CustomLabel title="Datum:"/>
@@ -298,8 +264,7 @@ class IndividualPlan extends Component {
 				</InputWrapper>
 				<InputWrapperWide>
 					<Button onClick={this.onSave}>Sačuvaj</Button>
-					{/* <Button onClick={this.onDelete}>Obriši</Button> */}
-					{/* <Button>Odštampaj</Button> */}
+					{options}
 				</InputWrapperWide>
 			</Container>
 		 );

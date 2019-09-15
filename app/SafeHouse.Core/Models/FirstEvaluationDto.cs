@@ -76,5 +76,7 @@ namespace SafeHouse.Core.Models
         public string EvaluationDoneBy { get; set; }
 
         public string EvaluationRevisedBy { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

@@ -25,16 +25,10 @@ namespace SafeHouse.Core.UseCases
 
         public IndividualPlanDto GetByCartonId(Guid id)
         {
-            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);
-            var individualPlan = _individualPlanRepository.GetSingleBy(e => e.Carton == carton);
-            if (individualPlan != null)
-            {
-                return _individualPlanMapper.ToDto(individualPlan);
-            }
-            else
-            {
-                return null;
-            }
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
+            var individualPlan = _individualPlanRepository.GetAll().OrderByDescending(c => c.CreationDate).FirstOrDefault(e => e.Carton == carton);
+            if (individualPlan != null && carton.IsDeleted == false && individualPlan.IsDeleted == false) return _individualPlanMapper.ToDto(individualPlan);
+            else return null;
         }
 
         public void Add(IndividualPlanDto individualPlanDto)
@@ -48,17 +42,27 @@ namespace SafeHouse.Core.UseCases
         public void Update(IndividualPlanDto individualPlanDto)
         {
             var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == individualPlanDto.CartonId);
-            var individualPlan = _individualPlanRepository.GetSingleBy(e => e.Id == individualPlanDto.Id);
-            _individualPlanMapper.ApplyToEntity(ref individualPlan, individualPlanDto, carton);
+            var individualPlan = _individualPlanRepository.GetAll().OrderByDescending(e => e.CreationDate).FirstOrDefault(e => e.Id == individualPlanDto.Id);
 
-            _individualPlanRepository.Update(individualPlan);
-            _unitOfWork.Commit();
+            if (individualPlan != null && carton.IsDeleted == false && individualPlan.IsDeleted == false)
+            {
+                _individualPlanMapper.ApplyToEntity(ref individualPlan, individualPlanDto, carton);
+                _individualPlanRepository.Update(individualPlan);
+                _unitOfWork.Commit();
+            }
         }
 
         public void Remove(Guid id)
         {
-            var individualPlan = _individualPlanRepository.GetSingleBy(e => e.Id == id);
-            _individualPlanRepository.Remove(individualPlan);
+            var carton = _cartonRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            var individualPlan = _individualPlanRepository.GetAll().OrderByDescending(e => e.CreationDate).FirstOrDefault(e => e.Carton == carton);
+
+            if (individualPlan != null && carton.IsDeleted == false && individualPlan.IsDeleted == false)
+            {
+                _individualPlanMapper.RemoveEntity(ref individualPlan);
+                _individualPlanRepository.Update(individualPlan);
+                _unitOfWork.Commit();
+            }
         }
     }
 }

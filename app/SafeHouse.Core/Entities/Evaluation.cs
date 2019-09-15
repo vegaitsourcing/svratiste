@@ -7,13 +7,8 @@ namespace SafeHouse.Core.Entities
     {
         public Carton Carton { get; set; }
 
-        public int Age { get; set; }
-
         [MaxLength(256)]
         public string DedicatedWorker { get; set; }
-
-        [MaxLength(32)]
-        public string FamilyMembers { get; set; }
 
         [MaxLength(256)]
         public string OtherMembers { get; set; }
@@ -23,9 +18,6 @@ namespace SafeHouse.Core.Entities
 
         [MaxLength(512)]
         public string PsyhoSocialNeeds { get; set; }
-
-        [MaxLength(32)]
-        public string SchoolStatus { get; set; }
 
         [MaxLength(512)]
         public string EducationalNeeds { get; set; }
@@ -76,5 +68,7 @@ namespace SafeHouse.Core.Entities
         public string EvaluationDoneBy { get; set; }
 
         public DateTime Date { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

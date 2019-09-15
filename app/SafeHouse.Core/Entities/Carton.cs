@@ -15,21 +15,6 @@ namespace SafeHouse.Core.Entities
         public string LastName { get; set; }
 
         [MaxLength(32)]
-        public string Nickname { get; set; }
-
-        public Gender Gender { get; set; }
-
-        public DateTime DateOfBirth { get; set; }
-
-        public int NumberOfVisits { get; set; }
-
-        [MaxLength(100)]
-        public string AddressStreetName { get; set; }
-
-        [MaxLength(32)]
-        public string AddressStreetNumber { get; set; }
-
-        [MaxLength(32)]
         public string FathersName { get; set; }
 
         [MaxLength(32)]
@@ -41,7 +26,18 @@ namespace SafeHouse.Core.Entities
         [MaxLength(32)]
         public string MothersLastName { get; set; }
 
-        public bool NotificationsEnabled { get; set; }
+        [MaxLength(32)]
+        public string Nickname { get; set; }
+
+        public int GenderOptions { get; set; }
+
+        [MaxLength(100)]
+        public string AddressStreetName { get; set; }
+
+        [MaxLength(32)]
+        public string AddressStreetNumber { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
 
         public bool InitialEvaluationDone { get; set; }
 
@@ -49,6 +45,6 @@ namespace SafeHouse.Core.Entities
 
         public bool IndividualPlanDone { get; set; }
 
-        public bool IndividualPlanRevised { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

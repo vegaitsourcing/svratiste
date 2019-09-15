@@ -6,6 +6,11 @@ namespace SafeHouse.Infrastructure.Mappers
 {
     public class FirstEvaluationMapper : IFirstEvaluationMapper
     {
+        public void RemoveEntity(ref FirstEvaluation firstEvaluation)
+        {
+            firstEvaluation.IsDeleted = true;
+        }
+
         public void ApplyToEntity(ref FirstEvaluation firstEvaluation, FirstEvaluationDto firstEvaluationDto, Carton carton)
         {
             firstEvaluation.Id = firstEvaluationDto.Id;
@@ -44,6 +49,7 @@ namespace SafeHouse.Infrastructure.Mappers
             firstEvaluation.FinishedEvaluation = firstEvaluationDto.FinishedEvaluation;
             firstEvaluation.EvaluationDoneBy = firstEvaluationDto.EvaluationDoneBy;
             firstEvaluation.EvaluationRevisedBy = firstEvaluationDto.EvaluationRevisedBy;
+            firstEvaluation.IsDeleted = firstEvaluationDto.IsDeleted;
         }
 
         public FirstEvaluationDto ToDto(FirstEvaluation entity)
@@ -85,7 +91,8 @@ namespace SafeHouse.Infrastructure.Mappers
                 StartedEvaluation = entity.StartedEvaluation,
                 FinishedEvaluation = entity.FinishedEvaluation,
                 EvaluationDoneBy = entity.EvaluationDoneBy,
-                EvaluationRevisedBy = entity.EvaluationRevisedBy
+                EvaluationRevisedBy = entity.EvaluationRevisedBy,
+                IsDeleted = entity.IsDeleted
             };
         }
 
@@ -128,7 +135,8 @@ namespace SafeHouse.Infrastructure.Mappers
                 StartedEvaluation = dto.StartedEvaluation,
                 FinishedEvaluation = dto.FinishedEvaluation,
                 EvaluationDoneBy = dto.EvaluationDoneBy,
-                EvaluationRevisedBy = dto.EvaluationRevisedBy
+                EvaluationRevisedBy = dto.EvaluationRevisedBy,
+                IsDeleted = dto.IsDeleted
             };
         }
     }

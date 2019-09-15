@@ -30,6 +30,9 @@ export function addIndividualPlan(individualPlan) {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then(() => {
         getIndividualPlanByCartonId(individualPlan.cartonId);
+        dispatcher.dispatch({
+            type: "RELOAD_PAGE"
+        });
     }).catch(error => {
         if (error.response && error.response.status === 401) {
             dispatcher.dispatch({
@@ -45,6 +48,9 @@ export function editIndividualPlan(individualPlan) {
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
             getIndividualPlanByCartonId(individualPlan.cartonId);
+            dispatcher.dispatch({
+                type: "RELOAD_PAGE"
+            });
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
@@ -59,7 +65,9 @@ export function deleteIndividualPlan(id) {
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then((response) => {
-			// Done
+            dispatcher.dispatch({
+                type: "RELOAD_PAGE"
+            });
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({

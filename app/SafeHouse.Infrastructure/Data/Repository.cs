@@ -58,5 +58,10 @@ namespace SafeHouse.Infrastructure.Data
         {
             return _dbContext.Set<TEntity>().SingleOrDefault(byProperty);
         }
+
+        public TEntity FirstOrDefault(Func<TEntity, bool> byProperty)
+        {
+            return _dbContext.Set<TEntity>().FirstOrDefault(byProperty);
+        }
     }
 }

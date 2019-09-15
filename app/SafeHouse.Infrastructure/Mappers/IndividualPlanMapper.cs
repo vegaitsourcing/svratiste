@@ -6,6 +6,11 @@ namespace SafeHouse.Infrastructure.Mappers
 {
     public class IndividualPlanMapper : IIndividualPlanMapper
     {
+        public void RemoveEntity(ref IndividualPlan individualPlan)
+        {
+            individualPlan.IsDeleted = true;
+        }
+
         public void ApplyToEntity(ref IndividualPlan individualPlan, IndividualPlanDto individualPlanDto, Carton carton)
         {
             individualPlan.Id = individualPlanDto.Id;
@@ -15,6 +20,7 @@ namespace SafeHouse.Infrastructure.Mappers
             individualPlan.InvolvedPersons = individualPlanDto.InvolvedPersons;
             individualPlan.Date = individualPlanDto.Date;
             individualPlan.Due = individualPlanDto.Due;
+            individualPlan.IsDeleted = individualPlanDto.IsDeleted;
         }
 
         public IndividualPlanDto ToDto(IndividualPlan entity)
@@ -27,7 +33,8 @@ namespace SafeHouse.Infrastructure.Mappers
                 ActivitiesAndDue = entity.ActivitiesAndDue,
                 InvolvedPersons = entity.InvolvedPersons,
                 Date = entity.Date,
-                Due = entity.Due
+                Due = entity.Due,
+                IsDeleted = entity.IsDeleted
             };
         }
 
@@ -41,7 +48,8 @@ namespace SafeHouse.Infrastructure.Mappers
                 ActivitiesAndDue = dto.ActivitiesAndDue,
                 InvolvedPersons = dto.InvolvedPersons,
                 Date = dto.Date,
-                Due = dto.Due
+                Due = dto.Due,
+                IsDeleted = dto.IsDeleted
             };
         }
     }

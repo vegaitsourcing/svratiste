@@ -29,6 +29,9 @@ export function addFirstEvaluation(firstEvaluation) {
         headers: { Authorization: "Bearer " + authToken.getToken() }
     }).then(() => {
         this.getFirstEvaluationByCartonId(firstEvaluation.cartonId);
+        dispatcher.dispatch({
+            type: "RELOAD_PAGE"
+        });
     }).catch(error => {
         if (error.response.status === 401) {
             dispatcher.dispatch({
@@ -44,6 +47,9 @@ export function editFirstEvaluation(firstEvaluation) {
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then(() => {
             getFirstEvaluationByCartonId(firstEvaluation.cartonId);
+            dispatcher.dispatch({
+                type: "RELOAD_PAGE"
+            });
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({
@@ -58,7 +64,9 @@ export function deleteFirstEvaluation(id) {
 		{
 			headers: { Authorization: "Bearer " + authToken.getToken() }
 		}).then((response) => {
-			// Done
+            dispatcher.dispatch({
+                type: "RELOAD_PAGE"
+            });
 		}).catch(error => {
 			if (error.response && error.response.status === 401) {
 				dispatcher.dispatch({

@@ -13,6 +13,8 @@ namespace SafeHouse.Core.Abstractions.Persistence
 
         TEntity GetSingleBy(Func<TEntity, bool> byProperty);
 
+        TEntity FirstOrDefault(Func<TEntity, bool> byProperty);
+
         IEnumerable<TEntity> GetBy(Func<TEntity, bool> byProperty);
 
         void Add(TEntity entity);

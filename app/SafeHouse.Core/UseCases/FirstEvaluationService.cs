@@ -26,8 +26,8 @@ namespace SafeHouse.Core.UseCases
         public FirstEvaluationDto GetByCartonId(Guid id)
         {
             var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
-            var firstEvaluation = _firstEvaluationRepository.GetSingleBy(e => e.Carton == carton);
-            if (firstEvaluation != null) return _firstEvaluationMapper.ToDto(firstEvaluation);
+            var firstEvaluation = _firstEvaluationRepository.GetAll().OrderByDescending(c => c.CreationDate).FirstOrDefault(e => e.Carton == carton);
+            if (firstEvaluation != null && carton.IsDeleted == false && firstEvaluation.IsDeleted == false) return _firstEvaluationMapper.ToDto(firstEvaluation);
             else return null;
         }
 
@@ -42,17 +42,27 @@ namespace SafeHouse.Core.UseCases
         public void Update(FirstEvaluationDto firstEvaluationDto)
         {
             var carton = _cartonRepository.GetSingleBy(c => c.Id == firstEvaluationDto.CartonId);
-            var firstEvaluation = _firstEvaluationRepository.GetSingleBy(e => e.Id == firstEvaluationDto.Id);
-            _firstEvaluationMapper.ApplyToEntity(ref firstEvaluation, firstEvaluationDto, carton);
+            var firstEvaluation = _firstEvaluationRepository.GetAll().OrderByDescending(e => e.CreationDate).FirstOrDefault(e => e.Id == firstEvaluationDto.Id);
 
-            _firstEvaluationRepository.Update(firstEvaluation);
-            _unitOfWork.Commit();
+            if (firstEvaluation != null && carton.IsDeleted == false && firstEvaluation.IsDeleted == false)
+            {
+                _firstEvaluationMapper.ApplyToEntity(ref firstEvaluation, firstEvaluationDto, carton);
+                _firstEvaluationRepository.Update(firstEvaluation);
+                _unitOfWork.Commit();
+            }
         }
 
         public void Remove(Guid id)
         {
-            var firstEvaluation = _firstEvaluationRepository.GetSingleBy(e => e.Id == id);
-            _firstEvaluationRepository.Remove(firstEvaluation);
+            var carton = _cartonRepository.GetSingleBy(c => c.Id == id);
+            var firstEvaluation = _firstEvaluationRepository.GetAll().OrderByDescending(e => e.CreationDate).FirstOrDefault(e => e.Carton == carton);
+
+            if (firstEvaluation != null && carton.IsDeleted == false && firstEvaluation.IsDeleted == false)
+            {
+                _firstEvaluationMapper.RemoveEntity(ref firstEvaluation);
+                _firstEvaluationRepository.Update(firstEvaluation);
+                _unitOfWork.Commit();
+            }
         }
     }
 }
