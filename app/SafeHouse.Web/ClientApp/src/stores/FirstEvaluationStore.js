@@ -17,15 +17,15 @@ class FirstEvaluationStore extends EventEmitter {
     handleActions(action) {
         switch (action.type) {
             case "FETCHED_FIRST_EVALUATION":
-            this.firstEvaluation = action.payload;
-            this.emit("fetched_first_evaluation");
-            break;
-        case "UNAUTHORIZED":
-            this.emit("unauthorized");
-            break;
-        case "RELOAD_PAGE":
-            this.emit("reload_page");
-            break;
+                this.firstEvaluation = action.payload;
+                this.emit("fetched_first_evaluation");
+                break;
+            case "UNAUTHORIZED":
+                this.emit("unauthorized");
+                break;
+            case "RELOAD_PAGE":
+                this.emit("reload_page");
+                break;
         default:
         }
     }

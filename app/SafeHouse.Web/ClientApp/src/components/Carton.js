@@ -15,11 +15,13 @@ import * as CardboardActions from '../actions/CardboardActions';
 import * as FirstEvaluationActions from '../actions/FirstEvaluationActions';
 import * as EvaluationActions from '../actions/EvaluationActions';
 import * as IndividualPlanActions from '../actions/IndividualPlanActions';
+import * as DailyEntryActions from '../actions/DailyEntryActions';
 
 import CardboardStore from '../stores/CardboardStore';
 import FirstEvaluationStore from '../stores/FirstEvaluationStore';
 import EvaluationStore from '../stores/EvaluationStore';
 import IndividualPlanStore from '../stores/IndividualPlanStore';
+import DailyEntryStore from '../stores/DailyEntryStore';
 
 const Container = styled.div`
 	display: flex;
@@ -191,6 +193,7 @@ class Carton extends Component {
 		this.getFirstEvaluation = this.getFirstEvaluation.bind(this);
 		this.getEvaluation = this.getEvaluation.bind(this);
 		this.getIndividualPlan = this.getIndividualPlan.bind(this);
+		this.getDailyEntries = this.getDailyEntries.bind(this);
 	}
 
 	state = {
@@ -216,7 +219,7 @@ class Carton extends Component {
 		show: false,
 		newCarton: true,
 		componentNumber: '',
-		dailyRecords: undefined
+		dailyEntries: []
 	}
 
     initState() {
@@ -245,11 +248,13 @@ class Carton extends Component {
 		FirstEvaluationStore.on("fetched_first_evaluation", this.getFirstEvaluation);
 		EvaluationStore.on("fetched_evaluation", this.getEvaluation);
 		IndividualPlanStore.on("fetched_individual_plan", this.getIndividualPlan);
+		DailyEntryStore.on("fetched_daily_entries", this.getDailyEntries);
 
 		CardboardStore.on("reload_page", this.reloadPage);
 		FirstEvaluationStore.on("reload_page", this.reloadPage);
 		EvaluationStore.on("reload_page", this.reloadPage);
 		IndividualPlanStore.on("reload_page", this.reloadPage);
+		DailyEntryStore.on("reload_page", this.reloadPage);
 	}
 
 	componentDidMount() {
@@ -258,6 +263,7 @@ class Carton extends Component {
 			FirstEvaluationActions.getFirstEvaluationByCartonId(this.props.id);
 			EvaluationActions.getEvaluationByCartonId(this.props.id);
 			IndividualPlanActions.getIndividualPlanByCartonId(this.props.id);
+			DailyEntryActions.getDailyEntryByCartonId(this.props.id);
 			this.setState({newCarton: false});
 		}
 	}
@@ -267,11 +273,13 @@ class Carton extends Component {
 		FirstEvaluationStore.removeListener("fetched_first_evaluation", this.getFirstEvaluation);
 		EvaluationStore.removeListener("fetched_evaluation", this.getEvaluation);
 		IndividualPlanStore.removeListener("fetched_individual_plan", this.getIndividualPlan);
+		DailyEntryStore.removeListener("fetched_daily_entries", this.getDailyEntries);
 		
 		CardboardStore.removeListener("reload_page", this.reloadPage);
 		FirstEvaluationStore.removeListener("reload_page", this.reloadPage);
 		EvaluationStore.removeListener("reload_page", this.reloadPage);
 		IndividualPlanStore.removeListener("reload_page", this.reloadPage);
+		DailyEntryStore.removeListener("reload_page", this.reloadPage);
 	}
 
 	showModal = (componentNumber) => {
@@ -343,9 +351,20 @@ class Carton extends Component {
 		individualPlan.due = new Date(individualPlan.due).toISOString().slice(0,10);
 		this.setState({individualPlan});
 	}
+
+	getDailyEntries() {
+		const dailyEntries = DailyEntryStore.getDailyEntries();
+		if(dailyEntries) {
+			dailyEntries.forEach(el => {
+				const date = new Date(el.date).toLocaleDateString().split('/');
+				el.date = date[1] + '.' + date[0] + '.' + date[2] + '.';
+			});
+		}
+		this.setState({dailyEntries});
+	}
 	
 	showDailyRecord = (id) => {
-		this.props.history.push('/records/' + id);
+		this.props.history.push('/records/id/' + id + '/' + this.props.id);
 	}
 
 	reloadPage() {
@@ -357,7 +376,7 @@ class Carton extends Component {
 		let evaluationTitle = this.state.evaluation === undefined || this.state.evaluation === "" ? "Kreiraj Procenu" : "Procena";
 		let individualPlanTitle = this.state.individualPlan === undefined || this.state.individualPlan === "" ? "Kreiraj individualni Plan" : "Individualni plan";
 		let options;
-		let dailyRecords;
+		let dailyEntries;
 		if(!this.state.newCarton) {
 			options = <span>
 				<ButtonWrapper>
@@ -370,8 +389,8 @@ class Carton extends Component {
 				{(this.state.componentNumber === 2) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={evaluationTitle}><Evaluation modalClosed={() => this.hideModal()} evaluation={this.state.evaluation} cartonId={this.props.id} /></Modal>}
 				{(this.state.componentNumber === 3) && <Modal show={this.state.show} modalClosed={() => this.hideModal()} title={individualPlanTitle}><IndividualPlan modalClosed={() => this.hideModal()} individualPlan={this.state.individualPlan} cartonId={this.props.id} /></Modal>}
 			</span>;
-			if(this.state.dailyRecords !== undefined) {
-				dailyRecords = <><InputWrapperWide>
+			if(this.state.dailyEntries.length > 0) {
+				dailyEntries = <><InputWrapperWide>
 					<Hr />
 					<H2>Dnevna evidencija</H2>
 					</InputWrapperWide>
@@ -381,17 +400,13 @@ class Carton extends Component {
 								<TR>
 									<TH>Redni broj</TH>
 									<TH>Datum kreiranja</TH>
-									<TH>Dolazak</TH>
-									<TH>Odlazak</TH>
 								</TR>
 							</thead>
 							<tbody>
-								{this.state.dailyRecords.map((item, index) => (
+								{this.state.dailyEntries.map((item, index) => (
 									<TR key={item.id} onClick={() => this.showDailyRecord(item.id)}>
-										<TD>{index}</TD>
+										<TD>{index + 1}</TD>
 										<TD>{item.date}</TD>
-										<TD>{item.startTime}</TD>
-										<TD>{item.endTime}</TD>
 									</TR>
 								))}
 							</tbody>
@@ -445,7 +460,7 @@ class Carton extends Component {
 					<CustomLabel required title="Datum rođenja"/>
 					<CustomInput inputType="date" inputName="dateOfBirth" value={this.state.carton.dateOfBirth} change={this.onInputChange}/>
 				</InputWrapper>
-				{dailyRecords}
+				{dailyEntries}
 				<InputWrapperWide>
 					<Hr />
 					<InputHidden type="checkbox" id="prijemnaprocena" name="initialEvaluationDone" checked={this.state.carton.initialEvaluationDone} onChange={this.onCheckboxChange}/>

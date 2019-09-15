@@ -5,7 +5,7 @@ import DailyRecord from '../components/DailyRecord';
 
 import LoginStore from '../stores/LoginStore';
 
-class Record extends Component {
+class RecordByCartonId extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -35,4 +35,4 @@ class Record extends Component {
 	}
 }
 
-export default Record;
+export default RecordByCartonId;

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	& > div {
-		width: calc(100%/2 - 38px);
+		width: 100%;
 		margin: 16px 11px 20px;
 		padding: 0 8px;
 		background-color: ${Colours.white};
@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 		border-bottom: 2px solid ${Colours.lochmara};
 	}
 `;
+
 class Notifications extends Component {
 	constructor(props) {
 		super(props);
@@ -33,19 +34,19 @@ class Notifications extends Component {
 
 	componentWillMount() {
 		CardboardStore.on("fetched_cartons_over_eighteen", this.getCartonsOverEighteen.bind(this));
-		CardboardStore.on("fetched_cartons_ready_for_initial_evaluation", this.getCartonsReadyForInitialEvaluation.bind(this));
+		// CardboardStore.on("fetched_cartons_ready_for_initial_evaluation", this.getCartonsReadyForInitialEvaluation.bind(this));
 		CardboardStore.on("unauthorized", this.redirectToLogin);
 		LoginStore.on("unauthorized", this.redirectToLogin);
 	}
 
 	componentDidMount() {
 		CardboardActions.getCartonsOverEighteen();
-		CardboardActions.getCartonsReadyForInitialEvaluation();
+		// CardboardActions.getCartonsReadyForInitialEvaluation();
 	}
 
 	componentWillUnmount() {
 		CardboardStore.removeListener("fetched_cartons_over_eighteen", this.getCartonsOverEighteen);
-		CardboardStore.removeListener("fetched_cartons_ready_for_initial_evaluation", this.getCartonsReadyForInitialEvaluation);
+		// CardboardStore.removeListener("fetched_cartons_ready_for_initial_evaluation", this.getCartonsReadyForInitialEvaluation);
 		CardboardStore.removeListener("unauthorized", this.redirectToLogin);
 		LoginStore.removeListener("unauthorized", this.redirectToLogin);
 	}
@@ -71,7 +72,7 @@ class Notifications extends Component {
 		return (
 			<Layout name="Notifikacije">
 				<Wrapper>
-					<Cartons cartons={this.state.readyForInitialEvaluation} title="Uraditi prijemnu procenu" icon="assignment" path="/users/" />
+					{/* <Cartons cartons={this.state.readyForInitialEvaluation} title="Uraditi prijemnu procenu" icon="assignment" path="/users/" /> */}
 					<Cartons cartons={this.state.overEighteen} title="Korisnici koji su napunili 18 godina" icon="cake" path="/users/" />
 				</Wrapper>
 			</Layout>

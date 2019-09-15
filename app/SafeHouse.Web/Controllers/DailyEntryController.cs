@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SafeHouse.Core.Abstractions;
+using System.Collections.Generic;
 using SafeHouse.Core.Entities;
 using SafeHouse.Core.Models;
 using System;
@@ -21,10 +22,17 @@ namespace SafeHouse.Web.Controllers
         }
 
         [HttpGet]
-        [Route("api/DailyEntry/{id}")]
-        public DailyEntryDto Get(Guid id)
+        [Route("api/DailyEntry/ByCartonId/{id}")]
+        public IEnumerable<DailyEntryDto> GetAllByCartonId(Guid id)
         {
-            return _dailyEntryService.GetByCartonId(id);
+            return _dailyEntryService.GetAllByCartonId(id);
+        }
+
+        [HttpGet]
+        [Route("api/DailyEntry/{id}/{cartonId}")]
+        public DailyEntryDto Get(Guid id, Guid cartonId)
+        {
+            return _dailyEntryService.GetById(id, cartonId);
         }
 
         [HttpGet]
@@ -69,7 +77,7 @@ namespace SafeHouse.Web.Controllers
         }
 
         [HttpDelete]
-        [Route("api/DailyEntry")]
+        [Route("api/DailyEntry/{id}")]
         public IActionResult Remove(Guid id)
         {
             try

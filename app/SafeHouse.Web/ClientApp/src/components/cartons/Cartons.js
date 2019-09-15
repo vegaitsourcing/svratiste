@@ -63,7 +63,6 @@ const cartons = ( props ) => (
 				<TR>
 					<TH>Ime</TH>
 					<TH>Prezime</TH>
-					<TH>Broj poseta</TH>
 				</TR>
 			</thead>
 			<tbody>
@@ -72,7 +71,6 @@ const cartons = ( props ) => (
 						<TR key={index} onClick={() => props.history.push(props.path + item.id)}>
 							<TD>{item.firstName}</TD>
 							<TD>{item.lastName}</TD>
-							<TD>{item.numberOfVisits}</TD>
 						</TR>
 					))
 				}

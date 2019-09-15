@@ -128,49 +128,228 @@ namespace SafeHouse.Infrastructure.Migrations
 
                     b.Property<Guid?>("CartonId");
 
-                    b.Property<int>("Gender");
-
-                    b.Property<bool>("Stay");
-
                     b.Property<bool>("Breakfast");
 
                     b.Property<bool>("Lunch");
+
+                    b.Property<bool>("Diner");
 
                     b.Property<bool>("Bath");
 
                     b.Property<bool>("LiecesRemoval");
 
-                    b.Property<int>("Clothes");
+                    b.Property<bool>("Clothes");
 
-                    b.Property<int>("MediationWriting");
+                    b.Property<bool>("VerballySocialCenter");
 
-                    b.Property<string>("MediationWritingDescription")
-                        .HasMaxLength(512);
+                    b.Property<bool>("VerballyEducation");
 
-                    b.Property<int>("MediationSpeaking");
+                    b.Property<bool>("VerballyCitizensAssociations");
 
-                    b.Property<string>("MediationSpeakingDescription");
+                    b.Property<bool>("VerballyHealthInstitutions");
 
-                    b.Property<int>("LifeSkills");
+                    b.Property<bool>("VerballyPolice");
 
-                    b.Property<int>("SchoolAcivities");
+                    b.Property<bool>("VerballyOther");
 
-                    b.Property<bool>("PsychosocialSupport");
+                    b.Property<bool>("WrittenSocialCenter");
 
-                    b.Property<int>("ParentsContact");
+                    b.Property<bool>("WrittenEducation");
 
-                    b.Property<int>("MedicalInterventions");
+                    b.Property<bool>("WrittenCitizensAssociations");
 
-                    b.Property<DateTime>("Arrival");
+                    b.Property<bool>("WrittenHealthInstitutions");
 
-                    b.Property<int>("EducationWorkshop");
+                    b.Property<bool>("WrittenPolice");
 
-                    b.Property<int>("CreativeWorkshop");
+                    b.Property<bool>("WrittenOther");
 
-                    b.Property<DateTime>("StartTime");
+                    b.Property<bool>("CbDecisionMakingSkills");
 
-                    b.Property<DateTime>("EndTIme");
-                    
+                    b.Property<bool>("CbProblemSolvingSkills");
+
+                    b.Property<bool>("CbAssertiveCommunication");
+
+                    b.Property<bool>("CbHowToSayNo");
+
+                    b.Property<bool>("CbAwarenessOfYourself");
+
+                    b.Property<bool>("CbRecognizingAndManagingEmotions");
+
+                    b.Property<bool>("CbEmpathy");
+
+                    b.Property<bool>("CbConfrontationWithStress");
+
+                    b.Property<bool>("CbMaintainingPersonalHygiene");
+
+                    b.Property<bool>("CbMaintainingHygieneOfClothingAndFootwear");
+
+                    b.Property<bool>("CbHealth");
+
+                    b.Property<bool>("CbPersonalSecurityAndCrisisManagementSituations");
+
+                    b.Property<bool>("CbTakingCareOfPersonalFinances");
+
+                    b.Property<bool>("CbMaintainingHygieneOfThePlaceOfResidence");
+
+                    b.Property<bool>("CbUseOfHomeAppliances");
+
+                    b.Property<bool>("CbMealPreparationAndServing");
+
+                    b.Property<bool>("CbBehaviorAtTheTable");
+
+                    b.Property<bool>("CbProcurementOfGroceries");
+
+                    b.Property<bool>("CbHealthCareDuringPregnancy");
+
+                    b.Property<bool>("CbPhysicalCareOfNewbornAndInfant");
+
+                    b.Property<bool>("CbExpressingLoveForYourChild");
+
+                    b.Property<bool>("CbChildProtection");
+
+                    b.Property<bool>("CbStimulatingTheChild");
+
+                    b.Property<bool>("CbIssuingCersonalDocuments");
+
+                    b.Property<bool>("CbUseOfTheClock");
+
+                    b.Property<bool>("CbTrafficRegulationsAndSigns");
+
+                    b.Property<bool>("CbUtilizingCommunityResources");
+
+                    b.Property<bool>("CbNavigatingTheSpace");
+
+                    b.Property<bool>("CbUseOfMedia");
+
+                    b.Property<bool>("CbActiveJobSearch");
+
+                    b.Property<string>("TxtDecisionMakingSkills")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtProblemSolvingSkills")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtAssertiveCommunication")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtHowToSayNo")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtAwarenessOfYourself")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtRecognizingAndManagingEmotions")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtEmpathy")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtConfrontationWithStress")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtMaintainingPersonalHygiene")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtMaintainingHygieneOfClothingAndFootwear")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtHealth")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtPersonalSecurityAndCrisisManagementSituations")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtTakingCareOfPersonalFinances")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtMaintainingHygieneOfThePlaceOfResidence")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtUseOfHomeAppliances")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtMealPreparationAndServing")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtBehaviorAtTheTable")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtProcurementOfGroceries")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtHealthCareDuringPregnancy")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtPhysicalCareOfNewbornAndInfant")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtExpressingLoveForYourChild")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtChildProtection")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtStimulatingTheChild")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtIssuingCersonalDocuments")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtUseOfTheClock")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtTrafficRegulationsAndSigns")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtUtilizingCommunityResources")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtNavigatingTheSpace")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtUseOfMedia")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("TxtActiveJobSearch")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("EdictiveWorkshops")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("CreativeWorkshops")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Homework")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Training")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("LearningSchoolMaterials")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("InterventionsForTheDevelopmentOfCognitiveFunctions")
+                        .HasMaxLength(256);
+                    b.Property<string>("TelephoneContact")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PersonalContact")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("InterventionAtTheSafeHouse")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Counseling")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Medication")
+                        .HasMaxLength(256);
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<bool>("IsDeleted");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CartonId");

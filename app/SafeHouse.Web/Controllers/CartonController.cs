@@ -34,13 +34,6 @@ namespace SafeHouse.Web.Controllers
         }
 
         [HttpGet]
-        [Route("api/Carton/GetReadyForInitialEvaluation")]
-        public IEnumerable<CartonDto> GetReadyForInitialEvaluation()
-        {
-            return _cartonService.GetReadyForInitialEvaluation();
-        }
-
-        [HttpGet]
         [Route("api/Carton/pageCount")]
         public int GetPageCount()
         {

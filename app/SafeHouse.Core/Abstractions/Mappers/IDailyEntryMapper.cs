@@ -10,6 +10,7 @@ namespace SafeHouse.Core.Abstractions.Mappers
         DailyEntry ToEntity(DailyEntryDto dto, Carton carton);
 
         void ApplyToEntity(ref DailyEntry dailyEntry, DailyEntryDto dailyEntryDto, Carton carton);
-       /* void RemoveEntity(ref DailyEntry dailyEntry);*/
+
+        void RemoveEntity(ref DailyEntry dailyEntry);
     }
 }
