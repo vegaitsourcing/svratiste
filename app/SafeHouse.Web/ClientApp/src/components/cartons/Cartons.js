@@ -77,7 +77,7 @@ const cartons = ( props ) => (
 			</tbody>
 		</Table>
 		{props.showPagination && <PaginationWrapper>
-			<Pagination pageNumbers={props.pageNumbers} pageClicked={props.pageClicked} previous={props.previous} next={props.next} current={props.current}/>
+			<Pagination pageNumbers={props.pageNumbers - 1} pageClicked={props.pageClicked} previous={props.previous} next={props.next} current={props.current}/>
 		</PaginationWrapper>}
 	</div>
 );

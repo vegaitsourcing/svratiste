@@ -328,27 +328,59 @@ class Carton extends Component {
 
 	getCarton() {
 		const carton = CardboardStore.getCarton();
-		carton.dateOfBirth = new Date(carton.dateOfBirth).toISOString().slice(0,10);
+		console.log('-- carton: ', carton);
+		if(carton.dateOfBirth === '0001-01-01T00:00:00') {
+			carton.dateOfBirth = undefined;
+		}
+		else {
+			carton.dateOfBirth = new Date(carton.dateOfBirth.replace('T00:00:00', 'T09:00:00')).toISOString().slice(0,10);
+		}
 		this.setState({carton});
 	}
 
 	getFirstEvaluation() {
 		const firstEvaluation = FirstEvaluationStore.getFirstEvaluation();
-		firstEvaluation.startedEvaluation = new Date(firstEvaluation.startedEvaluation).toISOString().slice(0,10);
-		firstEvaluation.finishedEvaluation = new Date(firstEvaluation.finishedEvaluation).toISOString().slice(0,10);
+		if(firstEvaluation.startedEvaluation === '0001-01-01T00:00:00') {
+			firstEvaluation.startedEvaluation = undefined;
+		}
+		else {
+			firstEvaluation.startedEvaluation = new Date(firstEvaluation.startedEvaluation.replace('T00:00:00', 'T09:00:00')).toISOString().slice(0,10);
+		}
+
+		if(firstEvaluation.finishedEvaluation === '0001-01-01T00:00:00') {
+			firstEvaluation.finishedEvaluation = undefined;
+		}
+		else {
+			firstEvaluation.finishedEvaluation = new Date(firstEvaluation.finishedEvaluation.replace('T00:00:00', 'T09:00:00')).toISOString().slice(0,10);
+		}
 		this.setState({firstEvaluation});
 	}
 
 	getEvaluation() {
 		const evaluation = EvaluationStore.getEvaluation();
-		evaluation.date = new Date(evaluation.date).toISOString().slice(0,10);
+		if(evaluation.date === '0001-01-01T00:00:00') {
+			evaluation.date = undefined;
+		}
+		else {
+			evaluation.date = new Date(evaluation.date.replace('T00:00:00', 'T09:00:00')).toISOString().slice(0,10);
+		}
 		this.setState({evaluation});
 	}
 
 	getIndividualPlan() {
 		const individualPlan = IndividualPlanStore.getIndividualPlan();
-		individualPlan.date = new Date(individualPlan.date).toISOString().slice(0,10);
-		individualPlan.due = new Date(individualPlan.due).toISOString().slice(0,10);
+		if(individualPlan.date === '0001-01-01T00:00:00') {
+			individualPlan.date = undefined;
+		}
+		else {
+			individualPlan.date = new Date(individualPlan.date.replace('T00:00:00', 'T09:00:00')).toISOString().slice(0,10);
+		}
+		if(individualPlan.due === '0001-01-01T00:00:00') {
+			individualPlan.due = undefined;
+		}
+		else {
+			individualPlan.due = new Date(individualPlan.due.replace('T00:00:00', 'T09:00:00')).toISOString().slice(0,10);
+		}
 		this.setState({individualPlan});
 	}
 
